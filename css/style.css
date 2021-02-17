@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
 
 :root {
-  --nav-color: #476891;
+  --nav-color: #688AB5;
   --white-header: #F7F7F7;
   --white-body: #BACCE2;
   --white-button: #879EBB;
@@ -89,7 +89,7 @@ li {
   font-family: 'M PLUS Rounded 1c', sans-serif;
   font-weight: bold;
   font-size: 0.875em;
-  padding-left: 4rem !important;
+  padding-right: 2rem !important;
 }
 
 .nav-item:hover {
