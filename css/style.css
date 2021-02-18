@@ -138,6 +138,13 @@ li {
   font-size: 0.9375em;
 }
 
+@media (max-width: 768px) {
+  .btn-outline-hero {
+    font-size: 1.15em;
+    padding: 1em 0;
+  }
+}
+
 /* ================= SUB SECTION ================= */
 
 @media (min-width: 993px) {
@@ -252,14 +259,22 @@ li {
   }
   
   .btn-signup {
-    font-size: 1.125em;
+    font-size: 1.35em;
+    padding: 0.5em 0;
     width: 100%;
+  }
+}
+
+@media (max-width: calc(768px - 1px)) {
+  .signup-text {
+    padding: calc(var(--main-padding-y) + 2rem) 15px;
   }
 }
 
 @media (max-width: calc(576px - 1px)) {
   .signup-text {
-    padding: var(--main-padding-y) var(--main-padding-x);
+    padding-left: var(--main-padding-x);
+    padding-right: var(--main-padding-x);
   }
 }
 
@@ -318,6 +333,14 @@ li {
   color: var(--white-header);
   font-size: 0.9375em;
   font-weight: 600;
+}
+
+@media (max-width: calc(993px - 1px)) {
+  .btn-listing {
+    font-size: 1.1em;
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+  }
 }
 
 /* ================= FOOTER ================= */
