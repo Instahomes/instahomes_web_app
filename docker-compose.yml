@@ -1,0 +1,34 @@
+services:
+  postgresql:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    #sets-up postgresql volume to harddrive.
+    volumes:
+      - ./postgresql:/var/lib/postgresql/data
+    ports:
+     - '5432:5432'
+  server:
+    env_file:
+      - ./instahomes/.env
+    restart: always
+    tty: true
+    stdin_open: true
+    build:
+      dockerfile: dockerfile-server
+      context: ./
+    ports:
+      - "8000:8000"
+  client:
+    env_file:
+      - ./instahomes/frontend/.env
+    restart: always
+    tty: true
+    stdin_open: true
+    build:
+      dockerfile: dockerfile-client
+      context: ./
+    ports:
+      - "3000:3000"

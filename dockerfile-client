@@ -1,0 +1,8 @@
+#dont use stretch in prod. Build using stretch then create another container step without stretch suffix.
+FROM node:14.4-stretch 
+WORKDIR /usr/frontend/
+#webpack config doesn't work with the container because of paths.
+COPY ./instahomes/frontend/package.json ./instahomes/frontend/webpack.config.js ./instahomes/frontend/babel.config.json /usr/frontend/
+RUN yarn
+COPY ./instahomes/frontend/ /usr/frontend/
+CMD ["yarn", "dev"]

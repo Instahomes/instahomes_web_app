@@ -1,3 +1,5 @@
+# docker-compose volumes
+postgresql/
 # Media and static files
 media/
 #react webpack output
