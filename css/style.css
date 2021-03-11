@@ -199,6 +199,7 @@ li {
 @media (max-width: 538px) {
   .hero-home-img {
     width: 90vw;
+    width: 40em;
   }
 }
 
@@ -401,7 +402,7 @@ li {
     padding-right: 0;
   }
   p {
-    font-size: 1.8em;
+    font-size: 1.4em;
   }
   h2 {
     font-size: 2em;
