@@ -404,8 +404,11 @@ li {
   p {
     font-size: 1.4em;
   }
+  h1 {
+    font-size: 2.6em;
+  }
   h2 {
-    font-size: 2em;
+    font-size: 2.25em;
   }
 }
 
