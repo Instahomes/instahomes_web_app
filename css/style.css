@@ -381,12 +381,6 @@ li {
   .signup-text {
     padding: calc(var(--main-padding-y) + 1rem) var(--main-padding-x);
   }
-  p {
-    font-size: 1.8em;
-  }
-  h2 {
-    font-size: 2em;
-  }
 }
 
 @media (max-width: calc(576px - 1px)) {
@@ -405,6 +399,12 @@ li {
   .container-no-padding {
     padding-left: 0;
     padding-right: 0;
+  }
+  p {
+    font-size: 1.8em;
+  }
+  h2 {
+    font-size: 2em;
   }
 }
 
