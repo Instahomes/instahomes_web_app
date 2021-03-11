@@ -43,8 +43,14 @@ body {
 }
 
 @media (max-width: 425px) {
-  body {
-    font-size: 10px;
+  p {
+    font-size: 1em;
+  }
+  h1 {
+    font-size: 1.8em;
+  }
+  h2 {
+    font-size: 1.6em;
   }
 }
 
@@ -161,7 +167,7 @@ li {
   }
   .hero-section {
     padding-bottom: 8em;
-    margin-top: -18em;
+    margin-top: -16em;
     max-height: 600px;
 }
 .hero-section-bottom {
@@ -192,14 +198,22 @@ li {
   .hero-section {
     padding: calc(var(--main-padding-y) + 6rem) var(--main-padding-x);
   }
+  .hero-section {
+    padding-bottom: 8em;
+    margin-top: -20em;
+    max-height: 600px;
+}
 }
 
 
 
 @media (max-width: 538px) {
-  .hero-home-img {
+  .home-img {
     width: 90vw;
-    width: 40em;
+  }
+  .hero-image {
+    min-width: 160%;
+    max-height: 650px;
   }
 }
 
@@ -404,6 +418,9 @@ li {
   p {
     font-size: 1.2em;
   }
+  .hero-section {
+    padding-bottom: 4em;
+  }
 }
 
 @media (max-width: 500px) {
@@ -412,10 +429,10 @@ li {
     padding-right: 0;
   }
   p {
-    font-size: 1.4em;
+    font-size: 1em;
   }
   h1 {
-    font-size: 2.6em;
+    font-size: 2.3em;
   }
   h2 {
     font-size: 2.25em;
