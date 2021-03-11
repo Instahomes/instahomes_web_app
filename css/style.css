@@ -381,15 +381,18 @@ li {
   .signup-text {
     padding: calc(var(--main-padding-y) + 1rem) var(--main-padding-x);
   }
+  p {
+    font-size: 1.8em;
+  }
+  h2 {
+    font-size: 2em;
+  }
 }
 
 @media (max-width: calc(576px - 1px)) {
   .signup-text {
     padding-left: var(--main-padding-x);
     padding-right: var(--main-padding-x);
-  }
-  p {
-    font-size: 2em;
   }
 }
 
