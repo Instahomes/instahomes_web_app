@@ -43,14 +43,8 @@ body {
 }
 
 @media (max-width: 425px) {
-  p {
-    font-size: 1em;
-  }
-  h1 {
-    font-size: 1.8em;
-  }
-  h2 {
-    font-size: 1.6em;
+  body {
+    font-size: 0.7em;
   }
 }
 
@@ -340,6 +334,12 @@ li {
 }
 
 .btn-signup {
+  width: 100%;
+  background-color: var(--white-body);
+  color: var(--signup-btn)
+}
+
+.btn-signup-join {
   width: 45%;
   background-color: var(--white-body);
   color: var(--signup-btn)
@@ -429,10 +429,10 @@ li {
     padding-right: 0;
   }
   p {
-    font-size: 1em;
+    font-size: 1.4em;
   }
   h1 {
-    font-size: 2.3em;
+    font-size: 2.6em;
   }
   h2 {
     font-size: 2.25em;
@@ -558,6 +558,9 @@ h5 {
     font-size: 2em;
   }
   .btn-signup {
+    max-width: 100%;
+  }
+  .btn-signup-join {
     max-width: 50%;
   }
   .cta-image {
