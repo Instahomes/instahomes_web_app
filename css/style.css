@@ -127,6 +127,13 @@ li {
   padding-bottom: 4em;
 }
 
+.hero-section-preview {
+  padding: calc(var(--main-padding-y) - 4rem) calc(var(--main-padding-x)  - 1rem);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 4em;
+}
+
 .hero-section-bottom {
   padding: calc(var(--main-padding-y) - 4rem) calc(var(--main-padding-x)  - 1rem);
   max-height: 700px;
