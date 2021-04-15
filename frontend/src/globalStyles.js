@@ -19,6 +19,10 @@ export const theme = {
     listingInputColor: " #BDBDBD",
     listingBtn: "#FF6700",
   },
+  padding: {
+    mainPaddingX: window.innerWidth > 768 ? "6.5rem" : "1.5rem",
+    mainPaddingY: window.innerWidth > 768 ? "10rem" : "2rem",
+  },
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -69,8 +73,7 @@ export const GlobalStyle = createGlobalStyle`
     margin-bottom: 0.7rem;
   }
 
-  .btn {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
-    font-weight: bold;
+  .btn-rubik {
+    font-family: 'Rubik', sans-serif;
   }
 `;

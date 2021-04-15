@@ -6,14 +6,18 @@ export const TopBarFrame = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 32px;
-  padding: 0 ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 0 12rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 export const TopBarSpan = styled.span`
   color: ${({ theme }) => theme.colors.mutedBlue};
   font-size: 0.8em;
   font-weight: 400;
-  padding: 0 ${({ noRightPadding }) => (noRightPadding ? "0" : "1rem")} 0 1rem;
+  padding: 0 1rem;
 
   @media (max-width: 768px) {
     display: ${({ nodisplay }) => (nodisplay ? "none" : "block")};
