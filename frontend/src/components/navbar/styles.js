@@ -1,36 +1,30 @@
 import styled from "styled-components";
 
-export const TopBarFrame = styled.div`
-  background-color: ${({ theme }) => theme.colors.darkBlue};
+export const NavbarFrame = styled.nav`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  height: 32px;
-  padding: 0 12rem;
-
-  @media (max-width: 768px) {
-    padding: 0 1rem;
-  }
+  height: 48px;
+  padding: 0.8rem ${({ theme }) => theme.padding.mainPaddingX};
 `;
 
-export const TopBarSpan = styled.span`
-  color: ${({ theme }) => theme.colors.mutedBlue};
-  font-size: 0.8em;
-  font-weight: 400;
-  padding: 0 1rem;
-
-  @media (max-width: 768px) {
-    display: ${({ nodisplay }) => (nodisplay ? "none" : "block")};
-  }
+export const NavbarLogo = styled.img`
+  height: 40%;
 `;
 
-export const TopBarPhone = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: auto;
+export const NavbarSpan = styled.span`
+  color: ${({ theme }) => theme.colors.darkBlue};
+  margin: 0 2em;
+  font-size: 16px;
+  font-weight: 500;
 `;
 
-export const TopBarPhoneIcon = styled.img`
-  height: 13px;
-  width: 13px;
+export const NavbarButton = styled.button`
+  font-size: 16px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.darkBlue};
+  padding: 0.5em 1.5em;
+  background-color: initial;
+  border: 1px solid ${({ theme }) => theme.colors.darkBlue};
+  border-radius: 1px;
 `;

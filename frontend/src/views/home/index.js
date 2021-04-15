@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Layout from "../../components/layout";
 import heroBg from "../../assets/home/hero.png";
 import Navbar from "../../components/navbar";
+import HomeSearch from "../../components/home-search";
 
 const HeroFrame = styled.div`
   height: 792px;
@@ -22,6 +23,7 @@ const Home = (props) => {
     <Layout>
       <HeroFrame>
         <Navbar />
+        <HomeSearch />
       </HeroFrame>
     </Layout>
   );
