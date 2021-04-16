@@ -115,9 +115,8 @@ li {
 /* ================= HERO SECTION ================= */
 
 .blog-topline-div {
-  padding: calc(var(--main-padding-y) - 4rem) calc(var(--main-padding-x)  - 1rem);
   background-color: #1C222A;
-  max-height: 400px;
+  max-height: 500px;
   position: relative;
   overflow: hidden;
   margin-top: -6em;
