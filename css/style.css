@@ -64,6 +64,16 @@ h2 {
   font-weight: bold;
 }
 
+h3 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: bold;
+}
+
+h4 {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-weight: bold;
+}
+
 p, li {
   font-size: 1.125em;
   font-family: 'Rubik', sans-serif;
