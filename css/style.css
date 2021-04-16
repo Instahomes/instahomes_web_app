@@ -117,7 +117,7 @@ li {
 .blog-topline-div {
   padding: calc(var(--main-padding-y) - 4rem) calc(var(--main-padding-x)  - 1rem);
   background-color: #1C222A;
-  max-height: 500px;
+  max-height: 400px;
   position: relative;
   overflow: hidden;
   margin-top: -6em;
@@ -541,11 +541,11 @@ li {
 .blog-preview-content {
   padding-top: 1em;
   padding-bottom: 1em;
-  padding-left: 1.3em;
-  padding-right: 1.3em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 .blog-preview-div {
-  max-width: 47%;
+  max-width: 45%;
   border: 1px solid #EAEAEA;
   border-radius: 4px;
   top: 2em;
