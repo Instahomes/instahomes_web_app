@@ -11,12 +11,6 @@ export const SearchFrame = styled.div`
   margin-top: 8rem;
 `;
 
-export const SearchBody = styled.p`
-  color: ${({ theme }) => theme.colors.mutedLightBlue};
-  font-size: 1em;
-  text-align: center;
-`;
-
 export const SearchForm = styled.form`
   display: flex;
   width: 100%;

@@ -2,7 +2,6 @@ import React from "react";
 import arrow from "../../assets/home/arrow.svg";
 import {
   SearchFrame,
-  SearchBody,
   SearchForm,
   SearchInput,
   SearchButton,
@@ -14,10 +13,10 @@ const HomeSearch = (props) => {
   return (
     <SearchFrame>
       <h1 className="center">Find your home instantly</h1>
-      <SearchBody>
+      <p className="center">
         Skip the line and get the best offers from the best developers in
         Manila.
-      </SearchBody>
+      </p>
       <SearchForm>
         <SearchInput placeholder="Search for location/city/subdivision" />
         <SearchButton>FIND MY HOME</SearchButton>

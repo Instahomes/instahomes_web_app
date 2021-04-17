@@ -2,37 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import Layout from "../../components/layout";
 import ListingCard from "../../components/listing-card";
-import heroBg from "../../assets/home/hero.png";
 import house from "../../assets/card/sample_house.png";
 import Navbar from "../../components/navbar";
 import HomeSearch from "../../components/home-search";
-
-const HeroFrame = styled.div`
-  height: 792px;
-  width: 100%;
-  background: linear-gradient(
-      180deg,
-      #f9f9f9 4.69%,
-      rgba(254, 254, 254, 0.226848) 78.38%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    url(${heroBg});
-  background-size: cover;
-`;
-
-const HomeListings = styled.div`
-  padding: 3em ${({ theme }) => theme.padding.mainPaddingX};
-`;
-
-const ListingRow = styled.div`
-  margin-top: 2em;
-  margin-bottom: 2em;
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 400px;
-  column-gap: 20px;
-`;
+import {
+  HeroFrame,
+  HomeListings,
+  ListingRow,
+  NewsletterFrame,
+  NewsletterImage,
+  NewsletterText,
+  SignupForm,
+  SignupInput,
+  SignupButton,
+} from "./styles";
 
 const Home = (props) => {
   return (
@@ -70,6 +53,24 @@ const Home = (props) => {
           />
         </ListingRow>
       </HomeListings>
+      <NewsletterFrame>
+        <NewsletterImage />
+        <NewsletterText>
+          <h1>Invest in Real Estate for your Family’s Future</h1>
+          <p>
+            Invest in real estate in the Philippines without having to worry
+            about legal concerns. We make sure you get recommended trustworthy
+            and relevant properties suited for your area, budget, and investment
+            needs through our algorithm.
+          </p>
+          <form>
+            <SignupForm>
+              <SignupInput placeholder="Email Address" />
+              <SignupButton>JOIN OUR NEWSLETTER</SignupButton>
+            </SignupForm>
+          </form>
+        </NewsletterText>
+      </NewsletterFrame>
     </Layout>
   );
 };

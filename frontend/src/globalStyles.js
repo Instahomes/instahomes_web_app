@@ -21,7 +21,7 @@ export const theme = {
     listingInputColor: " #BDBDBD",
   },
   padding: {
-    mainPaddingX: window.innerWidth > 768 ? "6.5rem" : "1.5rem",
+    mainPaddingX: window.innerWidth > 768 ? "8.5rem" : "1.5rem",
     mainPaddingY: window.innerWidth > 768 ? "10rem" : "2rem",
   },
 };
@@ -78,6 +78,12 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.125em;
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
+  }
+
+  p {
+    color: ${theme.colors.mutedLightBlue};
+    font-size: 1em;
+    line-height: 155%;
   }
 
   li {
