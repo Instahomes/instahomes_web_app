@@ -18,13 +18,3 @@ export const NavbarSpan = styled.span`
   font-size: 16px;
   font-weight: 500;
 `;
-
-export const NavbarButton = styled.button`
-  font-size: 16px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.darkBlue};
-  padding: 0.5em 1.5em;
-  background-color: initial;
-  border: 1px solid ${({ theme }) => theme.colors.darkBlue};
-  border-radius: 1px;
-`;

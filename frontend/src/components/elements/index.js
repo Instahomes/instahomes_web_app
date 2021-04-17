@@ -19,3 +19,13 @@ export const OrangeButton = styled.button`
   padding: 0.8em 1em;
   font-size: 0.8em;
 `;
+
+export const OutlineButton = styled.button`
+  font-size: 1rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.darkBlue};
+  padding: 0.5em 1.5em;
+  background-color: initial;
+  border: 1px solid ${({ theme }) => theme.colors.darkBlue};
+  border-radius: 1px;
+`;

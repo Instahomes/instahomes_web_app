@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const theme = {
   colors: {
+    mainBgColor: "#FDFDFD",
     mainBg: "#F6F6F6",
     darkBlue: "#2D4059",
     mutedBlue: "#879EBB",
@@ -15,7 +16,6 @@ export const theme = {
     darkBody: "#476891",
     signupBg: "#36485F",
     signupInputBg: " #41546C",
-    mainBgColor: " #FDFDFD",
     listingInputBg: " #F8F8F8",
     listingInputBorder: " #EAEAEA",
     listingInputColor: " #BDBDBD",
@@ -59,10 +59,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    font-size: 2.25em;
+    font-size: 2em;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-weight: bold;
     margin: 0;
+    color: ${theme.colors.lightBlue};
+  }
+
+  h1.dark {
+    color: ${theme.colors.darkHeader};
+  }
+
+  .center {
+    text-align: center;
   }
   
   p, li, span, input {

@@ -1,4 +1,5 @@
-import { NavbarFrame, NavbarLogo, NavbarSpan, NavbarButton } from "./styles";
+import { NavbarFrame, NavbarLogo, NavbarSpan } from "./styles";
+import { OutlineButton } from "../elements";
 import logo from "../../assets/navbar/logo.svg";
 
 const Navbar = () => (
@@ -7,7 +8,7 @@ const Navbar = () => (
     <div>
       <NavbarSpan>BLOG</NavbarSpan>
       <NavbarSpan>FEATURED LISTINGS</NavbarSpan>
-      <NavbarButton className="btn-rubik">SIGNUP FOR BETA</NavbarButton>
+      <OutlineButton className="btn-rubik">SIGNUP FOR BETA</OutlineButton>
     </div>
   </NavbarFrame>
 );
