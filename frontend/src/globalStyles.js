@@ -58,7 +58,7 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  h1 {
+  h1, h2, h3, h4 {
     font-size: 2em;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     font-weight: bold;
@@ -78,7 +78,7 @@ export const GlobalStyle = createGlobalStyle`
     text-align: center;
   }
   
-  p, li, span, input, textarea {
+  p, li, span, input, textarea, ul {
     font-size: 1.125em;
     font-family: 'Rubik', sans-serif;
     font-weight: 400;

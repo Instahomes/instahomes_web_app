@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import TopBar from "../top-bar";
+import Footer from "../footer";
 
 const Frame = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBgColor};
@@ -11,6 +12,7 @@ export default function Layout({ children }) {
     <React.Fragment>
       <TopBar />
       <Frame>{children}</Frame>
+      <Footer />
     </React.Fragment>
   );
 }
