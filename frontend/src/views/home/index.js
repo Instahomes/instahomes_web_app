@@ -15,7 +15,16 @@ import {
   SignupForm,
   SignupInput,
   SignupButton,
+  ListingFormFrame,
+  ListingFormText,
+  ListingForm,
+  ListingFormDiv,
 } from "./styles";
+import {
+  LightInput,
+  LightTextarea,
+  OrangeButton,
+} from "../../components/elements";
 
 const Home = (props) => {
   return (
@@ -71,6 +80,65 @@ const Home = (props) => {
           </form>
         </NewsletterText>
       </NewsletterFrame>
+      <ListingFormFrame>
+        <ListingFormText>
+          <h1 className="dark">
+            Interested in Joining Our Roster of Fast-Growing Developers?
+          </h1>
+          <p className="body-dark">
+            We are opening up our doors for real-estate developers in the
+            Philippines who want a free and seamless/no-hassle experience
+            selling their available listings.
+          </p>
+          <ul class="fa-ul">
+            <li className="body-dark">
+              <i className="fa-li fa fa-check"></i>We’ll create a <b>funnel</b>{" "}
+              for customer acquisition.
+            </li>
+            <li className="body-dark">
+              <i className="fa-li fa fa-check"></i>We’ll <b>streamline</b>{" "}
+              quotation to accounting process.
+            </li>
+            <li className="body-dark">
+              <i className="fa-li fa fa-check"></i>We’ll add your listings
+              completely <b>free of cost</b>.
+            </li>
+          </ul>
+        </ListingFormText>
+        <ListingForm>
+          <ListingFormDiv>
+            <LightInput
+              marginBottom="1em"
+              type="text"
+              name="name"
+              placeholder="Full name or Company name"
+            />
+            <LightInput
+              marginBottom="1em"
+              type="email"
+              name="email"
+              placeholder="Email address"
+            />
+            <LightInput
+              marginBottom="1em"
+              type="text"
+              name="phone"
+              placeholder="Cellphone number"
+            />
+            <LightTextarea
+              marginBottom="1em"
+              name="details"
+              id="details"
+              placeholder="Any details about your properties (locations, types of property, prices, etc.)"
+            ></LightTextarea>
+            <div>
+              <OrangeButton>
+                LIST YOUR PROPERTY <i id="signup-free">it's free</i>
+              </OrangeButton>
+            </div>
+          </ListingFormDiv>
+        </ListingForm>
+      </ListingFormFrame>
     </Layout>
   );
 };

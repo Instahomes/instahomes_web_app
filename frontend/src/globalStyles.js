@@ -14,11 +14,11 @@ export const theme = {
     navColor: "#476891",
     darkHeader: "#3F526A",
     darkBody: "#476891",
+    whiteInputBg: " #F8F8F8",
+    whiteInputBorder: " #EAEAEA",
+    whiteInputColor: " #BDBDBD",
     signupBg: "#36485F",
     signupInputBg: " #41546C",
-    listingInputBg: " #F8F8F8",
-    listingInputBorder: " #EAEAEA",
-    listingInputColor: " #BDBDBD",
   },
   padding: {
     mainPaddingX: window.innerWidth > 768 ? "8.5rem" : "1.5rem",
@@ -66,21 +66,25 @@ export const GlobalStyle = createGlobalStyle`
     color: ${theme.colors.lightBlue};
   }
 
-  h1.dark {
+  .dark {
     color: ${theme.colors.darkHeader};
+  }
+
+  .body-dark {
+    color: ${theme.colors.darkBody};
   }
 
   .center {
     text-align: center;
   }
   
-  p, li, span, input {
+  p, li, span, input, textarea {
     font-size: 1.125em;
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
   }
 
-  p {
+  p, li {
     color: ${theme.colors.mutedLightBlue};
     font-size: 1em;
     line-height: 155%;

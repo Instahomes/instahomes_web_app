@@ -13,6 +13,38 @@ export const Input = styled.input`
   }
 `;
 
+export const LightInput = styled.input`
+  display: block;
+  background-color: ${({ theme }) => theme.colors.whiteInputBg};
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputBorder};
+  color: ${({ theme }) => theme.colors.darkHeader};
+  border-radius: 4px;
+  font-size: 1em;
+  padding: 1em;
+  margin-bottom: ${({ marginBottom }) => marginBottom};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.whiteInputColor};
+  }
+`;
+
+export const LightTextarea = styled.textarea`
+  display: block;
+  background-color: ${({ theme }) => theme.colors.whiteInputBg};
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputBorder};
+  color: ${({ theme }) => theme.colors.darkHeader};
+  border-radius: 4px;
+  font-size: 1em;
+  padding: 1em;
+  resize: none;
+  margin-bottom: ${({ marginBottom }) => marginBottom};
+  height: 80px;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.whiteInputColor};
+  }
+`;
+
 export const OrangeButton = styled.button`
   background-color: ${({ theme }) => theme.colors.orange};
   color: ${({ theme }) => theme.colors.softWhite};

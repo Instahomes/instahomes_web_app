@@ -62,3 +62,26 @@ export const SignupButton = styled.button`
   background-color: ${({ theme }) => theme.colors.mutedLightBlue};
   color: ${({ theme }) => theme.colors.darkBlue};
 `;
+
+export const ListingFormFrame = styled.section`
+  padding: 10rem ${({ theme }) => theme.padding.mainPaddingX};
+  display: flex;
+`;
+
+export const ListingFormText = styled.div`
+  width: 50%;
+  padding-right: 5em;
+`;
+
+export const ListingForm = styled.form`
+  width: 50%;
+`;
+
+export const ListingFormDiv = styled.div`
+  background-color: ${({ theme }) => theme.colors.mainBgColor};
+  box-shadow: 0px 4px 16px 0px rgb(0, 0, 0, 0.1);
+  padding: 1.6875em;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+`;
