@@ -90,7 +90,7 @@ const Home = (props) => {
             Philippines who want a free and seamless/no-hassle experience
             selling their available listings.
           </p>
-          <ul class="fa-ul">
+          <ul>
             <li className="body-dark">
               <i className="fa-li fa fa-check"></i>We’ll create a <b>funnel</b>{" "}
               for customer acquisition.

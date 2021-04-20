@@ -6,6 +6,7 @@ import email from "../../assets/footer/email.svg";
 import phone from "../../assets/footer/phone.svg";
 
 const FooterFrame = styled.div`
+  background-color: ${({ theme }) => theme.colors.mainBg};
   padding: 3rem ${({ theme }) => theme.padding.mainPaddingX};
 `;
 
@@ -74,7 +75,7 @@ const Footer = () => (
       </FooterItem>
       <FooterItem>
         <h4>CONNECT WITH US</h4>
-        <div class="d-flex">
+        <div>
           <FooterIcon href="https://www.facebook.com/Instahomes.com.ph">
             <img src={facebook} alt="Facebook" />
           </FooterIcon>

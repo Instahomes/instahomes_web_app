@@ -4,7 +4,7 @@ import TopBar from "../top-bar";
 import Footer from "../footer";
 
 const Frame = styled.div`
-  background-color: ${({ theme }) => theme.colors.mainBgColor};
+  background-color: ${({ theme }) => theme.colors.mainBg};
 `;
 
 export default function Layout({ children }) {

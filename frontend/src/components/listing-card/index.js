@@ -39,7 +39,7 @@ const ListingPiece = styled.span`
   font-size: 1em;
   font-weight: ${({ bold }) => (bold ? 500 : 400)};
   color: ${({ theme, orange }) =>
-    orange ? theme.colors.orange : theme.colors.navColor};
+    orange ? theme.colors.orange : theme.colors.darkBlue};
   margin-left: ${({ marginLeft }) => marginLeft};
   margin-right: ${({ marginRight }) => marginRight};
 `;

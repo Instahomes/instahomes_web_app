@@ -11,7 +11,6 @@ export const theme = {
     inputBlue: "#50637B",
     orange: "#FF6700",
     softWhite: "#F7F7F7",
-    navColor: "#476891",
     darkHeader: "#3F526A",
     darkBody: "#476891",
     whiteInputBg: " #F8F8F8",
@@ -19,6 +18,7 @@ export const theme = {
     whiteInputColor: " #BDBDBD",
     signupBg: "#36485F",
     signupInputBg: " #41546C",
+    mutedGray: "#E0E0E0",
   },
   padding: {
     mainPaddingX: window.innerWidth > 768 ? "8.5rem" : "1.5rem",
