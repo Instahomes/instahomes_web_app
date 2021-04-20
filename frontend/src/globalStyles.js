@@ -14,8 +14,8 @@ export const theme = {
     darkHeader: "#3F526A",
     darkBody: "#476891",
     whiteInputBg: " #F8F8F8",
-    whiteInputBorder: " #EAEAEA",
-    whiteInputColor: " #BDBDBD",
+    whiteInputBorder: "#EAEAEA",
+    whiteInputColor: "#BDBDBD",
     signupBg: "#36485F",
     signupInputBg: " #41546C",
     mutedGray: "#E0E0E0",
@@ -43,6 +43,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
     font-size: 16px;
   }
 

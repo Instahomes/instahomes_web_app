@@ -6,55 +6,25 @@ import ProductSearch from "../../components/product-search";
 import heart from "../../assets/product/heart.svg";
 import blueHeart from "../../assets/product/blue_heart.svg";
 import map from "../../assets/product/map.svg";
-import { ListingContainer } from "./styles";
-import { OutlineButton, OrangeButton } from "../../components/elements";
-
-const ListingHeader = styled.div`
-  display: flex;
-  margin-top: 2rem;
-`;
-
-const ListingLine = styled.div`
-  display: flex;
-  margin-bottom: 10px;
-
-  h4 {
-    font-family: "Rubik", sans-serif;
-    font-weight: 500;
-    color: ${({ theme }) => theme.colors.darkBlue};
-    font-size: 1.5em;
-    margin-right: 10px;
-  }
-
-  span {
-    font-size: 1.1em;
-    color: ${({ theme }) => theme.colors.darkBody};
-    margin-left: 10px;
-  }
-`;
-
-const HeaderButtons = styled.div`
-  display: flex;
-  margin-left: auto;
-  padding: 10px 0;
-`;
-
-const WishlistButton = styled(OutlineButton)`
-  font-size: 1.1em;
-  padding: 0 2em;
-  display: flex;
-  align-items: center;
-`;
-
-const WishlistHeart = styled.img`
-  margin-right: 5px;
-`;
-
-const InquireButton = styled(OrangeButton)`
-  font-size: 1.1em;
-  padding: 0 2em;
-  margin-left: 10px;
-`;
+import imageMain from "../../assets/product/imageMain.png";
+import image1 from "../../assets/product/image1.png";
+import image2 from "../../assets/product/image2.png";
+import image3 from "../../assets/product/image3.png";
+import image4 from "../../assets/product/image4.png";
+import {
+  ListingContainer,
+  ListingHeader,
+  ListingLine,
+  HeaderButtons,
+  WishlistButton,
+  WishlistHeart,
+  InquireButton,
+  Image,
+  ImageContainer,
+  MoreImages,
+  ProductTabContainer,
+  ProductTab,
+} from "./styles";
 
 const Listing = (props) => {
   return (
@@ -81,6 +51,21 @@ const Listing = (props) => {
             <InquireButton>INQUIRE NOW</InquireButton>
           </HeaderButtons>
         </ListingHeader>
+        <ImageContainer>
+          <Image image={imageMain} />
+          <Image image={image1} />
+          <Image image={image2} />
+          <Image image={image3} />
+          <Image image={image4} />
+          <MoreImages>+10 more photos</MoreImages>
+        </ImageContainer>
+        <ProductTabContainer>
+          <ProductTab active first>
+            OVERVIEW
+          </ProductTab>
+          <ProductTab>PROPERTY DETAILS</ProductTab>
+          <ProductTab last>DEVELOPER INFORMATION</ProductTab>
+        </ProductTabContainer>
       </ListingContainer>
     </Layout>
   );
