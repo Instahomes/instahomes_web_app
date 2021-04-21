@@ -75,6 +75,10 @@ export const GlobalStyle = createGlobalStyle`
     color: ${theme.colors.darkBody};
   }
 
+  .dark-blue {
+    color: ${theme.colors.darkBlue};
+  }
+
   .center {
     text-align: center;
   }

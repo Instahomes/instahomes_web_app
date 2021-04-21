@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { OutlineButton, OrangeButton } from "../../components/elements";
 
 export const ListingContainer = styled.main`
-  padding: 0 ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 2em ${({ theme }) => theme.padding.mainPaddingX};
 `;
 
 export const ListingHeader = styled.div`
@@ -119,6 +119,7 @@ export const ProductTabContainer = styled.div`
 
 export const ProductTab = styled.a`
   font-family: "M PLUS Rounded 1c", sans-serif;
+  font-size: 0.9em;
   font-weight: bold;
   color: ${({ theme, active }) =>
     active ? theme.colors.mutedLightBlue : theme.colors.whiteInputColor};
@@ -128,4 +129,78 @@ export const ProductTab = styled.a`
   margin-right: ${({ last }) => (last ? 0 : "1.5em")};
   padding-top: 1em;
   padding-bottom: 1em;
+`;
+
+export const DescriptionContainer = styled.div`
+  display: flex;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+`;
+
+export const DescriptionLeft = styled.div`
+  width: 50%;
+  margin-right: 2rem;
+
+  div {
+    h4 {
+      margin-top: 1.5em;
+      font-size: 1em;
+      color: ${({ theme }) => theme.colors.darkBlue};
+    }
+
+    p {
+      font-size: 0.9em;
+      color: ${({ theme }) => theme.colors.darkHeader};
+    }
+  }
+
+  div:nth-child(1) {
+    h4 {
+      margin-top: 0;
+    }
+  }
+`;
+
+export const DescriptionRight = styled.div`
+  width: 50%;
+`;
+
+export const MetadataLine = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2em;
+`;
+
+export const MetadataNumber = styled.div`
+  font-size: 1em;
+  color: ${({ theme }) => theme.colors.darkBlue};
+  margin-bottom: 0.8em;
+  text-align: center;
+`;
+
+export const MetadataProperty = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.darkBody};
+
+  img {
+    margin-right: 10px;
+  }
+`;
+
+export const ProductPriceLine = styled.div`
+  display: flex;
+  font-size: 1.3em;
+  margin-bottom: 2em;
+
+  img {
+    margin-right: 15px;
+  }
+
+  span:nth-child(3) {
+    margin-left: auto;
+  }
 `;
