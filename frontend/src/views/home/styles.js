@@ -17,7 +17,8 @@ export const HeroFrame = styled.section`
 `;
 
 export const HomeListings = styled.section`
-  padding: 3em ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 3em var(--main-padding-x);
+  // padding: 3em var(--main-padding-x);
 `;
 
 export const ListingRow = styled.div`
@@ -43,7 +44,7 @@ export const NewsletterImage = styled.div`
 `;
 
 export const NewsletterText = styled.div`
-  padding: 10rem ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 10rem var(--main-padding-x);
 `;
 
 export const SignupForm = styled.div`
@@ -64,7 +65,7 @@ export const SignupButton = styled.button`
 `;
 
 export const ListingFormFrame = styled.section`
-  padding: 10rem ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 10rem var(--main-padding-x);
   display: flex;
 `;
 

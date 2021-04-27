@@ -7,7 +7,7 @@ import phone from "../../assets/footer/phone.svg";
 
 const FooterFrame = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBg};
-  padding: 3rem ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 3rem var(--main-padding-x);
 `;
 
 const FooterList = styled.div`

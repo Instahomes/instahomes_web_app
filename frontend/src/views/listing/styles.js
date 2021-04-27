@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { OutlineButton, OrangeButton } from "../../components/elements";
 
 export const ListingContainer = styled.main`
-  padding: 2em ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 2em var(--main-padding-x);
 `;
 
 export const ListingHeader = styled.div`

@@ -6,7 +6,7 @@ export const TopBarFrame = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 32px;
-  padding: 0 ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 0 var(--main-padding-x);
 `;
 
 export const TopBarSpan = styled.span`

@@ -1,5 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
+export const breakpoints = {
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+};
+
 export const theme = {
   colors: {
     mainBgColor: "#FDFDFD",
@@ -20,19 +27,15 @@ export const theme = {
     signupInputBg: " #41546C",
     mutedGray: "#E0E0E0",
   },
-  padding: {
-    mainPaddingX: window.innerWidth > 768 ? "8.5rem" : "1.5rem",
-    mainPaddingY: window.innerWidth > 768 ? "10rem" : "2rem",
-  },
 };
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --main-padding-x: 6.5rem;
+    --main-padding-x: 8.5rem;
     --main-padding-y: 10rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.md}px) {
     :root {
       --main-padding-x: 1.5rem;
       --main-padding-y: 2rem;
@@ -47,13 +50,13 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.md}px) {
     body {
       font-size: 14px;
     }
   }
 
-  @media (max-width: 425px) {
+  @media (max-width: ${breakpoints.sm}px) {
     body {
       font-size: 10px;
     }

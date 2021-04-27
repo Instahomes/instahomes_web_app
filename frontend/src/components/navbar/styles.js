@@ -5,7 +5,7 @@ export const NavbarFrame = styled.nav`
   justify-content: space-between;
   align-items: center;
   height: 48px;
-  padding: 0.8rem ${({ theme }) => theme.padding.mainPaddingX};
+  padding: 0.8rem var(--main-padding-x);
 `;
 
 export const NavbarLogo = styled.img`
