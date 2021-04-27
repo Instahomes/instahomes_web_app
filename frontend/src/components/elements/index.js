@@ -53,7 +53,7 @@ export const OrangeButton = styled.button`
 `;
 
 export const OutlineButton = styled.button`
-  font-size: 1rem;
+  font-size: ${({ fontSize }) => fontSize || "1rem"};
   font-weight: 500;
   color: ${({ theme }) => theme.colors.darkBlue};
   padding: 0.5em 1.5em;

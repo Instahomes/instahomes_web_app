@@ -19,7 +19,7 @@ const HomeSearch = (props) => {
       </p>
       <SearchForm>
         <SearchInput placeholder="Search for location/city/subdivision" />
-        <SearchButton>FIND MY HOME</SearchButton>
+        <SearchButton>FIND&nbsp;MY&nbsp;HOME</SearchButton>
       </SearchForm>
       <SearchAdvanced>
         <img src={arrow} alt="Arrow" />

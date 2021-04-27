@@ -9,25 +9,48 @@ export const SearchFrame = styled.div`
   border-radius: 9px;
   margin: auto;
   margin-top: 8rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 70%;
+    margin-top: 3rem;
+  }
 `;
 
 export const SearchForm = styled.form`
   display: flex;
   width: 100%;
   margin-top: 2rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column;
+  }
 `;
 
 export const SearchInput = styled(Input)`
   margin-right: 16px;
   width: 70%;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-right: 0;
+    margin-bottom: 16px;
+    width: initial;
+  }
 `;
 
 export const SearchButton = styled(OrangeButton)`
   width: 20%;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 100%;
+  }
 `;
 
 export const SearchAdvanced = styled.div`
   margin-top: 0.75rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    text-align: center;
+  }
 `;
 
 export const SearchAdvancedSpan = styled.span`

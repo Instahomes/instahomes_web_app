@@ -13,19 +13,16 @@ const ListingCard = styled.div`
 
 const ListingImage = styled.img`
   object-fit: cover;
-  height: 50%;
   width: 100%;
 `;
 
 const ListingInfo = styled.div`
-  height: 50%;
-  padding: 0.5em 1.1em;
+  padding: 1.1em;
 `;
 
 const ListingName = styled.h1`
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: ${({ theme }) => theme.colors.darkBlue};
-  margin-bottom: 8px;
 `;
 
 const ListingLine = styled.div`
@@ -36,7 +33,7 @@ const ListingLine = styled.div`
 `;
 
 const ListingPiece = styled.span`
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: ${({ bold }) => (bold ? 500 : 400)};
   color: ${({ theme, orange }) =>
     orange ? theme.colors.orange : theme.colors.darkBlue};
@@ -74,12 +71,16 @@ const Card = ({ image, name, size, address, bedrooms, bathrooms }) => {
         <ListingLine marginBottom="0.7em">
           <img src={bed} alt="Bed" />
           <ListingPiece marginLeft="10px" marginRight="20px">
-            {bedrooms} Bedrooms
+            {bedrooms}&nbsp;Bedrooms
           </ListingPiece>
           <img src={bath} alt="Bath" />
-          <ListingPiece marginLeft="10px">{bathrooms} Bathrooms</ListingPiece>
+          <ListingPiece marginLeft="10px">
+            {bathrooms}&nbsp;Bathrooms
+          </ListingPiece>
         </ListingLine>
-        <OutlineButton className="btn-rubik">VIEW HOME</OutlineButton>
+        <OutlineButton fontSize="0.8em" className="btn-rubik">
+          VIEW HOME
+        </OutlineButton>
       </ListingInfo>
     </ListingCard>
   );

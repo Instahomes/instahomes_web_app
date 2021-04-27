@@ -13,6 +13,10 @@ const FooterFrame = styled.div`
 const FooterList = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    justify-content: center;
+  }
 `;
 
 const FooterItem = styled.div`
@@ -27,16 +31,41 @@ const FooterItem = styled.div`
     list-style: none;
     padding-left: 0;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: none;
+
+    &.social-media {
+      display: block;
+
+      h4 {
+        display: none;
+      }
+    }
+  }
 `;
 
 const FooterText = styled.li`
   color: ${({ theme }) => theme.colors.darkBody};
   list-style: none;
   font-size: 1em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    text-align: center;
+  }
 `;
 
 const FooterIcon = styled.a`
   margin-right: 1em;
+`;
+
+const FooterIconRow = styled.div`
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-bottom: 1em;
+    ${FooterIcon}:nth-child(3) {
+      margin-right: 0;
+    }
+  }
 `;
 
 const Footer = () => (
@@ -73,9 +102,9 @@ const Footer = () => (
           <FooterText>Cookies</FooterText>
         </ul>
       </FooterItem>
-      <FooterItem>
+      <FooterItem className="social-media">
         <h4>CONNECT WITH US</h4>
-        <div>
+        <FooterIconRow>
           <FooterIcon href="https://www.facebook.com/Instahomes.com.ph">
             <img src={facebook} alt="Facebook" />
           </FooterIcon>
@@ -85,7 +114,7 @@ const Footer = () => (
           <FooterIcon href="mailto:instahomes.ph@gmail.com">
             <img src={email} alt="Email" />
           </FooterIcon>
-        </div>
+        </FooterIconRow>
       </FooterItem>
     </FooterList>
     <FooterText>© 2021 Instahomes Philipppines</FooterText>

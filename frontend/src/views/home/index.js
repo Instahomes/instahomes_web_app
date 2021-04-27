@@ -19,6 +19,7 @@ import {
   ListingFormText,
   ListingForm,
   ListingFormDiv,
+  ListingButton,
 } from "./styles";
 import {
   LightInput,
@@ -46,9 +47,9 @@ const Home = (props) => {
           />
           <ListingCard
             image={house}
-            name="Lipa Town House Unit"
-            size={55}
-            address="Bel-Air Residences Lipa, Batangas"
+            name="Ferndale Villas, Pasong Tamo"
+            size={30}
+            address="Sampaguita Ave., Pasong Tamo, QC"
             bedrooms={2}
             bathrooms={2}
           />
@@ -131,11 +132,11 @@ const Home = (props) => {
               id="details"
               placeholder="Any details about your properties (locations, types of property, prices, etc.)"
             ></LightTextarea>
-            <div>
+            <ListingButton>
               <OrangeButton>
                 LIST YOUR PROPERTY <i id="signup-free">it's free</i>
               </OrangeButton>
-            </div>
+            </ListingButton>
           </ListingFormDiv>
         </ListingForm>
       </ListingFormFrame>
