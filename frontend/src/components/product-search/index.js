@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import arrow from "../../assets/product/gray_arrow.svg";
 import {
   SearchFrame,
@@ -9,11 +9,20 @@ import {
 } from "./styles";
 
 const ProductSearch = ({ className }) => {
+  const [query, setQuery] = useState("");
+
+  const onSubmit = (e) => {
+    console.log(query);
+  };
+
   return (
     <div className={className}>
       <SearchFrame>
-        <SearchInput placeholder="Search for location/city/subdivision" />
-        <SearchButton>FIND&nbsp;MY&nbsp;HOME</SearchButton>
+        <SearchInput
+          placeholder="Search for location/city/subdivision"
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <SearchButton onClick={onSubmit}>FIND&nbsp;MY&nbsp;HOME</SearchButton>
       </SearchFrame>
       <SearchAdvanced>
         <img src={arrow} alt="Arrow" />

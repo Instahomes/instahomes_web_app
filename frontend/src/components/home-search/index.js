@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import arrow from "../../assets/home/arrow.svg";
 import {
   SearchFrame,
@@ -10,6 +10,12 @@ import {
 } from "./styles.js";
 
 const HomeSearch = (props) => {
+  const [query, setQuery] = useState("");
+
+  const onSubmit = (e) => {
+    console.log(query);
+  };
+
   return (
     <SearchFrame>
       <h1 className="center">Find your home instantly</h1>
@@ -18,8 +24,11 @@ const HomeSearch = (props) => {
         Manila.
       </p>
       <SearchForm>
-        <SearchInput placeholder="Search for location/city/subdivision" />
-        <SearchButton>FIND&nbsp;MY&nbsp;HOME</SearchButton>
+        <SearchInput
+          placeholder="Search for location/city/subdivision"
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <SearchButton onClick={onSubmit}>FIND&nbsp;MY&nbsp;HOME</SearchButton>
       </SearchForm>
       <SearchAdvanced>
         <img src={arrow} alt="Arrow" />

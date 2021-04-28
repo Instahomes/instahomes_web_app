@@ -10,7 +10,7 @@ export const ProductInquiryContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  span {
+  & > span {
     color: ${({ theme }) => theme.colors.darkHeader};
   }
 
@@ -42,16 +42,20 @@ export const InquiryTags = styled.div`
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   font-size: 0.8em;
+`;
 
-  span {
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 0.3em 1em;
-    color: ${({ theme }) => theme.colors.darkBody};
-    border: 1px solid ${({ theme }) => theme.colors.darkBody};
-    box-sizing: border-box;
-    border-radius: 19px;
-  }
+export const Tag = styled.span`
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 0.3em 1em;
+  color: ${({ theme, selected }) =>
+    selected ? theme.colors.mainBgColor : theme.colors.darkBody};
+  border: 1px solid ${({ theme }) => theme.colors.darkBody};
+  background-color: ${({ theme, selected }) =>
+    selected && theme.colors.darkBody};
+  box-sizing: border-box;
+  border-radius: 19px;
 `;
 
 export const InquiryButtons = styled.div`
@@ -68,7 +72,7 @@ export const InquiryButtons = styled.div`
 `;
 
 export const InquiryButtonsChild = styled(OrangeButton)`
-  font-size: 1em;
+  font-size: 0.9em;
   width: 50%;
   padding: 0.5em 1em;
   display: flex;

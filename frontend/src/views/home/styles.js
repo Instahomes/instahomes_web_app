@@ -144,6 +144,10 @@ export const ListingForm = styled.form`
 `;
 
 export const ListingButton = styled.div`
+  button {
+    font-size: 1em;
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     button {
       width: 100%;

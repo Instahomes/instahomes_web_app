@@ -1,15 +1,48 @@
+import React, { useState } from "react";
 import email from "../../assets/product/email.svg";
 import phone from "../../assets/product/phone.svg";
 import { LightTextarea } from "../elements";
 import {
   ProductInquiryContainer,
   InquiryTags,
+  Tag,
   InquiryButtons,
   InquiryButtonsChild,
   ButtonIcon,
 } from "./styles";
 
+const inquiryTags = [
+  {
+    value: "neighborhoodProfile",
+    label: "Neighborhood Profile",
+  },
+  {
+    value: "tourDates",
+    label: "Tour Dates",
+  },
+  {
+    value: "benefits",
+    label: "Benefits",
+  },
+  {
+    value: "downpayment",
+    label: "Downpayment",
+  },
+  {
+    value: "termsOfPayment",
+    label: "Terms of Payment",
+  },
+  {
+    value: "similarProperties",
+    label: "Similar Properties",
+  },
+];
+
 const ProductInquiry = () => {
+  const [selectedTag, setSelectedTag] = useState("");
+
+  console.log(selectedTag);
+
   return (
     <ProductInquiryContainer>
       <h2 className="btn-rubik">
@@ -18,12 +51,15 @@ const ProductInquiry = () => {
       </h2>
       <span>I want to inquire about...</span>
       <InquiryTags>
-        <span>Neighborhood Profile</span>
-        <span>Tour Dates</span>
-        <span>Benefits</span>
-        <span>Downpayment</span>
-        <span>Terms of Payment</span>
-        <span>Similar Properties</span>
+        {inquiryTags.map((tag) => (
+          <Tag
+            key={tag.value}
+            onClick={() => setSelectedTag(tag.value)}
+            selected={tag.value == selectedTag}
+          >
+            {tag.label}
+          </Tag>
+        ))}
       </InquiryTags>
       <LightTextarea placeholder="Additional things you want to include (optional)"></LightTextarea>
       <InquiryButtons>

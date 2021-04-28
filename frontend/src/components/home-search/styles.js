@@ -16,7 +16,7 @@ export const SearchFrame = styled.div`
   }
 `;
 
-export const SearchForm = styled.form`
+export const SearchForm = styled.div`
   display: flex;
   width: 100%;
   margin-top: 2rem;
