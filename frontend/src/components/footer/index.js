@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import facebook from "../../assets/footer/facebook.svg";
-import instagram from "../../assets/footer/instagram.svg";
 import email from "../../assets/footer/email.svg";
 import phone from "../../assets/footer/phone.svg";
 

@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 
 export const NavbarFrame = styled.nav`
   display: flex;

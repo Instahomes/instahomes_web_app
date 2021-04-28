@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import Layout from "../../components/layout";
 import ListingCard from "../../components/listing-card";
 import house from "../../assets/card/sample_house.png";
