@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
-import ProductSearch from "../../components/product-search";
 import ProductInquiry from "../../components/product-inquiry";
 import heart from "../../assets/product/heart.svg";
 import blueHeart from "../../assets/product/blue_heart.svg";
@@ -18,6 +17,8 @@ import bed from "../../assets/product/bed.svg";
 import money from "../../assets/product/money.svg";
 import {
   ListingContainer,
+  ListingHeadContainer,
+  ListingProductSearch,
   ListingHeader,
   ListingLine,
   HeaderButtons,
@@ -43,40 +44,42 @@ const Listing = (props) => {
     <Layout>
       <Navbar />
       <ListingContainer>
-        <ProductSearch />
-        <ListingHeader>
-          <div>
-            <ListingLine>
-              <h4>Andrea Duplex Unit</h4>
-              <img src={heart} alt="Heart" />
-            </ListingLine>
-            <ListingLine>
-              <img src={map} alt="Map" />
-              <span>Bel-Air Residences Lipa, Batangas</span>
-            </ListingLine>
-          </div>
-          <HeaderButtons>
-            <WishlistButton>
-              <WishlistHeart src={blueHeart} alt="Heart" />
-              ADD TO WISHLIST
-            </WishlistButton>
-            <InquireButton>INQUIRE NOW</InquireButton>
-          </HeaderButtons>
-        </ListingHeader>
-        <ImageContainer>
-          <Image image={imageMain} />
-          <Image image={image1} />
-          <Image image={image2} />
-          <Image image={image3} />
-          <Image image={image4} />
-          <MoreImages>+10 more photos</MoreImages>
-        </ImageContainer>
+        <ListingProductSearch />
+        <ListingHeadContainer>
+          <ListingHeader>
+            <div>
+              <ListingLine>
+                <h4>Andrea Duplex Unit</h4>
+                <img src={heart} alt="Heart" />
+              </ListingLine>
+              <ListingLine>
+                <img src={map} alt="Map" />
+                <span>Bel-Air Residences Lipa, Batangas</span>
+              </ListingLine>
+            </div>
+            <HeaderButtons>
+              <WishlistButton>
+                <WishlistHeart src={blueHeart} alt="Heart" />
+                ADD TO WISHLIST
+              </WishlistButton>
+              <InquireButton>INQUIRE NOW</InquireButton>
+            </HeaderButtons>
+          </ListingHeader>
+          <ImageContainer>
+            <Image image={imageMain} />
+            <Image image={image1} />
+            <Image image={image2} />
+            <Image image={image3} />
+            <Image image={image4} />
+            <MoreImages>+10 more photos</MoreImages>
+          </ImageContainer>
+        </ListingHeadContainer>
         <ProductTabContainer>
           <ProductTab active first>
             OVERVIEW
           </ProductTab>
-          <ProductTab>PROPERTY DETAILS</ProductTab>
-          <ProductTab last>DEVELOPER INFORMATION</ProductTab>
+          <ProductTab>PROPERTY&nbsp;DETAILS</ProductTab>
+          <ProductTab last>DEVELOPER&nbsp;INFORMATION</ProductTab>
         </ProductTabContainer>
         <DescriptionContainer>
           <DescriptionLeft>
@@ -117,7 +120,7 @@ const Listing = (props) => {
               <p>
                 This House and Lot unit was designed to suit the needs of
                 individuals or couples who are just starting out a whole new
-                adventure on independence. This house unit is also ideal to
+                adventure on independence. Tcdhis house unit is also ideal to
                 invest with by turning each unit as an apartment for students
                 studying at the nearby schools in Lipa City, Batangas.
               </p>
@@ -155,8 +158,10 @@ const Listing = (props) => {
               </div>
             </MetadataLine>
             <ProductPriceLine>
-              <img src={money} alt="Money" />
-              <span className="body-dark">Est. Property Price</span>
+              <div>
+                <img src={money} alt="Money" />
+                <span className="body-dark">Est.&nbsp;Property&nbsp;Price</span>
+              </div>
               <span className="dark-blue">Php 1,820,000.00</span>
             </ProductPriceLine>
             <ProductInquiry />

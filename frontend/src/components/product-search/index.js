@@ -8,12 +8,12 @@ import {
   SearchAdvancedSpan,
 } from "./styles";
 
-const ProductSearch = () => {
+const ProductSearch = ({ className }) => {
   return (
-    <div>
+    <div className={className}>
       <SearchFrame>
         <SearchInput placeholder="Search for location/city/subdivision" />
-        <SearchButton>FIND MY HOME</SearchButton>
+        <SearchButton>FIND&nbsp;MY&nbsp;HOME</SearchButton>
       </SearchFrame>
       <SearchAdvanced>
         <img src={arrow} alt="Arrow" />

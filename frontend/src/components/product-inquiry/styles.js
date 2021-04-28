@@ -15,14 +15,14 @@ export const ProductInquiryContainer = styled.div`
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.5em;
     font-weight: 500;
     color: ${({ theme }) => theme.colors.darkBlue};
     line-height: 128%;
     margin-bottom: 1rem;
 
     #property-name {
-      font-size: 1.5rem;
+      font-size: 1em;
       font-weight: 500;
       color: ${({ theme }) => theme.colors.orange};
     }
@@ -61,6 +61,10 @@ export const InquiryButtons = styled.div`
   button:nth-child(1) {
     margin-right: 10px;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column;
+  }
 `;
 
 export const InquiryButtonsChild = styled(OrangeButton)`
@@ -70,6 +74,11 @@ export const InquiryButtonsChild = styled(OrangeButton)`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 100%;
+    margin-bottom: 5px;
+  }
 `;
 
 export const ButtonIcon = styled.img`

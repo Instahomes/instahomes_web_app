@@ -29,11 +29,11 @@ const ProductInquiry = () => {
       <InquiryButtons>
         <InquiryButtonsChild>
           <ButtonIcon src={email} alt="Email" />
-          INQUIRE VIA EMAIL
+          INQUIRE&nbsp;VIA&nbsp;EMAIL
         </InquiryButtonsChild>
         <InquiryButtonsChild>
           <ButtonIcon src={phone} alt="Phone" />
-          INQUIRE VIA PHONE*
+          INQUIRE&nbsp;VIA&nbsp;PHONE*
         </InquiryButtonsChild>
       </InquiryButtons>
       <i id="sms-charges">*SMS charges may apply</i>

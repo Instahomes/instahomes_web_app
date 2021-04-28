@@ -17,7 +17,6 @@ export const SearchInput = styled(LightInput)`
 `;
 
 export const SearchButton = styled.button`
-  width: 25%;
   font-size: 0.9em;
   background-color: ${({ theme }) => theme.colors.mutedLightBlue};
   color: ${({ theme }) => theme.colors.softWhite};

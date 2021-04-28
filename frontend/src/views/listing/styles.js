@@ -1,8 +1,24 @@
 import styled from "styled-components";
 import { OutlineButton, OrangeButton } from "../../components/elements";
+import ProductSearch from "../../components/product-search";
 
 export const ListingContainer = styled.main`
   padding: 2em var(--main-padding-x);
+`;
+
+export const ListingHeadContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column-reverse;
+  }
+`;
+
+export const ListingProductSearch = styled(ProductSearch)`
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: none;
+  }
 `;
 
 export const ListingHeader = styled.div`
@@ -11,6 +27,10 @@ export const ListingHeader = styled.div`
   padding-bottom: 1em;
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.mutedGray};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column;
+  }
 `;
 
 export const ListingLine = styled.div`
@@ -36,6 +56,11 @@ export const HeaderButtons = styled.div`
   display: flex;
   margin-left: auto;
   padding: 12px 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-left: 0;
+    flex-direction: column-reverse;
+  }
 `;
 
 export const WishlistButton = styled(OutlineButton)`
@@ -44,6 +69,12 @@ export const WishlistButton = styled(OutlineButton)`
   display: flex;
   align-items: center;
   border: 2px solid ${({ theme }) => theme.colors.darkBlue};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 0.7em 0;
+    margin-top: 10px;
+    justify-content: center;
+  }
 `;
 
 export const WishlistHeart = styled.img`
@@ -54,6 +85,11 @@ export const InquireButton = styled(OrangeButton)`
   font-size: 1em;
   padding: 0 2em;
   margin-left: 10px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-left: 0;
+    padding: 0.7em 0;
+  }
 `;
 
 export const Image = styled.div`
@@ -91,6 +127,17 @@ export const ImageContainer = styled.div`
   ${Image}:nth-child(5) {
     grid-area: image4;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: repeat(5, 90%);
+    grid-template-rows: 400px;
+    grid-template-areas: "main image1 image2 image3 image4";
+    overflow-x: scroll;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-rows: 200px;
+  }
 `;
 
 export const MoreImages = styled.div`
@@ -115,6 +162,7 @@ export const ProductTabContainer = styled.div`
   margin-top: 1rem;
   display: flex;
   border-bottom: 1px solid ${({ theme }) => theme.colors.mutedGray};
+  overflow-x: scroll;
 `;
 
 export const ProductTab = styled.a`
@@ -135,6 +183,10 @@ export const DescriptionContainer = styled.div`
   display: flex;
   padding-top: 1.5em;
   padding-bottom: 1.5em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column;
+  }
 `;
 
 export const DescriptionLeft = styled.div`
@@ -159,10 +211,19 @@ export const DescriptionLeft = styled.div`
       margin-top: 0;
     }
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 100%;
+  }
 `;
 
 export const DescriptionRight = styled.div`
   width: 50%;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 100%;
+    margin-top: 1em;
+  }
 `;
 
 export const MetadataLine = styled.div`
@@ -170,12 +231,19 @@ export const MetadataLine = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
 `;
 
 export const MetadataNumber = styled.div`
   font-size: 1em;
   color: ${({ theme }) => theme.colors.darkBlue};
-  margin-bottom: 0.8em;
+  margin-bottom: 5px;
   text-align: center;
 `;
 
@@ -189,6 +257,10 @@ export const MetadataProperty = styled.div`
   img {
     margin-right: 10px;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    justify-content: center;
+  }
 `;
 
 export const ProductPriceLine = styled.div`
@@ -197,10 +269,26 @@ export const ProductPriceLine = styled.div`
   margin-bottom: 2em;
 
   img {
-    margin-right: 15px;
+    margin-right: 10px;
   }
 
-  span:nth-child(3) {
+  & > span {
     margin-left: auto;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column-reverse;
+    align-items: center;
+
+    & > span {
+      margin-left: 0;
+      margin-bottom: 5px;
+    }
+
+    div {
+      span {
+        font-size: 1em;
+      }
+    }
   }
 `;
