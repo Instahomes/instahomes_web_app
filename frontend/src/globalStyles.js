@@ -10,6 +10,7 @@ export const theme = {
     mutedLightBlue: "#BACCE2",
     inputBlue: "#50637B",
     orange: "#FF6700",
+    green: "#2DAA0D",
     softWhite: "#F7F7F7",
     darkHeader: "#3F526A",
     darkBody: "#476891",

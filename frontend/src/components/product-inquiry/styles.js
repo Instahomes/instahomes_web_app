@@ -21,18 +21,11 @@ export const ProductInquiryContainer = styled.div`
     line-height: 128%;
     margin-bottom: 1rem;
 
-    #property-name {
+    #property-developer {
       font-size: 1em;
       font-weight: 500;
       color: ${({ theme }) => theme.colors.orange};
     }
-  }
-
-  #sms-charges {
-    margin-top: 0.8em;
-    color: ${({ theme }) => theme.colors.whiteInputColor};
-    font-size: 0.8em;
-    text-align: center;
   }
 `;
 
@@ -87,4 +80,29 @@ export const InquiryButtonsChild = styled(OrangeButton)`
 
 export const ButtonIcon = styled.img`
   margin-right: 5px;
+`;
+
+export const Footnotes = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+
+  #direct-dev {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 15px;
+      height: 15px;
+      margin-right: 10px;
+    }
+
+    font-size: 0.8em;
+    color: ${({ theme }) => theme.colors.green};
+  }
+
+  #sms-charges {
+    font-size: 0.8em;
+    color: ${({ theme }) => theme.colors.whiteInputColor};
+  }
 `;

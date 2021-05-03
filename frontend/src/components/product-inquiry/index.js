@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import email from "../../assets/product/email.svg";
 import phone from "../../assets/product/phone.svg";
+import check from "../../assets/product/check.svg";
 import { LightTextarea } from "../elements";
 import {
   ProductInquiryContainer,
@@ -9,6 +10,7 @@ import {
   InquiryButtons,
   InquiryButtonsChild,
   ButtonIcon,
+  Footnotes,
 } from "./styles";
 
 const inquiryTags = [
@@ -44,8 +46,8 @@ const ProductInquiry = () => {
   return (
     <ProductInquiryContainer>
       <h2 className="btn-rubik">
-        Contact Bel-Air Residences about{" "}
-        <span id="property-name">Andrea Duplex Unit</span> directly!
+        Contact <span id="property-developer">Alveo Land</span> directly &nbsp;
+        <img src={check} alt="Check" />
       </h2>
       <span>I want to inquire about...</span>
       <InquiryTags>
@@ -70,7 +72,13 @@ const ProductInquiry = () => {
           INQUIRE&nbsp;VIA&nbsp;PHONE*
         </InquiryButtonsChild>
       </InquiryButtons>
-      <i id="sms-charges">*SMS charges may apply</i>
+      <Footnotes>
+        <span id="direct-dev">
+          <img src={check} alt="Check" />
+          Direct to Official Developer
+        </span>
+        <i id="sms-charges">*SMS charges may apply</i>
+      </Footnotes>
     </ProductInquiryContainer>
   );
 };
