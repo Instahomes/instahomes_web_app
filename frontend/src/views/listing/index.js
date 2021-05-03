@@ -2,6 +2,8 @@ import React from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import ProductInquiry from "../../components/product-inquiry";
+import ProductTour from "../../components/product-tour";
+
 import heart from "../../assets/product/heart.svg";
 import check from "../../assets/product/check.svg";
 import map from "../../assets/product/map.svg";
@@ -220,6 +222,9 @@ const Listing = (props) => {
               </div>
               <span className="dark-blue">Php 1,820,000.00</span>
             </ProductPriceLine>
+            <ProductTour />
+            <br />
+            <br />
             <ProductInquiry />
           </DescriptionRight>
         </DescriptionContainer>

@@ -20,6 +20,7 @@ export const theme = {
     signupInputBg: " #41546C",
     mutedGray: "#E0E0E0",
     lightGray: "#F2F2F2",
+    darkGray: "#828282",
   },
   breakpoints: {
     sm: "576px",

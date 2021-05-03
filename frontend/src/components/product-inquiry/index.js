@@ -41,8 +41,6 @@ const inquiryTags = [
 const ProductInquiry = () => {
   const [selectedTag, setSelectedTag] = useState("");
 
-  console.log(selectedTag);
-
   return (
     <ProductInquiryContainer>
       <h2 className="btn-rubik">
