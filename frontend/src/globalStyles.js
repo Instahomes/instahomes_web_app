@@ -19,6 +19,7 @@ export const theme = {
     signupBg: "#36485F",
     signupInputBg: " #41546C",
     mutedGray: "#E0E0E0",
+    lightGray: "#F2F2F2",
   },
   breakpoints: {
     sm: "576px",
@@ -87,6 +88,10 @@ export const GlobalStyle = createGlobalStyle`
 
   .center {
     text-align: center;
+  }
+
+  .m-plus {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
   }
   
   p, li, span, input, textarea, ul {

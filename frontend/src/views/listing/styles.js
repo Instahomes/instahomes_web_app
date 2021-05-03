@@ -45,10 +45,13 @@ export const ListingLine = styled.div`
     margin-right: 10px;
   }
 
+  img {
+    margin-right: 10px;
+  }
+
   span {
     font-size: 1.1em;
     color: ${({ theme }) => theme.colors.darkBody};
-    margin-left: 10px;
   }
 `;
 
@@ -102,7 +105,7 @@ export const ImageContainer = styled.div`
   display: grid;
   position: relative;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 170px);
+  grid-template-rows: repeat(2, 200px);
   grid-template-areas:
     "main main image1 image2"
     "main main image3 image4";
@@ -141,9 +144,9 @@ export const ImageContainer = styled.div`
 `;
 
 export const MoreImages = styled.div`
-  background: ${({ theme }) => theme.colors.mutedGray};
+  background: rgba(224, 224, 224, 0.49);
 
-  border: 1px solid #bdbdbd;
+  border: 1px solid ${({ theme }) => theme.colors.lightGray};
   box-sizing: border-box;
   border-radius: 3px;
 
@@ -152,9 +155,9 @@ export const MoreImages = styled.div`
   right: 1%;
 
   padding: 0.5em 1em;
-  color: ${({ theme }) => theme.colors.darkBlue};
+  color: ${({ theme }) => theme.colors.lightGray};
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 400;
   opacity: 0.7;
 `;
 
@@ -204,9 +207,45 @@ export const DescriptionLeft = styled.div`
       font-size: 0.9em;
       color: ${({ theme }) => theme.colors.darkHeader};
     }
+
+    #view-specs {
+      font-size: 0.9em;
+      color: ${({ theme }) => theme.colors.darkBody};
+    }
+
+    #prop-details {
+      display: flex;
+      margin-top: 1em;
+
+      img {
+        margin-right: 1.2rem;
+      }
+    }
   }
 
-  div:nth-child(1) {
+  #prop-directions {
+    img {
+      margin-top: 1em;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    #directions-details {
+      display: flex;
+
+      & > div {
+        padding-top: 1em;
+        padding-right: 1em;
+      }
+
+      h4 {
+        margin-top: 0;
+      }
+    }
+  }
+
+  & > div:nth-child(1) {
     h4 {
       margin-top: 0;
     }
@@ -215,6 +254,39 @@ export const DescriptionLeft = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 100%;
   }
+`;
+
+export const DevInformation = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5em;
+  height: 100px;
+  margin-top: 1em;
+
+  h4, p {
+    margin-bottom: 5px !important;
+    margin-top: 0 !important;
+  }
+
+  .dev-info {
+    max-width: 50%;
+  }
+
+  .logo {
+    width: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .orange-text {
+    font-weight: 500;
+    font-size: 0.7em;
+    color: ${({ theme }) => theme.colors.orange};
+`;
+
+export const ViewDev = styled(OutlineButton)`
+  padding: 0.5em 1em;
+  font-size: 0.9em;
 `;
 
 export const DescriptionRight = styled.div`
