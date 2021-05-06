@@ -5,6 +5,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
 import Listing from "./views/listing";
+import DeveloperForm from "./views/developer-form";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           <Switch>
             <Route exact path="/listing">
               <Listing />
+            </Route>
+            <Route exact path="/inquire">
+              <DeveloperForm />
             </Route>
             <Route path="/">
               <Home />

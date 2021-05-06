@@ -102,7 +102,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
-  p, li {
+  p, li, span {
     color: ${theme.colors.mutedLightBlue};
     font-size: 1em;
     line-height: 155%;
