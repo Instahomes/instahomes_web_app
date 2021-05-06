@@ -19,6 +19,20 @@ import Step3 from "./steps/step3";
 import Step4 from "./steps/step4";
 import Step5 from "./steps/step5";
 import Step6 from "./steps/step6";
+import Step7 from "./steps/step7";
+import Step8 from "./steps/step8";
+import Step9 from "./steps/step9";
+import Step10 from "./steps/step10";
+import Step11 from "./steps/step11";
+import circleFilled from "../../assets/form/circle-filled.svg";
+import circleEmpty from "../../assets/form/circle-empty.svg";
+
+const ProgressBar = styled.div`
+  width: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+`;
 
 // Wizard is a single Formik instance whose children are each page of the
 // multi-step form. The form is submitted on each forward transition (can only
@@ -64,15 +78,27 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
       onSubmit={handleSubmit}
       validationSchema={step.props.validationSchema}
     >
-      {({ isSubmitting, values, handleChange, handleBlur }) => (
+      {({ isSubmitting, values, setFieldValue }) => (
         <Form>
           {React.isValidElement(step)
             ? React.cloneElement(step, {
                 isSubmitting,
                 values,
+                setFieldValue,
                 previous,
               })
             : step}
+          {stepNumber > 0 && stepNumber < totalSteps - 1 && (
+            <ProgressBar>
+              {steps.slice(1, steps.length - 1).map((step, idx) => (
+                <img
+                  key={"step" + idx}
+                  src={stepNumber <= idx ? circleEmpty : circleFilled}
+                  alt="Filled Circle"
+                />
+              ))}
+            </ProgressBar>
+          )}
         </Form>
       )}
     </Formik>
@@ -91,6 +117,12 @@ const DeveloperForm = (props) => {
             address: "",
             propertyTypes: [],
             budget: "",
+            purchaseType: "",
+            reason: "",
+            progress: "",
+            hasAgent: false,
+            password: "",
+            confirmPassword: "",
           }}
         >
           <Step1
@@ -125,6 +157,39 @@ const DeveloperForm = (props) => {
             validationSchema={Yup.object({
               budget: Yup.string().required(),
             })}
+          />
+          <Step7
+            onSubmit={() => console.log("Step7 onSubmit")}
+            validationSchema={Yup.object({
+              purchaseType: Yup.string().required(),
+              reason: Yup.string().required(),
+            })}
+          />
+          <Step8
+            onSubmit={() => console.log("Step8 onSubmit")}
+            validationSchema={Yup.object({
+              progress: Yup.string().required(),
+            })}
+          />
+          <Step9
+            onSubmit={() => console.log("Step9 onSubmit")}
+            validationSchema={Yup.object({
+              hasAgent: Yup.boolean().required(),
+            })}
+          />
+          <Step10
+            onSubmit={() => console.log("Step10 onSubmit")}
+            validationSchema={Yup.object({
+              password: Yup.string().required(),
+              confirmPassword: Yup.string().oneOf(
+                [Yup.ref("password"), null],
+                "Passwords must match"
+              ),
+            })}
+          />
+          <Step11
+            onSubmit={() => console.log("Step11 onSubmit")}
+            validationSchema={Yup.object({})}
           />
         </Wizard>
       </Content>

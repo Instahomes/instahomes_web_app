@@ -46,9 +46,11 @@ const Step5 = ({ isSubmitting, values, previous }) => {
         Select your preferred type of property from the options below. Check all
         that apply.
       </p>
+      <FormErrorMessage component="span" name="propertyTypes" />
       <CheckboxGroup>
         {propertyChoices.map((choice) => (
           <CheckboxLabel
+            key={choice.label}
             isChecked={values.propertyTypes.includes(choice.value)}
           >
             <span>{choice.label}</span>
@@ -82,7 +84,6 @@ const Step5 = ({ isSubmitting, values, previous }) => {
       </CheckboxGroup>
       <FormDiv>
         <FormFrame>
-          <FormErrorMessage component="span" name="name" />
           <SignupOrangeButton disabled={isSubmitting} type="submit">
             NEXT PAGE
           </SignupOrangeButton>

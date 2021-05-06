@@ -19,7 +19,7 @@ export const Frame = styled.main`
     color: ${({ theme }) => theme.colors.mutedLightBlue};
   }
 
-  span {
+  & > span {
     font-size: 0.9em;
   }
 
@@ -99,6 +99,7 @@ export const FormErrorMessage = styled(ErrorMessage)`
 export const CheckboxGroup = styled.div`
   width: 70%;
   margin: auto;
+  margin-top: 2em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
@@ -113,13 +114,14 @@ export const CheckboxLabel = styled.label`
     border: 1px solid ${theme.colors.mutedBlue};
     border-radius: 7px;`}
 
-  color: ${({ theme }) => theme.colors.mutedLightBlue};
   padding: 0.3em 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  span {
+  & > span {
+    color: ${({ theme, isChecked }) =>
+      isChecked ? theme.colors.mutedLightBlue : theme.colors.mutedBlue};
     font-size: 1em;
   }
 
@@ -147,6 +149,8 @@ export const CheckboxLabel = styled.label`
   .checkbox__input {
     display: grid;
     grid-template-areas: "checkbox";
+    width: 1em;
+    height: 1em;
 
     > * {
       grid-area: checkbox;
@@ -162,4 +166,25 @@ export const CheckboxLabel = styled.label`
       }
     }
   }
+`;
+
+export const ChoiceGroup = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+export const Choice = styled.span`
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.2em 0.5em;
+  color: ${({ theme, isChecked }) =>
+    isChecked
+      ? theme.colors.mutedLightBlue
+      : theme.colors.mutedBlue} !important;
+
+  ${({ isChecked, theme }) =>
+    isChecked &&
+    `background: #253243;
+    border: 1px solid ${theme.colors.mutedBlue};
+    border-radius: 7px;`}
 `;

@@ -8,50 +8,41 @@ import {
   FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
+  ChoiceGroup,
+  Choice,
 } from "../styles";
 import { Field } from "formik";
 
-const budgetChoices = [
+const progressChoices = [
   {
-    value: "1-5",
-    label: "PHP 1-5 Million",
+    value: "askingAround",
+    label: "I'm just asking around",
   },
   {
-    value: "5-10",
-    label: "PHP 5-10 Million",
+    value: "visiting",
+    label: "I'm just visiting properties",
   },
   {
-    value: "10-15",
-    label: "PHP 10-15 Million",
+    value: "readyToClose",
+    label: "I'm ready to close a deal",
   },
   {
-    value: "15-20",
-    label: "PHP 15-20 Million",
-  },
-  {
-    value: "20-25",
-    label: "PHP 20-25 Million",
-  },
-  {
-    value: "25-",
-    label: "More than 25 Million",
+    value: "other",
+    label: "Other",
   },
 ];
 
-const Step6 = ({ isSubmitting, values, previous }) => {
+const Step8 = ({ isSubmitting, values, setFieldValue, previous }) => {
   return (
     <React.Fragment>
-      <h1>Estimated Budget</h1>
-      <p>
-        Select your estimated budget below. The property you're inquiring is
-        approx. PHP 13,000,000.00.
-      </p>
-      <FormErrorMessage component="span" name="budget" />
+      <h1>Where in the process are you?</h1>
+      <p>Select where you are in the process right now.</p>
+      <FormErrorMessage component="span" name="progress" />
       <CheckboxGroup>
-        {budgetChoices.map((choice) => (
+        {progressChoices.map((choice) => (
           <CheckboxLabel
             key={choice.label}
-            isChecked={values.budget == choice.value}
+            isChecked={values.progress == choice.value}
           >
             <span>{choice.label}</span>
             <span className="checkbox__input">
@@ -59,7 +50,7 @@ const Step6 = ({ isSubmitting, values, previous }) => {
                 className="checkbox"
                 as={Field}
                 type="radio"
-                name="budget"
+                name="progress"
                 value={choice.value}
               />
               <span className="checkbox__control">
@@ -96,4 +87,4 @@ const Step6 = ({ isSubmitting, values, previous }) => {
   );
 };
 
-export default Step6;
+export default Step8;

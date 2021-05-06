@@ -8,50 +8,81 @@ import {
   FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
+  ChoiceGroup,
+  Choice,
 } from "../styles";
 import { Field } from "formik";
 
-const budgetChoices = [
+const purchaseTypeChoices = [
   {
-    value: "1-5",
-    label: "PHP 1-5 Million",
+    value: "buy",
+    label: "Buy",
   },
   {
-    value: "5-10",
-    label: "PHP 5-10 Million",
+    value: "rentToOwn",
+    label: "Rent-to-own",
   },
   {
-    value: "10-15",
-    label: "PHP 10-15 Million",
-  },
-  {
-    value: "15-20",
-    label: "PHP 15-20 Million",
-  },
-  {
-    value: "20-25",
-    label: "PHP 20-25 Million",
-  },
-  {
-    value: "25-",
-    label: "More than 25 Million",
+    value: "rent",
+    label: "Rent",
   },
 ];
 
-const Step6 = ({ isSubmitting, values, previous }) => {
+const reasonChoices = [
+  {
+    value: "reside",
+    label: "To reside in",
+  },
+  {
+    value: "rented",
+    label: "To be rented",
+  },
+  {
+    value: "business",
+    label: "To use for business",
+  },
+  {
+    value: "secondHouse",
+    label: "To save for second house",
+  },
+  {
+    value: "invest",
+    label: "To invest in",
+  },
+  {
+    value: "other",
+    label: "Other",
+  },
+];
+
+const Step7 = ({ isSubmitting, values, setFieldValue, previous }) => {
   return (
     <React.Fragment>
-      <h1>Estimated Budget</h1>
+      <h1>What do you want to use the property for?</h1>
       <p>
-        Select your estimated budget below. The property you're inquiring is
-        approx. PHP 13,000,000.00.
+        Select the reason for buying the property. The property you’re inquiring
+        is listed as For Sale.
       </p>
-      <FormErrorMessage component="span" name="budget" />
+      <p>I want to...</p>
+      <FormDiv style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+        <FormErrorMessage component="span" name="purchaseType" />
+        <ChoiceGroup>
+          {purchaseTypeChoices.map((choice) => (
+            <Choice
+              onClick={() => setFieldValue("purchaseType", choice.value)}
+              isChecked={values.purchaseType == choice.value}
+            >
+              {choice.label}
+            </Choice>
+          ))}
+        </ChoiceGroup>
+      </FormDiv>
+      <FormErrorMessage component="span" name="reason" />
       <CheckboxGroup>
-        {budgetChoices.map((choice) => (
+        {reasonChoices.map((choice) => (
           <CheckboxLabel
             key={choice.label}
-            isChecked={values.budget == choice.value}
+            isChecked={values.reason == choice.value}
           >
             <span>{choice.label}</span>
             <span className="checkbox__input">
@@ -59,7 +90,7 @@ const Step6 = ({ isSubmitting, values, previous }) => {
                 className="checkbox"
                 as={Field}
                 type="radio"
-                name="budget"
+                name="reason"
                 value={choice.value}
               />
               <span className="checkbox__control">
@@ -96,4 +127,4 @@ const Step6 = ({ isSubmitting, values, previous }) => {
   );
 };
 
-export default Step6;
+export default Step7;
