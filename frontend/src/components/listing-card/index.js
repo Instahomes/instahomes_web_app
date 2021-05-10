@@ -19,6 +19,7 @@ const Card = ({
   image,
   name,
   size,
+  price,
   address,
   bedrooms,
   bathrooms,
@@ -34,8 +35,8 @@ const Card = ({
         </ListingName>
         <ListingLine>
           <ListingSize>{size}&nbsp;sqm</ListingSize>
-          <ListingPiece bold large marginLeft="10px">
-            Starts at <span class="orange bold">PHP 9,500,000.00</span>
+          <ListingPiece bold marginLeft="10px">
+            Starts at <span class="orange bold">PHP&nbsp;{price}</span>
           </ListingPiece>
         </ListingLine>
         <ListingLine>
