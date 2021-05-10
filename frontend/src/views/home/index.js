@@ -43,6 +43,7 @@ const Home = (props) => {
             address="Bel-Air Residences Lipa, Batangas"
             bedrooms={2}
             bathrooms={2}
+            isVerified
           />
           <ListingCard
             image={house}

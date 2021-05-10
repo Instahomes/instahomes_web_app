@@ -9,11 +9,11 @@ const Step11 = ({ isSubmitting }) => {
       <img src={formComplete} alt="Form Complete" />
       <h1>Hannah, you’re now signed up and your inquiry has been sent!</h1>
       <p>
-        Please expect a reply from Alveo Land Corp. that will be sent to
-        hannah@gmail.com.
+        Please expect a reply from Alveo Land Corp. that will be sent to{" "}
+        <b>hannah@gmail.com</b>.
         <br />
-        Alveo Land usually takes 30 minutes to reply for inquiries sent in
-        business days.
+        Alveo Land usually takes <b>30 minutes</b> to reply for inquiries sent
+        in business days.
       </p>
       <FormDiv>
         <FormFrame>

@@ -88,6 +88,14 @@ export const GlobalStyle = createGlobalStyle`
     color: ${theme.colors.darkBlue};
   }
 
+  .orange {
+    color: ${theme.colors.orange};
+  }
+
+  .bold {
+    font-weight: 500;
+  }
+
   .center {
     text-align: center;
   }

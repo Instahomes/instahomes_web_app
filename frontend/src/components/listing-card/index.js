@@ -1,74 +1,48 @@
 import React from "react";
-import styled from "styled-components";
 import map from "../../assets/card/map.svg";
 import bed from "../../assets/card/bed.svg";
 import bath from "../../assets/card/bath.svg";
-import { OutlineButton } from "../../components/elements";
+import check from "../../assets/card/check.svg";
+import {
+  ListingCard,
+  ListingImage,
+  ListingInfo,
+  ListingName,
+  ListingLine,
+  ListingPiece,
+  ListingSize,
+  ViewHomeButton,
+  DirectToDeveloper,
+} from "./styles";
 
-const ListingCard = styled.div`
-  background: ${({ theme }) => theme.colors.mainBgColor};
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-`;
-
-const ListingImage = styled.img`
-  object-fit: cover;
-  width: 100%;
-`;
-
-const ListingInfo = styled.div`
-  padding: 1.1em;
-`;
-
-const ListingName = styled.h1`
-  font-size: 1.3em;
-  color: ${({ theme }) => theme.colors.darkBlue};
-`;
-
-const ListingLine = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 0.5em;
-  margin-bottom: ${({ marginBottom }) => marginBottom};
-`;
-
-const ListingPiece = styled.span`
-  font-size: 0.9em;
-  font-weight: ${({ bold }) => (bold ? 500 : 400)};
-  color: ${({ theme, orange }) =>
-    orange ? theme.colors.orange : theme.colors.darkBlue};
-  margin-left: ${({ marginLeft }) => marginLeft};
-  margin-right: ${({ marginRight }) => marginRight};
-`;
-
-const ListingSize = styled.span`
-  border: 1.5px solid ${({ theme }) => theme.colors.darkHeader};
-  box-sizing: border-box;
-  border-radius: 18px;
-
-  color: ${({ theme }) => theme.colors.darkHeader};
-  font-size: 0.75em;
-  font-weight: 500;
-  padding: 0.2em 0.5em;
-`;
-
-const Card = ({ image, name, size, address, bedrooms, bathrooms }) => {
+const Card = ({
+  image,
+  name,
+  size,
+  address,
+  bedrooms,
+  bathrooms,
+  isVerified,
+}) => {
   return (
     <ListingCard>
       <ListingImage src={image} alt="House" />
       <ListingInfo>
-        <ListingName>{name}</ListingName>
+        <ListingName>
+          {name}&nbsp;&nbsp;
+          {isVerified && <img src={check} />}
+        </ListingName>
         <ListingLine>
-          <ListingPiece orange bold marginRight="10px">
-            For Sale
+          <ListingSize>{size}&nbsp;sqm</ListingSize>
+          <ListingPiece bold large marginLeft="10px">
+            Starts at <span class="orange bold">PHP 9,500,000.00</span>
           </ListingPiece>
-          <ListingSize>{size} sqm</ListingSize>
         </ListingLine>
         <ListingLine>
           <img src={map} alt="Map" />
           <ListingPiece marginLeft="10px">{address}</ListingPiece>
         </ListingLine>
-        <ListingLine marginBottom="0.7em">
+        <ListingLine marginBottom="1em">
           <img src={bed} alt="Bed" />
           <ListingPiece marginLeft="10px" marginRight="20px">
             {bedrooms}&nbsp;Bedrooms
@@ -78,9 +52,11 @@ const Card = ({ image, name, size, address, bedrooms, bathrooms }) => {
             {bathrooms}&nbsp;Bathrooms
           </ListingPiece>
         </ListingLine>
-        <OutlineButton fontSize="0.8em" className="btn-rubik">
-          VIEW HOME
-        </OutlineButton>
+        <ViewHomeButton>VIEW HOME</ViewHomeButton>
+        <DirectToDeveloper>
+          <img src={check} alt="" />
+          <span>Direct To Official Developer</span>
+        </DirectToDeveloper>
       </ListingInfo>
     </ListingCard>
   );
