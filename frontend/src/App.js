@@ -5,6 +5,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
 import Listing from "./views/listing";
+import Development from "./views/development";
 import DeveloperForm from "./views/developer-form";
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
           <Switch>
             <Route exact path="/listing">
               <Listing />
+            </Route>
+            <Route exact path="/development">
+              <Development />
             </Route>
             <Route exact path="/inquire">
               <DeveloperForm />

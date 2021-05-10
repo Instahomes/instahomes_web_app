@@ -29,8 +29,8 @@ import {
 const Home = (props) => {
   return (
     <Layout>
+      <Navbar />
       <HeroFrame>
-        <Navbar />
         <HomeSearch />
       </HeroFrame>
       <HomeListings>

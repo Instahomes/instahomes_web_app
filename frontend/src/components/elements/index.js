@@ -55,9 +55,12 @@ export const OrangeButton = styled.button`
 export const OutlineButton = styled.button`
   font-size: ${({ fontSize }) => fontSize || "1rem"};
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.darkBlue};
+  color: ${({ theme, dark }) =>
+    dark ? theme.colors.mutedGray : theme.colors.darkBlue};
   padding: 0.5em 1.5em;
   background-color: initial;
-  border: 1px solid ${({ theme }) => theme.colors.darkBlue};
+  border: 1px solid
+    ${({ theme, dark }) =>
+      dark ? theme.colors.mutedGray : theme.colors.darkBlue};
   border-radius: 1px;
 `;

@@ -1,19 +1,38 @@
 import styled from "styled-components";
 
 export const NavbarFrame = styled.nav`
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 48px;
   padding: 0.8rem var(--main-padding-x);
+  margin-top: 1rem;
 `;
 
-export const NavbarLogo = styled.img`
-  height: 40%;
-`;
+// export const NavbarLogo = styled.div`
+//   height: 100%;
+
+//   a {
+//     display: flex;
+//     align-items: center;
+//     height: 100%;
+//   }
+
+//   img {
+//     height: 40%;
+//   }
+// `;
+
+// export const NavbarLogo = styled.img`
+//   height: 40%;
+// `;
 
 export const NavbarSpan = styled.a`
-  color: ${({ theme }) => theme.colors.darkBlue};
+  color: ${({ theme, dark }) =>
+    dark ? theme.colors.mutedGray : theme.colors.darkBlue};
   margin: 0 2em;
   font-size: 16px;
   font-weight: 500;

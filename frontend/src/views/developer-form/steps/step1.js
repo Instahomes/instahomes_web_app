@@ -5,7 +5,7 @@ import {
   SignupOrangeButton,
   SignupOutlineButton,
 } from "../styles";
-import logo from "../../../assets/navbar/logoDark.svg";
+import logo from "../../../assets/navbar/largeLogoDark.svg";
 
 const Step1 = ({ isSubmitting }) => {
   return (

@@ -4,7 +4,6 @@ import ProductSearch from "../../components/product-search";
 
 export const ListingContainer = styled.main`
   padding: 2em var(--main-padding-x);
-  padding-top: 5em;
 `;
 
 export const ListingHeadContainer = styled.div`

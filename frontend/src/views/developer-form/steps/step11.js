@@ -1,7 +1,7 @@
 import React from "react";
 import { FormDiv, FormFrame, SignupOutlineButton } from "../styles";
 import formComplete from "../../../assets/form/form-complete.svg";
-import logo from "../../../assets/navbar/logoDark.svg";
+import logo from "../../../assets/navbar/largeLogoDark.svg";
 
 const Step11 = ({ isSubmitting }) => {
   return (

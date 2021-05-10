@@ -8,7 +8,7 @@ export const SearchFrame = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 9px;
   margin: auto;
-  margin-top: 8rem;
+  // margin-top: 8rem;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 70%;

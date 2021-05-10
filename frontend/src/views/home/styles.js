@@ -4,8 +4,9 @@ import signupImg from "../../assets/home/signup-img.png";
 import { Input } from "../../components/elements";
 
 export const HeroFrame = styled.section`
-  height: 792px;
+  height: 550px;
   width: 100%;
+  padding-top: 10em;
   background: linear-gradient(
       180deg,
       #f9f9f9 4.69%,
