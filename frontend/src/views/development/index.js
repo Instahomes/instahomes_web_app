@@ -186,7 +186,7 @@ const Development = (props) => {
         </ContactComponent>
         <FeaturedNews>
           <h2 className="h2">Featured News and Press</h2>
-          <div>
+          <div className="featured-row">
             {sampleFeatures.map((feature) => (
               <FeaturedCard image={devMap} title={feature.title} />
             ))}

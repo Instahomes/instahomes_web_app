@@ -26,6 +26,36 @@ import {
   OrangeButton,
 } from "../../components/elements";
 
+const sampleListings = [
+  {
+    name: "The Lattice Studio Unit",
+    size: 33,
+    price: "9,500,000.00",
+    address: "C-5 Road, Brgy. Rosario, Pasig City",
+    bedrooms: 1,
+    bathrooms: 1,
+    isVerified: true,
+  },
+  {
+    name: "The Lattice 1-Bedroom",
+    size: 58,
+    price: "13,000,000.00",
+    address: "C-5 Road, Brgy. Rosario, Pasig City",
+    bedrooms: 1,
+    bathrooms: 1,
+    isVerified: false,
+  },
+  {
+    name: "The Lattice 2-Bedroom",
+    size: 94,
+    price: "24,000,000.00",
+    address: "C-5 Road, Brgy. Rosario, Pasig City",
+    bedrooms: 2,
+    bathrooms: 1,
+    isVerified: true,
+  },
+];
+
 const Home = (props) => {
   return (
     <Layout>
@@ -36,31 +66,19 @@ const Home = (props) => {
       <HomeListings>
         <h1 className="dark center">Featured listings in the market today</h1>
         <ListingRow>
-          <ListingCard
-            image={house}
-            name="Lipa Town House Unit"
-            size={55}
-            address="Bel-Air Residences Lipa, Batangas"
-            bedrooms={2}
-            bathrooms={2}
-            isVerified
-          />
-          <ListingCard
-            image={house}
-            name="Ferndale Villas, Pasong Tamo"
-            size={30}
-            address="Sampaguita Ave., Pasong Tamo, QC"
-            bedrooms={2}
-            bathrooms={2}
-          />
-          <ListingCard
-            image={house}
-            name="Lipa Town House Unit"
-            size={55}
-            address="Bel-Air Residences Lipa, Batangas"
-            bedrooms={2}
-            bathrooms={2}
-          />
+          {sampleListings.map((listing) => (
+            <ListingCard
+              key={listing.name}
+              image={house}
+              name={listing.name}
+              size={listing.size}
+              price={listing.price}
+              address={listing.address}
+              bedrooms={listing.bedrooms}
+              bathrooms={listing.bathrooms}
+              isVerified={listing.isVerified}
+            />
+          ))}
         </ListingRow>
       </HomeListings>
       <NewsletterFrame>

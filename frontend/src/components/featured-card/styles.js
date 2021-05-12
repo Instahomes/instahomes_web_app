@@ -10,6 +10,10 @@ export const FeaturedCard = styled.div`
     width: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    min-width: 290px;
+  }
 `;
 
 export const FeaturedInfo = styled.div`

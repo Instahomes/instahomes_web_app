@@ -5,6 +5,10 @@ export const ListingCard = styled.div`
   background: ${({ theme }) => theme.colors.mainBgColor};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    min-width: 290px;
+  }
 `;
 
 export const ListingImage = styled.img`
@@ -19,6 +23,13 @@ export const ListingInfo = styled.div`
 export const ListingName = styled.h1`
   font-size: 1.3em;
   color: ${({ theme }) => theme.colors.darkBlue};
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 0.9em;
+    height: 0.9em;
+  }
 `;
 
 export const ListingLine = styled.div`
