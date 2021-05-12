@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import alveoProperty from "../../assets/development/alveoProperty.jpeg";
-import { OrangeButton } from "../../components/elements";
 
 export const DevelopmentContainer = styled.main`
   .h2 {

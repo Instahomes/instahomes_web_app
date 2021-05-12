@@ -197,6 +197,7 @@ const Development = (props) => {
         <OfficeLocations backgroundImage={devMap}>
           <div>
             <h2 className="h2">Office Locations</h2>
+            <div className="office-map-mobile"></div>
             <p className="p">
               ALVEO Corporate Center
               <br />

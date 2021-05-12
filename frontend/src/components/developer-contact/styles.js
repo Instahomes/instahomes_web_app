@@ -11,8 +11,9 @@ export const ContactComponent = styled.div`
   margin: auto;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    box-sizing: border-box;
-    width: 100%;
+    width: auto;
+    margin-left: var(--main-padding-x);
+    margin-right: var(--main-padding-x);
   }
 `;
 

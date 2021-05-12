@@ -38,7 +38,11 @@ export const HeroSection = styled.section`
   background-repeat: no-repeat;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    height: 500px;
+    width: auto;
+    padding: 0 var(--main-padding-x);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 
@@ -68,11 +72,13 @@ export const HeroContent = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    width: auto;
-    padding: 0 var(--main-padding-x);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0;
+
+    h1 {
+      display: block;
+    }
   }
 `;
 
@@ -85,7 +91,10 @@ export const MetadataLine = styled.div`
   margin: auto;
   margin-top: 2em;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
   }
 `;
 
@@ -110,6 +119,10 @@ export const Developments = styled.div`
     display: flex;
     overflow: auto;
     gap: 2em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding-right: var(--main-padding-x);
   }
 `;
 
@@ -139,7 +152,7 @@ export const CardFrame = styled.div`
     font-size: 0.6em;
     font-weight: 600;
     text-transform: uppercase;
-    margin-bottom: -5px;
+    margin-bottom: -0.5em;
   }
 
   .dev-name {
@@ -153,13 +166,19 @@ export const CardFrame = styled.div`
     display: flex;
     align-items: center;
     font-size: 1em;
-    margin-bottom: 4px;
+    margin-bottom: 0.1em;
   }
 
   .dev-price {
     font-size: 0.6em;
     font-weight: 600;
     color: ${({ theme }) => theme.colors.mutedBlue};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    box-sizing: border-box;
+    min-width: 100%;
+    padding: 1em;
   }
 `;
 
@@ -172,6 +191,20 @@ export const About = styled.section`
 
     & > div {
       width: 50%;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    text-align: center;
+    padding-bottom: 0;
+
+    .about-body {
+      flex-direction: column;
+      gap: 2em;
+
+      & > div {
+        width: 100%;
+      }
     }
   }
 `;
@@ -189,6 +222,21 @@ export const Affiliates = styled.section`
       max-width: 30%;
     }
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    text-align: center;
+
+    .affiliates-logos {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5em;
+
+      img {
+        max-width: 100%;
+        max-height: 25px;
+      }
+    }
+  }
 `;
 
 export const OfficeLocations = styled.section`
@@ -200,18 +248,29 @@ export const OfficeLocations = styled.section`
     width: 50%;
   }
 
-  .office-map {
+  .office-map,
+  .office-map-mobile {
     background: url(${({ backgroundImage }) => backgroundImage});
     background-size: cover;
     border-radius: 10px;
   }
 
+  .office-map-mobile {
+    display: none;
+  }
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     text-align: center;
+    flex-direction: column;
     padding-bottom: 0;
 
-    .about-map {
+    .office-map {
       display: none;
+    }
+
+    .office-map-mobile {
+      display: block;
+      height: 150px;
+      margin-bottom: 1.5em;
     }
 
     & > * {
