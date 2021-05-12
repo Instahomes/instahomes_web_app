@@ -2,10 +2,9 @@ import React from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import ListingCard from "../../components/listing-card";
-import FeaturedCard from "../../components/featured-card";
+import DeveloperContact from "../../components/developer-contact";
+import FeaturedSection from "../../components/featured-section";
 
-import email from "../../assets/product/email.svg";
-import phone from "../../assets/product/phone.svg";
 import map from "../../assets/development/map.svg";
 import devMap from "../../assets/development/devMap.png";
 import house from "../../assets/card/sample_house.png";
@@ -17,12 +16,6 @@ import {
   About,
   Amenities,
   AmenitiesCard,
-  ContactComponent,
-  InquiryButtons,
-  InquiryButtonsChild,
-  ButtonIcon,
-  Footnotes,
-  FeaturedNews,
 } from "./styles";
 
 const sampleListings = [
@@ -86,14 +79,17 @@ const sampleFeatures = [
   {
     title: "5 Reasons to Invest in Philippine Real Estate",
     url: "",
+    image: house,
   },
   {
     title: "Top Indicators of A Valuable Property",
     url: "",
+    image: house,
   },
   {
     title: "The Best Areas to Invest in the Philippines in 2021",
     url: "",
+    image: house,
   },
 ];
 
@@ -164,34 +160,8 @@ const Development = (props) => {
             ))}
           </div>
         </Amenities>
-        <ContactComponent>
-          <h2 className="h2">
-            Get in touch with Alveo Land Corporation directly today!
-          </h2>
-          <InquiryButtons>
-            <InquiryButtonsChild>
-              <ButtonIcon src={email} alt="Email" />
-              CONTACT&nbsp;VIA&nbsp;EMAIL
-            </InquiryButtonsChild>
-            <InquiryButtonsChild>
-              <ButtonIcon src={phone} alt="Phone" />
-              CONTACT&nbsp;VIA&nbsp;PHONE*
-            </InquiryButtonsChild>
-          </InquiryButtons>
-          <div>
-            <Footnotes>
-              <i>*SMS charges may apply</i>
-            </Footnotes>
-          </div>
-        </ContactComponent>
-        <FeaturedNews>
-          <h2 className="h2">Featured News and Press</h2>
-          <div className="featured-row">
-            {sampleFeatures.map((feature) => (
-              <FeaturedCard image={devMap} title={feature.title} />
-            ))}
-          </div>
-        </FeaturedNews>
+        <DeveloperContact />
+        <FeaturedSection data={sampleFeatures} />
       </DevelopmentContainer>
     </Layout>
   );

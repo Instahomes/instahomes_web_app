@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FeaturedCard = styled.div`
+  width: 33%;
   background: ${({ theme }) => theme.colors.mainBgColor};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
