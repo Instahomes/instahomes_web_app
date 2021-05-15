@@ -5,6 +5,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
 import Listing from "./views/listing";
+import Search from "./views/search";
 import Development from "./views/development";
 import Developer from "./views/developer";
 import DeveloperForm from "./views/developer-form";
@@ -16,6 +17,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Switch>
+            <Route exact path="/search">
+              <Search />
+            </Route>
             <Route exact path="/listing">
               <Listing />
             </Route>

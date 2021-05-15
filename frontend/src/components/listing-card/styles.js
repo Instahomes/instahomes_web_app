@@ -5,9 +5,14 @@ export const ListingCard = styled.div`
   background: ${({ theme }) => theme.colors.mainBgColor};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
+  min-width: 350px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     min-width: 290px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    min-width: min(250px, 100%);
   }
 `;
 

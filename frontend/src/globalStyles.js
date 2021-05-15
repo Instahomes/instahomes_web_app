@@ -53,6 +53,10 @@ export const GlobalStyle = createGlobalStyle`
     :root {
       --main-padding-x: 3.5rem;
     }
+
+    .remove-on-mobile {
+      display: none;
+    }
   }
 
   @media (max-width: ${theme.breakpoints.md}) {

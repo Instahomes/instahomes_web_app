@@ -17,14 +17,45 @@ export const LightInput = styled.input`
   display: block;
   background-color: ${({ theme }) => theme.colors.whiteInputBg};
   border: 1px solid ${({ theme }) => theme.colors.whiteInputBorder};
-  color: ${({ theme }) => theme.colors.darkHeader};
+  color: ${({ theme, isDefault }) =>
+    isDefault ? theme.colors.whiteInputColor : theme.colors.darkHeader};
   border-radius: 4px;
-  font-size: 1em;
+  font-size: ${({ scale }) => (scale ? `calc(1em * ${scale})` : "1em")};
   padding: 1em;
+  margin-bottom: ${({ marginBottom }) => marginBottom};
+  order: ${({ order }) => order || "initial"};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.whiteInputColor};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    order: ${({ mobileOrder }) => mobileOrder || "initial"};
+  }
+`;
+
+export const GrayInput = styled(LightInput)`
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  border: 1px solid ${({ theme }) => theme.colors.mutedGray};
+  color: ${({ theme, isDefault }) =>
+    isDefault ? theme.colors.whiteInputColor : theme.colors.darkHeader};
+  font-size: ${({ scale }) => (scale ? `calc(1em * ${scale})` : "1em")};
   margin-bottom: ${({ marginBottom }) => marginBottom};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.whiteInputColor};
+  }
+`;
+
+export const WhiteInput = styled(LightInput)`
+  background-color: ${({ theme }) => theme.colors.mainBg};
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
+  color: ${({ theme, isDefault }) =>
+    isDefault ? theme.colors.darkGray : theme.colors.darkHeader};
+  margin-bottom: ${({ marginBottom }) => marginBottom};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.darkGray};
   }
 `;
 
@@ -53,7 +84,8 @@ export const OrangeButton = styled.button`
 `;
 
 export const OutlineButton = styled.button`
-  font-size: ${({ fontSize }) => fontSize || "1rem"};
+  font-size: ${({ scale, fontSize }) =>
+    scale ? `calc(1em * ${scale})` : fontSize || "1rem"};
   font-weight: 500;
   color: ${({ theme, dark }) =>
     dark ? theme.colors.mutedGray : theme.colors.darkBlue};

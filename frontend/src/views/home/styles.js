@@ -22,7 +22,12 @@ export const HeroFrame = styled.section`
 `;
 
 export const HomeListings = styled.section`
-  padding: 3em var(--main-padding-x);
+  padding: 3em 0 3em var(--main-padding-x);
+  overflow-x: scroll;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding-right: var(--main-padding-x);
+  }
 `;
 
 export const ListingRow = styled.div`
@@ -30,7 +35,7 @@ export const ListingRow = styled.div`
   margin-bottom: 2em;
 
   display: flex;
-  justify-content: space-between;
+  gap: 1em;
 
   & > div:nth-child(3) {
     margin-right: 10px;
