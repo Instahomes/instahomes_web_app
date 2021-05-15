@@ -3,15 +3,12 @@ import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import ListingCard from "../../components/listing-card";
 import house from "../../assets/card/sample_house.png";
-import arrow from "../../assets/search/arrow.svg";
-import arrowUp from "../../assets/search/arrowUp.svg";
 import { Formik } from "formik";
 
 import {
   SearchContainer,
   SearchFields,
   SearchButton,
-  AdvancedSettings,
   ListingsFilters,
   ListingGrid,
 } from "./styles";
@@ -21,6 +18,7 @@ import {
   GrayInput,
   LightInput,
   OutlineButton,
+  AdvancedSettings,
 } from "../../components/elements";
 
 const sampleListings = [
@@ -192,19 +190,10 @@ const Search = (props) => {
             </form>
           )}
         </Formik>
-        <AdvancedSettings onClick={() => setShowAdvanced(!showAdvanced)}>
-          {showAdvanced ? (
-            <React.Fragment>
-              <img src={arrowUp} />
-              &nbsp;&nbsp; Minimize Advanced Settings
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <img src={arrow} />
-              &nbsp;&nbsp; Show Advanced Settings
-            </React.Fragment>
-          )}
-        </AdvancedSettings>
+        <AdvancedSettings
+          setShowAdvanced={setShowAdvanced}
+          showAdvanced={showAdvanced}
+        />
         <ListingsFilters>
           <span class="listing-count">
             Showing{" "}

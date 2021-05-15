@@ -50,7 +50,9 @@ const Navbar = ({ theme, dark }) => {
 
   return (
     <NavbarFrame>
-      <img src={logoDark} alt="Instahomes" />
+      <Link to="/">
+        <img src={logoDark} alt="Instahomes" />
+      </Link>
       {/* <NavbarLogo>
         <Link to="/">
           <img src={logo} />

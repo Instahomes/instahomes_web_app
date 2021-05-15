@@ -43,12 +43,6 @@ export const SearchButton = styled(OrangeButton)`
   }
 `;
 
-export const AdvancedSettings = styled.span`
-  cursor: pointer;
-  font-size: 0.75em;
-  color: ${({ theme }) => theme.colors.darkBlue};
-`;
-
 export const ListingsFilters = styled.div`
   margin-top: 2em;
   margin-bottom: 1em;

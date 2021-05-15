@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import heroBg from "../../assets/home/hero.png";
 import signupImg from "../../assets/home/signup-img.png";
 import { Input } from "../../components/elements";
 
@@ -13,17 +12,16 @@ export const HeroFrame = styled.section`
       rgba(254, 254, 254, 0.226848) 78.38%,
       rgba(255, 255, 255, 0) 100%
     ),
-    url(${heroBg});
+    url(${({ heroBg }) => heroBg});
   background-size: cover;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    height: 460px;
+    height: ${({ showAdvanced }) => (showAdvanced ? "750px" : "460px")};
   }
 `;
 
 export const HomeListings = styled.section`
   padding: 3em 0 3em var(--main-padding-x);
-  overflow-x: scroll;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding-right: var(--main-padding-x);
@@ -33,6 +31,8 @@ export const HomeListings = styled.section`
 export const ListingRow = styled.div`
   margin-top: 2em;
   margin-bottom: 2em;
+  overflow-x: scroll;
+  padding: 5px;
 
   display: flex;
   gap: 1em;

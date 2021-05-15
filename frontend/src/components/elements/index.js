@@ -1,3 +1,6 @@
+import React from "react";
+import arrow from "../../assets/search/arrow.svg";
+import arrowUp from "../../assets/search/arrowUp.svg";
 import styled from "styled-components";
 
 export const Input = styled.input`
@@ -96,3 +99,25 @@ export const OutlineButton = styled.button`
       dark ? theme.colors.mutedGray : theme.colors.darkBlue};
   border-radius: 1px;
 `;
+
+const AdvancedSettingsStyle = styled.span`
+  cursor: pointer;
+  font-size: 0.75em;
+  color: ${({ theme }) => theme.colors.darkBlue};
+`;
+
+export const AdvancedSettings = ({ setShowAdvanced, showAdvanced }) => (
+  <AdvancedSettingsStyle onClick={() => setShowAdvanced(!showAdvanced)}>
+    {showAdvanced ? (
+      <React.Fragment>
+        <img src={arrowUp} />
+        &nbsp;&nbsp; Minimize Advanced Settings
+      </React.Fragment>
+    ) : (
+      <React.Fragment>
+        <img src={arrow} />
+        &nbsp;&nbsp; Show Advanced Settings
+      </React.Fragment>
+    )}
+  </AdvancedSettingsStyle>
+);

@@ -1,40 +1,159 @@
 import React, { useState } from "react";
-import arrow from "../../assets/home/arrow.svg";
-import {
-  SearchFrame,
-  SearchForm,
-  SearchInput,
-  SearchButton,
-  SearchAdvanced,
-  SearchAdvancedSpan,
-} from "./styles.js";
+import { SearchFrame, SearchForm, SearchButton } from "./styles.js";
+import { Formik } from "formik";
 
-const HomeSearch = (props) => {
-  const [query, setQuery] = useState("");
+import { AdvancedSettings, LightInput } from "../../components/elements";
 
-  const onSubmit = (e) => {
-    console.log(query);
-  };
-
+const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
   return (
-    <SearchFrame>
-      <h1 className="center">Find your home instantly</h1>
-      <p className="center">
-        Skip the line and get the best offers from the best developers in
-        Manila.
-      </p>
-      <SearchForm>
-        <SearchInput
-          placeholder="Search for location/city/subdivision"
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <SearchButton onClick={onSubmit}>FIND&nbsp;MY&nbsp;HOME</SearchButton>
-      </SearchForm>
-      <SearchAdvanced>
-        <img src={arrow} alt="Arrow" />
-        <SearchAdvancedSpan>Show Advanced Settings</SearchAdvancedSpan>
-      </SearchAdvanced>
-    </SearchFrame>
+    <Formik
+      initialValues={{
+        listingStatus: "",
+        query: "",
+        propertyType: "",
+        keywords: "",
+        minPrice: "",
+        maxPrice: "",
+        bathrooms: "",
+        bedrooms: "",
+        developer: "",
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400);
+      }}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }) => (
+        <form onSubmit={handleSubmit}>
+          <SearchFrame>
+            <h1 className="center">Secure your dream home instantly</h1>
+            <p className="center">
+              Get in touch with the best developers directly easily and for free
+            </p>
+            <SearchForm showAdvanced={showAdvanced}>
+              <LightInput
+                scale={0.9}
+                as="select"
+                name="listingStatus"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.listingStatus}
+                isDefault={values.listingStatus == ""}
+                mobileOrder={1}
+                className="flex-grow-mobile"
+              >
+                <option value="" selected>
+                  For Sale
+                </option>
+                <option value="For Sale">For Sale</option>
+              </LightInput>
+              <LightInput
+                style={{ flex: 1 }}
+                placeholder="Search for location/city/subdivision"
+                name="query"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.query}
+                scale={0.9}
+                mobileOrder={2}
+              />
+              <LightInput
+                placeholder="Property Type"
+                name="propertyType"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.propertyType}
+                className="advanced-setting"
+                scale={0.9}
+                mobileOrder={3}
+              />
+              <LightInput
+                placeholder="Keywords (Pool, garage, etc.)"
+                name="keywords"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.keywords}
+                className="advanced-setting"
+                scale={0.9}
+                mobileOrder={4}
+              />
+              <LightInput
+                as="select"
+                name="bedrooms"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.bedrooms}
+                className="advanced-setting"
+                scale={0.9}
+                mobileOrder={5}
+              >
+                <option value="">Bedrooms (All)</option>
+              </LightInput>
+              <LightInput
+                as="select"
+                name="bathrooms"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.bathrooms}
+                className="advanced-setting"
+                scale={0.9}
+                mobileOrder={6}
+              >
+                <option value="">Baths (All)</option>
+              </LightInput>
+              <LightInput
+                placeholder="Minimum Price"
+                name="minPrice"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.minPrice}
+                className="advanced-setting"
+                scale={0.9}
+                mobileOrder={7}
+              />
+              <LightInput
+                placeholder="Maximum Price"
+                name="maxPrice"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.maxPrice}
+                className="advanced-setting"
+                scale={0.9}
+                mobileOrder={8}
+              />
+              <LightInput
+                placeholder="Preferred Developer (All)"
+                style={{ flex: 1 }}
+                name="preferredDeveloper"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.preferredDeveloper}
+                className="advanced-setting"
+                scale={0.9}
+                mobileOrder={9}
+              />
+              <SearchButton scale={0.9} style={{ flex: 1 }} mobileOrder={10}>
+                FIND&nbsp;MY&nbsp;HOME
+              </SearchButton>
+            </SearchForm>
+            <AdvancedSettings
+              setShowAdvanced={setShowAdvanced}
+              showAdvanced={showAdvanced}
+            />
+          </SearchFrame>
+        </form>
+      )}
+    </Formik>
   );
 };
 

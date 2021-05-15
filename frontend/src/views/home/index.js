@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/layout";
 import ListingCard from "../../components/listing-card";
 import house from "../../assets/card/sample_house.png";
@@ -25,6 +25,7 @@ import {
   LightTextarea,
   OrangeButton,
 } from "../../components/elements";
+import heroBg from "../../assets/home/hero.jpeg";
 
 const sampleListings = [
   {
@@ -54,14 +55,28 @@ const sampleListings = [
     bathrooms: 1,
     isVerified: true,
   },
+  {
+    name: "The Lattice 2-Bedroom",
+    size: 94,
+    price: "24,000,000.00",
+    address: "C-5 Road, Brgy. Rosario, Pasig City",
+    bedrooms: 2,
+    bathrooms: 1,
+    isVerified: true,
+  },
 ];
 
 const Home = (props) => {
+  const [showAdvanced, setShowAdvanced] = useState(false);
+
   return (
     <Layout>
       <Navbar />
-      <HeroFrame>
-        <HomeSearch />
+      <HeroFrame heroBg={heroBg} showAdvanced={showAdvanced}>
+        <HomeSearch
+          showAdvanced={showAdvanced}
+          setShowAdvanced={setShowAdvanced}
+        />
       </HeroFrame>
       <HomeListings>
         <h1 className="dark center">Featured listings in the market today</h1>
