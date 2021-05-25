@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { OrangeButton } from "../elements";
+import { LightInput } from "../../components/elements";
 
 export const SearchFrame = styled.div`
   width: 700px;
@@ -67,4 +68,8 @@ export const SearchAdvancedSpan = styled.span`
   color: ${({ theme }) => theme.colors.mutedBlue};
   font-size: 0.75em;
   margin-left: 6px;
+`;
+
+export const Input = styled(LightInput)`
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
 `;

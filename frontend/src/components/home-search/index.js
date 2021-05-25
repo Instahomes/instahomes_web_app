@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { SearchFrame, SearchForm, SearchButton } from "./styles.js";
+import { SearchFrame, SearchForm, SearchButton, Input } from "./styles.js";
 import { Formik } from "formik";
 
-import { AdvancedSettings, LightInput } from "../../components/elements";
+import { AdvancedSettings } from "../../components/elements";
 
 const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
   return (
@@ -41,7 +41,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
               Get in touch with the best developers directly easily and for free
             </p>
             <SearchForm showAdvanced={showAdvanced}>
-              <LightInput
+              <Input
                 scale={0.9}
                 as="select"
                 name="listingStatus"
@@ -56,8 +56,8 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                   For Sale
                 </option>
                 <option value="For Sale">For Sale</option>
-              </LightInput>
-              <LightInput
+              </Input>
+              <Input
                 style={{ flex: 1 }}
                 placeholder="Search for location/city/subdivision"
                 name="query"
@@ -67,7 +67,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={2}
               />
-              <LightInput
+              <Input
                 placeholder="Property Type"
                 name="propertyType"
                 onChange={handleChange}
@@ -77,7 +77,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={3}
               />
-              <LightInput
+              <Input
                 placeholder="Keywords (Pool, garage, etc.)"
                 name="keywords"
                 onChange={handleChange}
@@ -87,7 +87,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={4}
               />
-              <LightInput
+              <Input
                 as="select"
                 name="bedrooms"
                 onChange={handleChange}
@@ -98,8 +98,8 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 mobileOrder={5}
               >
                 <option value="">Bedrooms (All)</option>
-              </LightInput>
-              <LightInput
+              </Input>
+              <Input
                 as="select"
                 name="bathrooms"
                 onChange={handleChange}
@@ -110,8 +110,8 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 mobileOrder={6}
               >
                 <option value="">Baths (All)</option>
-              </LightInput>
-              <LightInput
+              </Input>
+              <Input
                 placeholder="Minimum Price"
                 name="minPrice"
                 onChange={handleChange}
@@ -121,7 +121,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={7}
               />
-              <LightInput
+              <Input
                 placeholder="Maximum Price"
                 name="maxPrice"
                 onChange={handleChange}
@@ -131,7 +131,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={8}
               />
-              <LightInput
+              <Input
                 placeholder="Preferred Developer (All)"
                 style={{ flex: 1 }}
                 name="preferredDeveloper"
@@ -142,7 +142,11 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={9}
               />
-              <SearchButton scale={0.9} style={{ flex: 1 }} mobileOrder={10}>
+              <SearchButton
+                scale={0.9}
+                style={{ flex: showAdvanced ? 1 : "initial" }}
+                mobileOrder={10}
+              >
                 FIND&nbsp;MY&nbsp;HOME
               </SearchButton>
             </SearchForm>

@@ -47,7 +47,7 @@ const FooterItem = styled.div`
 const FooterText = styled.li`
   color: ${({ theme }) => theme.colors.darkBody};
   list-style: none;
-  font-size: 1em;
+  font-size: 0.8em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     text-align: center;
