@@ -26,9 +26,11 @@ import {
   Affiliates,
   OfficeLocations,
 } from "./styles";
+import { Link } from "react-router-dom";
 
 const sampleDevelopments = [
   {
+    id: 1,
     name: "Callisto Towers",
     type: "Commercial Condominium",
     location: "Circuit Lane, Makati",
@@ -36,6 +38,7 @@ const sampleDevelopments = [
     priceEnd: "30,000,000",
   },
   {
+    id: 1,
     name: "Orean Place",
     type: "Commercial Condominium",
     location: "Vertis North, Quezon City",
@@ -43,6 +46,7 @@ const sampleDevelopments = [
     priceEnd: "25,000,000",
   },
   {
+    id: 1,
     name: "Parkford Suites",
     type: "Commercial Condominium",
     location: "Legaspi, Makati City",
@@ -88,22 +92,31 @@ const sampleFeatures = [
   },
 ];
 
-const DevelopmentCard = ({ name, type, location, priceStart, priceEnd }) => (
-  <CardFrame background={circuitLane}>
-    <div>
-      <h3 className="dev-type">{type}</h3>
-      <h3 className="dev-name">{name}</h3>
-    </div>
-    <div>
-      <span className="dev-location">
-        <img src={map} />
-        &nbsp;&nbsp;{location}
-      </span>
-      <h4 className="dev-price">
-        PHP {priceStart} - {priceEnd}
-      </h4>
-    </div>
-  </CardFrame>
+const DevelopmentCard = ({
+  id,
+  name,
+  type,
+  location,
+  priceStart,
+  priceEnd,
+}) => (
+  <Link to={`/development/${id}`}>
+    <CardFrame background={circuitLane}>
+      <div>
+        <h3 className="dev-type">{type}</h3>
+        <h3 className="dev-name">{name}</h3>
+      </div>
+      <div>
+        <span className="dev-location">
+          <img src={map} />
+          &nbsp;&nbsp;{location}
+        </span>
+        <h4 className="dev-price">
+          PHP {priceStart} - {priceEnd}
+        </h4>
+      </div>
+    </CardFrame>
+  </Link>
 );
 
 const isVerified = true;

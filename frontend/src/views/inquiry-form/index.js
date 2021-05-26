@@ -26,6 +26,7 @@ import Step10 from "./steps/step10";
 import Step11 from "./steps/step11";
 import circleFilled from "../../assets/form/circle-filled.svg";
 import circleEmpty from "../../assets/form/circle-empty.svg";
+import { useHistory } from "react-router-dom";
 
 const ProgressBar = styled.div`
   width: 400px;
@@ -106,6 +107,9 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
 };
 
 const DeveloperForm = (props) => {
+  const [isSigningUp, setIsSigningUp] = useState(true);
+  const history = useHistory();
+
   return (
     <Frame>
       <Content>
@@ -126,8 +130,9 @@ const DeveloperForm = (props) => {
           }}
         >
           <Step1
-            onSubmit={() => console.log("Step1 onSubmit")}
+            onSubmit={() => console.log("Is signing up: " + isSigningUp)}
             validationSchema={Yup.object({})}
+            setIsSigningUp={setIsSigningUp}
           />
           <Step2
             onSubmit={() => console.log("Step2 onSubmit")}
@@ -177,18 +182,23 @@ const DeveloperForm = (props) => {
               hasAgent: Yup.boolean().required(),
             })}
           />
-          <Step10
-            onSubmit={() => console.log("Step10 onSubmit")}
-            validationSchema={Yup.object({
-              password: Yup.string().required(),
-              confirmPassword: Yup.string().oneOf(
-                [Yup.ref("password"), null],
-                "Passwords must match"
-              ),
-            })}
-          />
+          {isSigningUp && (
+            <Step10
+              onSubmit={() => console.log("Step10 onSubmit")}
+              validationSchema={Yup.object({
+                password: Yup.string().required(),
+                confirmPassword: Yup.string().oneOf(
+                  [Yup.ref("password"), null],
+                  "Passwords must match"
+                ),
+              })}
+            />
+          )}
           <Step11
-            onSubmit={() => console.log("Step11 onSubmit")}
+            onSubmit={(values) => {
+              console.log(values);
+              history.push("/");
+            }}
             validationSchema={Yup.object({})}
           />
         </Wizard>

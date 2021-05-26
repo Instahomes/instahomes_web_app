@@ -11,7 +11,7 @@ const Card = ({ image, title, url }) => {
       <img src={image} />
       <FeaturedInfo>
         <span className="span">{title}</span>
-        <p className="p">Read Article</p>
+        <p className="p">Read Article →</p>
       </FeaturedInfo>
     </FeaturedCard>
   );

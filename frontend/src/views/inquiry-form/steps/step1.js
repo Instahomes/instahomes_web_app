@@ -7,7 +7,7 @@ import {
 } from "../styles";
 import logo from "../../../assets/navbar/largeLogoDark.svg";
 
-const Step1 = ({ isSubmitting }) => {
+const Step1 = ({ isSubmitting, setIsSigningUp }) => {
   return (
     <React.Fragment>
       <h1>Inquire about Alveo Land’s The Lattice 1-Bedroom Unit today</h1>
@@ -26,7 +26,13 @@ const Step1 = ({ isSubmitting }) => {
           <SignupOrangeButton disabled={isSubmitting} type="submit">
             ANSWER & SIGN UP <i>it's free</i>
           </SignupOrangeButton>
-          <SignupOutlineButton>JUST ANSWER</SignupOutlineButton>
+          <SignupOutlineButton
+            disabled={isSubmitting}
+            onClick={() => setIsSigningUp(false)}
+            type="submit"
+          >
+            JUST ANSWER
+          </SignupOutlineButton>
         </FormFrame>
       </FormDiv>
       <p>Either form only takes approx. 3 mins</p>

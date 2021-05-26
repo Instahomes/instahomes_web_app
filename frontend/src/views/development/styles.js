@@ -64,6 +64,7 @@ export const HeroContent = styled.div`
 export const ListingRow = styled.div`
   display: flex;
   justify-content: space-between;
+  overflow-x: scroll;
   padding: 2em;
   gap: 10px;
   margin-top: -8em;

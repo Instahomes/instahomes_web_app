@@ -89,6 +89,28 @@ export const SignupInput = styled(Input).attrs(({ type }) => ({
   font-size: 1em;
   text-align: center;
   color: ${({ theme }) => theme.colors.softWhite};
+  flex: 1;
+`;
+
+export const SignupInputWithHelper = styled.div`
+  display: flex;
+  position: relative;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+export const InputHelper = styled.span`
+  color: ${({ theme }) => theme.colors.mutedBlue} !important;
+  position: absolute;
+  right: -10.5em;
+  top: 0.65em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    position: static;
+  }
 `;
 
 export const FormErrorMessage = styled(ErrorMessage)`

@@ -114,6 +114,9 @@ export const MetadataProperty = styled.div`
 
 export const Developments = styled.div`
   padding: 2em 0 2em var(--main-padding-x);
+  a {
+    text-decoration: none;
+  }
 
   .dev-row {
     display: flex;

@@ -69,6 +69,7 @@ const Step7 = ({ isSubmitting, values, setFieldValue, previous }) => {
         <ChoiceGroup>
           {purchaseTypeChoices.map((choice) => (
             <Choice
+              key={choice.value}
               onClick={() => setFieldValue("purchaseType", choice.value)}
               isChecked={values.purchaseType == choice.value}
             >

@@ -8,7 +8,7 @@ import Listing from "./views/listing";
 import Search from "./views/search";
 import Development from "./views/development";
 import Developer from "./views/developer";
-import DeveloperForm from "./views/developer-form";
+import InquiryForm from "./views/inquiry-form";
 
 function App() {
   return (
@@ -20,17 +20,17 @@ function App() {
             <Route exact path="/search">
               <Search />
             </Route>
-            <Route path="/listing/:id">
+            <Route exact path="/listing/:id">
               <Listing />
             </Route>
-            <Route exact path="/development">
+            <Route exact path="/development/:id">
               <Development />
             </Route>
-            <Route exact path="/developer">
+            <Route exact path="/developer/:id">
               <Developer />
             </Route>
             <Route exact path="/inquire">
-              <DeveloperForm />
+              <InquiryForm />
             </Route>
             <Route path="/">
               <Home />
