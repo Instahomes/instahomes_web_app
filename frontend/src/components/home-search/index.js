@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { SearchFrame, SearchForm, SearchButton, Input } from "./styles.js";
 import { Formik } from "formik";
+import { useHistory } from "react-router-dom";
 
 import { AdvancedSettings } from "../../components/elements";
 
 const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
+  const history = useHistory();
+
   return (
     <Formik
       initialValues={{
@@ -19,10 +22,15 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
         developer: "",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        const params = Object.entries(values)
+          .filter(([key, value]) => !!value)
+          .map(([key, value]) => `${key}=${value}`)
+          .join("&");
+
+        history.push({
+          pathname: "/search",
+          search: "?" + params,
+        });
       }}
     >
       {({

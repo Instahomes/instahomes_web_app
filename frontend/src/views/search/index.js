@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import ListingCard from "../../components/listing-card";
 import house from "../../assets/card/sample_house.png";
 import { Formik } from "formik";
+import { useHistory, useLocation } from "react-router-dom";
 
 import {
   SearchContainer,
@@ -66,26 +67,54 @@ const sampleListings = [
 
 const Search = (props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [listingStatus, setListingStatus] = useState("");
+  const [query, setQuery] = useState("");
+  const [propertyType, setPropertyType] = useState("");
+  const [price, setPrice] = useState("");
+  const [bathrooms, setBathrooms] = useState("");
+  const [bedrooms, setBedrooms] = useState("");
+  const [developer, setDeveloper] = useState("");
+
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(() => {
+    const { search } = location;
+    const searchParams = new URLSearchParams(search);
+    setListingStatus(searchParams.get("listingStatus"));
+    setQuery(searchParams.get("query"));
+    setPropertyType(searchParams.get("propertyType"));
+    setPrice(searchParams.get("price"));
+    setBathrooms(searchParams.get("bathrooms"));
+    setBedrooms(searchParams.get("bedrooms"));
+    setDeveloper(searchParams.get("developer"));
+  }, [location]);
 
   return (
     <Layout>
       <Navbar />
       <SearchContainer>
         <Formik
+          enableReinitialize
           initialValues={{
-            listingStatus: "",
-            query: "",
-            propertyType: "",
-            price: "",
-            bathrooms: "",
-            bedrooms: "",
-            developer: "",
+            listingStatus,
+            query,
+            propertyType,
+            price,
+            bathrooms,
+            bedrooms,
+            developer,
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+            const params = Object.entries(values)
+              .filter(([key, value]) => !!value)
+              .map(([key, value]) => `${key}=${value}`)
+              .join("&");
+
+            history.push({
+              pathname: "/search",
+              search: "?" + params,
+            });
           }}
         >
           {({
@@ -106,7 +135,7 @@ const Search = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.listingStatus}
-                  isDefault={values.listingStatus == ""}
+                  isDefault={!values.listingStatus}
                   mobileOrder={7}
                 >
                   <option value="" selected>
@@ -131,7 +160,7 @@ const Search = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.propertyType}
-                  isDefault={values.propertyType == ""}
+                  isDefault={!values.propertyType}
                   mobileOrder={2}
                 >
                   <option value="">Property Type</option>
@@ -143,7 +172,7 @@ const Search = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.price}
-                  isDefault={values.price == ""}
+                  isDefault={!values.price}
                   mobileOrder={3}
                 >
                   <option value="">List Price</option>
@@ -155,7 +184,7 @@ const Search = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.bedrooms}
-                  isDefault={values.bedrooms == ""}
+                  isDefault={!values.bedrooms}
                   className="advanced-setting"
                   mobileOrder={4}
                 >
@@ -168,7 +197,7 @@ const Search = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.bathrooms}
-                  isDefault={values.bathrooms == ""}
+                  isDefault={!values.bathrooms}
                   className="advanced-setting"
                   mobileOrder={5}
                 >
@@ -181,7 +210,7 @@ const Search = (props) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.developer}
-                  isDefault={values.developer == ""}
+                  isDefault={!values.developer}
                   className="advanced-setting"
                   mobileOrder={6}
                 >
