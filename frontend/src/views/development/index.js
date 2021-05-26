@@ -20,6 +20,7 @@ import {
 
 const sampleListings = [
   {
+    id: 1,
     name: "The Lattice Studio Unit",
     size: 33,
     price: "9,500,000.00",
@@ -29,6 +30,7 @@ const sampleListings = [
     isVerified: true,
   },
   {
+    id: 1,
     name: "The Lattice 1-Bedroom",
     size: 58,
     price: "13,000,000.00",
@@ -38,6 +40,7 @@ const sampleListings = [
     isVerified: false,
   },
   {
+    id: 1,
     name: "The Lattice 2-Bedroom",
     size: 94,
     price: "24,000,000.00",
@@ -47,6 +50,7 @@ const sampleListings = [
     isVerified: true,
   },
   {
+    id: 1,
     name: "The Lattice 3-Bedroom",
     size: 128,
     price: "32,000,000.00",
@@ -117,6 +121,7 @@ const Development = (props) => {
         <ListingRow>
           {sampleListings.map((listing) => (
             <ListingCard
+              id={listing.id}
               key={listing.name}
               image={house}
               name={listing.name}

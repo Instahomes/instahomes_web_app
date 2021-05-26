@@ -14,8 +14,10 @@ import {
   ViewHomeButton,
   DirectToDeveloper,
 } from "./styles";
+import { Link } from "react-router-dom";
 
 const Card = ({
+  id,
   image,
   name,
   size,
@@ -29,10 +31,12 @@ const Card = ({
     <ListingCard>
       <ListingImage src={image} alt="House" />
       <ListingInfo>
-        <ListingName>
-          {name}&nbsp;&nbsp;
-          {isVerified && <img src={check} />}
-        </ListingName>
+        <Link to={`/listing/${id}`}>
+          <ListingName>
+            {name}&nbsp;&nbsp;
+            {isVerified && <img src={check} />}
+          </ListingName>
+        </Link>
         <ListingLine>
           <ListingSize>{size}&nbsp;sqm</ListingSize>
           <ListingPiece bold marginLeft="10px">
@@ -53,7 +57,9 @@ const Card = ({
             {bathrooms}&nbsp;Bathrooms
           </ListingPiece>
         </ListingLine>
-        <ViewHomeButton>VIEW HOME</ViewHomeButton>
+        <Link to={`/listing/${id}`}>
+          <ViewHomeButton>VIEW HOME</ViewHomeButton>
+        </Link>
         <DirectToDeveloper>
           <img src={check} alt="" />
           <span>Direct To Official Developer</span>

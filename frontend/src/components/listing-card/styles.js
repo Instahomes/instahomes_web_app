@@ -23,6 +23,10 @@ export const ListingImage = styled.img`
 
 export const ListingInfo = styled.div`
   padding: 1.1em;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 export const ListingName = styled.h1`

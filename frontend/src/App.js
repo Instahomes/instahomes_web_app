@@ -20,7 +20,7 @@ function App() {
             <Route exact path="/search">
               <Search />
             </Route>
-            <Route exact path="/listing">
+            <Route path="/listing/:id">
               <Listing />
             </Route>
             <Route exact path="/development">
