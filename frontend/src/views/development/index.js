@@ -103,20 +103,24 @@ const Development = (props) => {
       <Navbar dark />
       <DevelopmentContainer>
         <HeroSection>
-          <HeroContent>
-            <h1>The Lattice at Parklinks</h1>
-            <span>
-              <img src={map} />
-              &nbsp;&nbsp;C-5 Road, Brgy. Rosario, Pasig City
-            </span>
-            <p>
-              The Lattice is Alveo Land's first upscale residential tower in
-              Parklinks. Parklinks is a 35-hectare mixed-used development and
-              the biggest estate along the prime C-5 corridor. It is envisioned
-              to be the greenest urban estate in Metro Manila dedicating 50% of
-              the development to open spaces and greeneries.
-            </p>
-          </HeroContent>
+          <div className="hero-gradient">
+            <HeroContent>
+              <h1>The Lattice at Parklinks</h1>
+              <span>
+                <img src={map} />
+                &nbsp;&nbsp;C-5 Road, Brgy. Rosario, Pasig City
+              </span>
+              <p>
+                The Lattice is Alveo Land's first upscale residential tower in
+                Parklinks. Parklinks is a 35-hectare mixed-used development and
+                the biggest estate along the prime C-5 corridor. It is
+                envisioned to be the greenest urban estate in Metro Manila
+                dedicating 50% of the development to open spaces and greeneries.
+              </p>
+            </HeroContent>
+          </div>
+          <div className="hero-image"></div>
+          <div className="hero-black"></div>
         </HeroSection>
         <ListingRow threeOrLess={sampleListings.length <= 3}>
           {sampleListings.map((listing) => (

@@ -10,6 +10,7 @@ export const NavbarFrame = styled.nav`
   height: 48px;
   padding: 0.8rem var(--main-padding-x);
   margin-top: 1rem;
+  z-index: 10000;
 `;
 
 // export const NavbarLogo = styled.div`

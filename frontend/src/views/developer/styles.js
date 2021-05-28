@@ -28,18 +28,42 @@ export const DeveloperContainer = styled.main`
 
 export const HeroSection = styled.section`
   height: 500px;
-  background: linear-gradient(
+  position: relative;
+
+  .hero-gradient {
+    z-index: 3;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
       180deg,
-      rgba(12, 20, 31, 0.62) 0%,
+      rgba(12, 19, 29, 0.62) 0%,
       rgba(28, 55, 90, 0) 116.2%
-    ),
-    url(${hero}), #0c121b;
-  background-size: cover;
-  background-repeat: no-repeat;
+    );
+  }
+
+  .hero-image {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    background: url(${hero});
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .hero-black {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #0c121b;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: auto;
-    padding: 0 var(--main-padding-x);
+    // padding: 0 var(--main-padding-x);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -72,8 +96,13 @@ export const HeroContent = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     box-sizing: border-box;
     width: 100%;
+    height: 100%;
     padding: 0;
 
     h1 {
@@ -95,6 +124,8 @@ export const MetadataLine = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     gap: 2em;
+    width: 100%;
+    margin: 0;
   }
 `;
 

@@ -127,31 +127,35 @@ const Development = (props) => {
       <Navbar dark />
       <DeveloperContainer>
         <HeroSection>
-          <HeroContent>
-            <h1>
-              Alveo Land Corporation&nbsp;&nbsp;
-              {isVerified && <img src={check} />}
-            </h1>
-            <p>
-              Alveo Land caters to the upscale market with its dynamic portfolio
-              of residential, business, commercial, and leisure developments
-              across the country.
-            </p>
-            <MetadataLine>
-              <div>
-                <MetadataNumber>8</MetadataNumber>
-                <MetadataProperty>Developments</MetadataProperty>
-              </div>
-              <div>
-                <MetadataNumber>32</MetadataNumber>
-                <MetadataProperty>Properties</MetadataProperty>
-              </div>
-              <div>
-                <MetadataNumber>6</MetadataNumber>
-                <MetadataProperty>Site Locations</MetadataProperty>
-              </div>
-            </MetadataLine>
-          </HeroContent>
+          <div className="hero-gradient">
+            <HeroContent>
+              <h1>
+                Alveo Land Corporation&nbsp;&nbsp;
+                {isVerified && <img src={check} />}
+              </h1>
+              <p>
+                Alveo Land caters to the upscale market with its dynamic
+                portfolio of residential, business, commercial, and leisure
+                developments across the country.
+              </p>
+              <MetadataLine>
+                <div>
+                  <MetadataNumber>8</MetadataNumber>
+                  <MetadataProperty>Developments</MetadataProperty>
+                </div>
+                <div>
+                  <MetadataNumber>32</MetadataNumber>
+                  <MetadataProperty>Properties</MetadataProperty>
+                </div>
+                <div>
+                  <MetadataNumber>6</MetadataNumber>
+                  <MetadataProperty>Site Locations</MetadataProperty>
+                </div>
+              </MetadataLine>
+            </HeroContent>
+          </div>
+          <div className="hero-image"></div>
+          <div className="hero-black"></div>
         </HeroSection>
         <Developments>
           <h2 className="h2">Alveo Land Developments</h2>

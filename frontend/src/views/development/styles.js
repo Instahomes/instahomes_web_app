@@ -21,15 +21,40 @@ export const DevelopmentContainer = styled.main`
 `;
 
 export const HeroSection = styled.section`
+  z-index: 0;
+  position: relative;
   height: 600px;
-  background: linear-gradient(
+
+  .hero-gradient {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 3;
+    background: linear-gradient(
       180deg,
       rgba(12, 20, 31, 0.62) 0%,
       rgba(28, 55, 90, 0) 116.2%
-    ),
-    url(${alveoProperty}), #0d1115;
-  background-size: cover;
-  background-repeat: no-repeat;
+    );
+  }
+
+  .hero-image {
+    z-index: 2;
+    position: absolute;
+    opacity: 0.3;
+    background: url(${alveoProperty});
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+  }
+
+  .hero-black {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #0d1115;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     height: 500px;
@@ -54,6 +79,7 @@ export const HeroContent = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: auto;
+    height: 100%;
     padding: 0 var(--main-padding-x);
     display: flex;
     flex-direction: column;
@@ -62,6 +88,7 @@ export const HeroContent = styled.div`
 `;
 
 export const ListingRow = styled.div`
+  z-index: 10;
   display: flex;
   justify-content: ${({ threeOrLess }) =>
     threeOrLess ? "center" : "space-between"};
