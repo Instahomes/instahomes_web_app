@@ -2,18 +2,27 @@ import styled from "styled-components";
 import { OutlineButton } from "../../components/elements";
 
 export const ListingCard = styled.div`
+  position: relative;
   background: ${({ theme }) => theme.colors.mainBgColor};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
-  min-width: 350px;
+  min-width: 370px;
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    min-width: 290px;
+    min-width: 310px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    min-width: min(250px, 100%);
+    min-width: min(260px, 100%);
   }
+`;
+
+export const DeveloperLogo = styled.img`
+  position: absolute;
+  right: 10px;
+  top: 10px;
 `;
 
 export const ListingImage = styled.img`
@@ -22,7 +31,14 @@ export const ListingImage = styled.img`
 `;
 
 export const ListingInfo = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 1.1em;
+  height: 100%;
+
+  .view-home {
+    margin-top: auto;
+  }
 
   a {
     text-decoration: none;
@@ -32,12 +48,10 @@ export const ListingInfo = styled.div`
 export const ListingName = styled.h1`
   font-size: 1.3em;
   color: ${({ theme }) => theme.colors.darkBlue};
-  display: flex;
-  align-items: center;
 
   img {
-    width: 0.9em;
-    height: 0.9em;
+    width: 0.8em;
+    height: 0.8em;
   }
 `;
 

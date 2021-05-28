@@ -116,7 +116,7 @@ export const GlobalStyle = createGlobalStyle`
 
   p, li, span {
     color: ${theme.colors.mutedLightBlue};
-    font-size: 1em;
+    font-size: 1.1em;
     line-height: 155%;
   }
 

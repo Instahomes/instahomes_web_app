@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TopBarFrame = styled.div`
-  background-color: ${({ theme }) => theme.colors.darkBlue};
+  background-color: #1a2534;
   display: flex;
   justify-content: flex-end;
   align-items: center;

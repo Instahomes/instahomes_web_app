@@ -15,8 +15,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
         query: "",
         propertyType: "",
         keywords: "",
-        minPrice: "",
-        maxPrice: "",
+        priceRange: "",
         bathrooms: "",
         bedrooms: "",
         developer: "",
@@ -104,6 +103,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 className="advanced-setting"
                 scale={0.9}
                 mobileOrder={5}
+                isDefault={values.bedrooms == ""}
               >
                 <option value="">Bedrooms (All)</option>
               </Input>
@@ -116,29 +116,23 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 className="advanced-setting"
                 scale={0.9}
                 mobileOrder={6}
+                isDefault={values.bathrooms == ""}
               >
                 <option value="">Baths (All)</option>
               </Input>
               <Input
-                placeholder="Minimum Price"
-                name="minPrice"
+                as="select"
+                name="priceRange"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.minPrice}
+                value={values.priceRange}
                 className="advanced-setting"
                 scale={0.9}
                 mobileOrder={7}
-              />
-              <Input
-                placeholder="Maximum Price"
-                name="maxPrice"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.maxPrice}
-                className="advanced-setting"
-                scale={0.9}
-                mobileOrder={8}
-              />
+                isDefault={values.priceRange == ""}
+              >
+                <option value="">Price Range</option>
+              </Input>
               <Input
                 placeholder="Preferred Developer (All)"
                 style={{ flex: 1 }}
@@ -150,11 +144,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={9}
               />
-              <SearchButton
-                scale={0.9}
-                style={{ flex: showAdvanced ? 1 : "initial" }}
-                mobileOrder={10}
-              >
+              <SearchButton scale={0.9} mobileOrder={10}>
                 FIND&nbsp;MY&nbsp;HOME
               </SearchButton>
             </SearchForm>

@@ -51,7 +51,7 @@ export const SearchButton = styled(OrangeButton)`
   width: 20%;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    width: 100%;
+    width: 120px;
     order: ${({ mobileOrder }) => mobileOrder || "initial"};
   }
 `;

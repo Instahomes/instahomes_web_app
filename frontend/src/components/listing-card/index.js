@@ -3,8 +3,10 @@ import map from "../../assets/card/map.svg";
 import bed from "../../assets/card/bed.svg";
 import bath from "../../assets/card/bath.svg";
 import check from "../../assets/card/check.svg";
+import logo from "../../assets/card/alveo.png";
 import {
   ListingCard,
+  DeveloperLogo,
   ListingImage,
   ListingInfo,
   ListingName,
@@ -20,6 +22,7 @@ const Card = ({
   id,
   image,
   name,
+  developer,
   size,
   price,
   address,
@@ -30,6 +33,7 @@ const Card = ({
   return (
     <ListingCard>
       <ListingImage src={image} alt="House" />
+      {developer == "Alveo" && <DeveloperLogo src={logo} alt="Alveo" />}
       <ListingInfo>
         <Link to={`/listing/${id}`}>
           <ListingName>
@@ -57,7 +61,7 @@ const Card = ({
             {bathrooms}&nbsp;Bathrooms
           </ListingPiece>
         </ListingLine>
-        <Link to={`/listing/${id}`}>
+        <Link to={`/listing/${id}`} className="view-home">
           <ViewHomeButton>VIEW HOME</ViewHomeButton>
         </Link>
         <DirectToDeveloper>

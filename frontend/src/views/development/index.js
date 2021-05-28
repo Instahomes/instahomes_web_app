@@ -118,7 +118,7 @@ const Development = (props) => {
             </p>
           </HeroContent>
         </HeroSection>
-        <ListingRow>
+        <ListingRow threeOrLess={sampleListings.length <= 3}>
           {sampleListings.map((listing) => (
             <ListingCard
               id={listing.id}

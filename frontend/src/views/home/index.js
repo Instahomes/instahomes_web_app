@@ -31,6 +31,7 @@ const sampleListings = [
   {
     id: 1,
     name: "The Lattice Studio Unit",
+    developer: "Alveo",
     size: 33,
     price: "9,500,000.00",
     address: "C-5 Road, Brgy. Rosario, Pasig City",
@@ -41,6 +42,7 @@ const sampleListings = [
   {
     id: 1,
     name: "The Lattice 1-Bedroom",
+    developer: "Alveo",
     size: 58,
     price: "13,000,000.00",
     address: "C-5 Road, Brgy. Rosario, Pasig City",
@@ -51,6 +53,7 @@ const sampleListings = [
   {
     id: 1,
     name: "The Lattice 2-Bedroom",
+    developer: "Alveo",
     size: 94,
     price: "24,000,000.00",
     address: "C-5 Road, Brgy. Rosario, Pasig City",
@@ -60,7 +63,8 @@ const sampleListings = [
   },
   {
     id: 1,
-    name: "The Lattice 2-Bedroom",
+    name: "The Lattice 2-Bedrooms in this House",
+    developer: "Alveo",
     size: 94,
     price: "24,000,000.00",
     address: "C-5 Road, Brgy. Rosario, Pasig City",
@@ -83,12 +87,13 @@ const Home = (props) => {
         />
       </HeroFrame>
       <HomeListings>
-        <h1 className="dark center">Featured listings in the market today</h1>
-        <ListingRow>
+        <h1 className="dark center">Newest listings in the market today</h1>
+        <ListingRow threeOrLess={sampleListings.length <= 3}>
           {sampleListings.map((listing) => (
             <ListingCard
               id={listing.id}
               key={listing.name}
+              developer={listing.developer}
               image={house}
               name={listing.name}
               size={listing.size}
@@ -96,7 +101,7 @@ const Home = (props) => {
               address={listing.address}
               bedrooms={listing.bedrooms}
               bathrooms={listing.bathrooms}
-              isVerified={listing.isVerified}
+              isVerified={true}
             />
           ))}
         </ListingRow>
