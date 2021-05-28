@@ -11,13 +11,13 @@ export const ListingHeadContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column-reverse;
   }
 `;
 
 export const ListingProductSearch = styled(ProductSearch)`
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
   }
 `;
@@ -29,7 +29,7 @@ export const ListingHeader = styled.div`
 
   border-bottom: 1px solid ${({ theme }) => theme.colors.mutedGray};
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
   }
 `;
@@ -61,7 +61,7 @@ export const HeaderButtons = styled.div`
   margin-left: auto;
   padding: 12px 0;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     margin-left: 0;
     flex-direction: column-reverse;
   }
@@ -74,7 +74,7 @@ export const WishlistButton = styled(OutlineButton)`
   align-items: center;
   border: 2px solid ${({ theme }) => theme.colors.darkBlue};
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding: 0.7em 0;
     margin-top: 10px;
     justify-content: center;
@@ -90,7 +90,7 @@ export const InquireButton = styled(OrangeButton)`
   padding: 0 2em;
   margin-left: 10px;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     margin-left: 0;
     padding: 0.7em 0;
   }
@@ -132,7 +132,7 @@ export const ImageContainer = styled.div`
     grid-area: image4;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-columns: repeat(5, 90%);
     grid-template-rows: 400px;
     grid-template-areas: "main image1 image2 image3 image4";
@@ -189,7 +189,7 @@ export const DescriptionContainer = styled.div`
   padding-top: 1.5em;
   padding-bottom: 1.5em;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
   }
 `;
@@ -253,8 +253,18 @@ export const DescriptionLeft = styled.div`
     }
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 100%;
+
+    #prop-details {
+      flex-direction: column;
+    }
+  }
+`;
+
+export const DescriptionDiv = styled.div`
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: ${({ active }) => (active ? "block" : "none")};
   }
 `;
 
@@ -265,7 +275,8 @@ export const DevInformation = styled.div`
   height: 100px;
   margin-top: 1em;
 
-  h4, p {
+  h4,
+  p {
     margin-bottom: 5px !important;
     margin-top: 0 !important;
   }
@@ -284,17 +295,42 @@ export const DevInformation = styled.div`
     font-weight: 500;
     font-size: 0.7em;
     color: ${({ theme }) => theme.colors.orange};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 1em;
+
+    .logo {
+      max-width: 100%;
+      width: 100%;
+      max-height: 150px;
+    }
+
+    .dev-info {
+      max-width: 100%;
+      width: 100%;
+      text-align: center;
+    }
+  }
 `;
 
 export const ViewDev = styled(OutlineButton)`
   padding: 0.5em 1em;
   font-size: 0.9em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 100%;
+    margin-top: -5px;
+  }
 `;
 
 export const DescriptionRight = styled.div`
   width: 50%;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 100%;
     margin-top: 1em;
   }
@@ -306,7 +342,7 @@ export const MetadataLine = styled.div`
   align-items: center;
   margin-bottom: 2em;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -336,7 +372,7 @@ export const MetadataProperty = styled.div`
     color: ${({ theme }) => theme.colors.darkBody};
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     justify-content: center;
   }
 `;

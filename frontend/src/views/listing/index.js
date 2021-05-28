@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import ProductInquiry from "../../components/product-inquiry";
@@ -38,6 +38,7 @@ import {
   ProductTab,
   DescriptionContainer,
   DescriptionLeft,
+  DescriptionDiv,
   DevInformation,
   ViewDev,
   DescriptionRight,
@@ -48,6 +49,8 @@ import {
 } from "./styles";
 
 const Listing = (props) => {
+  const [active, setActive] = useState("overview");
+
   return (
     <Layout>
       <Navbar />
@@ -81,26 +84,53 @@ const Listing = (props) => {
           </ImageContainer>
         </ListingHeadContainer>
         <ProductTabContainer>
-          <ProductTab active first>
+          <ProductTab
+            onClick={() => setActive("overview")}
+            active={active == "overview"}
+            first
+          >
             OVERVIEW
           </ProductTab>
-          <ProductTab href="#property-details">
+          <ProductTab
+            onClick={() => setActive("propertyDetails")}
+            active={active == "propertyDetails"}
+            href="#property-details"
+          >
             PROPERTY&nbsp;DETAILS
           </ProductTab>
-          <ProductTab href="#prop-directions">
+          <ProductTab
+            href="#prop-directions"
+            onClick={() => setActive("propertyDirections")}
+            active={active == "propertyDirections"}
+          >
             HOW&nbsp;TO&nbsp;GET&nbsp;THERE
           </ProductTab>
-          <ProductTab href="#area-facts">AREA&nbsp;FACTS</ProductTab>
-          <ProductTab href="#development">
+          <ProductTab
+            href="#area-facts"
+            onClick={() => setActive("facts")}
+            active={active == "facts"}
+          >
+            AREA&nbsp;FACTS
+          </ProductTab>
+          <ProductTab
+            href="#development"
+            onClick={() => setActive("development")}
+            active={active == "development"}
+          >
             DEVELOPMENT&nbsp;INFORMATION
           </ProductTab>
-          <ProductTab href="#developer" last>
+          <ProductTab
+            href="#developer"
+            onClick={() => setActive("developer")}
+            active={active == "developer"}
+            last
+          >
             DEVELOPER&nbsp;INFORMATION
           </ProductTab>
         </ProductTabContainer>
         <DescriptionContainer>
           <DescriptionLeft>
-            <div>
+            <DescriptionDiv active={active == "overview"}>
               <h4>OVERVIEW</h4>
               <p>
                 A high-rise residential development located at the greenest
@@ -113,8 +143,11 @@ const Listing = (props) => {
                 It is laid out to even allow a small dressing room for the
                 masters, a covered garage, and generous toilet bathing space.
               </p>
-            </div>
-            <div id="property-details">
+            </DescriptionDiv>
+            <DescriptionDiv
+              active={active == "propertyDetails"}
+              id="property-details"
+            >
               <h4>PROPERTY DETAILS</h4>
               <div id="prop-details">
                 <img src={propertyDetails} alt="Property Details" />
@@ -134,8 +167,11 @@ const Listing = (props) => {
                   </span>
                 </div>
               </div>
-            </div>
-            <div id="prop-directions">
+            </DescriptionDiv>
+            <DescriptionDiv
+              active={active == "propertyDirections"}
+              id="prop-directions"
+            >
               <h4>HOW TO GET THERE</h4>
               <img src={propertyMap} alt="Property Map" id="prop-map" />
               <div id="directions-details">
@@ -154,8 +190,8 @@ const Listing = (props) => {
                   </p>
                 </div>
               </div>
-            </div>
-            <div id="area-facts">
+            </DescriptionDiv>
+            <DescriptionDiv active={active == "facts"} id="area-facts">
               <h4>AREA FACTS</h4>
               <p>
                 This House and Lot unit was designed to suit the needs of
@@ -164,8 +200,8 @@ const Listing = (props) => {
                 invest with by turning each unit as an apartment for students
                 studying at the nearby schools in Lipa City, Batangas.
               </p>
-            </div>
-            <div id="development">
+            </DescriptionDiv>
+            <DescriptionDiv active={active == "development"} id="development">
               <h4>DEVELOPMENT INFORMATION</h4>
               <DevInformation>
                 <img src={parklinks} className="logo" alt="Parklinks" />
@@ -179,8 +215,8 @@ const Listing = (props) => {
                 </div>
                 <ViewDev>VIEW DEVELOPMENT</ViewDev>
               </DevInformation>
-            </div>
-            <div id="developer">
+            </DescriptionDiv>
+            <DescriptionDiv active={active == "developer"} id="developer">
               <h4>DEVELOPER INFORMATION</h4>
               <DevInformation>
                 <img src={alveo} className="logo" alt="Alveo" />
@@ -190,7 +226,7 @@ const Listing = (props) => {
                 </div>
                 <ViewDev>VIEW DEVELOPER</ViewDev>
               </DevInformation>
-            </div>
+            </DescriptionDiv>
           </DescriptionLeft>
           <DescriptionRight>
             <MetadataLine>
