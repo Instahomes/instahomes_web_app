@@ -54,7 +54,11 @@ const ProductInquiry = () => {
         {inquiryTags.map((tag) => (
           <Tag
             key={tag.value}
-            onClick={() => setSelectedTag(tag.value)}
+            onClick={() =>
+              tag.value == selectedTag
+                ? setSelectedTag("")
+                : setSelectedTag(tag.value)
+            }
             selected={tag.value == selectedTag}
           >
             {tag.label}

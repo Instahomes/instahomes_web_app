@@ -70,7 +70,7 @@ const Search = (props) => {
   const [listingStatus, setListingStatus] = useState("");
   const [query, setQuery] = useState("");
   const [propertyType, setPropertyType] = useState("");
-  const [price, setPrice] = useState("");
+  const [priceRange, setPriceRange] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [developer, setDeveloper] = useState("");
@@ -84,7 +84,7 @@ const Search = (props) => {
     setListingStatus(searchParams.get("listingStatus"));
     setQuery(searchParams.get("query"));
     setPropertyType(searchParams.get("propertyType"));
-    setPrice(searchParams.get("price"));
+    setPriceRange(searchParams.get("priceRange"));
     setBathrooms(searchParams.get("bathrooms"));
     setBedrooms(searchParams.get("bedrooms"));
     setDeveloper(searchParams.get("developer"));
@@ -100,7 +100,7 @@ const Search = (props) => {
             listingStatus,
             query,
             propertyType,
-            price,
+            priceRange,
             bathrooms,
             bedrooms,
             developer,
@@ -166,16 +166,16 @@ const Search = (props) => {
                   <option value="">Property Type</option>
                 </GrayInput>
                 <GrayInput
-                  scale={0.9}
                   as="select"
-                  name="price"
+                  name="priceRange"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.price}
-                  isDefault={!values.price}
+                  value={values.priceRange}
+                  scale={0.9}
                   mobileOrder={3}
+                  isDefault={!values.priceRange}
                 >
-                  <option value="">List Price</option>
+                  <option value="">Price Range</option>
                 </GrayInput>
                 <GrayInput
                   scale={0.9}
@@ -235,15 +235,19 @@ const Search = (props) => {
             listings
           </span>
           <LightInput scale={0.8} as="select" className="listing-sort">
-            <option value="">Sort by Location</option>
+            <option value="">Sort by Price (highest first)</option>
+            <option value="">Sort by Price (lowest first)</option>
+            <option value="">Sort by Size (highest first)</option>
+            <option value="">Sort by Size (lowest first)</option>
+            <option value="">Sort by Newest</option>
           </LightInput>
-          <OutlineButton
+          {/* <OutlineButton
             className="remove-on-mobile btn-rubik"
             scale={0.8}
             style={{ alignSelf: "stretch", fontWeight: 400 }}
           >
             View with map <span id="beta">BETA</span>
-          </OutlineButton>
+          </OutlineButton> */}
         </ListingsFilters>
         <ListingGrid>
           {sampleListings.map((listing) => (

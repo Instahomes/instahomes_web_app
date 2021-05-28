@@ -52,7 +52,7 @@ const Listing = (props) => {
     <Layout>
       <Navbar />
       <ListingContainer>
-        <ListingProductSearch />
+        {/* <ListingProductSearch /> */}
         <ListingHeadContainer>
           <ListingHeader>
             <div>
@@ -67,8 +67,8 @@ const Listing = (props) => {
               </ListingLine>
             </div>
             <HeaderButtons>
-              <WishlistButton>SEND AN INQUIRY</WishlistButton>
-              <InquireButton>TOUR THIS PROPERTY</InquireButton>
+              <WishlistButton>ADD TO WISHLIST</WishlistButton>
+              <InquireButton>SEND AN INQUIRY</InquireButton>
             </HeaderButtons>
           </ListingHeader>
           <ImageContainer>
@@ -84,11 +84,19 @@ const Listing = (props) => {
           <ProductTab active first>
             OVERVIEW
           </ProductTab>
-          <ProductTab>PROPERTY&nbsp;DETAILS</ProductTab>
-          <ProductTab>HOW&nbsp;TO&nbsp;GET&nbsp;THERE</ProductTab>
-          <ProductTab>AREA&nbsp;FACTS</ProductTab>
-          <ProductTab>DEVELOPMENT&nbsp;INFORMATION</ProductTab>
-          <ProductTab last>DEVELOPER&nbsp;INFORMATION</ProductTab>
+          <ProductTab href="#property-details">
+            PROPERTY&nbsp;DETAILS
+          </ProductTab>
+          <ProductTab href="#prop-directions">
+            HOW&nbsp;TO&nbsp;GET&nbsp;THERE
+          </ProductTab>
+          <ProductTab href="#area-facts">AREA&nbsp;FACTS</ProductTab>
+          <ProductTab href="#development">
+            DEVELOPMENT&nbsp;INFORMATION
+          </ProductTab>
+          <ProductTab href="#developer" last>
+            DEVELOPER&nbsp;INFORMATION
+          </ProductTab>
         </ProductTabContainer>
         <DescriptionContainer>
           <DescriptionLeft>
@@ -106,7 +114,7 @@ const Listing = (props) => {
                 masters, a covered garage, and generous toilet bathing space.
               </p>
             </div>
-            <div>
+            <div id="property-details">
               <h4>PROPERTY DETAILS</h4>
               <div id="prop-details">
                 <img src={propertyDetails} alt="Property Details" />
@@ -147,7 +155,7 @@ const Listing = (props) => {
                 </div>
               </div>
             </div>
-            <div>
+            <div id="area-facts">
               <h4>AREA FACTS</h4>
               <p>
                 This House and Lot unit was designed to suit the needs of
@@ -157,7 +165,7 @@ const Listing = (props) => {
                 studying at the nearby schools in Lipa City, Batangas.
               </p>
             </div>
-            <div>
+            <div id="development">
               <h4>DEVELOPMENT INFORMATION</h4>
               <DevInformation>
                 <img src={parklinks} className="logo" alt="Parklinks" />
@@ -172,7 +180,7 @@ const Listing = (props) => {
                 <ViewDev>VIEW DEVELOPMENT</ViewDev>
               </DevInformation>
             </div>
-            <div>
+            <div id="developer">
               <h4>DEVELOPER INFORMATION</h4>
               <DevInformation>
                 <img src={alveo} className="logo" alt="Alveo" />
@@ -222,9 +230,9 @@ const Listing = (props) => {
               </div>
               <span className="dark-blue">Php 1,820,000.00</span>
             </ProductPriceLine>
-            <ProductTour />
+            {/* <ProductTour />
             <br />
-            <br />
+            <br /> */}
             <ProductInquiry />
           </DescriptionRight>
         </DescriptionContainer>

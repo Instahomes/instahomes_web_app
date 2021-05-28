@@ -170,6 +170,7 @@ export const ProductTabContainer = styled.div`
 `;
 
 export const ProductTab = styled.a`
+  text-decoration: none;
   font-family: "M PLUS Rounded 1c", sans-serif;
   font-size: 0.9em;
   font-weight: bold;
@@ -315,6 +316,7 @@ export const MetadataLine = styled.div`
 
 export const MetadataNumber = styled.div`
   font-size: 1em;
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.darkBlue};
   margin-bottom: 5px;
   text-align: center;
@@ -325,10 +327,13 @@ export const MetadataProperty = styled.div`
   align-items: center;
   font-size: 0.8em;
   text-align: center;
-  color: ${({ theme }) => theme.colors.darkBody};
 
   img {
     margin-right: 10px;
+  }
+
+  span {
+    color: ${({ theme }) => theme.colors.darkBody};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
