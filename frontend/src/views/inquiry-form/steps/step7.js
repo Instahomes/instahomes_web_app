@@ -55,7 +55,14 @@ const reasonChoices = [
   },
 ];
 
-const Step7 = ({ isSubmitting, values, setFieldValue, previous }) => {
+const Step7 = ({
+  isSubmitting,
+  values,
+  setFieldValue,
+  previous,
+  touched,
+  errors,
+}) => {
   return (
     <React.Fragment>
       <h1>What do you want to use the property for?</h1>
@@ -116,7 +123,16 @@ const Step7 = ({ isSubmitting, values, setFieldValue, previous }) => {
       </CheckboxGroup>
       <FormDiv>
         <FormFrame>
-          <SignupOrangeButton disabled={isSubmitting} type="submit">
+          <SignupOrangeButton
+            disabled={
+              isSubmitting ||
+              values.purchaseType == "" ||
+              !touched.reason ||
+              errors.purchaseType ||
+              errors.reason
+            }
+            type="submit"
+          >
             NEXT PAGE
           </SignupOrangeButton>
           <SecondaryButton onClick={() => previous(values)}>

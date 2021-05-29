@@ -38,7 +38,7 @@ const budgetChoices = [
   },
 ];
 
-const Step6 = ({ isSubmitting, values, previous }) => {
+const Step6 = ({ isSubmitting, values, previous, errors, touched }) => {
   return (
     <React.Fragment>
       <h1>Estimated Budget</h1>
@@ -84,7 +84,10 @@ const Step6 = ({ isSubmitting, values, previous }) => {
       </CheckboxGroup>
       <FormDiv>
         <FormFrame>
-          <SignupOrangeButton disabled={isSubmitting} type="submit">
+          <SignupOrangeButton
+            disabled={isSubmitting || !touched.budget || errors.budget}
+            type="submit"
+          >
             NEXT PAGE
           </SignupOrangeButton>
           <SecondaryButton onClick={() => previous(values)}>

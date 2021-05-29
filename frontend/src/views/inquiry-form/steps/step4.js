@@ -9,7 +9,7 @@ import {
 } from "../styles";
 import { Field } from "formik";
 
-const Step4 = ({ isSubmitting, values, previous }) => {
+const Step4 = ({ isSubmitting, values, previous, touched, errors }) => {
   return (
     <React.Fragment>
       <h1>Preferred Location</h1>
@@ -25,7 +25,10 @@ const Step4 = ({ isSubmitting, values, previous }) => {
             placeholder="Address or Landmark"
             name="address"
           />
-          <SignupOrangeButton disabled={isSubmitting} type="submit">
+          <SignupOrangeButton
+            disabled={isSubmitting || !touched.address || errors.address}
+            type="submit"
+          >
             NEXT PAGE
           </SignupOrangeButton>
           <SecondaryButton onClick={() => previous(values)}>

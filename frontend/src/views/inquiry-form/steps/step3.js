@@ -11,7 +11,7 @@ import {
 } from "../styles";
 import { Field } from "formik";
 
-const Step3 = ({ isSubmitting, values, previous }) => {
+const Step3 = ({ isSubmitting, values, previous, errors, touched }) => {
   const [showEmail, setShowEmail] = useState(false);
 
   return (
@@ -40,7 +40,12 @@ const Step3 = ({ isSubmitting, values, previous }) => {
           {showEmail && (
             <SignupInput as={Field} placeholder="Email Address" name="email" />
           )}
-          <SignupOrangeButton disabled={isSubmitting} type="submit">
+          <SignupOrangeButton
+            disabled={
+              isSubmitting || !touched.contactNumber || errors.contactNumber
+            }
+            type="submit"
+          >
             NEXT PAGE
           </SignupOrangeButton>
           <SecondaryButton onClick={() => previous(values)}>

@@ -24,7 +24,14 @@ const hasAgentChoices = [
   },
 ];
 
-const Step9 = ({ isSubmitting, values, setFieldValue, previous }) => {
+const Step9 = ({
+  isSubmitting,
+  values,
+  setFieldValue,
+  previous,
+  errors,
+  touched,
+}) => {
   return (
     <React.Fragment>
       <h1>Do you already have an agent?</h1>
@@ -45,7 +52,10 @@ const Step9 = ({ isSubmitting, values, setFieldValue, previous }) => {
       </FormDiv>
       <FormDiv>
         <FormFrame>
-          <SignupOrangeButton disabled={isSubmitting} type="submit">
+          <SignupOrangeButton
+            disabled={isSubmitting || errors.hasAgent}
+            type="submit"
+          >
             NEXT PAGE
           </SignupOrangeButton>
           <SecondaryButton onClick={() => previous(values)}>

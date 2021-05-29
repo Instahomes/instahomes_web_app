@@ -43,6 +43,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
     font-size: 16px;
+    background-color: #1A2534;  
   }
 
   @media (max-width: ${theme.breakpoints.lg}) {

@@ -5,7 +5,12 @@ import {
   SignupOrangeButton,
   SignupOutlineButton,
 } from "../styles";
+import styled from "styled-components";
 import logo from "../../../assets/navbar/largeLogoDark.svg";
+
+const InstahomesLogo = styled.img`
+  width: 250px;
+`;
 
 const Step1 = ({ isSubmitting, setIsSigningUp }) => {
   return (
@@ -36,7 +41,7 @@ const Step1 = ({ isSubmitting, setIsSigningUp }) => {
         </FormFrame>
       </FormDiv>
       <p>Either form only takes approx. 3 mins</p>
-      <img src={logo} alt="Instahomes" />
+      <InstahomesLogo src={logo} alt="Instahomes" />
     </React.Fragment>
   );
 };

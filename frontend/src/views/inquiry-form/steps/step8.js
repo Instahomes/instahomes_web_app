@@ -32,7 +32,14 @@ const progressChoices = [
   },
 ];
 
-const Step8 = ({ isSubmitting, values, setFieldValue, previous }) => {
+const Step8 = ({
+  isSubmitting,
+  values,
+  setFieldValue,
+  previous,
+  errors,
+  touched,
+}) => {
   return (
     <React.Fragment>
       <h1>Where in the process are you?</h1>
@@ -75,7 +82,10 @@ const Step8 = ({ isSubmitting, values, setFieldValue, previous }) => {
       </CheckboxGroup>
       <FormDiv>
         <FormFrame>
-          <SignupOrangeButton disabled={isSubmitting} type="submit">
+          <SignupOrangeButton
+            disabled={isSubmitting || values.progress == "" || errors.progress}
+            type="submit"
+          >
             NEXT PAGE
           </SignupOrangeButton>
           <SecondaryButton onClick={() => previous(values)}>

@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import { OrangeButton, OutlineButton } from "../../components/elements";
 import { Input } from "../../components/elements";
-import { ErrorMessage } from "formik";
+import { ErrorMessage, Form } from "formik";
 
 export const Frame = styled.main`
   background: hsla(215, 33%, 15%, 0.95);
-  padding: 7rem var(--main-padding-x) 2rem var(--main-padding-x);
+  padding: 2rem var(--main-padding-x);
+  padding-top: 4rem;
   text-align: center;
-  min-height: 80vh;
+  // min-height: 80vh;
 
   h1 {
     color: ${({ theme }) => theme.colors.lightBlue};
-    margin: auto 5rem;
+    // margin: auto 5rem;
   }
 
   p,
@@ -29,13 +30,40 @@ export const Frame = styled.main`
 `;
 
 export const Content = styled.div`
-  width: 80%;
+  // width: 80%;
   margin: auto;
+`;
+
+export const ProgressBar = styled.div`
+  width: 300px;
+  margin: auto;
+  // margin-top: auto;
+  display: flex;
+  justify-content: space-evenly;
+
+  & > img {
+    width: 0.5em;
+    height: 0.5em;
+  }
+`;
+
+export const FormStyle = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+`;
+
+export const FormContent = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const FormDiv = styled.div`
   width: 350px;
-  margin: auto;
+  // min-height: 300px;
+  // margin: auto;
   margin-top: 2em;
 `;
 
@@ -56,9 +84,12 @@ export const FormChild = styled.div`
   }
 `;
 
-export const SignupOrangeButton = styled(OrangeButton).attrs(({ type }) => ({
-  type: type || "button",
-}))`
+export const SignupOrangeButton = styled(OrangeButton).attrs(
+  ({ type, disabled }) => ({
+    type: type || "button",
+    disabled,
+  })
+)`
   font-size: 0.9em;
   padding: 0.7em 1.5em;
 `;
@@ -120,7 +151,7 @@ export const FormErrorMessage = styled(ErrorMessage)`
 
 export const CheckboxGroup = styled.div`
   width: 70%;
-  margin: auto;
+  // margin: auto;
   margin-top: 2em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -145,6 +176,7 @@ export const CheckboxLabel = styled.label`
     color: ${({ theme, isChecked }) =>
       isChecked ? theme.colors.mutedLightBlue : theme.colors.mutedBlue};
     font-size: 1em;
+    text-align: left;
   }
 
   .checkbox {
@@ -184,7 +216,7 @@ export const CheckboxLabel = styled.label`
       height: 1em;
 
       &:checked + .checkbox__control svg {
-        transform: scale(1.5);
+        transform: scale(1.8) translate(2px, -2px);
       }
     }
   }

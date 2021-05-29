@@ -80,8 +80,10 @@ export const LightTextarea = styled.textarea`
 `;
 
 export const OrangeButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.orange};
-  color: ${({ theme }) => theme.colors.softWhite};
+  background-color: ${({ theme, disabled }) =>
+    disabled ? "#2C3A4D" : theme.colors.orange};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.mutedBlue : theme.colors.softWhite};
   padding: 0.8em 1em;
   font-size: 0.8em;
 `;

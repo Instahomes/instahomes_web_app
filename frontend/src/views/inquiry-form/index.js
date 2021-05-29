@@ -1,18 +1,7 @@
 import React, { useState } from "react";
-import {
-  Frame,
-  Content,
-  FormDiv,
-  FormFrame,
-  FormChild,
-  SignupOrangeButton,
-  SignupOutlineButton,
-  SecondaryButton,
-  SignupInput,
-} from "./styles";
-import styled from "styled-components";
+import { Frame, Content, ProgressBar, FormStyle } from "./styles";
 import * as Yup from "yup";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Formik } from "formik";
 import Step1 from "./steps/step1";
 import Step2 from "./steps/step2";
 import Step3 from "./steps/step3";
@@ -27,13 +16,6 @@ import Step11 from "./steps/step11";
 import circleFilled from "../../assets/form/circle-filled.svg";
 import circleEmpty from "../../assets/form/circle-empty.svg";
 import { useHistory } from "react-router-dom";
-
-const ProgressBar = styled.div`
-  width: 400px;
-  margin: auto;
-  display: flex;
-  justify-content: space-evenly;
-`;
 
 // Wizard is a single Formik instance whose children are each page of the
 // multi-step form. The form is submitted on each forward transition (can only
@@ -69,40 +51,56 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
       return onSubmit(values, bag);
     } else {
       bag.setTouched({});
+      console.log(values);
       next(values);
+      console.log(values);
     }
   };
 
   return (
-    <Formik
-      initialValues={snapshot}
-      onSubmit={handleSubmit}
-      validationSchema={step.props.validationSchema}
-    >
-      {({ isSubmitting, values, setFieldValue }) => (
-        <Form>
-          {React.isValidElement(step)
-            ? React.cloneElement(step, {
-                isSubmitting,
-                values,
-                setFieldValue,
-                previous,
-              })
-            : step}
-          {stepNumber > 0 && stepNumber < totalSteps - 1 && (
-            <ProgressBar>
-              {steps.slice(1, steps.length - 1).map((step, idx) => (
-                <img
-                  key={"step" + idx}
-                  src={stepNumber <= idx ? circleEmpty : circleFilled}
-                  alt="Filled Circle"
-                />
-              ))}
-            </ProgressBar>
-          )}
-        </Form>
+    <React.Fragment>
+      <Formik
+        initialValues={snapshot}
+        onSubmit={handleSubmit}
+        validationSchema={step.props.validationSchema}
+      >
+        {({
+          isSubmitting,
+          values,
+          setFieldValue,
+          isValid,
+          dirty,
+          errors,
+          touched,
+        }) => (
+          <FormStyle>
+            {React.isValidElement(step)
+              ? React.cloneElement(step, {
+                  isSubmitting,
+                  values,
+                  setFieldValue,
+                  isValid,
+                  dirty,
+                  errors,
+                  touched,
+                  previous,
+                })
+              : step}
+          </FormStyle>
+        )}
+      </Formik>
+      {stepNumber > 0 && stepNumber < totalSteps - 1 && (
+        <ProgressBar>
+          {steps.slice(1, steps.length - 1).map((step, idx) => (
+            <img
+              key={"step" + idx}
+              src={stepNumber <= idx ? circleEmpty : circleFilled}
+              alt="Filled Circle"
+            />
+          ))}
+        </ProgressBar>
       )}
-    </Formik>
+    </React.Fragment>
   );
 };
 

@@ -162,7 +162,7 @@ export const Developments = styled.div`
 
 export const CardFrame = styled.div`
   background: linear-gradient(
-      180deg,
+      360deg,
       rgba(15, 15, 17, 0.64) 22.92%,
       rgba(0, 0, 0, 0) 68.23%
     ),
@@ -211,7 +211,7 @@ export const CardFrame = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     box-sizing: border-box;
-    min-width: 100%;
+    min-width: 350px;
     padding: 1em;
   }
 `;
