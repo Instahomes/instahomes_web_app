@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavbarFrame, NavbarLogo, NavbarSpan, menuStyles } from "./styles";
-import { OutlineButton } from "../elements";
+import { OutlineButton, GrayInput } from "../elements";
 import logo from "../../assets/navbar/logo.svg";
 import logoDark from "../../assets/navbar/logoDark.svg";
 import { slide as Menu } from "react-burger-menu";
@@ -9,6 +9,12 @@ import { Link } from "react-router-dom";
 
 const NavbarItems = ({ isMobile, className, dark }) => (
   <React.Fragment>
+    <GrayInput
+      style={{ flex: 1, margin: "0 2.5em" }}
+      scale={0.8}
+      placeholder="Search for location or landmark"
+      name="query"
+    />
     <NavbarSpan dark={dark} className={className}>
       BLOG
     </NavbarSpan>
@@ -53,20 +59,14 @@ const Navbar = ({ theme, dark }) => {
       <Link to="/">
         <img src={logoDark} alt="Instahomes" />
       </Link>
-      {/* <NavbarLogo>
-        <Link to="/">
-          <img src={logo} />
-          <img src={dark ? logoDark : logo} />
-        </Link>
-      </NavbarLogo> */}
       {isMediumScreen ? (
         <Menu styles={finalMenuStyles} right>
           <NavbarItems isMobile />
         </Menu>
       ) : (
-        <div>
+        <React.Fragment>
           <NavbarItems dark={dark} />
-        </div>
+        </React.Fragment>
       )}
     </NavbarFrame>
   );
