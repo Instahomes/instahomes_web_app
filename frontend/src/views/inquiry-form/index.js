@@ -89,9 +89,9 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
           </Form>
         )}
       </Formik>
-      {stepNumber > 0 && stepNumber < totalSteps - 1 && (
+      {stepNumber > 0 && stepNumber < totalSteps - 2 && (
         <ProgressBar>
-          {steps.slice(1, steps.length - 1).map((step, idx) => (
+          {steps.slice(1, steps.length - 2).map((step, idx) => (
             <img
               key={"step" + idx}
               src={stepNumber <= idx ? circleEmpty : circleFilled}

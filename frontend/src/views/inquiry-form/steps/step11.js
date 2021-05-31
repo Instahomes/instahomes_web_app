@@ -8,10 +8,27 @@ import {
 } from "../styles";
 import formComplete from "../../../assets/form/form-complete.svg";
 import logo from "../../../assets/navbar/largeLogoDark.svg";
+import styled from "styled-components";
 
-const Step11 = ({ isSubmitting }) => {
+const Step11Frame = styled(Frame)`
+  background: ${({ theme }) => theme.colors.mainBg};
+  height: 88vh;
+
+  h1,
+  p {
+    color: ${({ theme }) => theme.colors.darkBlue};
+  }
+`;
+
+const Step11Button = styled(SignupOutlineButton)`
+  background: ${({ theme }) => theme.colors.softWhite};
+  border: 1.5px solid ${({ theme }) => theme.colors.darkHeader};
+  color: ${({ theme }) => theme.colors.darkHeader};
+`;
+
+const Step11 = () => {
   return (
-    <Frame>
+    <Step11Frame>
       <Content>
         <img
           src={formComplete}
@@ -28,14 +45,12 @@ const Step11 = ({ isSubmitting }) => {
         </p>
         <FormDiv>
           <FormFrame>
-            <SignupOutlineButton type="submit">
-              BACK TO HOME
-            </SignupOutlineButton>
+            <Step11Button type="submit">BACK TO HOME</Step11Button>
           </FormFrame>
         </FormDiv>
         <img src={logo} alt="Instahomes" />
       </Content>
-    </Frame>
+    </Step11Frame>
   );
 };
 

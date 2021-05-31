@@ -9,14 +9,26 @@ import {
 } from "../styles";
 import styled from "styled-components";
 import logo from "../../../assets/navbar/largeLogoDark.svg";
+import step1Bg from "../../../assets/form/step1Bg.jpeg";
 
 const InstahomesLogo = styled.img`
   width: 250px;
 `;
 
+const Step1Frame = styled(Frame)`
+  background: linear-gradient(
+      0deg,
+      rgba(26, 37, 52, 0.95),
+      rgba(26, 37, 52, 0.95)
+    ),
+    url(${step1Bg});
+  background-size: cover;
+  height: 88vh;
+`;
+
 const Step1 = ({ isSubmitting, setIsSigningUp }) => {
   return (
-    <Frame>
+    <Step1Frame>
       <Content>
         <h1>Inquire about Alveo Land’s The Lattice 1-Bedroom Unit today</h1>
         <p>
@@ -46,7 +58,7 @@ const Step1 = ({ isSubmitting, setIsSigningUp }) => {
         <p>Either form only takes approx. 3 mins</p>
         <InstahomesLogo src={logo} alt="Instahomes" />
       </Content>
-    </Frame>
+    </Step1Frame>
   );
 };
 
