@@ -33,7 +33,7 @@ export const NavbarFrame = styled.nav`
 
 export const NavbarSpan = styled.a`
   color: ${({ theme, dark }) =>
-    dark ? theme.colors.mutedGray : theme.colors.darkBlue};
+    dark ? theme.colors.softWhite : theme.colors.darkBlue};
   margin: 0 2em;
   font-size: 16px;
   font-weight: 500;

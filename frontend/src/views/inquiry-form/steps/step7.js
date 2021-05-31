@@ -127,7 +127,7 @@ const Step7 = ({
             disabled={
               isSubmitting ||
               values.purchaseType == "" ||
-              !touched.reason ||
+              values.reason == "" ||
               errors.purchaseType ||
               errors.reason
             }

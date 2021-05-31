@@ -32,6 +32,11 @@ export const Frame = styled.main`
 export const Content = styled.div`
   // width: 80%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
 `;
 
 export const ProgressBar = styled.div`
@@ -45,14 +50,6 @@ export const ProgressBar = styled.div`
     width: 0.5em;
     height: 0.5em;
   }
-`;
-
-export const FormStyle = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 500px;
 `;
 
 export const FormContent = styled.div`

@@ -9,7 +9,7 @@ import {
 } from "../styles";
 import { Field } from "formik";
 
-const Step2 = ({ isSubmitting, values, previous, errors, touched }) => {
+const Step2 = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
       <h1>What's your name?</h1>
@@ -19,7 +19,7 @@ const Step2 = ({ isSubmitting, values, previous, errors, touched }) => {
           <FormErrorMessage component="span" name="name" />
           <SignupInput as={Field} placeholder="Full Name" name="name" />
           <SignupOrangeButton
-            disabled={isSubmitting || !touched.name || errors.name}
+            disabled={isSubmitting || values.name == "" || errors.name}
             type="submit"
           >
             NEXT PAGE

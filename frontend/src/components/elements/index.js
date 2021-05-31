@@ -93,12 +93,12 @@ export const OutlineButton = styled.button`
     scale ? `calc(1em * ${scale})` : fontSize || "1rem"};
   font-weight: 500;
   color: ${({ theme, dark }) =>
-    dark ? theme.colors.mutedGray : theme.colors.darkBlue};
+    dark ? theme.colors.softWhite : theme.colors.darkBlue};
   padding: 0.5em 1.5em;
   background-color: initial;
   border: 1px solid
     ${({ theme, dark }) =>
-      dark ? theme.colors.mutedGray : theme.colors.darkBlue};
+      dark ? theme.colors.softWhite : theme.colors.darkBlue};
   border-radius: 1px;
 `;
 

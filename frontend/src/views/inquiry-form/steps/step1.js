@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  Frame,
+  Content,
   FormDiv,
   FormFrame,
   SignupOrangeButton,
@@ -14,35 +16,37 @@ const InstahomesLogo = styled.img`
 
 const Step1 = ({ isSubmitting, setIsSigningUp }) => {
   return (
-    <React.Fragment>
-      <h1>Inquire about Alveo Land’s The Lattice 1-Bedroom Unit today</h1>
-      <p>
-        Hi there! To make your investment process with Alveo Land easier, we’ll
-        just need a couple of preset information. <br />
-        Don’t worry, all information here will not be shared with anyone aside
-        from the direct developer.
-      </p>
-      <p>
-        First, would you like to save your information for other inquiries by
-        signing up?
-      </p>
-      <FormDiv>
-        <FormFrame>
-          <SignupOrangeButton disabled={isSubmitting} type="submit">
-            ANSWER & SIGN UP <i>it's free</i>
-          </SignupOrangeButton>
-          <SignupOutlineButton
-            disabled={isSubmitting}
-            onClick={() => setIsSigningUp(false)}
-            type="submit"
-          >
-            JUST ANSWER
-          </SignupOutlineButton>
-        </FormFrame>
-      </FormDiv>
-      <p>Either form only takes approx. 3 mins</p>
-      <InstahomesLogo src={logo} alt="Instahomes" />
-    </React.Fragment>
+    <Frame>
+      <Content>
+        <h1>Inquire about Alveo Land’s The Lattice 1-Bedroom Unit today</h1>
+        <p>
+          Hi there! To make your investment process with Alveo Land easier,
+          we’ll just need a couple of preset information. <br />
+          Don’t worry, all information here will not be shared with anyone aside
+          from the direct developer.
+        </p>
+        <p>
+          First, would you like to save your information for other inquiries by
+          signing up?
+        </p>
+        <FormDiv>
+          <FormFrame>
+            <SignupOrangeButton disabled={isSubmitting} type="submit">
+              ANSWER & SIGN UP <i>it's free</i>
+            </SignupOrangeButton>
+            <SignupOutlineButton
+              disabled={isSubmitting}
+              onClick={() => setIsSigningUp(false)}
+              type="submit"
+            >
+              JUST ANSWER
+            </SignupOutlineButton>
+          </FormFrame>
+        </FormDiv>
+        <p>Either form only takes approx. 3 mins</p>
+        <InstahomesLogo src={logo} alt="Instahomes" />
+      </Content>
+    </Frame>
   );
 };
 

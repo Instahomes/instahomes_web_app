@@ -38,7 +38,7 @@ const budgetChoices = [
   },
 ];
 
-const Step6 = ({ isSubmitting, values, previous, errors, touched }) => {
+const Step6 = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
       <h1>Estimated Budget</h1>
@@ -85,7 +85,7 @@ const Step6 = ({ isSubmitting, values, previous, errors, touched }) => {
       <FormDiv>
         <FormFrame>
           <SignupOrangeButton
-            disabled={isSubmitting || !touched.budget || errors.budget}
+            disabled={isSubmitting || values.budget == "" || errors.budget}
             type="submit"
           >
             NEXT PAGE

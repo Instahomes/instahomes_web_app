@@ -201,12 +201,14 @@ export const CardFrame = styled.div`
     align-items: center;
     font-size: 1em;
     margin-bottom: 0.1em;
+    text-align: right;
   }
 
   .dev-price {
     font-size: 0.6em;
     font-weight: 600;
     color: ${({ theme }) => theme.colors.mutedBlue};
+    text-align: right;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {

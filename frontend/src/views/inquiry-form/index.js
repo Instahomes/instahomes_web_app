@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Frame, Content, ProgressBar, FormStyle } from "./styles";
+import { Frame, Content, ProgressBar } from "./styles";
 import * as Yup from "yup";
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import Step1 from "./steps/step1";
 import Step2 from "./steps/step2";
 import Step3 from "./steps/step3";
@@ -73,7 +73,7 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
           errors,
           touched,
         }) => (
-          <FormStyle>
+          <Form>
             {React.isValidElement(step)
               ? React.cloneElement(step, {
                   isSubmitting,
@@ -86,7 +86,7 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
                   previous,
                 })
               : step}
-          </FormStyle>
+          </Form>
         )}
       </Formik>
       {stepNumber > 0 && stepNumber < totalSteps - 1 && (
@@ -109,99 +109,95 @@ const DeveloperForm = (props) => {
   const history = useHistory();
 
   return (
-    <Frame>
-      <Content>
-        <Wizard
-          initialValues={{
-            name: "",
-            contactNumber: "",
-            email: "",
-            address: "",
-            propertyTypes: [],
-            budget: "",
-            purchaseType: "",
-            reason: "",
-            progress: "",
-            hasAgent: false,
-            password: "",
-            confirmPassword: "",
-          }}
-        >
-          <Step1
-            onSubmit={() => console.log("Is signing up: " + isSigningUp)}
-            validationSchema={Yup.object({})}
-            setIsSigningUp={setIsSigningUp}
-          />
-          <Step2
-            onSubmit={() => console.log("Step2 onSubmit")}
-            validationSchema={Yup.object({ name: Yup.string().required() })}
-          />
-          <Step3
-            onSubmit={() => console.log("Step3 onSubmit")}
-            validationSchema={Yup.object({
-              contactNumber: Yup.string().required(),
-              email: Yup.string().email(),
-            })}
-          />
-          <Step4
-            onSubmit={() => console.log("Step4 onSubmit")}
-            validationSchema={Yup.object({
-              address: Yup.string().required(),
-            })}
-          />
-          <Step5
-            onSubmit={() => console.log("Step5 onSubmit")}
-            validationSchema={Yup.object({
-              propertyTypes: Yup.array().of(Yup.string()).required(),
-            })}
-          />
-          <Step6
-            onSubmit={() => console.log("Step6 onSubmit")}
-            validationSchema={Yup.object({
-              budget: Yup.string().required(),
-            })}
-          />
-          <Step7
-            onSubmit={() => console.log("Step7 onSubmit")}
-            validationSchema={Yup.object({
-              purchaseType: Yup.string().required(),
-              reason: Yup.string().required(),
-            })}
-          />
-          <Step8
-            onSubmit={() => console.log("Step8 onSubmit")}
-            validationSchema={Yup.object({
-              progress: Yup.string().required(),
-            })}
-          />
-          <Step9
-            onSubmit={() => console.log("Step9 onSubmit")}
-            validationSchema={Yup.object({
-              hasAgent: Yup.boolean().required(),
-            })}
-          />
-          {isSigningUp && (
-            <Step10
-              onSubmit={() => console.log("Step10 onSubmit")}
-              validationSchema={Yup.object({
-                password: Yup.string().required(),
-                confirmPassword: Yup.string().oneOf(
-                  [Yup.ref("password"), null],
-                  "Passwords must match"
-                ),
-              })}
-            />
-          )}
-          <Step11
-            onSubmit={(values) => {
-              console.log(values);
-              history.push("/");
-            }}
-            validationSchema={Yup.object({})}
-          />
-        </Wizard>
-      </Content>
-    </Frame>
+    <Wizard
+      initialValues={{
+        name: "",
+        contactNumber: "",
+        email: "",
+        address: "",
+        propertyTypes: [],
+        budget: "",
+        purchaseType: "",
+        reason: "",
+        progress: "",
+        hasAgent: false,
+        password: "",
+        confirmPassword: "",
+      }}
+    >
+      <Step1
+        onSubmit={() => console.log("Is signing up: " + isSigningUp)}
+        validationSchema={Yup.object({})}
+        setIsSigningUp={setIsSigningUp}
+      />
+      <Step2
+        onSubmit={() => console.log("Step2 onSubmit")}
+        validationSchema={Yup.object({ name: Yup.string().required() })}
+      />
+      <Step3
+        onSubmit={() => console.log("Step3 onSubmit")}
+        validationSchema={Yup.object({
+          contactNumber: Yup.string().required(),
+          email: Yup.string().email(),
+        })}
+      />
+      <Step4
+        onSubmit={() => console.log("Step4 onSubmit")}
+        validationSchema={Yup.object({
+          address: Yup.string().required(),
+        })}
+      />
+      <Step5
+        onSubmit={() => console.log("Step5 onSubmit")}
+        validationSchema={Yup.object({
+          propertyTypes: Yup.array().of(Yup.string()).required(),
+        })}
+      />
+      <Step6
+        onSubmit={() => console.log("Step6 onSubmit")}
+        validationSchema={Yup.object({
+          budget: Yup.string().required(),
+        })}
+      />
+      <Step7
+        onSubmit={() => console.log("Step7 onSubmit")}
+        validationSchema={Yup.object({
+          purchaseType: Yup.string().required(),
+          reason: Yup.string().required(),
+        })}
+      />
+      <Step8
+        onSubmit={() => console.log("Step8 onSubmit")}
+        validationSchema={Yup.object({
+          progress: Yup.string().required(),
+        })}
+      />
+      <Step9
+        onSubmit={() => console.log("Step9 onSubmit")}
+        validationSchema={Yup.object({
+          hasAgent: Yup.boolean().required(),
+        })}
+      />
+      {isSigningUp && (
+        <Step10
+          onSubmit={() => console.log("Step10 onSubmit")}
+          validationSchema={Yup.object({
+            password: Yup.string().required(),
+            confirmPassword: Yup.string().oneOf(
+              [Yup.ref("password"), null],
+              "Passwords must match"
+            ),
+          })}
+        />
+      )}
+      <Step11
+        onSubmit={(values) => {
+          console.log(values);
+          history.push("/");
+        }}
+        validationSchema={Yup.object({})}
+      />
+    </Wizard>
   );
 };
 

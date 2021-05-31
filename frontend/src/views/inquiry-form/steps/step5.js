@@ -38,7 +38,7 @@ const propertyChoices = [
   },
 ];
 
-const Step5 = ({ isSubmitting, values, previous, errors, touched }) => {
+const Step5 = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
       <h1>Preferred Type of Property</h1>
@@ -86,7 +86,7 @@ const Step5 = ({ isSubmitting, values, previous, errors, touched }) => {
         <FormFrame>
           <SignupOrangeButton
             disabled={
-              isSubmitting || !touched.propertyTypes || errors.propertyTypes
+              isSubmitting || values.propertyTypes == "" || errors.propertyTypes
             }
             type="submit"
           >

@@ -6,13 +6,7 @@ export const HeroFrame = styled.section`
   height: 550px;
   width: 100%;
   padding-top: 10em;
-  background: linear-gradient(
-      180deg,
-      #f9f9f9 4.69%,
-      rgba(254, 254, 254, 0.226848) 78.38%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    url(${({ heroBg }) => heroBg});
+  background: url(${({ heroBg }) => heroBg});
   background-size: cover;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {

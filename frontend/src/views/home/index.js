@@ -79,7 +79,7 @@ const Home = (props) => {
 
   return (
     <Layout>
-      <Navbar />
+      <Navbar dark />
       <HeroFrame heroBg={heroBg} showAdvanced={showAdvanced}>
         <HomeSearch
           showAdvanced={showAdvanced}

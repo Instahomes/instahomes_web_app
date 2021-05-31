@@ -11,7 +11,7 @@ import {
 } from "../styles";
 import { Field } from "formik";
 
-const Step3 = ({ isSubmitting, values, previous, errors, touched }) => {
+const Step3 = ({ isSubmitting, values, previous, errors }) => {
   const [showEmail, setShowEmail] = useState(false);
 
   return (
@@ -42,7 +42,7 @@ const Step3 = ({ isSubmitting, values, previous, errors, touched }) => {
           )}
           <SignupOrangeButton
             disabled={
-              isSubmitting || !touched.contactNumber || errors.contactNumber
+              isSubmitting || values.contactNumber == "" || errors.contactNumber
             }
             type="submit"
           >

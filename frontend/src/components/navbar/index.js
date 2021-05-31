@@ -57,7 +57,7 @@ const Navbar = ({ theme, dark }) => {
   return (
     <NavbarFrame>
       <Link to="/">
-        <img src={logoDark} alt="Instahomes" />
+        <img src={dark ? logoDark : logo} alt="Instahomes" />
       </Link>
       {isMediumScreen ? (
         <Menu styles={finalMenuStyles} right>

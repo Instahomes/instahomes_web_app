@@ -10,7 +10,7 @@ import {
 import { Field } from "formik";
 import security from "../../../assets/form/security.svg";
 
-const Step10 = ({ isSubmitting, values, previous, touched, errors }) => {
+const Step10 = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
       <img src={security} alt="Security" />
@@ -38,8 +38,8 @@ const Step10 = ({ isSubmitting, values, previous, touched, errors }) => {
           <SignupOrangeButton
             disabled={
               isSubmitting ||
-              !touched.password ||
-              !touched.confirmPassword ||
+              values.password == "" ||
+              values.confirmPassword == "" ||
               errors.password ||
               errors.confirmPassword
             }
