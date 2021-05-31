@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  Frame,
+  Content,
   FormDiv,
   FormFrame,
   SignupOrangeButton,
@@ -33,37 +35,41 @@ const Step9 = ({
   touched,
 }) => {
   return (
-    <React.Fragment>
-      <h1>Do you already have an agent?</h1>
-      <p>Please let us know if you have an agent by choosing Yes or No below</p>
-      <FormDiv style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-        <FormErrorMessage component="span" name="hasAgent" />
-        <ChoiceGroup>
-          {hasAgentChoices.map((choice) => (
-            <Choice
-              key={choice.label}
-              onClick={() => setFieldValue("hasAgent", choice.value)}
-              isChecked={values.hasAgent == choice.value}
+    <Frame>
+      <Content>
+        <h1>Do you already have an agent?</h1>
+        <p>
+          Please let us know if you have an agent by choosing Yes or No below
+        </p>
+        <FormDiv style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+          <FormErrorMessage component="span" name="hasAgent" />
+          <ChoiceGroup>
+            {hasAgentChoices.map((choice) => (
+              <Choice
+                key={choice.label}
+                onClick={() => setFieldValue("hasAgent", choice.value)}
+                isChecked={values.hasAgent == choice.value}
+              >
+                {choice.label}
+              </Choice>
+            ))}
+          </ChoiceGroup>
+        </FormDiv>
+        <FormDiv>
+          <FormFrame>
+            <SignupOrangeButton
+              disabled={isSubmitting || errors.hasAgent}
+              type="submit"
             >
-              {choice.label}
-            </Choice>
-          ))}
-        </ChoiceGroup>
-      </FormDiv>
-      <FormDiv>
-        <FormFrame>
-          <SignupOrangeButton
-            disabled={isSubmitting || errors.hasAgent}
-            type="submit"
-          >
-            NEXT PAGE
-          </SignupOrangeButton>
-          <SecondaryButton onClick={() => previous(values)}>
-            GO BACK
-          </SecondaryButton>
-        </FormFrame>
-      </FormDiv>
-    </React.Fragment>
+              NEXT PAGE
+            </SignupOrangeButton>
+            <SecondaryButton onClick={() => previous(values)}>
+              GO BACK
+            </SecondaryButton>
+          </FormFrame>
+        </FormDiv>
+      </Content>
+    </Frame>
   );
 };
 
