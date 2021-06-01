@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
 import Listing from "./views/listing";
 import Search from "./views/search";
+import Signup from "./views/signup";
 import Wishlist from "./views/wishlist";
 import Development from "./views/development";
 import Developer from "./views/developer";
@@ -18,6 +19,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Switch>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
             <Route exact path="/search">
               <Search />
             </Route>
