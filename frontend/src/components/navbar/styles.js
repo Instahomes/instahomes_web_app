@@ -13,24 +13,6 @@ export const NavbarFrame = styled.nav`
   z-index: 10000;
 `;
 
-// export const NavbarLogo = styled.div`
-//   height: 100%;
-
-//   a {
-//     display: flex;
-//     align-items: center;
-//     height: 100%;
-//   }
-
-//   img {
-//     height: 40%;
-//   }
-// `;
-
-// export const NavbarLogo = styled.img`
-//   height: 40%;
-// `;
-
 export const NavbarSpan = styled.a`
   color: ${({ theme, dark }) =>
     dark ? theme.colors.softWhite : theme.colors.darkBlue};
@@ -40,19 +22,24 @@ export const NavbarSpan = styled.a`
 
   &.bm-item {
     display: inline-block;
-    color: ${({ theme }) => theme.colors.mutedBlue};
+    color: ${({ theme }) => theme.colors.darkBlue};
     padding: 1em 0;
-  },
+    text-align: center;
+  }
+
+  .btn-menu {
+    font-size: 14px !important;
+  }
 `;
 
-export const menuStyles = (theme) => ({
+export const menuStyles = (theme, dark) => ({
   bmBurgerButton: {
     position: "sticky",
     width: "20px",
     height: "15px",
   },
   bmBurgerBars: {
-    background: theme.colors.mutedBlue,
+    background: dark ? theme.colors.softWhite : theme.colors.mutedBlue,
   },
   bmBurgerBarsHover: {
     background: "#a90000",
@@ -70,7 +57,7 @@ export const menuStyles = (theme) => ({
     height: "100%",
   },
   bmMenu: {
-    background: theme.colors.darkBlue,
+    background: "#fafafa",
     padding: "2.5em 1.5em 0",
     fontSize: "1.15em",
   },
@@ -78,7 +65,8 @@ export const menuStyles = (theme) => ({
     fill: "#373a47",
   },
   bmItemList: {
-    color: "#b8b7ad",
+    display: "flex",
+    flexDirection: "column",
     padding: "0.8em",
   },
   bmOverlay: {

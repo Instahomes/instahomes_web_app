@@ -9,32 +9,35 @@ import { Link } from "react-router-dom";
 
 const NavbarItems = ({ isMobile, className, dark }) => (
   <React.Fragment>
-    <GrayInput
-      style={{ flex: 1, margin: "0 2.5em" }}
-      scale={0.8}
-      placeholder="Search for location or landmark"
-      name="query"
-    />
-    <NavbarSpan dark={dark} className={className}>
-      BLOG
-    </NavbarSpan>
-    <NavbarSpan dark={dark} className={className}>
-      FEATURED LISTINGS
-    </NavbarSpan>
-    {isMobile ? (
+    {!isMobile && (
+      <GrayInput
+        style={{ flex: 1, margin: "0 2.5em" }}
+        scale={0.8}
+        placeholder="Search for location or landmark"
+        name="query"
+      />
+    )}
+    {isMobile && (
       <NavbarSpan dark={dark} className={className}>
-        SIGNUP FOR BETA
+        HOME
       </NavbarSpan>
-    ) : (
-      <OutlineButton dark={dark} className={`btn-rubik ${className}`}>
+    )}
+    <NavbarSpan dark={dark} className={className}>
+      DISCOVER LISTINGS
+    </NavbarSpan>
+    <NavbarSpan dark={dark} className={className}>
+      WISHLIST
+    </NavbarSpan>
+    <NavbarSpan dark={dark} className={className}>
+      <OutlineButton dark={dark} className={`btn-menu btn-rubik ${className}`}>
         SIGNUP FOR BETA
       </OutlineButton>
-    )}
+    </NavbarSpan>
   </React.Fragment>
 );
 
 const Navbar = ({ theme, dark }) => {
-  const finalMenuStyles = menuStyles(theme);
+  const finalMenuStyles = menuStyles(theme, dark);
   const [width, setWidth] = useState(window.innerWidth);
   const isMediumScreen =
     width <=
