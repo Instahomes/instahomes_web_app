@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./views/home";
 import Listing from "./views/listing";
 import Search from "./views/search";
+import Wishlist from "./views/wishlist";
 import Development from "./views/development";
 import Developer from "./views/developer";
 import InquiryForm from "./views/inquiry-form";
@@ -19,6 +20,9 @@ function App() {
           <Switch>
             <Route exact path="/search">
               <Search />
+            </Route>
+            <Route exact path="/wishlist">
+              <Wishlist />
             </Route>
             <Route exact path="/listing/:id">
               <Listing />

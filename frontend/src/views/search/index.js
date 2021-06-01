@@ -1,24 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
-import ListingCard from "../../components/listing-card";
-import house from "../../assets/card/sample_house.png";
 import { Formik } from "formik";
 import { useHistory, useLocation } from "react-router-dom";
+import ListingGrid from "../../components/listing-grid";
 
-import {
-  SearchContainer,
-  SearchFields,
-  SearchButton,
-  ListingsFilters,
-  ListingGrid,
-} from "./styles";
+import { SearchContainer, SearchFields, SearchButton } from "./styles";
 
 import {
   WhiteInput,
   GrayInput,
-  LightInput,
-  OutlineButton,
   AdvancedSettings,
 } from "../../components/elements";
 
@@ -227,44 +218,8 @@ const Search = (props) => {
           setShowAdvanced={setShowAdvanced}
           showAdvanced={showAdvanced}
         />
-        <ListingsFilters>
-          <span class="listing-count">
-            Showing{" "}
-            <span className="count-emphasis">{sampleListings.length}</span> out
-            of <span className="count-emphasis">{sampleListings.length}</span>{" "}
-            listings
-          </span>
-          <LightInput scale={0.8} as="select" className="listing-sort">
-            <option value="">Sort by Price (highest first)</option>
-            <option value="">Sort by Price (lowest first)</option>
-            <option value="">Sort by Size (highest first)</option>
-            <option value="">Sort by Size (lowest first)</option>
-            <option value="">Sort by Newest</option>
-          </LightInput>
-          {/* <OutlineButton
-            className="remove-on-mobile btn-rubik"
-            scale={0.8}
-            style={{ alignSelf: "stretch", fontWeight: 400 }}
-          >
-            View with map <span id="beta">BETA</span>
-          </OutlineButton> */}
-        </ListingsFilters>
-        <ListingGrid>
-          {sampleListings.map((listing) => (
-            <ListingCard
-              id={listing.id}
-              key={listing.name}
-              image={house}
-              name={listing.name}
-              size={listing.size}
-              price={listing.price}
-              address={listing.address}
-              bedrooms={listing.bedrooms}
-              bathrooms={listing.bathrooms}
-              isVerified={listing.isVerified}
-            />
-          ))}
-        </ListingGrid>
+        <div style={{ marginBottom: "2em" }}></div>
+        <ListingGrid listings={sampleListings} />
       </SearchContainer>
     </Layout>
   );
