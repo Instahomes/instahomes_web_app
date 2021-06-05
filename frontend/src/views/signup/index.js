@@ -11,6 +11,9 @@ import {
   LoginButton,
 } from "./styles";
 import heroBg from "../../assets/home/hero.jpeg";
+import person from "../../assets/signup/person.svg";
+import email from "../../assets/signup/email.svg";
+import lock from "../../assets/signup/lock.svg";
 import { Formik, Form } from "formik";
 
 const Signup = (props) => {
@@ -55,6 +58,7 @@ const Signup = (props) => {
                     information to inquire for multiple properties easily.
                   </p>
                   <SignupInput
+                    icon={person}
                     scale={0.9}
                     placeholder="Full Name"
                     name="name"
@@ -63,6 +67,7 @@ const Signup = (props) => {
                     value={values.name}
                   />
                   <SignupInput
+                    icon={email}
                     scale={0.9}
                     placeholder="Email Address"
                     name="email"
@@ -71,6 +76,7 @@ const Signup = (props) => {
                     value={values.email}
                   />
                   <SignupInput
+                    icon={lock}
                     scale={0.9}
                     type="password"
                     placeholder="Password"

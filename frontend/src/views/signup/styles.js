@@ -60,12 +60,22 @@ export const SignupForm = styled.div`
 `;
 
 export const SignupInput = styled(LightInput)`
-  background: #f3f4f4;
+  background: url(${({ icon }) => icon}) no-repeat scroll 13px 14px, #f3f4f4;
+  // background: #F3F4F4;
+  padding-left: 40px;
   border: 1px solid #bdbdbd;
   box-sizing: border-box;
   border-radius: 2px;
   width: 100%;
   margin-bottom: 1em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    background: url(${({ icon }) => icon}) no-repeat scroll 13px 13px, #f3f4f4;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    background: url(${({ icon }) => icon}) no-repeat scroll 13px 10px, #f3f4f4;
+  }
 `;
 
 export const SignupButtonsDiv = styled.div`
