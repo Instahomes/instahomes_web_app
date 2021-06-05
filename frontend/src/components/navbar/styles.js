@@ -10,7 +10,7 @@ export const NavbarFrame = styled.nav`
   height: 48px;
   padding: 0.8rem var(--main-padding-x);
   margin-top: 1rem;
-  z-index: 10000;
+  z-index: 100;
 `;
 
 export const NavbarSpan = styled.a`

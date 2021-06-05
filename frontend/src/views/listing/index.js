@@ -21,6 +21,7 @@ import area from "../../assets/product/area.svg";
 import bath from "../../assets/product/bath.svg";
 import bed from "../../assets/product/bed.svg";
 import money from "../../assets/product/money.svg";
+import { useLightbox } from "simple-react-lightbox";
 import {
   ListingContainer,
   ListingHeadContainer,
@@ -47,9 +48,11 @@ import {
   MetadataProperty,
   ProductPriceLine,
 } from "./styles";
+import { SRLWrapper } from "simple-react-lightbox";
 
 const Listing = (props) => {
   const [active, setActive] = useState("overview");
+  const { openLightbox, closeLightbox } = useLightbox();
 
   return (
     <Layout>
@@ -57,6 +60,23 @@ const Listing = (props) => {
       <ListingContainer>
         {/* <ListingProductSearch /> */}
         <ListingHeadContainer>
+          <SRLWrapper>
+            <div style={{ display: "none" }}>
+              <img src={imageMain} />
+            </div>
+            <div style={{ display: "none" }}>
+              <img src={image1} />
+            </div>
+            <div style={{ display: "none" }}>
+              <img src={image2} />
+            </div>
+            <div style={{ display: "none" }}>
+              <img src={image3} />
+            </div>
+            <div style={{ display: "none" }}>
+              <img src={image4} />
+            </div>
+          </SRLWrapper>
           <ListingHeader>
             <div>
               <ListingLine>
@@ -75,11 +95,11 @@ const Listing = (props) => {
             </HeaderButtons>
           </ListingHeader>
           <ImageContainer>
-            <Image image={imageMain} />
-            <Image image={image1} />
-            <Image image={image2} />
-            <Image image={image3} />
-            <Image image={image4} />
+            <Image image={imageMain} onClick={() => openLightbox(0)} />
+            <Image image={image1} onClick={() => openLightbox(1)} />
+            <Image image={image2} onClick={() => openLightbox(2)} />
+            <Image image={image3} onClick={() => openLightbox(3)} />
+            <Image image={image4} onClick={() => openLightbox(4)} />
             <MoreImages>+10 more photos</MoreImages>
           </ImageContainer>
         </ListingHeadContainer>
