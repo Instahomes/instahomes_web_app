@@ -97,6 +97,7 @@ export const InquireButton = styled(OrangeButton)`
 `;
 
 export const Image = styled.div`
+  cursor: pointer;
   background: url(${({ image }) => image});
   background-size: cover;
   background-repeat: no-repeat;

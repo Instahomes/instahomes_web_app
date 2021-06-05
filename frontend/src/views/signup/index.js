@@ -15,8 +15,22 @@ import person from "../../assets/signup/person.svg";
 import email from "../../assets/signup/email.svg";
 import lock from "../../assets/signup/lock.svg";
 import { Formik, Form } from "formik";
+import { useHistory } from "react-router-dom";
+import { login } from "../../services/auth";
 
 const Signup = (props) => {
+  const [message, setMessage] = useState("");
+  const history = useHistory();
+
+  const handleLogin = (email, password) => {
+    login(
+      email,
+      password,
+      () => history.push("/"),
+      () => setMessage("Wrong credentials!")
+    );
+  };
+
   return (
     <Layout>
       <Navbar dark />
@@ -30,15 +44,8 @@ const Signup = (props) => {
               password: "",
             }}
             onSubmit={(values, { setSubmitting }) => {
-              const params = Object.entries(values)
-                .filter(([key, value]) => !!value)
-                .map(([key, value]) => `${key}=${value}`)
-                .join("&");
-
-              // history.push({
-              //   pathname: "/search",
-              //   search: "?" + params,
-              // });
+              const { email, password } = values;
+              handleLogin(email, password);
             }}
           >
             {({
@@ -52,6 +59,7 @@ const Signup = (props) => {
             }) => (
               <Form>
                 <SignupForm>
+                  {message && <span>{message}</span>}
                   <h2>Save your dream listings, Inquire with just a click</h2>
                   <p>
                     Sign up to add to your wishlist and save your contact
@@ -91,7 +99,7 @@ const Signup = (props) => {
                   </label>
                   <SignupButtonsDiv>
                     <SignupButton>SIGN UP</SignupButton>
-                    <LoginButton>LOG IN</LoginButton>
+                    <LoginButton type="submit">LOG IN</LoginButton>
                   </SignupButtonsDiv>
                 </SignupForm>
               </Form>

@@ -41,7 +41,7 @@ const ListingGrid = ({ listings }) => {
   return (
     <React.Fragment>
       <ListingsFilters>
-        <span class="listing-count">
+        <span className="listing-count">
           Showing <span className="count-emphasis">{listings.length}</span> out
           of <span className="count-emphasis">{listings.length}</span> listings
         </span>

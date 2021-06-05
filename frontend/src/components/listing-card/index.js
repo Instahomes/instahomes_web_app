@@ -44,7 +44,7 @@ const Card = ({
         <ListingLine>
           <ListingSize>{size}&nbsp;sqm</ListingSize>
           <ListingPiece bold marginLeft="10px">
-            Starts at <span class="orange bold">PHP&nbsp;{price}</span>
+            Starts at <span className="orange bold">PHP&nbsp;{price}</span>
           </ListingPiece>
         </ListingLine>
         <ListingLine>

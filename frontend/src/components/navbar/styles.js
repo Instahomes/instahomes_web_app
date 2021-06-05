@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const NavbarFrame = styled.nav`
   box-sizing: border-box;
@@ -13,7 +14,9 @@ export const NavbarFrame = styled.nav`
   z-index: 100;
 `;
 
-export const NavbarSpan = styled.a`
+export const NavbarSpan = styled(Link)`
+  text-decoration: none;
+
   color: ${({ theme, dark }) =>
     dark ? theme.colors.softWhite : theme.colors.darkBlue};
   margin: 0 2em;
@@ -27,8 +30,24 @@ export const NavbarSpan = styled.a`
     text-align: center;
   }
 
-  .btn-menu {
-    font-size: 14px !important;
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    .btn-menu {
+      font-size: 14px !important;
+    }
+  }
+`;
+
+export const AccountDropdown = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  span {
+    color: ${({ theme, dark }) =>
+      dark ? theme.colors.softWhite : theme.colors.darkBlue};
+    font-size: 16px;
+    line-height: 1px;
+    font-weight: 500;
   }
 `;
 
