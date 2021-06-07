@@ -14,22 +14,41 @@ import { withTheme } from "styled-components";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../../services/auth";
 import AccountDropdown from "../../components/account-dropdown";
+import { useHistory } from "react-router-dom";
 
-const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
-  <React.Fragment>
-    {!isMobile && (
+const NavbarSearch = ({ isHome, dark }) => {
+  const history = useHistory();
+  const [query, setQuery] = useState("");
+
+  return (
+    <form
+      style={{
+        flex: 1,
+        margin: "0 2.5em",
+      }}
+      onSubmit={() => {
+        history.push({
+          pathname: "/search",
+          search: "?query=" + query,
+        });
+      }}
+    >
       <GrayInput
-        style={{
-          flex: 1,
-          margin: "0 2.5em",
-          opacity: isHome ? 0 : 1,
-        }}
+        style={{ width: "100%", display: isHome ? "none" : "block" }}
         scale={0.8}
         placeholder="Search for location or landmark"
         name="query"
+        onChange={(e) => setQuery(e.target.value)}
+        value={query}
         dark={dark}
       />
-    )}
+    </form>
+  );
+};
+
+const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
+  <React.Fragment>
+    {!isMobile && <NavbarSearch isHome={isHome} dark={dark} />}
     <MenuItems>
       {isMobile && (
         <NavbarSpan dark={dark} className={className}>
@@ -68,6 +87,7 @@ const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
 );
 
 const Navbar = ({ theme, dark, isHome }) => {
+  const history = useHistory();
   const finalMenuStyles = menuStyles(theme, dark);
   const isLoggedIn = isAuthenticated();
   const [width, setWidth] = useState(window.innerWidth);
@@ -96,11 +116,21 @@ const Navbar = ({ theme, dark, isHome }) => {
       </Link>
       {isMediumScreen ? (
         <Menu styles={finalMenuStyles} right>
-          <NavbarItems isLoggedIn={isLoggedIn} isHome={isHome} isMobile />
+          <NavbarItems
+            history={history}
+            isLoggedIn={isLoggedIn}
+            isHome={isHome}
+            isMobile
+          />
         </Menu>
       ) : (
         <React.Fragment>
-          <NavbarItems isLoggedIn={isLoggedIn} isHome={isHome} dark={dark} />
+          <NavbarItems
+            history={history}
+            isLoggedIn={isLoggedIn}
+            isHome={isHome}
+            dark={dark}
+          />
         </React.Fragment>
       )}
     </NavbarFrame>

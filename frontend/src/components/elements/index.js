@@ -41,8 +41,8 @@ export const GrayInput = styled(LightInput)`
   background: ${({ theme }) => theme.colors.lightGray}${({ dark }) => dark && "26"};
   border: 1px solid
     ${({ theme, dark }) => (dark ? "#ecedef42" : theme.colors.mutedGray)};
-  color: ${({ theme, isDefault }) =>
-    isDefault ? theme.colors.whiteInputColor : theme.colors.darkHeader};
+  color: ${({ theme, isDefault, dark }) =>
+    isDefault || dark ? theme.colors.whiteInputColor : theme.colors.darkHeader};
   font-size: ${({ scale }) => (scale ? `calc(1em * ${scale})` : "1em")};
   margin-bottom: ${({ marginBottom }) => marginBottom};
 
