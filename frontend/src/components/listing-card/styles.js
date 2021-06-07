@@ -25,6 +25,13 @@ export const DeveloperLogo = styled.img`
   top: 10px;
 `;
 
+export const WishlistHeart = styled.img`
+  cursor: pointer;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+`;
+
 export const ListingImage = styled.img`
   object-fit: cover;
   width: 100%;

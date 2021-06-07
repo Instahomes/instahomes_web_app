@@ -3,6 +3,8 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "./globalStyles";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ProtectedRoute from "./misc/protectedRoutes";
+import { isAuthenticated } from "./services/auth";
 import Home from "./views/home";
 import Listing from "./views/listing";
 import Search from "./views/search";
@@ -19,14 +21,18 @@ function App() {
       <ThemeProvider theme={theme}>
         <Router>
           <Switch>
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated()}
+              exact
+              path="/wishlist"
+            >
+              <Wishlist />
+            </ProtectedRoute>
             <Route exact path="/signup">
               <Signup />
             </Route>
             <Route exact path="/search">
               <Search />
-            </Route>
-            <Route exact path="/wishlist">
-              <Wishlist />
             </Route>
             <Route exact path="/listing/:id">
               <Listing />

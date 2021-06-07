@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { NavbarFrame, NavbarSpan, MenuItems, menuStyles } from "./styles";
+import {
+  NavbarFrame,
+  NavbarSpan,
+  MenuItems,
+  menuStyles,
+  WishlistNumber,
+} from "./styles";
 import { OutlineButton, GrayInput } from "../elements";
 import logo from "../../assets/navbar/logo.svg";
 import logoDark from "../../assets/navbar/logoDark.svg";
@@ -39,8 +45,8 @@ const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
         DISCOVER LISTINGS
       </NavbarSpan>
       {isLoggedIn && (
-        <NavbarSpan dark={dark} className={className}>
-          WISHLIST
+        <NavbarSpan dark={dark} className={className} to="/wishlist">
+          WISHLIST&nbsp;&nbsp;<WishlistNumber>2</WishlistNumber>
         </NavbarSpan>
       )}
       {isLoggedIn ? (

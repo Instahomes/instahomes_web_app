@@ -31,7 +31,6 @@ export const NavbarSpan = styled(Link)`
 
   color: ${({ theme, dark }) =>
     dark ? theme.colors.softWhite : theme.colors.darkBlue};
-  // margin: 0 2em;
   font-size: 16px;
   font-weight: 500;
 
@@ -47,6 +46,14 @@ export const NavbarSpan = styled(Link)`
       font-size: 14px !important;
     }
   }
+`;
+
+export const WishlistNumber = styled.span`
+  background: ${({ theme }) => theme.colors.orange};
+  border-radius: 50%;
+  color: ${({ theme }) => theme.colors.mainBg};
+  padding: 0 5px;
+  font-size: 16px;
 `;
 
 export const menuStyles = (theme, dark) => ({

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import map from "../../assets/card/map.svg";
 import bed from "../../assets/card/bed.svg";
 import bath from "../../assets/card/bath.svg";
 import check from "../../assets/card/check.svg";
 import logo from "../../assets/card/alveo.png";
+import heartEmpty from "../../assets/card/heartEmpty.svg";
+import heartFull from "../../assets/card/heartFull.svg";
 import {
   ListingCard,
+  WishlistHeart,
   DeveloperLogo,
   ListingImage,
   ListingInfo,
@@ -29,11 +32,19 @@ const Card = ({
   bedrooms,
   bathrooms,
   isVerified,
+  isOnWishlist,
 }) => {
+  const [isHeartFilled, setIsHeartFilled] = useState(isOnWishlist);
+
   return (
     <ListingCard>
       <ListingImage src={image} alt="House" />
       {developer == "Alveo" && <DeveloperLogo src={logo} alt="Alveo" />}
+      <WishlistHeart
+        src={isHeartFilled ? heartFull : heartEmpty}
+        alt="Heart"
+        onClick={() => setIsHeartFilled(!isHeartFilled)}
+      />
       <ListingInfo>
         <Link to={`/listing/${id}`}>
           <ListingName>

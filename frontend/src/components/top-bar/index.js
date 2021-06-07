@@ -1,4 +1,4 @@
-import phoneIcon from "../../assets/navbar/phone.svg";
+import emailIcon from "../../assets/navbar/email.svg";
 import {
   TopBarFrame,
   TopBarSpan,
@@ -9,10 +9,10 @@ import {
 const TopBar = () => (
   <TopBarFrame>
     <TopBarPhone>
-      <TopBarPhoneIcon src={phoneIcon} />
-      <TopBarSpan>243-2349/243-1765</TopBarSpan>
+      <TopBarPhoneIcon src={emailIcon} />
+      <TopBarSpan>instahomes.ph@gmail.com</TopBarSpan>
     </TopBarPhone>
-    <TopBarSpan nodisplay>BULK SALE</TopBarSpan>
+    <TopBarSpan nodisplay>COMMERCIAL LEASING</TopBarSpan>
     <TopBarSpan noRightPadding>CONTACT SUPPORT</TopBarSpan>
   </TopBarFrame>
 );
