@@ -8,7 +8,6 @@ import {
   SignupInput,
   SignupButtonsDiv,
   SignupButton,
-  LoginButton,
 } from "./styles";
 import heroBg from "../../assets/home/hero.jpeg";
 import person from "../../assets/signup/person.svg";
@@ -19,7 +18,7 @@ import { useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Helmet } from "react-helmet";
 
-const Signup = (props) => {
+const Signup = ({ login }) => {
   const [message, setMessage] = useState("");
   const history = useHistory();
 
@@ -36,7 +35,7 @@ const Signup = (props) => {
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Instahomes | Signup</title>
+        <title>Instahomes | {login ? "Login" : "Signup"}</title>
         <meta name="description" content=""></meta>
       </Helmet>
       <Navbar dark isHome />
@@ -66,20 +65,28 @@ const Signup = (props) => {
               <Form>
                 <SignupForm>
                   {message && <span>{message}</span>}
-                  <h2>Save your dream listings, Inquire with just a click</h2>
-                  <p>
-                    Sign up to add to your wishlist and save your contact
-                    information to inquire for multiple properties easily.
-                  </p>
-                  <SignupInput
-                    icon={person}
-                    scale={0.9}
-                    placeholder="Full Name"
-                    name="name"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.name}
-                  />
+                  <h2>
+                    {login
+                      ? "Log into your account"
+                      : "Save your dream listings, Inquire with just a click"}
+                  </h2>
+                  {!login && (
+                    <p>
+                      Sign up to add to your wishlist and save your contact
+                      information to inquire for multiple properties easily.
+                    </p>
+                  )}
+                  {!login && (
+                    <SignupInput
+                      icon={person}
+                      scale={0.9}
+                      placeholder="Full Name"
+                      name="name"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.name}
+                    />
+                  )}
                   <SignupInput
                     icon={email}
                     scale={0.9}
@@ -99,14 +106,30 @@ const Signup = (props) => {
                     onBlur={handleBlur}
                     value={values.password}
                   />
-                  <label className="terms-checkbox">
-                    <input type="checkbox" />I agree to the Terms & Conditions
-                    and Privacy Policy
-                  </label>
+                  {!login && (
+                    <label className="terms-checkbox small-span">
+                      <input type="checkbox" />I agree to the Terms & Conditions
+                      and Privacy Policy
+                    </label>
+                  )}
                   <SignupButtonsDiv>
-                    <SignupButton>SIGN UP</SignupButton>
-                    <LoginButton type="submit">LOG IN</LoginButton>
+                    <SignupButton>{login ? "LOG IN" : "SIGN UP"}</SignupButton>
                   </SignupButtonsDiv>
+                  {login ? (
+                    <span
+                      className="small-span"
+                      onClick={() => history.push("/signup")}
+                    >
+                      Don't have an account? <strong>Sign up!</strong>
+                    </span>
+                  ) : (
+                    <span
+                      className="small-span"
+                      onClick={() => history.push("/login")}
+                    >
+                      Have an account? <strong>Log in!</strong>
+                    </span>
+                  )}
                 </SignupForm>
               </Form>
             )}

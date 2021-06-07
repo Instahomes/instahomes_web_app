@@ -1,9 +1,5 @@
 import styled from "styled-components";
-import {
-  LightInput,
-  OrangeButton,
-  OutlineButton,
-} from "../../components/elements";
+import { LightInput, OrangeButton } from "../../components/elements";
 
 export const HeroFrame = styled.section`
   width: 100%;
@@ -41,15 +37,20 @@ export const SignupForm = styled.div`
 
   h2 {
     color: ${({ theme }) => theme.colors.darkBlue};
+    margin-bottom: 0.5em;
   }
 
-  p,
-  label {
+  p {
     color: ${({ theme }) => theme.colors.darkHeader};
   }
 
-  .terms-checkbox {
+  .small-span {
     font-size: 0.9em;
+    color: ${({ theme }) => theme.colors.darkHeader};
+    cursor: pointer;
+  }
+
+  .terms-checkbox {
     display: flex;
     align-items: center;
 
@@ -82,14 +83,10 @@ export const SignupButtonsDiv = styled.div`
   display: flex;
   gap: 1em;
   margin-top: 1.5em;
+  margin-bottom: 1em;
 `;
 
 export const SignupButton = styled(OrangeButton)`
-  font-size: 1em;
-  padding: 0.5em 2em;
-`;
-
-export const LoginButton = styled(OutlineButton)`
   font-size: 1em;
   padding: 0.5em 2em;
 `;
