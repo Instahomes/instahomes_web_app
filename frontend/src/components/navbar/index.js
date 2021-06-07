@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavbarFrame, NavbarSpan, menuStyles } from "./styles";
+import { NavbarFrame, NavbarSpan, MenuItems, menuStyles } from "./styles";
 import { OutlineButton, GrayInput } from "../elements";
 import logo from "../../assets/navbar/logo.svg";
 import logoDark from "../../assets/navbar/logoDark.svg";
@@ -24,38 +24,40 @@ const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
         dark={dark}
       />
     )}
-    {isMobile && (
-      <NavbarSpan dark={dark} className={className}>
-        HOME
-      </NavbarSpan>
-    )}
-    {!isLoggedIn && (
+    <MenuItems>
+      {isMobile && (
+        <NavbarSpan dark={dark} className={className}>
+          HOME
+        </NavbarSpan>
+      )}
+      {!isLoggedIn && (
+        <NavbarSpan dark={dark} className={className}>
+          BLOG
+        </NavbarSpan>
+      )}
       <NavbarSpan dark={dark} className={className}>
         DISCOVER LISTINGS
       </NavbarSpan>
-    )}
-    <NavbarSpan dark={dark} className={className}>
-      DISCOVER LISTINGS
-    </NavbarSpan>
-    {isLoggedIn && (
-      <NavbarSpan dark={dark} className={className}>
-        WISHLIST
-      </NavbarSpan>
-    )}
-    {isLoggedIn ? (
-      <NavbarSpan dark={dark} className={className}>
-        <AccountDropdown dark={dark}></AccountDropdown>
-      </NavbarSpan>
-    ) : (
-      <NavbarSpan dark={dark} className={className} to="/signup">
-        <OutlineButton
-          dark={dark}
-          className={`btn-menu btn-rubik ${className}`}
-        >
-          SIGNUP FOR BETA
-        </OutlineButton>
-      </NavbarSpan>
-    )}
+      {isLoggedIn && (
+        <NavbarSpan dark={dark} className={className}>
+          WISHLIST
+        </NavbarSpan>
+      )}
+      {isLoggedIn ? (
+        <NavbarSpan dark={dark} className={className}>
+          <AccountDropdown dark={dark}></AccountDropdown>
+        </NavbarSpan>
+      ) : (
+        <NavbarSpan dark={dark} className={className} to="/signup">
+          <OutlineButton
+            dark={dark}
+            className={`btn-menu btn-rubik ${className}`}
+          >
+            SIGNUP FOR BETA
+          </OutlineButton>
+        </NavbarSpan>
+      )}
+    </MenuItems>
   </React.Fragment>
 );
 

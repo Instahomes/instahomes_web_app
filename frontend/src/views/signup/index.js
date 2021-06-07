@@ -33,7 +33,7 @@ const Signup = (props) => {
 
   return (
     <Layout>
-      <Navbar dark />
+      <Navbar dark isHome />
       <HeroFrame heroBg={heroBg}>
         <HeroContent>
           <div id="empty-div"></div>

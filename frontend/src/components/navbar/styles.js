@@ -12,6 +12,18 @@ export const NavbarFrame = styled.nav`
   padding: 0.8rem var(--main-padding-x);
   margin-top: 1rem;
   z-index: 100;
+  gap: 2em;
+`;
+
+export const MenuItems = styled.div`
+  display: flex;
+  gap: 2.5em;
+  align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column;
+    gap: 0;
+  }
 `;
 
 export const NavbarSpan = styled(Link)`
@@ -19,7 +31,7 @@ export const NavbarSpan = styled(Link)`
 
   color: ${({ theme, dark }) =>
     dark ? theme.colors.softWhite : theme.colors.darkBlue};
-  margin: 0 2em;
+  // margin: 0 2em;
   font-size: 16px;
   font-weight: 500;
 

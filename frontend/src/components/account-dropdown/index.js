@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { clear } from "../../services/auth";
 
 export const AccountDropdownStyle = styled.div`
   position: relative;
@@ -41,6 +42,11 @@ export const DropdownDiv = styled.div`
 
 const AccountDropdown = ({ dark }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleLogout = () => {
+    clear();
+    window.location.reload();
+  };
 
   return (
     <React.Fragment>
@@ -88,7 +94,7 @@ const AccountDropdown = ({ dark }) => {
           <DropdownDiv>
             <ul>
               <li>Account Settings</li>
-              <li>Log out</li>
+              <li onClick={handleLogout}>Log out</li>
             </ul>
           </DropdownDiv>
         )}
