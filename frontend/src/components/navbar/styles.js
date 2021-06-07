@@ -37,20 +37,6 @@ export const NavbarSpan = styled(Link)`
   }
 `;
 
-export const AccountDropdown = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 7px;
-
-  span {
-    color: ${({ theme, dark }) =>
-      dark ? theme.colors.softWhite : theme.colors.darkBlue};
-    font-size: 16px;
-    line-height: 1px;
-    font-weight: 500;
-  }
-`;
-
 export const menuStyles = (theme, dark) => ({
   bmBurgerButton: {
     position: "sticky",
