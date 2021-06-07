@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar";
 import ListingGrid from "../../components/listing-grid";
 
 import { WishlistContainer, WishlistHeader } from "./styles";
+import { Helmet } from "react-helmet";
 
 const sampleListings = [
   {
@@ -31,6 +32,11 @@ const sampleListings = [
 const Wishlist = (props) => {
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Instahomes | Wishlist</title>
+        <meta name="description" content=""></meta>
+      </Helmet>
       <Navbar />
       <WishlistContainer>
         <WishlistHeader>My Wishlist</WishlistHeader>

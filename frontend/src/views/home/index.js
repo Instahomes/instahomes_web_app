@@ -26,6 +26,7 @@ import {
   OrangeButton,
 } from "../../components/elements";
 import heroBg from "../../assets/home/hero.jpeg";
+import { Helmet } from "react-helmet";
 
 const sampleListings = [
   {
@@ -79,6 +80,11 @@ const Home = (props) => {
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Instahomes</title>
+        <meta name="description" content=""></meta>
+      </Helmet>
       <Navbar isHome dark />
       <HeroFrame heroBg={heroBg} showAdvanced={showAdvanced}>
         <HomeSearch

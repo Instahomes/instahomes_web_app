@@ -27,6 +27,7 @@ import {
   OfficeLocations,
 } from "./styles";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const sampleDevelopments = [
   {
@@ -121,9 +122,14 @@ const DevelopmentCard = ({
 
 const isVerified = true;
 
-const Development = (props) => {
+const Developer = (props) => {
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Instahomes | Alveo Land Corporation</title>
+        <meta name="description" content=""></meta>
+      </Helmet>
       <Navbar dark />
       <DeveloperContainer>
         <HeroSection>
@@ -245,4 +251,4 @@ const Development = (props) => {
   );
 };
 
-export default Development;
+export default Developer;

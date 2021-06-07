@@ -12,6 +12,7 @@ import {
   GrayInput,
   AdvancedSettings,
 } from "../../components/elements";
+import { Helmet } from "react-helmet";
 
 const sampleListings = [
   {
@@ -83,6 +84,11 @@ const Search = (props) => {
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Instahomes | Search</title>
+        <meta name="description" content=""></meta>
+      </Helmet>
       <Navbar />
       <SearchContainer>
         <Formik

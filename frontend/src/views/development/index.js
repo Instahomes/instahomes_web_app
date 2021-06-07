@@ -17,6 +17,7 @@ import {
   Amenities,
   AmenitiesCard,
 } from "./styles";
+import { Helmet } from "react-helmet";
 
 const sampleListings = [
   {
@@ -100,6 +101,11 @@ const sampleFeatures = [
 const Development = (props) => {
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Instahomes | The Lattice at Parklinks</title>
+        <meta name="description" content=""></meta>
+      </Helmet>
       <Navbar dark />
       <DevelopmentContainer>
         <HeroSection>

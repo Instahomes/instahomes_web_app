@@ -49,6 +49,7 @@ import {
   ProductPriceLine,
 } from "./styles";
 import { SRLWrapper } from "simple-react-lightbox";
+import { Helmet } from "react-helmet";
 
 const Listing = (props) => {
   const [active, setActive] = useState("overview");
@@ -56,6 +57,11 @@ const Listing = (props) => {
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Instahomes | The Lattice 1-Bedroom Unit</title>
+        <meta name="description" content=""></meta>
+      </Helmet>
       <Navbar />
       <ListingContainer>
         {/* <ListingProductSearch /> */}

@@ -17,6 +17,7 @@ import lock from "../../assets/signup/lock.svg";
 import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
+import { Helmet } from "react-helmet";
 
 const Signup = (props) => {
   const [message, setMessage] = useState("");
@@ -33,6 +34,11 @@ const Signup = (props) => {
 
   return (
     <Layout>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Instahomes | Signup</title>
+        <meta name="description" content=""></meta>
+      </Helmet>
       <Navbar dark isHome />
       <HeroFrame heroBg={heroBg}>
         <HeroContent>
