@@ -86,7 +86,7 @@ const Search = (props) => {
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Instahomes | Search</title>
+        <title>Search | Instahomes</title>
         <meta name="description" content=""></meta>
       </Helmet>
       <Navbar />

@@ -35,7 +35,7 @@ const Signup = ({ login }) => {
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Instahomes | {login ? "Login" : "Signup"}</title>
+        <title>{login ? "Login" : "Signup"} | Instahomes</title>
         <meta name="description" content=""></meta>
       </Helmet>
       <Navbar dark isHome />

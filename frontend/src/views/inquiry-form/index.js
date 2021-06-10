@@ -113,7 +113,7 @@ const DeveloperForm = (props) => {
     <React.Fragment>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Instahomes | Inquire</title>
+        <title>Inquire | Instahomes</title>
         <meta name="description" content=""></meta>
       </Helmet>
       <Wizard
