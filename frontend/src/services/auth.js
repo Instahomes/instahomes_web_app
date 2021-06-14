@@ -6,7 +6,7 @@ const LOCAL_STORAGE_REFRESH_TOKEN = "refresh_token";
 export const login = (email, password, callback, errorCallback) => {
   return axiosClient
     .post("/token/obtain/", {
-      username: email,
+      email,
       password,
     })
     .then((response) => {

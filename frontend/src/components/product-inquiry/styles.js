@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { OrangeButton } from "../elements";
 
 export const ProductInquiryContainer = styled.div`
-  position: sticky;
-  top: 5%;
+  // position: sticky;
+  // top: 5%;
   background: ${({ theme }) => theme.colors.mainBgColor};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;

@@ -335,6 +335,11 @@ export const DescriptionRight = styled.div`
     width: 100%;
     margin-top: 1em;
   }
+
+  .sticky {
+    position: sticky;
+    top: 5%;
+  }
 `;
 
 export const MetadataLine = styled.div`

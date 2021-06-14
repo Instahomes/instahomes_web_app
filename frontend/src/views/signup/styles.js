@@ -9,8 +9,11 @@ export const HeroFrame = styled.section`
 `;
 
 export const HeroContent = styled.div`
-  padding: 4em var(--main-padding-x);
+  padding: 0 var(--main-padding-x);
+  box-sizing: border-box;
+  height: 760px;
   display: flex;
+  align-items: center;
 
   & > * {
     width: 50%;
@@ -57,6 +60,20 @@ export const SignupForm = styled.div`
     input {
       margin-right: 10px;
     }
+  }
+`;
+
+export const SignupWrapper = styled.div`
+  position: relative;
+
+  span {
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 16px;
+    color: ${({ theme }) => theme.colors.darkGray};
+    text-decoration: underline;
+    font-size: 11px;
   }
 `;
 

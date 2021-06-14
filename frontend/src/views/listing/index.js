@@ -30,7 +30,6 @@ import {
   ListingLine,
   HeaderButtons,
   WishlistButton,
-  WishlistHeart,
   InquireButton,
   Image,
   ImageContainer,
@@ -255,47 +254,51 @@ const Listing = (props) => {
             </DescriptionDiv>
           </DescriptionLeft>
           <DescriptionRight>
-            <MetadataLine>
-              <div>
-                <MetadataNumber>55 sqm</MetadataNumber>
-                <MetadataProperty>
-                  <img src={area} alt="Area" />
-                  <span>Lot Size</span>
-                </MetadataProperty>
-              </div>
-              <div>
-                <MetadataNumber>55 sqm</MetadataNumber>
-                <MetadataProperty>
-                  <img src={area} alt="Area" />
-                  <span>Floor Area</span>
-                </MetadataProperty>
-              </div>
-              <div>
-                <MetadataNumber>2</MetadataNumber>
-                <MetadataProperty>
-                  <img src={bed} alt="Bed" />
-                  <span>Bedrooms</span>
-                </MetadataProperty>
-              </div>
-              <div>
-                <MetadataNumber>2</MetadataNumber>
-                <MetadataProperty>
-                  <img src={bath} alt="Bath" />
-                  <span>Bathrooms</span>
-                </MetadataProperty>
-              </div>
-            </MetadataLine>
-            <ProductPriceLine>
-              <div>
-                <img src={money} alt="Money" />
-                <span className="body-dark">Est.&nbsp;Property&nbsp;Price</span>
-              </div>
-              <span className="dark-blue">Php 1,820,000.00</span>
-            </ProductPriceLine>
-            {/* <ProductTour />
+            <div className="sticky">
+              <MetadataLine>
+                <div>
+                  <MetadataNumber>55 sqm</MetadataNumber>
+                  <MetadataProperty>
+                    <img src={area} alt="Area" />
+                    <span>Lot Size</span>
+                  </MetadataProperty>
+                </div>
+                <div>
+                  <MetadataNumber>55 sqm</MetadataNumber>
+                  <MetadataProperty>
+                    <img src={area} alt="Area" />
+                    <span>Floor Area</span>
+                  </MetadataProperty>
+                </div>
+                <div>
+                  <MetadataNumber>2</MetadataNumber>
+                  <MetadataProperty>
+                    <img src={bed} alt="Bed" />
+                    <span>Bedrooms</span>
+                  </MetadataProperty>
+                </div>
+                <div>
+                  <MetadataNumber>2</MetadataNumber>
+                  <MetadataProperty>
+                    <img src={bath} alt="Bath" />
+                    <span>Bathrooms</span>
+                  </MetadataProperty>
+                </div>
+              </MetadataLine>
+              <ProductPriceLine>
+                <div>
+                  <img src={money} alt="Money" />
+                  <span className="body-dark">
+                    Est.&nbsp;Property&nbsp;Price
+                  </span>
+                </div>
+                <span className="dark-blue">Php 1,820,000.00</span>
+              </ProductPriceLine>
+              {/* <ProductTour />
             <br />
             <br /> */}
-            <ProductInquiry />
+              <ProductInquiry />
+            </div>
           </DescriptionRight>
         </DescriptionContainer>
       </ListingContainer>

@@ -5,6 +5,7 @@ import {
   HeroFrame,
   HeroContent,
   SignupForm,
+  SignupWrapper,
   SignupInput,
   SignupButtonsDiv,
   SignupButton,
@@ -13,13 +14,16 @@ import heroBg from "../../assets/home/hero.jpeg";
 import person from "../../assets/signup/person.svg";
 import email from "../../assets/signup/email.svg";
 import lock from "../../assets/signup/lock.svg";
+import phone from "../../assets/signup/phone.svg";
 import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
 import { login } from "../../services/auth";
 import { Helmet } from "react-helmet";
+import * as Yup from "yup";
 
-const Signup = ({ login }) => {
+const Signup = ({ isLogin }) => {
   const [message, setMessage] = useState("");
+  const [isEmailShown, setEmailShown] = useState(false);
   const history = useHistory();
 
   const handleLogin = (email, password) => {
@@ -35,7 +39,7 @@ const Signup = ({ login }) => {
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>{login ? "Login" : "Signup"} | Instahomes</title>
+        <title>{isLogin ? "Login" : "Signup"} | Instahomes</title>
         <meta name="description" content=""></meta>
       </Helmet>
       <Navbar dark isHome />
@@ -45,13 +49,27 @@ const Signup = ({ login }) => {
           <Formik
             initialValues={{
               name: "",
+              contactNumber: "",
               email: "",
               password: "",
+              passwordRetype: "",
             }}
             onSubmit={(values, { setSubmitting }) => {
               const { email, password } = values;
               handleLogin(email, password);
             }}
+            validationSchema={Yup.object({
+              name: Yup.string().required("Full name is required"),
+              contactNumber: Yup.string().required(
+                "Contact number is required"
+              ),
+              email: Yup.string().email(),
+              password: Yup.string().required("Password is required"),
+              retypePassword: Yup.string().oneOf(
+                [Yup.ref("password"), null],
+                "Passwords must match"
+              ),
+            })}
           >
             {({
               values,
@@ -66,17 +84,17 @@ const Signup = ({ login }) => {
                 <SignupForm>
                   {message && <span>{message}</span>}
                   <h2>
-                    {login
+                    {isLogin
                       ? "Log into your account"
                       : "Save your dream listings, Inquire with just a click"}
                   </h2>
-                  {!login && (
+                  {!isLogin && (
                     <p>
                       Sign up to add to your wishlist and save your contact
                       information to inquire for multiple properties easily.
                     </p>
                   )}
-                  {!login && (
+                  {!isLogin && (
                     <SignupInput
                       icon={person}
                       scale={0.9}
@@ -87,15 +105,31 @@ const Signup = ({ login }) => {
                       value={values.name}
                     />
                   )}
-                  <SignupInput
-                    icon={email}
-                    scale={0.9}
-                    placeholder="Email Address"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
+                  <SignupWrapper>
+                    <SignupInput
+                      icon={phone}
+                      scale={0.9}
+                      placeholder="Contact Number"
+                      name="contactNumber"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.contactNumber}
+                    />
+                    <span onClick={() => setEmailShown(!isEmailShown)}>
+                      {isEmailShown ? "- remove" : "+ add"} email address
+                    </span>
+                  </SignupWrapper>
+                  {isEmailShown && (
+                    <SignupInput
+                      icon={email}
+                      scale={0.9}
+                      placeholder="Email Address"
+                      name="email"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                    />
+                  )}
                   <SignupInput
                     icon={lock}
                     scale={0.9}
@@ -106,16 +140,28 @@ const Signup = ({ login }) => {
                     onBlur={handleBlur}
                     value={values.password}
                   />
-                  {!login && (
+                  <SignupInput
+                    icon={lock}
+                    scale={0.9}
+                    type="password"
+                    placeholder="Retype Password"
+                    name="passwordRetype"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.passwordRetype}
+                  />
+                  {!isLogin && (
                     <label className="terms-checkbox small-span">
                       <input type="checkbox" />I agree to the Terms & Conditions
                       and Privacy Policy
                     </label>
                   )}
                   <SignupButtonsDiv>
-                    <SignupButton>{login ? "LOG IN" : "SIGN UP"}</SignupButton>
+                    <SignupButton>
+                      {isLogin ? "LOG IN" : "SIGN UP"}
+                    </SignupButton>
                   </SignupButtonsDiv>
-                  {login ? (
+                  {isLogin ? (
                     <span
                       className="small-span"
                       onClick={() => history.push("/signup")}

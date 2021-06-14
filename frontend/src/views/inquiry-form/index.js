@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Frame, Content, ProgressBar } from "./styles";
+import { ProgressBar } from "./styles";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import Step1 from "./steps/step1";

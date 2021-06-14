@@ -116,7 +116,7 @@ const Footer = () => (
         </FooterIconRow>
       </FooterItem>
     </FooterList>
-    <FooterText>© 2021 Instahomes Philipppines</FooterText>
+    <FooterText>© 2021 Instahomes Philippines</FooterText>
   </FooterFrame>
 );
 

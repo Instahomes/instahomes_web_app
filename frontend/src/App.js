@@ -32,7 +32,7 @@ function App() {
               <Signup />
             </Route>
             <Route exact path="/login">
-              <Signup login />
+              <Signup isLogin />
             </Route>
             <Route exact path="/search">
               <Search />

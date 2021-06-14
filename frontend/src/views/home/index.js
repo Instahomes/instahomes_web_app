@@ -27,6 +27,8 @@ import {
 } from "../../components/elements";
 import heroBg from "../../assets/home/hero.jpeg";
 import { Helmet } from "react-helmet";
+import { useEffect } from "react";
+import { getDevelopers } from "../../services/developers";
 
 const sampleListings = [
   {
@@ -77,6 +79,10 @@ const sampleListings = [
 
 const Home = (props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
+
+  // useEffect(() => {
+  //   getDevelopers().then((res) => console.log(res));
+  // }, []);
 
   return (
     <Layout>
