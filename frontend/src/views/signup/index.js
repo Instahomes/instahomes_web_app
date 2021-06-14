@@ -21,6 +21,17 @@ import { login } from "../../services/auth";
 import { Helmet } from "react-helmet";
 import * as Yup from "yup";
 
+const SignupSchema = Yup.object({
+  name: Yup.string().required("Full name is required"),
+  contactNumber: Yup.string().required("Contact number is required"),
+  email: Yup.string().email(),
+  password: Yup.string().required("Password is required"),
+  retypePassword: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
+});
+
 const Signup = ({ isLogin }) => {
   const [message, setMessage] = useState("");
   const [isEmailShown, setEmailShown] = useState(false);
@@ -33,6 +44,12 @@ const Signup = ({ isLogin }) => {
       () => history.push("/"),
       () => setMessage("Wrong credentials!")
     );
+  };
+
+  const handleSignup = (values) => {
+    history.push("/inquire", {
+      isComingFromSignupPage: true,
+    });
   };
 
   return (
@@ -56,20 +73,9 @@ const Signup = ({ isLogin }) => {
             }}
             onSubmit={(values, { setSubmitting }) => {
               const { email, password } = values;
-              handleLogin(email, password);
+              isLogin ? handleLogin(email, password) : handleSignup(values);
             }}
-            validationSchema={Yup.object({
-              name: Yup.string().required("Full name is required"),
-              contactNumber: Yup.string().required(
-                "Contact number is required"
-              ),
-              email: Yup.string().email(),
-              password: Yup.string().required("Password is required"),
-              retypePassword: Yup.string().oneOf(
-                [Yup.ref("password"), null],
-                "Passwords must match"
-              ),
-            })}
+            validationSchema={SignupSchema}
           >
             {({
               values,
@@ -145,10 +151,10 @@ const Signup = ({ isLogin }) => {
                     scale={0.9}
                     type="password"
                     placeholder="Retype Password"
-                    name="passwordRetype"
+                    name="retypePassword"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.passwordRetype}
+                    value={values.retypePassword}
                   />
                   {!isLogin && (
                     <label className="terms-checkbox small-span">
@@ -157,7 +163,7 @@ const Signup = ({ isLogin }) => {
                     </label>
                   )}
                   <SignupButtonsDiv>
-                    <SignupButton>
+                    <SignupButton type="submit">
                       {isLogin ? "LOG IN" : "SIGN UP"}
                     </SignupButton>
                   </SignupButtonsDiv>

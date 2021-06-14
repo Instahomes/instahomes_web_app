@@ -15,7 +15,7 @@ import Step10 from "./steps/step10";
 import Step11 from "./steps/step11";
 import circleFilled from "../../assets/form/circle-filled.svg";
 import circleEmpty from "../../assets/form/circle-empty.svg";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 // Wizard is a single Formik instance whose children are each page of the
@@ -52,9 +52,7 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
       return onSubmit(values, bag);
     } else {
       bag.setTouched({});
-      console.log(values);
       next(values);
-      console.log(values);
     }
   };
 
@@ -108,6 +106,9 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
 const DeveloperForm = (props) => {
   const [isSigningUp, setIsSigningUp] = useState(true);
   const history = useHistory();
+  const location = useLocation();
+
+  const { isComingFromSignupPage } = location.state;
 
   return (
     <React.Fragment>
@@ -132,11 +133,13 @@ const DeveloperForm = (props) => {
           confirmPassword: "",
         }}
       >
-        <Step1
-          onSubmit={() => console.log("Is signing up: " + isSigningUp)}
-          validationSchema={Yup.object({})}
-          setIsSigningUp={setIsSigningUp}
-        />
+        {!isComingFromSignupPage && (
+          <Step1
+            onSubmit={() => console.log("Is signing up: " + isSigningUp)}
+            validationSchema={Yup.object({})}
+            setIsSigningUp={setIsSigningUp}
+          />
+        )}
         <Step2
           onSubmit={() => console.log("Step2 onSubmit")}
           validationSchema={Yup.object({ name: Yup.string().required() })}
@@ -185,7 +188,7 @@ const DeveloperForm = (props) => {
             hasAgent: Yup.boolean().required(),
           })}
         />
-        {isSigningUp && (
+        {isSigningUp && !isComingFromSignupPage && (
           <Step10
             onSubmit={() => console.log("Step10 onSubmit")}
             validationSchema={Yup.object({
