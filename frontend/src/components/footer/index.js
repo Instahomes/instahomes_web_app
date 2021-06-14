@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import facebook from "../../assets/footer/facebook.svg";
-import email from "../../assets/footer/email.svg";
-import phone from "../../assets/footer/phone.svg";
+import instagram from "../../assets/footer/instagram.svg";
+import linkedin from "../../assets/footer/linkedin.svg";
+import { Link } from "react-router-dom";
 
 const FooterFrame = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBg};
@@ -52,6 +53,11 @@ const FooterText = styled.li`
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     text-align: center;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 const FooterIcon = styled.a`
@@ -73,32 +79,49 @@ const Footer = () => (
       <FooterItem>
         <h4>JOIN OUR BETA</h4>
         <ul>
-          <FooterText>Customer Sign up</FooterText>
-          <FooterText>Developer Sign up</FooterText>
+          <FooterText>
+            <Link to="/signup">Sign up</Link>
+          </FooterText>
+          <FooterText>
+            <Link to="/#developer-signup">Apply as Developer</Link>
+          </FooterText>
         </ul>
       </FooterItem>
       <FooterItem>
         <h4>CONTACT</h4>
         <ul>
-          <FooterText>Inquiries</FooterText>
-          <FooterText>User Support</FooterText>
-          <FooterText>Invest in Us</FooterText>
+          <FooterText>
+            <a href="mailto:instahomes.ph@gmail.com">Inquiries</a>
+          </FooterText>
+          <FooterText>
+            <Link>User Support</Link>
+          </FooterText>
+          {/* <FooterText><Link></Link>Invest in Us</FooterText> */}
         </ul>
       </FooterItem>
       <FooterItem>
         <h4>ABOUT US</h4>
         <ul>
-          <FooterText>Our Company</FooterText>
-          <FooterText>Expertise</FooterText>
-          <FooterText>Blogs/Press</FooterText>
+          <FooterText>
+            <a href="https://www.linkedin.com/company/instahomes-ph/">
+              Company Profile
+            </a>
+          </FooterText>
+          <FooterText>
+            <a href="https://instahomes.com.ph/Articles.html">Blogs/Press</a>
+          </FooterText>
         </ul>
       </FooterItem>
       <FooterItem>
         <h4>TERMS & PRIVACY</h4>
         <ul>
-          <FooterText>Terms & Conditions</FooterText>
-          <FooterText>Privacy Policy</FooterText>
-          <FooterText>Cookies</FooterText>
+          <FooterText>
+            <Link>Terms & Conditions</Link>
+          </FooterText>
+          <FooterText>
+            <Link>Privacy Policy</Link>
+          </FooterText>
+          {/* <FooterText><Link></Link>Cookies</FooterText> */}
         </ul>
       </FooterItem>
       <FooterItem className="social-media">
@@ -107,11 +130,11 @@ const Footer = () => (
           <FooterIcon href="https://www.facebook.com/Instahomes.com.ph">
             <img src={facebook} alt="Facebook" />
           </FooterIcon>
-          <FooterIcon href="tel:+639989688302">
-            <img src={phone} alt="Phone" />
+          <FooterIcon href="https://www.instagram.com/instahomes.ph/">
+            <img src={instagram} alt="Instagram" />
           </FooterIcon>
-          <FooterIcon href="mailto:instahomes.ph@gmail.com">
-            <img src={email} alt="Email" />
+          <FooterIcon href="https://www.linkedin.com/company/instahomes-ph/">
+            <img src={linkedin} alt="LinkedIn" />
           </FooterIcon>
         </FooterIconRow>
       </FooterItem>

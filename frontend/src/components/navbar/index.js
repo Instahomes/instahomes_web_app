@@ -56,8 +56,13 @@ const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
         </NavbarSpan>
       )}
       {!isLoggedIn && (
-        <NavbarSpan dark={dark} className={className}>
-          BLOG
+        <NavbarSpan
+          dark={dark}
+          className={className}
+          as="a"
+          href="https://instahomes.com.ph/Articles.html"
+        >
+          ARTICLES
         </NavbarSpan>
       )}
       <NavbarSpan dark={dark} className={className}>

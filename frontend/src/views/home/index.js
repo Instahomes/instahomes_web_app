@@ -136,7 +136,7 @@ const Home = (props) => {
           </form>
         </NewsletterText>
       </NewsletterFrame>
-      <ListingFormFrame>
+      <ListingFormFrame id="#developer-signup">
         <ListingFormText>
           <h1 className="dark">
             Interested in Joining Our Roster of Fast-Growing Developers?
