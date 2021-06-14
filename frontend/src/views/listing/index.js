@@ -3,12 +3,14 @@ import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import ProductInquiry from "../../components/product-inquiry";
 import ProductTour from "../../components/product-tour";
+import ListingImageGrid from "../../components/listing-image-grid";
 
 import heart from "../../assets/product/heart.svg";
 import check from "../../assets/product/check.svg";
 import map from "../../assets/product/map.svg";
 import specsArrow from "../../assets/product/specs_arrow.svg";
 import propertyDetails from "../../assets/product/propertyDetails.png";
+import floorPlan from "../../assets/product/floor-plan.webp";
 import propertyMap from "../../assets/product/propertyMap.png";
 import parklinks from "../../assets/product/parklinks.png";
 import alveo from "../../assets/product/alveo.png";
@@ -21,7 +23,6 @@ import area from "../../assets/product/area.svg";
 import bath from "../../assets/product/bath.svg";
 import bed from "../../assets/product/bed.svg";
 import money from "../../assets/product/money.svg";
-import { useLightbox } from "simple-react-lightbox";
 import {
   ListingContainer,
   ListingHeadContainer,
@@ -31,9 +32,6 @@ import {
   HeaderButtons,
   WishlistButton,
   InquireButton,
-  Image,
-  ImageContainer,
-  MoreImages,
   ProductTabContainer,
   ProductTab,
   DescriptionContainer,
@@ -47,12 +45,68 @@ import {
   MetadataProperty,
   ProductPriceLine,
 } from "./styles";
-import { SRLWrapper } from "simple-react-lightbox";
 import { Helmet } from "react-helmet";
+import SimpleReactLightbox, {
+  useLightbox,
+  SRLWrapper,
+} from "simple-react-lightbox";
+
+const PropertyDetails = ({ active }) => {
+  const { openLightbox } = useLightbox();
+
+  return (
+    <React.Fragment>
+      <DescriptionDiv
+        active={active == "propertyDetails"}
+        id="property-details"
+      >
+        <h4>PROPERTY DETAILS</h4>
+        <div id="prop-details">
+          <SRLWrapper>
+            <div style={{ display: "none" }}>
+              <img src={floorPlan} />
+            </div>
+          </SRLWrapper>
+          <img
+            onClick={() => openLightbox(0)}
+            className="floor-plan"
+            src={floorPlan}
+            alt="Floor Plan"
+          />
+          {/* <img
+            className="floor-plan"
+            src={propertyDetails}
+            alt="Floor Plan"
+          /> */}
+          <div className="plan-details">
+            <p>
+              The Lattice at Parklinks’ 1 Bedroom Unit Condominium is a 58 sqm
+              space with refined finish.
+            </p>
+            <p>
+              The Living, Dining, Kitchen, and Balcony are built with 600x600mm
+              porcelain tile floors, while the Bedroom has Wood Laminated
+              Flooring. All parts of the unit have paint finished ceilings and
+              walls.
+            </p>
+            <span id="view-specs">
+              View All Specifications <img src={specsArrow} alt="Arrow" />
+            </span>
+          </div>
+        </div>
+      </DescriptionDiv>
+    </React.Fragment>
+  );
+};
+
+const PropertyDetailsWrapper = ({ active }) => (
+  <SimpleReactLightbox>
+    <PropertyDetails active={active} />
+  </SimpleReactLightbox>
+);
 
 const Listing = (props) => {
   const [active, setActive] = useState("overview");
-  const { openLightbox, closeLightbox } = useLightbox();
 
   return (
     <Layout>
@@ -65,23 +119,6 @@ const Listing = (props) => {
       <ListingContainer>
         {/* <ListingProductSearch /> */}
         <ListingHeadContainer>
-          <SRLWrapper>
-            <div style={{ display: "none" }}>
-              <img src={imageMain} />
-            </div>
-            <div style={{ display: "none" }}>
-              <img src={image1} />
-            </div>
-            <div style={{ display: "none" }}>
-              <img src={image2} />
-            </div>
-            <div style={{ display: "none" }}>
-              <img src={image3} />
-            </div>
-            <div style={{ display: "none" }}>
-              <img src={image4} />
-            </div>
-          </SRLWrapper>
           <ListingHeader>
             <div>
               <ListingLine>
@@ -99,14 +136,10 @@ const Listing = (props) => {
               <InquireButton>SEND AN INQUIRY</InquireButton>
             </HeaderButtons>
           </ListingHeader>
-          <ImageContainer>
-            <Image image={imageMain} onClick={() => openLightbox(0)} />
-            <Image image={image1} onClick={() => openLightbox(1)} />
-            <Image image={image2} onClick={() => openLightbox(2)} />
-            <Image image={image3} onClick={() => openLightbox(3)} />
-            <Image image={image4} onClick={() => openLightbox(4)} />
-            <MoreImages>+10 more photos</MoreImages>
-          </ImageContainer>
+          <ListingImageGrid
+            imageMain={imageMain}
+            images={[image1, image2, image3, image4]}
+          />
         </ListingHeadContainer>
         <ProductTabContainer>
           <ProductTab
@@ -169,30 +202,7 @@ const Listing = (props) => {
                 masters, a covered garage, and generous toilet bathing space.
               </p>
             </DescriptionDiv>
-            <DescriptionDiv
-              active={active == "propertyDetails"}
-              id="property-details"
-            >
-              <h4>PROPERTY DETAILS</h4>
-              <div id="prop-details">
-                <img src={propertyDetails} alt="Property Details" />
-                <div>
-                  <p>
-                    The Lattice at Parklinks’ 1 Bedroom Unit Condominium is a 58
-                    sqm space with refined finish.
-                  </p>
-                  <p>
-                    The Living, Dining, Kitchen, and Balcony are built with
-                    600x600mm porcelain tile floors, while the Bedroom has Wood
-                    Laminated Flooring. All parts of the unit have paint
-                    finished ceilings and walls.
-                  </p>
-                  <span id="view-specs">
-                    View All Specifications <img src={specsArrow} alt="Arrow" />
-                  </span>
-                </div>
-              </div>
-            </DescriptionDiv>
+            <PropertyDetailsWrapper active={active} />
             <DescriptionDiv
               active={active == "propertyDirections"}
               id="prop-directions"

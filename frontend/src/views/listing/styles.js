@@ -96,73 +96,6 @@ export const InquireButton = styled(OrangeButton)`
   }
 `;
 
-export const Image = styled.div`
-  cursor: pointer;
-  background: url(${({ image }) => image});
-  background-size: cover;
-  background-repeat: no-repeat;
-`;
-
-export const ImageContainer = styled.div`
-  display: grid;
-  position: relative;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 200px);
-  grid-template-areas:
-    "main main image1 image2"
-    "main main image3 image4";
-  gap: 10px;
-
-  ${Image}:nth-child(1) {
-    grid-area: main;
-  }
-
-  ${Image}:nth-child(2) {
-    grid-area: image1;
-  }
-
-  ${Image}:nth-child(3) {
-    grid-area: image2;
-  }
-
-  ${Image}:nth-child(4) {
-    grid-area: image3;
-  }
-
-  ${Image}:nth-child(5) {
-    grid-area: image4;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    grid-template-columns: repeat(5, 90%);
-    grid-template-rows: 400px;
-    grid-template-areas: "main image1 image2 image3 image4";
-    overflow-x: scroll;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    grid-template-rows: 200px;
-  }
-`;
-
-export const MoreImages = styled.div`
-  background: rgba(224, 224, 224, 0.49);
-
-  border: 1px solid ${({ theme }) => theme.colors.lightGray};
-  box-sizing: border-box;
-  border-radius: 3px;
-
-  position: absolute;
-  bottom: 2%;
-  right: 1%;
-
-  padding: 0.5em 1em;
-  color: ${({ theme }) => theme.colors.lightGray};
-  font-size: 1em;
-  font-weight: 400;
-  opacity: 0.7;
-`;
-
 export const ProductTabContainer = styled.div`
   margin-top: 1rem;
   display: flex;
@@ -218,10 +151,19 @@ export const DescriptionLeft = styled.div`
 
     #prop-details {
       display: flex;
+      flex-wrap: wrap;
       margin-top: 1em;
+      gap: 0 1.2em;
 
-      img {
-        margin-right: 1.2rem;
+      .floor-plan {
+        max-width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .plan-details {
+        // max-width: 50%;
+        flex: 1;
       }
     }
   }
@@ -259,6 +201,11 @@ export const DescriptionLeft = styled.div`
 
     #prop-details {
       flex-direction: column;
+      flex-wrap: no-wrap;
+
+      .floor-plan {
+        width: 100%;
+      }
     }
   }
 `;
