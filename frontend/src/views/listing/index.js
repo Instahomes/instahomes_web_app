@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import ProductInquiry from "../../components/product-inquiry";
@@ -9,16 +9,8 @@ import heart from "../../assets/product/heart.svg";
 import check from "../../assets/product/check.svg";
 import map from "../../assets/product/map.svg";
 import specsArrow from "../../assets/product/specs_arrow.svg";
-import propertyDetails from "../../assets/product/propertyDetails.png";
-import floorPlan from "../../assets/product/floor-plan.webp";
-import propertyMap from "../../assets/product/propertyMap.png";
 import parklinks from "../../assets/product/parklinks.png";
 import alveo from "../../assets/product/alveo.png";
-import imageMain from "../../assets/product/imageMain.png";
-import image1 from "../../assets/product/image1.png";
-import image2 from "../../assets/product/image2.png";
-import image3 from "../../assets/product/image3.png";
-import image4 from "../../assets/product/image4.png";
 import area from "../../assets/product/area.svg";
 import bath from "../../assets/product/bath.svg";
 import bed from "../../assets/product/bed.svg";
@@ -50,9 +42,13 @@ import SimpleReactLightbox, {
   useLightbox,
   SRLWrapper,
 } from "simple-react-lightbox";
+import { getListings } from "../../services/listings";
+import { useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const PropertyDetails = ({ active }) => {
+const PropertyDetails = ({ active, floorPlan, ...props }) => {
   const { openLightbox } = useLightbox();
+  console.log(floorPlan);
 
   return (
     <React.Fragment>
@@ -73,11 +69,6 @@ const PropertyDetails = ({ active }) => {
             src={floorPlan}
             alt="Floor Plan"
           />
-          {/* <img
-            className="floor-plan"
-            src={propertyDetails}
-            alt="Floor Plan"
-          /> */}
           <div className="plan-details">
             <p>
               The Lattice at Parklinks’ 1 Bedroom Unit Condominium is a 58 sqm
@@ -99,219 +90,246 @@ const PropertyDetails = ({ active }) => {
   );
 };
 
-const PropertyDetailsWrapper = ({ active }) => (
+const PropertyDetailsWrapper = ({ active, floorPlan }) => (
   <SimpleReactLightbox>
-    <PropertyDetails active={active} />
+    <PropertyDetails active={active} floorPlan={floorPlan} />
   </SimpleReactLightbox>
 );
 
 const Listing = (props) => {
   const [active, setActive] = useState("overview");
+  const match = useRouteMatch();
+  const [listing, setListing] = useState(null);
+
+  useEffect(() => {
+    getListings(
+      (data) => data.length > 0 && setListing(data[0]),
+      `id=${match.params.id}`
+    );
+  }, []);
 
   return (
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Instahomes | The Lattice 1-Bedroom Unit</title>
+        <title>{listing ? listing.seo_title : "Instahomes"}</title>
         <meta name="description" content=""></meta>
       </Helmet>
       <Navbar />
-      <ListingContainer>
-        {/* <ListingProductSearch /> */}
-        <ListingHeadContainer>
-          <ListingHeader>
-            <div>
-              <ListingLine>
-                <h4>The Lattice 1-Bedroom Unit</h4>
-                <img src={check} alt="Heart" />
-                <img src={heart} alt="Heart" />
-              </ListingLine>
-              <ListingLine>
-                <img src={map} alt="Map" />
-                <span>C-5 Road, Brgy. Rosario, Pasig City</span>
-              </ListingLine>
-            </div>
-            <HeaderButtons>
-              <WishlistButton>ADD TO WISHLIST</WishlistButton>
-              <InquireButton>SEND AN INQUIRY</InquireButton>
-            </HeaderButtons>
-          </ListingHeader>
-          <ListingImageGrid
-            imageMain={imageMain}
-            images={[image1, image2, image3, image4]}
-          />
-        </ListingHeadContainer>
-        <ProductTabContainer>
-          <ProductTab
-            onClick={() => setActive("overview")}
-            active={active == "overview"}
-            first
-          >
-            OVERVIEW
-          </ProductTab>
-          <ProductTab
-            onClick={() => setActive("propertyDetails")}
-            active={active == "propertyDetails"}
-            href="#property-details"
-          >
-            PROPERTY&nbsp;DETAILS
-          </ProductTab>
-          <ProductTab
-            href="#prop-directions"
-            onClick={() => setActive("propertyDirections")}
-            active={active == "propertyDirections"}
-          >
-            HOW&nbsp;TO&nbsp;GET&nbsp;THERE
-          </ProductTab>
-          <ProductTab
-            href="#area-facts"
-            onClick={() => setActive("facts")}
-            active={active == "facts"}
-          >
-            AREA&nbsp;FACTS
-          </ProductTab>
-          <ProductTab
-            href="#development"
-            onClick={() => setActive("development")}
-            active={active == "development"}
-          >
-            DEVELOPMENT&nbsp;INFORMATION
-          </ProductTab>
-          <ProductTab
-            href="#developer"
-            onClick={() => setActive("developer")}
-            active={active == "developer"}
-            last
-          >
-            DEVELOPER&nbsp;INFORMATION
-          </ProductTab>
-        </ProductTabContainer>
-        <DescriptionContainer>
-          <DescriptionLeft>
-            <DescriptionDiv active={active == "overview"}>
-              <h4>OVERVIEW</h4>
-              <p>
-                A high-rise residential development located at the greenest
-                urban estate along the prime C5 corridor, with direct access to
-                3-hectare central park and retail choices.
-              </p>
-              <p>
-                The design of the house unit was incorporated for possible
-                future expansions to accommodate the needs of a growing family.
-                It is laid out to even allow a small dressing room for the
-                masters, a covered garage, and generous toilet bathing space.
-              </p>
-            </DescriptionDiv>
-            <PropertyDetailsWrapper active={active} />
-            <DescriptionDiv
-              active={active == "propertyDirections"}
-              id="prop-directions"
-            >
-              <h4>HOW TO GET THERE</h4>
-              <img src={propertyMap} alt="Property Map" id="prop-map" />
-              <div id="directions-details">
-                <div>
-                  <h4>By Car</h4>
-                  <p>
-                    Accessible via C-5, Ortigas Avenue and Amang Rodriguez
-                    avenue with future access to Circulo Verde and Metropoli
-                  </p>
-                </div>
-                <div>
-                  <h4>By Commute</h4>
-                  <p>
-                    From the I.P.I Bus Stop, take the Cainta-Quiapo to Taytay-
-                    Quiapo via Ortigas Avenue Manila East Road
-                  </p>
-                </div>
+      {listing && (
+        <ListingContainer>
+          {/* <ListingProductSearch /> */}
+          <ListingHeadContainer>
+            <ListingHeader>
+              <div>
+                <ListingLine>
+                  <h4>{listing.development.name + " " + listing.unit_name}</h4>
+                  <img src={check} alt="Heart" />
+                  <img src={heart} alt="Heart" />
+                </ListingLine>
+                <ListingLine>
+                  <img src={map} alt="Map" />
+                  <span>{listing.development.location}</span>
+                </ListingLine>
               </div>
-            </DescriptionDiv>
-            <DescriptionDiv active={active == "facts"} id="area-facts">
-              <h4>AREA FACTS</h4>
-              <p>
-                This House and Lot unit was designed to suit the needs of
-                individuals or couples who are just starting out a whole new
-                adventure on independence. This house unit is also ideal to
-                invest with by turning each unit as an apartment for students
-                studying at the nearby schools in Lipa City, Batangas.
-              </p>
-            </DescriptionDiv>
-            <DescriptionDiv active={active == "development"} id="development">
-              <h4>DEVELOPMENT INFORMATION</h4>
-              <DevInformation>
-                <img src={parklinks} className="logo" alt="Parklinks" />
-                <div className="dev-info">
-                  <h4>The Lattice at Park Links</h4>
-                  <p>
-                    <img src={map} alt="Map" />
-                    &nbsp;C-5 Road, Pasig City
-                  </p>
-                  <p className="orange-text m-plus">RESIDENTIAL CONDOMINIUM</p>
+              <HeaderButtons>
+                <WishlistButton>ADD TO WISHLIST</WishlistButton>
+                <InquireButton>SEND AN INQUIRY</InquireButton>
+              </HeaderButtons>
+            </ListingHeader>
+            <ListingImageGrid
+              imageMain={listing.photo_main}
+              images={[
+                listing.image_1,
+                listing.image_2,
+                listing.image_3,
+                listing.image_4,
+                listing.image_5,
+                listing.image_6,
+              ]}
+            />
+          </ListingHeadContainer>
+          <ProductTabContainer>
+            <ProductTab
+              onClick={() => setActive("overview")}
+              active={active == "overview"}
+              first
+            >
+              OVERVIEW
+            </ProductTab>
+            <ProductTab
+              onClick={() => setActive("propertyDetails")}
+              active={active == "propertyDetails"}
+              href="#property-details"
+            >
+              PROPERTY&nbsp;DETAILS
+            </ProductTab>
+            <ProductTab
+              href="#prop-directions"
+              onClick={() => setActive("propertyDirections")}
+              active={active == "propertyDirections"}
+            >
+              HOW&nbsp;TO&nbsp;GET&nbsp;THERE
+            </ProductTab>
+            <ProductTab
+              href="#area-facts"
+              onClick={() => setActive("facts")}
+              active={active == "facts"}
+            >
+              AREA&nbsp;FACTS
+            </ProductTab>
+            <ProductTab
+              href="#development"
+              onClick={() => setActive("development")}
+              active={active == "development"}
+            >
+              DEVELOPMENT&nbsp;INFORMATION
+            </ProductTab>
+            <ProductTab
+              href="#developer"
+              onClick={() => setActive("developer")}
+              active={active == "developer"}
+              last
+            >
+              DEVELOPER&nbsp;INFORMATION
+            </ProductTab>
+          </ProductTabContainer>
+          <DescriptionContainer>
+            <DescriptionLeft>
+              <DescriptionDiv active={active == "overview"}>
+                <h4>OVERVIEW</h4>
+                <p>{listing.overview}</p>
+              </DescriptionDiv>
+              <PropertyDetailsWrapper
+                active={active}
+                floorPlan={listing.floor_plan}
+              />
+              <DescriptionDiv
+                active={active == "propertyDirections"}
+                id="prop-directions"
+              >
+                <h4>HOW TO GET THERE</h4>
+                {/* <img
+                  src={listing.floor_plan}
+                  alt="Property Map"
+                  id="prop-map"
+                /> */}
+                <div id="directions-details">
+                  <div>
+                    <h4>By Car</h4>
+                    <p>{listing.development.description_by_car}</p>
+                  </div>
+                  {listing.development.description_by_commute && (
+                    <div>
+                      <h4>By Commute</h4>
+                      <p>{listing.development.description_by_commute}</p>
+                    </div>
+                  )}
                 </div>
-                <ViewDev>VIEW DEVELOPMENT</ViewDev>
-              </DevInformation>
-            </DescriptionDiv>
-            <DescriptionDiv active={active == "developer"} id="developer">
-              <h4>DEVELOPER INFORMATION</h4>
-              <DevInformation>
-                <img src={alveo} className="logo" alt="Alveo" />
-                <div className="dev-info">
-                  <h4>Alveo Land Corporation</h4>
-                  <p>9 more Developments</p>
-                </div>
-                <ViewDev>VIEW DEVELOPER</ViewDev>
-              </DevInformation>
-            </DescriptionDiv>
-          </DescriptionLeft>
-          <DescriptionRight>
-            <div className="sticky">
-              <MetadataLine>
-                <div>
-                  <MetadataNumber>55 sqm</MetadataNumber>
-                  <MetadataProperty>
-                    <img src={area} alt="Area" />
-                    <span>Lot Size</span>
-                  </MetadataProperty>
-                </div>
-                <div>
-                  <MetadataNumber>55 sqm</MetadataNumber>
-                  <MetadataProperty>
-                    <img src={area} alt="Area" />
-                    <span>Floor Area</span>
-                  </MetadataProperty>
-                </div>
-                <div>
-                  <MetadataNumber>2</MetadataNumber>
-                  <MetadataProperty>
-                    <img src={bed} alt="Bed" />
-                    <span>Bedrooms</span>
-                  </MetadataProperty>
-                </div>
-                <div>
-                  <MetadataNumber>2</MetadataNumber>
-                  <MetadataProperty>
-                    <img src={bath} alt="Bath" />
-                    <span>Bathrooms</span>
-                  </MetadataProperty>
-                </div>
-              </MetadataLine>
-              <ProductPriceLine>
-                <div>
-                  <img src={money} alt="Money" />
-                  <span className="body-dark">
-                    Est.&nbsp;Property&nbsp;Price
+              </DescriptionDiv>
+              <DescriptionDiv active={active == "facts"} id="area-facts">
+                <h4>AREA FACTS</h4>
+                <p>{listing.area_facts}</p>
+              </DescriptionDiv>
+              <DescriptionDiv active={active == "development"} id="development">
+                <h4>DEVELOPMENT INFORMATION</h4>
+                <DevInformation>
+                  <img src={parklinks} className="logo" alt="Parklinks" />
+                  <div className="dev-info">
+                    <h4>{listing.development.name}</h4>
+                    <p>
+                      <img src={map} alt="Map" />
+                      &nbsp;{listing.development.location}
+                    </p>
+                    <p className="orange-text m-plus">
+                      {listing.development.development_type}
+                    </p>
+                  </div>
+                  <ViewDev>
+                    <Link to={`/development/${listing.development.id}`}>
+                      VIEW DEVELOPMENT
+                    </Link>
+                  </ViewDev>
+                </DevInformation>
+              </DescriptionDiv>
+              <DescriptionDiv active={active == "developer"} id="developer">
+                <h4>DEVELOPER INFORMATION</h4>
+                <DevInformation>
+                  <img src={alveo} className="logo" alt="Alveo" />
+                  <div className="dev-info">
+                    <h4>{listing.development.developer.name}</h4>
+                    <p>More Developments!</p>
+                  </div>
+                  <ViewDev>
+                    <Link to={`/developer/${listing.development.developer.id}`}>
+                      VIEW DEVELOPER
+                    </Link>
+                  </ViewDev>
+                </DevInformation>
+              </DescriptionDiv>
+            </DescriptionLeft>
+            <DescriptionRight>
+              <div className="sticky">
+                <MetadataLine>
+                  <div>
+                    <MetadataNumber>{listing.lot_size} sqm</MetadataNumber>
+                    <MetadataProperty>
+                      <img src={area} alt="Area" />
+                      <span>Lot Size</span>
+                    </MetadataProperty>
+                  </div>
+                  <div>
+                    <MetadataNumber>
+                      {`${listing.floor_size_min}${
+                        listing.floor_size_max
+                          ? `-${listing.floor_size_max}`
+                          : ""
+                      }`}{" "}
+                      sqm
+                    </MetadataNumber>
+                    <MetadataProperty>
+                      <img src={area} alt="Area" />
+                      <span>Floor Area</span>
+                    </MetadataProperty>
+                  </div>
+                  <div>
+                    <MetadataNumber>{listing.bedrooms}</MetadataNumber>
+                    <MetadataProperty>
+                      <img src={bed} alt="Bed" />
+                      <span>Bedrooms</span>
+                    </MetadataProperty>
+                  </div>
+                  <div>
+                    <MetadataNumber>
+                      {listing.bathrooms_min}
+                      {listing.bathrooms_max && "-" + listing.bathrooms_max}
+                    </MetadataNumber>
+                    <MetadataProperty>
+                      <img src={bath} alt="Bath" />
+                      <span>Bathrooms</span>
+                    </MetadataProperty>
+                  </div>
+                </MetadataLine>
+                <ProductPriceLine>
+                  <div>
+                    <img src={money} alt="Money" />
+                    <span className="body-dark">
+                      Est.&nbsp;Property&nbsp;Price
+                    </span>
+                  </div>
+                  <span className="dark-blue">
+                    Php {listing.lowest_price.toLocaleString()}
                   </span>
-                </div>
-                <span className="dark-blue">Php 1,820,000.00</span>
-              </ProductPriceLine>
-              {/* <ProductTour />
+                </ProductPriceLine>
+                {/* <ProductTour />
             <br />
             <br /> */}
-              <ProductInquiry />
-            </div>
-          </DescriptionRight>
-        </DescriptionContainer>
-      </ListingContainer>
+                <ProductInquiry name={listing.development.developer.name} />
+              </div>
+            </DescriptionRight>
+          </DescriptionContainer>
+        </ListingContainer>
+      )}
     </Layout>
   );
 };

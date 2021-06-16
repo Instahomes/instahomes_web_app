@@ -13,49 +13,7 @@ import {
   AdvancedSettings,
 } from "../../components/elements";
 import { Helmet } from "react-helmet";
-
-const sampleListings = [
-  {
-    id: 1,
-    name: "The Lattice Studio Unit",
-    size: 33,
-    price: "9,500,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 1,
-    bathrooms: 1,
-    isVerified: true,
-  },
-  {
-    id: 1,
-    name: "The Lattice 1-Bedroom",
-    size: 58,
-    price: "13,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 1,
-    bathrooms: 1,
-    isVerified: false,
-  },
-  {
-    id: 1,
-    name: "The Lattice 2-Bedroom",
-    size: 94,
-    price: "24,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 2,
-    bathrooms: 1,
-    isVerified: true,
-  },
-  {
-    id: 1,
-    name: "The Lattice 3-Bedroom",
-    size: 128,
-    price: "32,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 3,
-    bathrooms: 2,
-    isVerified: true,
-  },
-];
+import { getListings } from "../../services/listings";
 
 const Search = (props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -66,6 +24,7 @@ const Search = (props) => {
   const [bathrooms, setBathrooms] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [developer, setDeveloper] = useState("");
+  const [listings, setListings] = useState([]);
 
   const history = useHistory();
   const location = useLocation();
@@ -81,6 +40,10 @@ const Search = (props) => {
     setBedrooms(searchParams.get("bedrooms"));
     setDeveloper(searchParams.get("developer"));
   }, [location]);
+
+  useEffect(() => {
+    getListings(setListings, "limit=9");
+  }, []);
 
   return (
     <Layout>
@@ -225,7 +188,7 @@ const Search = (props) => {
           showAdvanced={showAdvanced}
         />
         <div style={{ marginBottom: "2em" }}></div>
-        <ListingGrid listings={sampleListings} />
+        <ListingGrid listings={listings} />
       </SearchContainer>
     </Layout>
   );

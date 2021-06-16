@@ -40,13 +40,13 @@ const inquiryTags = [
   },
 ];
 
-const ProductInquiry = () => {
+const ProductInquiry = ({ name }) => {
   const [selectedTag, setSelectedTag] = useState("");
 
   return (
     <ProductInquiryContainer>
       <h2 className="btn-rubik">
-        Contact <span id="property-developer">Alveo Land</span> directly &nbsp;
+        Contact <span id="property-developer">{name}</span> directly &nbsp;
         <img src={check} alt="Check" />
       </h2>
       <span>I want to inquire about...</span>
