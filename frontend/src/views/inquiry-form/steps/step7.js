@@ -21,7 +21,7 @@ const purchaseTypeChoices = [
     label: "Buy",
   },
   {
-    value: "rentToOwn",
+    value: "rent_to_own",
     label: "Rent-to-own",
   },
   {
@@ -44,7 +44,7 @@ const reasonChoices = [
     label: "To use for business",
   },
   {
-    value: "secondHouse",
+    value: "second_home",
     label: "To save for second house",
   },
   {

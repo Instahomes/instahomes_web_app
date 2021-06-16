@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ProgressBar } from "./styles";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
@@ -17,6 +17,7 @@ import circleFilled from "../../assets/form/circle-filled.svg";
 import circleEmpty from "../../assets/form/circle-empty.svg";
 import { useHistory, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { createUserWithProfile, createProfile } from "../../services/users";
 
 // Wizard is a single Formik instance whose children are each page of the
 // multi-step form. The form is submitted on each forward transition (can only
@@ -45,14 +46,17 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
   };
 
   const handleSubmit = async (values, bag) => {
+    let willProceed = true;
     if (step.props.onSubmit) {
-      await step.props.onSubmit(values, bag);
+      willProceed = await step.props.onSubmit(values, bag);
     }
     if (isLastStep) {
       return onSubmit(values, bag);
     } else {
-      bag.setTouched({});
-      next(values);
+      if (willProceed) {
+        bag.setTouched({});
+        next(values);
+      }
     }
   };
 
@@ -105,11 +109,68 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
 
 const DeveloperForm = (props) => {
   const [isSigningUp, setIsSigningUp] = useState(true);
+  const [listing, setListing] = useState(null);
+  const [inquiry, setInquiry] = useState({});
   const history = useHistory();
   const location = useLocation();
 
   const isComingFromSignupPage =
     location.state && location.state.isComingFromSignupPage;
+
+  useEffect(() => {
+    if (location.state) {
+      if (location.state.listing) setListing(location.state.listing);
+      if (location.state.inquiry) setInquiry(location.state.inquiry);
+    }
+  }, []);
+
+  const handleSubmit = async (values, setSubmitting) => {
+    let willProceed = true;
+    setSubmitting(true);
+    const profile = {
+      name: values.name,
+      preferred_location: values.address,
+      property_types: values.propertyTypes,
+      budget: values.budget,
+      preferred_type: values.purchaseType,
+      preferred_use: values.reason,
+      process_stage: values.progress,
+      has_agent: values.hasAgent,
+    };
+
+    if (isSigningUp) {
+      if (!isComingFromSignupPage) {
+        await createUserWithProfile(
+          values.contactNumber,
+          values.email,
+          values.password,
+          profile,
+          inquiry,
+          () => {
+            setSubmitting(false);
+          },
+          () => {
+            setSubmitting(false);
+            willProceed = false;
+          }
+        );
+      }
+    } else {
+      await createProfile(
+        profile,
+        inquiry,
+        () => {
+          setSubmitting(false);
+        },
+        (err) => {
+          setSubmitting(false);
+          willProceed = false;
+        }
+      );
+    }
+
+    return willProceed;
+  };
 
   return (
     <React.Fragment>
@@ -136,62 +197,59 @@ const DeveloperForm = (props) => {
       >
         {!isComingFromSignupPage && (
           <Step1
-            onSubmit={() => console.log("Is signing up: " + isSigningUp)}
             validationSchema={Yup.object({})}
             setIsSigningUp={setIsSigningUp}
+            listing={listing}
           />
         )}
         <Step2
-          onSubmit={() => console.log("Step2 onSubmit")}
           validationSchema={Yup.object({ name: Yup.string().required() })}
         />
         <Step3
-          onSubmit={() => console.log("Step3 onSubmit")}
           validationSchema={Yup.object({
             contactNumber: Yup.string().required(),
             email: Yup.string().email(),
           })}
         />
         <Step4
-          onSubmit={() => console.log("Step4 onSubmit")}
           validationSchema={Yup.object({
             address: Yup.string().required(),
           })}
         />
         <Step5
-          onSubmit={() => console.log("Step5 onSubmit")}
           validationSchema={Yup.object({
             propertyTypes: Yup.array().of(Yup.string()).required(),
           })}
         />
         <Step6
-          onSubmit={() => console.log("Step6 onSubmit")}
           validationSchema={Yup.object({
             budget: Yup.string().required(),
           })}
         />
         <Step7
-          onSubmit={() => console.log("Step7 onSubmit")}
           validationSchema={Yup.object({
             purchaseType: Yup.string().required(),
             reason: Yup.string().required(),
           })}
         />
         <Step8
-          onSubmit={() => console.log("Step8 onSubmit")}
           validationSchema={Yup.object({
             progress: Yup.string().required(),
           })}
         />
         <Step9
-          onSubmit={() => console.log("Step9 onSubmit")}
+          onSubmit={async (values, { setSubmitting }) =>
+            !isSigningUp && (await handleSubmit(values, setSubmitting))
+          }
           validationSchema={Yup.object({
             hasAgent: Yup.boolean().required(),
           })}
         />
         {isSigningUp && !isComingFromSignupPage && (
           <Step10
-            onSubmit={() => console.log("Step10 onSubmit")}
+            onSubmit={async (values, { setSubmitting }) =>
+              await handleSubmit(values, setSubmitting)
+            }
             validationSchema={Yup.object({
               password: Yup.string().required(),
               confirmPassword: Yup.string().oneOf(
@@ -207,6 +265,9 @@ const DeveloperForm = (props) => {
             history.push("/");
           }}
           validationSchema={Yup.object({})}
+          isSigningUp={isSigningUp}
+          isComingFromSignupPage={isComingFromSignupPage}
+          listing={listing}
         />
       </Wizard>
     </React.Fragment>

@@ -35,7 +35,7 @@ const budgetChoices = [
     label: "PHP 20-25 Million",
   },
   {
-    value: "25-",
+    value: ">25",
     label: "More than 25 Million",
   },
 ];

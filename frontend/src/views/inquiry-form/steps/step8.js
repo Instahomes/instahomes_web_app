@@ -17,7 +17,7 @@ import { Field } from "formik";
 
 const progressChoices = [
   {
-    value: "askingAround",
+    value: "asking_around",
     label: "I'm just asking around",
   },
   {
@@ -25,7 +25,7 @@ const progressChoices = [
     label: "I'm just visiting properties",
   },
   {
-    value: "readyToClose",
+    value: "ready",
     label: "I'm ready to close a deal",
   },
   {

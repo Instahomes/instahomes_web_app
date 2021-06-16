@@ -5,11 +5,6 @@ import ProductSearch from "../../components/product-search";
 export const ListingContainer = styled.main`
   padding: 2em var(--main-padding-x);
   padding-top: 5em;
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
 `;
 
 export const ListingHeadContainer = styled.div`
@@ -273,6 +268,12 @@ export const DevInformation = styled.div`
 export const ViewDev = styled(OutlineButton)`
   padding: 0.5em 1em;
   font-size: 0.9em;
+  margin-left: auto;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 100%;

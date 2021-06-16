@@ -113,7 +113,10 @@ const Listing = (props) => {
       <Helmet>
         <meta charSet="utf-8" />
         <title>{listing ? listing.seo_title : "Instahomes"}</title>
-        <meta name="description" content=""></meta>
+        <meta
+          name="description"
+          content={listing ? listing.overview : ""}
+        ></meta>
       </Helmet>
       <Navbar />
       {listing && (
@@ -322,9 +325,22 @@ const Listing = (props) => {
                   </span>
                 </ProductPriceLine>
                 {/* <ProductTour />
-            <br />
-            <br /> */}
-                <ProductInquiry name={listing.development.developer.name} />
+                <br />
+                <br /> */}
+                <ProductInquiry
+                  listing={{
+                    developer: {
+                      id: listing.development.developer.id,
+                      name: listing.development.developer.name,
+                    },
+                    development: {
+                      id: listing.development.id,
+                      name: listing.development.name,
+                    },
+                    name: listing.unit_name,
+                    id: listing.id,
+                  }}
+                />
               </div>
             </DescriptionRight>
           </DescriptionContainer>

@@ -26,14 +26,20 @@ const Step1Frame = styled(Frame)`
   height: 88vh;
 `;
 
-const Step1 = ({ isSubmitting, setIsSigningUp }) => {
+const Step1 = ({ isSubmitting, setIsSigningUp, listing }) => {
   return (
     <Step1Frame>
       <Content>
-        <h1>Inquire about Alveo Land’s The Lattice 1-Bedroom Unit today</h1>
+        <h1>
+          Inquire{" "}
+          {listing &&
+            `about ${listing.developer.name}’s ${listing.development.name} ${listing.name}`}{" "}
+          today
+        </h1>
         <p>
-          Hi there! To make your investment process with Alveo Land easier,
-          we’ll just need a couple of preset information. <br />
+          Hi there! To make your investment process{" "}
+          {listing && `with ${listing.developer.name}`} easier, we’ll just need
+          a couple of preset information. <br />
           Don’t worry, all information here will not be shared with anyone aside
           from the direct developer.
         </p>

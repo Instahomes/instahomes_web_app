@@ -23,7 +23,7 @@ const propertyChoices = [
     label: "Commercial Office Space",
   },
   {
-    value: "houseAndLot",
+    value: "house_and_lot",
     label: "House and Lot",
   },
   {
@@ -31,7 +31,7 @@ const propertyChoices = [
     label: "Apartment",
   },
   {
-    value: "lotOnly",
+    value: "lot",
     label: "Lot Only",
   },
   {
