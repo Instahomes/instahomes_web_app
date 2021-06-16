@@ -32,13 +32,13 @@ export const ListingRow = styled.div`
   justify-content: ${({ threeOrLess }) => (threeOrLess ? "center" : "start")};
   gap: 1em;
 
-  & > div:nth-child(3) {
-    margin-right: 10px;
-  }
+  // & > div:nth-child(3) {
+  //   margin-right: 10px;
+  // }
 
-  & > div:not(:first-child) {
-    margin-left: 20px;
-  }
+  // & > div:not(:first-child) {
+  //   margin-left: 20px;
+  // }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding: 10px;

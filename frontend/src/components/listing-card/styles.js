@@ -7,15 +7,18 @@ export const ListingCard = styled.div`
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   min-width: 370px;
+  max-width: 370px;
   display: flex;
   flex-direction: column;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     min-width: 330px;
+    max-width: 330px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     min-width: min(260px, 100%);
+    max-width: min(260px, 100%);
   }
 `;
 

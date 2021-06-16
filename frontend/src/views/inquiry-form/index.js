@@ -121,6 +121,8 @@ const DeveloperForm = (props) => {
     if (location.state) {
       if (location.state.listing) setListing(location.state.listing);
       if (location.state.inquiry) setInquiry(location.state.inquiry);
+    } else {
+      history.push("/search");
     }
   }, []);
 
