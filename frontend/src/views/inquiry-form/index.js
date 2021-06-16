@@ -108,7 +108,8 @@ const DeveloperForm = (props) => {
   const history = useHistory();
   const location = useLocation();
 
-  const { isComingFromSignupPage } = location.state;
+  const isComingFromSignupPage =
+    location.state && location.state.isComingFromSignupPage;
 
   return (
     <React.Fragment>
