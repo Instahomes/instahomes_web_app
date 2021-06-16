@@ -28,7 +28,7 @@ import {
 import heroBg from "../../assets/home/hero.jpeg";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
-import { getDevelopers } from "../../services/developers";
+import { getListings } from "../../services/listings";
 
 const sampleListings = [
   {
@@ -79,10 +79,11 @@ const sampleListings = [
 
 const Home = (props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [listings, setListings] = useState([]);
 
-  // useEffect(() => {
-  //   getDevelopers().then((res) => console.log(res));
-  // }, []);
+  useEffect(() => {
+    getListings(setListings, "limit=5");
+  }, []);
 
   return (
     <Layout>
@@ -101,18 +102,18 @@ const Home = (props) => {
       <HomeListings>
         <h1 className="dark center">Newest listings in the market today</h1>
         <ListingRow threeOrLess={sampleListings.length <= 3}>
-          {sampleListings.map((listing) => (
+          {listings.map((listing) => (
             <ListingCard
               id={listing.id}
-              key={listing.name}
-              developer={listing.developer}
-              image={house}
-              name={listing.name}
-              size={listing.size}
-              price={listing.price}
-              address={listing.address}
+              key={listing.seo_title}
+              developer={listing.development.developer.name}
+              image={listing.photo_main}
+              name={listing.development.name + " " + listing.unit_name}
+              size={listing.floor_size_min}
+              price={listing.lowest_price}
+              address={listing.development.location}
               bedrooms={listing.bedrooms}
-              bathrooms={listing.bathrooms}
+              bathrooms={listing.bathrooms_min}
               isVerified={true}
             />
           ))}

@@ -3,10 +3,10 @@ import axiosClient from "./";
 const LOCAL_STORAGE_TOKEN = "token";
 const LOCAL_STORAGE_REFRESH_TOKEN = "refresh_token";
 
-export const login = (email, password, callback, errorCallback) => {
+export const login = (contactNumber, password, callback, errorCallback) => {
   return axiosClient
     .post("/token/obtain/", {
-      email,
+      contact_number: contactNumber,
       password,
     })
     .then((response) => {

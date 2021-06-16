@@ -32,14 +32,20 @@ const SignupSchema = Yup.object({
   ),
 });
 
+const LoginSchema = Yup.object({
+  contactNumber: Yup.string().required("Contact number is required"),
+  email: Yup.string().email(),
+  password: Yup.string().required("Password is required"),
+});
+
 const Signup = ({ isLogin }) => {
   const [message, setMessage] = useState("");
   const [isEmailShown, setEmailShown] = useState(false);
   const history = useHistory();
 
-  const handleLogin = (email, password) => {
+  const handleLogin = (contactNumber, password) => {
     login(
-      email,
+      contactNumber,
       password,
       () => history.push("/"),
       () => setMessage("Wrong credentials!")
@@ -72,10 +78,12 @@ const Signup = ({ isLogin }) => {
               passwordRetype: "",
             }}
             onSubmit={(values, { setSubmitting }) => {
-              const { email, password } = values;
-              isLogin ? handleLogin(email, password) : handleSignup(values);
+              const { contactNumber, password } = values;
+              isLogin
+                ? handleLogin(contactNumber, password)
+                : handleSignup(values);
             }}
-            validationSchema={SignupSchema}
+            validationSchema={isLogin ? LoginSchema : SignupSchema}
           >
             {({
               values,
@@ -146,16 +154,18 @@ const Signup = ({ isLogin }) => {
                     onBlur={handleBlur}
                     value={values.password}
                   />
-                  <SignupInput
-                    icon={lock}
-                    scale={0.9}
-                    type="password"
-                    placeholder="Retype Password"
-                    name="retypePassword"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.retypePassword}
-                  />
+                  {!isLogin && (
+                    <SignupInput
+                      icon={lock}
+                      scale={0.9}
+                      type="password"
+                      placeholder="Retype Password"
+                      name="retypePassword"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.retypePassword}
+                    />
+                  )}
                   {!isLogin && (
                     <label className="terms-checkbox small-span">
                       <input type="checkbox" />I agree to the Terms & Conditions

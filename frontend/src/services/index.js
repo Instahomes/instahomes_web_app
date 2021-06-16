@@ -13,8 +13,7 @@ axiosClient.interceptors.response.use(
   },
   (error) => {
     // Return any error which is not due to authentication back to the calling service
-    console.log(error);
-    if (error.response.status !== 401) {
+    if (error.response && error.response.status !== 401) {
       return new Promise((resolve, reject) => {
         reject(error);
       });

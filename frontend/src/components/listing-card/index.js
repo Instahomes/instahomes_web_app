@@ -38,7 +38,9 @@ const Card = ({
 
   return (
     <ListingCard>
-      <ListingImage src={image} alt="House" />
+      <ListingImage>
+        <img src={image} alt="House" />
+      </ListingImage>
       {developer == "Alveo" && <DeveloperLogo src={logo} alt="Alveo" />}
       <WishlistHeart
         src={isHeartFilled ? heartFull : heartEmpty}
@@ -55,7 +57,10 @@ const Card = ({
         <ListingLine>
           <ListingSize>{size}&nbsp;sqm</ListingSize>
           <ListingPiece bold marginLeft="10px">
-            Starts at <span className="orange bold">PHP&nbsp;{price}</span>
+            Starts at{" "}
+            <span className="orange bold">
+              PHP&nbsp;{price.toLocaleString()}
+            </span>
           </ListingPiece>
         </ListingLine>
         <ListingLine>
