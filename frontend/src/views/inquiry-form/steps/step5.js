@@ -12,33 +12,7 @@ import {
   CheckboxLabel,
 } from "../styles";
 import { Field } from "formik";
-
-const propertyChoices = [
-  {
-    value: "condo",
-    label: "Condominium",
-  },
-  {
-    value: "office",
-    label: "Commercial Office Space",
-  },
-  {
-    value: "house_and_lot",
-    label: "House and Lot",
-  },
-  {
-    value: "apartment",
-    label: "Apartment",
-  },
-  {
-    value: "lot",
-    label: "Lot Only",
-  },
-  {
-    value: "townhouse",
-    label: "Townhouse",
-  },
-];
+import { propertyChoices } from "../../../misc/constants";
 
 const Step5 = ({ isSubmitting, values, previous, errors }) => {
   return (

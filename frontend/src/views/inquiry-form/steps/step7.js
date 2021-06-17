@@ -14,48 +14,7 @@ import {
   Choice,
 } from "../styles";
 import { Field } from "formik";
-
-const purchaseTypeChoices = [
-  {
-    value: "buy",
-    label: "Buy",
-  },
-  {
-    value: "rent_to_own",
-    label: "Rent-to-own",
-  },
-  {
-    value: "rent",
-    label: "Rent",
-  },
-];
-
-const reasonChoices = [
-  {
-    value: "reside",
-    label: "To reside in",
-  },
-  {
-    value: "rented",
-    label: "To be rented",
-  },
-  {
-    value: "business",
-    label: "To use for business",
-  },
-  {
-    value: "second_home",
-    label: "To save for second house",
-  },
-  {
-    value: "invest",
-    label: "To invest in",
-  },
-  {
-    value: "other",
-    label: "Other",
-  },
-];
+import { purchaseTypeChoices, reasonChoices } from "../../../misc/constants";
 
 const Step7 = ({
   isSubmitting,

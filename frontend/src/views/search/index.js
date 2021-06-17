@@ -14,6 +14,12 @@ import {
 } from "../../components/elements";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
+import {
+  purchaseTypeChoices,
+  reasonChoices,
+  propertyChoices,
+  budgetChoices,
+} from "../../misc/constants";
 
 const Search = (props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);

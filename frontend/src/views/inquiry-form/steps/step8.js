@@ -14,25 +14,7 @@ import {
   Choice,
 } from "../styles";
 import { Field } from "formik";
-
-const progressChoices = [
-  {
-    value: "asking_around",
-    label: "I'm just asking around",
-  },
-  {
-    value: "visiting",
-    label: "I'm just visiting properties",
-  },
-  {
-    value: "ready",
-    label: "I'm ready to close a deal",
-  },
-  {
-    value: "other",
-    label: "Other",
-  },
-];
+import { progressChoices } from "../../../misc/constants";
 
 const Step8 = ({
   isSubmitting,
