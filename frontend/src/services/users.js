@@ -43,3 +43,10 @@ export const createUserWithProfile = (
     .then((res) => callback(res.data))
     .catch((err) => errorCallback(err));
 };
+
+export const createInquiry = (inquiry, callback, errorCallback) => {
+  return axiosClient
+    .post(`/inquire/`, inquiry)
+    .then((res) => callback(res.data))
+    .catch((err) => errorCallback(err));
+};

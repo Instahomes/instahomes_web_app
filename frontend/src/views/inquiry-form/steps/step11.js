@@ -8,6 +8,7 @@ import {
 } from "../styles";
 import formComplete from "../../../assets/form/form-complete.svg";
 import logo from "../../../assets/navbar/largeLogoDark.svg";
+import { getProfile } from "../../../services/auth";
 import styled from "styled-components";
 
 const Step11Frame = styled(Frame)`
@@ -27,6 +28,8 @@ const Step11Button = styled(SignupOutlineButton)`
 `;
 
 const Step11 = ({ listing, values, isSigningUp }) => {
+  const profile = getProfile();
+
   return (
     <Step11Frame>
       <Content>
@@ -42,7 +45,14 @@ const Step11 = ({ listing, values, isSigningUp }) => {
         </h1>
         <p>
           Please expect a reply from {listing.developer.name} that will be sent
-          to <b>{values.contactNumber || listing.email}</b>.
+          to{" "}
+          <b>
+            {values.contactNumber ||
+              values.email ||
+              profile.contactNumber ||
+              profile.email}
+          </b>
+          .
           <br />
           {listing.developer.name} usually takes <b>30 minutes</b> to reply for
           inquiries sent in business days.

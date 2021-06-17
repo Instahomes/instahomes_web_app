@@ -10,6 +10,11 @@ import {
 import styled from "styled-components";
 import logo from "../../../assets/navbar/largeLogoDark.svg";
 import step1Bg from "../../../assets/form/step1Bg.jpeg";
+import {
+  IS_SIGNING_UP,
+  IS_NOT_SIGNING_UP,
+  IS_AUTHENTICATED_NO_PROFILE,
+} from "../constants";
 
 const InstahomesLogo = styled.img`
   width: 250px;
@@ -26,7 +31,8 @@ const Step1Frame = styled(Frame)`
   height: 88vh;
 `;
 
-const Step1 = ({ isSubmitting, setIsSigningUp, listing }) => {
+const Step1 = ({ isSubmitting, setInquiryState, listing, inquiryState }) => {
+  const isAuthenticatedNoProfile = inquiryState == IS_AUTHENTICATED_NO_PROFILE;
   return (
     <Step1Frame>
       <Content>
@@ -39,30 +45,43 @@ const Step1 = ({ isSubmitting, setIsSigningUp, listing }) => {
         <p>
           Hi there! To make your investment process{" "}
           {listing && `with ${listing.developer.name}`} easier, we’ll just need
-          a couple of preset information. <br />
+          a couple of preset information.{" "}
+          {isAuthenticatedNoProfile &&
+            "Since you're signed up, we'll only need you to answer once."}{" "}
+          <br />
           Don’t worry, all information here will not be shared with anyone aside
           from the direct developer.
         </p>
-        <p>
-          First, would you like to save your information for other inquiries by
-          signing up?
-        </p>
+        {!isAuthenticatedNoProfile && (
+          <p>
+            First, would you like to save your information for other inquiries
+            by signing up?
+          </p>
+        )}
         <FormDiv>
           <FormFrame>
-            <SignupOrangeButton
-              disabled={isSubmitting}
-              onClick={() => setIsSigningUp(true)}
-              type="submit"
-            >
-              ANSWER & SIGN UP <i>it's free</i>
-            </SignupOrangeButton>
-            <SignupOutlineButton
-              disabled={isSubmitting}
-              onClick={() => setIsSigningUp(false)}
-              type="submit"
-            >
-              JUST ANSWER
-            </SignupOutlineButton>
+            {isAuthenticatedNoProfile ? (
+              <SignupOrangeButton disabled={isSubmitting} type="submit">
+                ANSWER NOW
+              </SignupOrangeButton>
+            ) : (
+              <React.Fragment>
+                <SignupOrangeButton
+                  disabled={isSubmitting}
+                  onClick={() => setInquiryState(IS_SIGNING_UP)}
+                  type="submit"
+                >
+                  ANSWER & SIGN UP <i>it's free</i>
+                </SignupOrangeButton>
+                <SignupOutlineButton
+                  disabled={isSubmitting}
+                  onClick={() => setInquiryState(IS_NOT_SIGNING_UP)}
+                  type="submit"
+                >
+                  JUST ANSWER
+                </SignupOutlineButton>
+              </React.Fragment>
+            )}
           </FormFrame>
         </FormDiv>
         <p>Either form only takes approx. 3 mins</p>

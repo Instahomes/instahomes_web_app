@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { clear } from "../../services/auth";
+import { clear, getProfile } from "../../services/auth";
 
 export const AccountDropdownStyle = styled.div`
   position: relative;
@@ -25,6 +25,7 @@ export const DropdownDiv = styled.div`
   border-radius: 10px;
   font-size: 0.9em;
   top: 2.2em;
+  right: 0;
 
   ul {
     padding: 1em 1em;
@@ -42,11 +43,20 @@ export const DropdownDiv = styled.div`
 
 const AccountDropdown = ({ dark }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [profile, setProfile] = useState({});
 
   const handleLogout = () => {
     clear();
     window.location.reload();
   };
+
+  useEffect(() => {
+    const currProfile = getProfile();
+    console.log(currProfile);
+    if (currProfile) {
+      setProfile(currProfile);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -76,7 +86,9 @@ const AccountDropdown = ({ dark }) => {
           />
         </svg>
         <span onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-          DANI DEL RIO
+          {profile &&
+            ((profile.name && profile.name.toUpperCase()) ||
+              profile.contactNumber)}
         </span>
         <svg
           width="12"
