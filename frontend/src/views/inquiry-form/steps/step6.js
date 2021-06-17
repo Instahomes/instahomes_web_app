@@ -7,12 +7,12 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
 import { Field } from "formik";
 import { budgetChoices } from "../../../misc/constants";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step6 = ({ isSubmitting, values, previous, errors }) => {
   return (

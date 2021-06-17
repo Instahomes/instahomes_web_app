@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar";
 import ProductInquiry from "../../components/product-inquiry";
 import ProductTour from "../../components/product-tour";
 import ListingImageGrid from "../../components/listing-image-grid";
+import Loading from "../../components/loading";
 
 import heart from "../../assets/product/heart.svg";
 import check from "../../assets/product/check.svg";
@@ -119,7 +120,7 @@ const Listing = (props) => {
         ></meta>
       </Helmet>
       <Navbar />
-      {listing && (
+      {listing ? (
         <ListingContainer>
           {/* <ListingProductSearch /> */}
           <ListingHeadContainer>
@@ -345,6 +346,8 @@ const Listing = (props) => {
             </DescriptionRight>
           </DescriptionContainer>
         </ListingContainer>
+      ) : (
+        <Loading />
       )}
     </Layout>
   );

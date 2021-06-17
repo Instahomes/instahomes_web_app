@@ -49,7 +49,11 @@ const Step1 = ({ isSubmitting, setIsSigningUp, listing }) => {
         </p>
         <FormDiv>
           <FormFrame>
-            <SignupOrangeButton disabled={isSubmitting} type="submit">
+            <SignupOrangeButton
+              disabled={isSubmitting}
+              onClick={() => setIsSigningUp(true)}
+              type="submit"
+            >
               ANSWER & SIGN UP <i>it's free</i>
             </SignupOrangeButton>
             <SignupOutlineButton

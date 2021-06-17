@@ -3,16 +3,10 @@ import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import DeveloperContact from "../../components/developer-contact";
 import FeaturedSection from "../../components/featured-section";
-import circuitLane from "../../assets/developer/circuitLane.png";
-import ayalaLand from "../../assets/developer/logo-ayalaland.png";
-import amaia from "../../assets/developer/logo-amaia.png";
-import premier from "../../assets/developer/logo-premier.png";
-import avida from "../../assets/developer/logo-avida.png";
+import Loading from "../../components/loading";
 
 import map from "../../assets/development/map.svg";
-import devMap from "../../assets/development/devMap.png";
 import check from "../../assets/card/check.svg";
-import house from "../../assets/card/sample_house.png";
 import {
   DeveloperContainer,
   HeroSection,
@@ -75,7 +69,7 @@ const Developer = (props) => {
         ></meta>
       </Helmet>
       <Navbar dark />
-      {developer && (
+      {developer ? (
         <DeveloperContainer>
           <HeroSection image={developer.featured_image}>
             <div className="hero-gradient">
@@ -169,6 +163,8 @@ const Developer = (props) => {
             <div className="office-map"></div>
           </OfficeLocations> */}
         </DeveloperContainer>
+      ) : (
+        <Loading></Loading>
       )}
     </Layout>
   );

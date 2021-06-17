@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar";
 import ListingCard from "../../components/listing-card";
 import DeveloperContact from "../../components/developer-contact";
 import FeaturedSection from "../../components/featured-section";
+import Loading from "../../components/loading";
 
 import map from "../../assets/development/map.svg";
 import devMap from "../../assets/development/devMap.png";
@@ -42,7 +43,7 @@ const Development = (props) => {
         ></meta>
       </Helmet>
       <Navbar dark />
-      {development && (
+      {development ? (
         <DevelopmentContainer>
           <HeroSection image={development.photo_main}>
             <div className="hero-gradient">
@@ -106,6 +107,8 @@ const Development = (props) => {
           <DeveloperContact />
           <FeaturedSection />
         </DevelopmentContainer>
+      ) : (
+        <Loading></Loading>
       )}
     </Layout>
   );

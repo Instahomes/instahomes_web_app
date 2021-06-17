@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { OrangeButton, OutlineButton } from "../../components/elements";
 import { Input } from "../../components/elements";
-import { ErrorMessage, Form } from "formik";
 
 export const Frame = styled.main`
   background: hsla(215, 33%, 15%, 0.95);
@@ -139,11 +138,6 @@ export const InputHelper = styled.span`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     position: static;
   }
-`;
-
-export const FormErrorMessage = styled(ErrorMessage)`
-  font-size: 1em;
-  color: ${({ theme }) => theme.colors.mutedLightBlue};
 `;
 
 export const CheckboxGroup = styled.div`

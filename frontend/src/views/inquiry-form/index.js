@@ -18,6 +18,8 @@ import circleEmpty from "../../assets/form/circle-empty.svg";
 import { useHistory, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { createUserWithProfile, createProfile } from "../../services/users";
+import Loading from "../../components/loading";
+import { FormErrorMessage } from "../../components/elements";
 
 // Wizard is a single Formik instance whose children are each page of the
 // multi-step form. The form is submitted on each forward transition (can only
@@ -26,7 +28,13 @@ import { createUserWithProfile, createProfile } from "../../services/users";
 // transition. Each page has an optional submit handler, and the top-level
 // submit is called when the final page is submitted.
 // Retrieved from: https://github.com/formium/formik/blob/master/examples/MultistepWizard.js
-const Wizard = ({ children, initialValues, onSubmit }) => {
+const Wizard = ({
+  children,
+  initialValues,
+  onSubmit,
+  isLoading,
+  isSigningUp,
+}) => {
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
   const [snapshot, setSnapshot] = useState(initialValues);
@@ -92,17 +100,19 @@ const Wizard = ({ children, initialValues, onSubmit }) => {
           </Form>
         )}
       </Formik>
-      {stepNumber > 0 && stepNumber < totalSteps - 2 && (
-        <ProgressBar>
-          {steps.slice(1, steps.length - 2).map((step, idx) => (
-            <img
-              key={"step" + idx}
-              src={stepNumber <= idx ? circleEmpty : circleFilled}
-              alt="Filled Circle"
-            />
-          ))}
-        </ProgressBar>
-      )}
+      {!isLoading &&
+        stepNumber > 0 &&
+        stepNumber < (isSigningUp ? totalSteps - 2 : totalSteps - 1) && (
+          <ProgressBar>
+            {steps.slice(1, steps.length - 1).map((step, idx) => (
+              <img
+                key={"step" + idx}
+                src={stepNumber <= idx ? circleEmpty : circleFilled}
+                alt="Filled Circle"
+              />
+            ))}
+          </ProgressBar>
+        )}
     </React.Fragment>
   );
 };
@@ -111,6 +121,8 @@ const DeveloperForm = (props) => {
   const [isSigningUp, setIsSigningUp] = useState(true);
   const [listing, setListing] = useState(null);
   const [inquiry, setInquiry] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState([]);
   const history = useHistory();
   const location = useLocation();
 
@@ -128,6 +140,7 @@ const DeveloperForm = (props) => {
 
   const handleSubmit = async (values, setSubmitting) => {
     let willProceed = true;
+    setIsLoading(true);
     setSubmitting(true);
     const profile = {
       name: values.name,
@@ -140,39 +153,57 @@ const DeveloperForm = (props) => {
       has_agent: values.hasAgent,
     };
 
+    const successCallback = () => {
+      setIsLoading(false);
+      setSubmitting(false);
+    };
+
+    const errorCallback = (err) => {
+      setIsLoading(false);
+      setSubmitting(false);
+      setFormErrors(
+        [].concat(
+          ...Object.entries(err.response.data).map(
+            ([key, value]) => `${key}: ${value}`
+          )
+        )
+      );
+      willProceed = false;
+    };
+
     if (isSigningUp) {
       if (!isComingFromSignupPage) {
         await createUserWithProfile(
           values.contactNumber,
-          values.email,
+          values.email || null,
           values.password,
           profile,
           inquiry,
-          () => {
-            setSubmitting(false);
-          },
-          () => {
-            setSubmitting(false);
-            willProceed = false;
-          }
+          successCallback,
+          errorCallback
         );
       }
     } else {
-      await createProfile(
-        profile,
-        inquiry,
-        () => {
-          setSubmitting(false);
-        },
-        (err) => {
-          setSubmitting(false);
-          willProceed = false;
-        }
-      );
+      await createProfile(profile, inquiry, successCallback, errorCallback);
     }
 
     return willProceed;
   };
+
+  const FormLoading = ({ children }) =>
+    isLoading ? (
+      <Loading
+        height={"600px"}
+        message="Inquiry is being sent, please wait a moment."
+      ></Loading>
+    ) : (
+      children
+    );
+
+  const FormErrorsComponent = () =>
+    formErrors.map((formError) => (
+      <FormErrorMessage as="span">{formError}</FormErrorMessage>
+    ));
 
   return (
     <React.Fragment>
@@ -196,6 +227,8 @@ const DeveloperForm = (props) => {
           password: "",
           confirmPassword: "",
         }}
+        isLoading={isLoading}
+        isSigningUp={isSigningUp}
       >
         {!isComingFromSignupPage && (
           <Step1
@@ -205,47 +238,62 @@ const DeveloperForm = (props) => {
           />
         )}
         <Step2
-          validationSchema={Yup.object({ name: Yup.string().required() })}
+          validationSchema={Yup.object({
+            name: Yup.string().required("Please enter your name."),
+          })}
         />
         <Step3
           validationSchema={Yup.object({
-            contactNumber: Yup.string().required(),
-            email: Yup.string().email(),
+            contactNumber: Yup.string()
+              .required("Please enter a contact number.")
+              .matches(
+                /^(09|\+639)\d{9}$/,
+                "Please follow the correct format: +639171234567"
+              ),
+            email: Yup.string().email("Please input a correct email."),
           })}
         />
         <Step4
           validationSchema={Yup.object({
-            address: Yup.string().required(),
+            address: Yup.string().required("Please enter your location."),
           })}
         />
         <Step5
           validationSchema={Yup.object({
-            propertyTypes: Yup.array().of(Yup.string()).required(),
+            propertyTypes: Yup.array()
+              .of(Yup.string())
+              .required("Please choose your preferred type/s."),
           })}
         />
         <Step6
           validationSchema={Yup.object({
-            budget: Yup.string().required(),
+            budget: Yup.string().required(
+              "Please choose your estimated budget."
+            ),
           })}
         />
         <Step7
           validationSchema={Yup.object({
-            purchaseType: Yup.string().required(),
-            reason: Yup.string().required(),
+            purchaseType: Yup.string().required(
+              "Please choose your preference."
+            ),
+            reason: Yup.string().required("Please choose your reason."),
           })}
         />
         <Step8
           validationSchema={Yup.object({
-            progress: Yup.string().required(),
+            progress: Yup.string().required("Please choose an option."),
           })}
         />
         <Step9
           onSubmit={async (values, { setSubmitting }) =>
-            !isSigningUp && (await handleSubmit(values, setSubmitting))
+            !isSigningUp ? await handleSubmit(values, setSubmitting) : true
           }
           validationSchema={Yup.object({
             hasAgent: Yup.boolean().required(),
           })}
+          FormLoading={FormLoading}
+          FormErrorsComponent={FormErrorsComponent}
         />
         {isSigningUp && !isComingFromSignupPage && (
           <Step10
@@ -253,12 +301,14 @@ const DeveloperForm = (props) => {
               await handleSubmit(values, setSubmitting)
             }
             validationSchema={Yup.object({
-              password: Yup.string().required(),
+              password: Yup.string().required("Please type a password."),
               confirmPassword: Yup.string().oneOf(
                 [Yup.ref("password"), null],
-                "Passwords must match"
+                "Passwords must match."
               ),
             })}
+            FormLoading={FormLoading}
+            FormErrorsComponent={FormErrorsComponent}
           />
         )}
         <Step11

@@ -9,9 +9,9 @@ import {
   SignupInput,
   SignupInputWithHelper,
   InputHelper,
-  FormErrorMessage,
 } from "../styles";
 import { Field } from "formik";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step3 = ({ isSubmitting, values, previous, errors }) => {
   const [showEmail, setShowEmail] = useState(false);
@@ -41,11 +41,14 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
               </InputHelper>
             </SignupInputWithHelper>
             {showEmail && (
-              <SignupInput
-                as={Field}
-                placeholder="Email Address"
-                name="email"
-              />
+              <React.Fragment>
+                <FormErrorMessage component="span" name="email" />
+                <SignupInput
+                  as={Field}
+                  placeholder="Email Address"
+                  name="email"
+                />
+              </React.Fragment>
             )}
             <SignupOrangeButton
               disabled={

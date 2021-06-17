@@ -7,7 +7,6 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
   ChoiceGroup,
@@ -15,6 +14,7 @@ import {
 } from "../styles";
 import { Field } from "formik";
 import { progressChoices } from "../../../misc/constants";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step8 = ({
   isSubmitting,

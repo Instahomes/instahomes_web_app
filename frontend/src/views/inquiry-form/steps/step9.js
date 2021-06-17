@@ -7,13 +7,12 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
   ChoiceGroup,
   Choice,
 } from "../styles";
-import { Field } from "formik";
+import { FormErrorMessage } from "../../../components/elements";
 
 const hasAgentChoices = [
   {
@@ -27,6 +26,8 @@ const hasAgentChoices = [
 ];
 
 const Step9 = ({
+  FormLoading,
+  FormErrorsComponent,
   isSubmitting,
   values,
   setFieldValue,
@@ -36,39 +37,42 @@ const Step9 = ({
 }) => {
   return (
     <Frame>
-      <Content>
-        <h1>Do you already have an agent?</h1>
-        <p>
-          Please let us know if you have an agent by choosing Yes or No below
-        </p>
-        <FormDiv style={{ marginTop: "1rem", marginBottom: "1rem" }}>
-          <FormErrorMessage component="span" name="hasAgent" />
-          <ChoiceGroup>
-            {hasAgentChoices.map((choice) => (
-              <Choice
-                key={choice.label}
-                onClick={() => setFieldValue("hasAgent", choice.value)}
-                isChecked={values.hasAgent == choice.value}
+      <FormLoading>
+        <Content>
+          <h1>Do you already have an agent?</h1>
+          <p>
+            Please let us know if you have an agent by choosing Yes or No below
+          </p>
+          <FormDiv style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            <FormErrorMessage component="span" name="hasAgent" />
+            <FormErrorsComponent />
+            <ChoiceGroup>
+              {hasAgentChoices.map((choice) => (
+                <Choice
+                  key={choice.label}
+                  onClick={() => setFieldValue("hasAgent", choice.value)}
+                  isChecked={values.hasAgent == choice.value}
+                >
+                  {choice.label}
+                </Choice>
+              ))}
+            </ChoiceGroup>
+          </FormDiv>
+          <FormDiv>
+            <FormFrame>
+              <SignupOrangeButton
+                disabled={isSubmitting || errors.hasAgent}
+                type="submit"
               >
-                {choice.label}
-              </Choice>
-            ))}
-          </ChoiceGroup>
-        </FormDiv>
-        <FormDiv>
-          <FormFrame>
-            <SignupOrangeButton
-              disabled={isSubmitting || errors.hasAgent}
-              type="submit"
-            >
-              NEXT PAGE
-            </SignupOrangeButton>
-            <SecondaryButton onClick={() => previous(values)}>
-              GO BACK
-            </SecondaryButton>
-          </FormFrame>
-        </FormDiv>
-      </Content>
+                NEXT PAGE
+              </SignupOrangeButton>
+              <SecondaryButton onClick={() => previous(values)}>
+                GO BACK
+              </SecondaryButton>
+            </FormFrame>
+          </FormDiv>
+        </Content>
+      </FormLoading>
     </Frame>
   );
 };
