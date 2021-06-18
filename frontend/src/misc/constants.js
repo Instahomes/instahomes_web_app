@@ -1,3 +1,18 @@
+export const listingChoices = [
+  {
+    value: "buy",
+    label: "To Buy",
+  },
+  {
+    value: "rent_to_own",
+    label: "Rent-to-Own",
+  },
+  {
+    value: "rent",
+    label: "For Rent",
+  },
+];
+
 export const purchaseTypeChoices = [
   {
     value: "buy",
@@ -71,26 +86,37 @@ export const budgetChoices = [
   {
     value: "1-5",
     label: "PHP 1-5 Million",
+    lowPrice: "1000000",
+    highPrice: "5000000",
   },
   {
     value: "5-10",
     label: "PHP 5-10 Million",
+    lowPrice: "5000000",
+    highPrice: "10000000",
   },
   {
     value: "10-15",
     label: "PHP 10-15 Million",
+    lowPrice: "10000000",
+    highPrice: "15000000",
   },
   {
     value: "15-20",
     label: "PHP 15-20 Million",
+    lowPrice: "15000000",
+    highPrice: "20000000",
   },
   {
     value: "20-25",
     label: "PHP 20-25 Million",
+    lowPrice: "20000000",
+    highPrice: "25000000",
   },
   {
     value: ">25",
     label: "More than 25 Million",
+    lowPrice: "25000000",
   },
 ];
 

@@ -135,3 +135,9 @@ export const FormErrorMessage = styled(ErrorMessage)`
   font-size: 0.9em;
   color: #9e0f0f !important;
 `;
+
+export const FormWarningMessage = styled(FormErrorMessage)`
+  background: #fffcf1;
+  border: 1px solid #b88840;
+  color: #926624 !important;
+`;

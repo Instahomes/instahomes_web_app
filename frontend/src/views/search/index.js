@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
+import Loading from "../../components/loading";
 import { Formik } from "formik";
 import { useHistory, useLocation } from "react-router-dom";
 import ListingGrid from "../../components/listing-grid";
@@ -14,42 +15,60 @@ import {
 } from "../../components/elements";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
-import {
-  purchaseTypeChoices,
-  reasonChoices,
-  propertyChoices,
-  budgetChoices,
-} from "../../misc/constants";
+import { listingChoices, budgetChoices } from "../../misc/constants";
 
 const Search = (props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const [listingStatus, setListingStatus] = useState("");
-  const [query, setQuery] = useState("");
-  const [propertyType, setPropertyType] = useState("");
+  const [sale_status, setSaleStatus] = useState("");
+  const [location, setLocation] = useState("");
+  const [development_type, setDevelopmentType] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [developer, setDeveloper] = useState("");
+
   const [listings, setListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
-  const location = useLocation();
+  const routeLocation = useLocation();
 
   useEffect(() => {
-    const { search } = location;
+    const { search } = routeLocation;
     const searchParams = new URLSearchParams(search);
-    setListingStatus(searchParams.get("listingStatus"));
-    setQuery(searchParams.get("query"));
-    setPropertyType(searchParams.get("propertyType"));
+    setSaleStatus(searchParams.get("sale_status"));
+    setLocation(searchParams.get("location"));
+    setDevelopmentType(searchParams.get("development_type"));
     setPriceRange(searchParams.get("priceRange"));
     setBathrooms(searchParams.get("bathrooms"));
     setBedrooms(searchParams.get("bedrooms"));
     setDeveloper(searchParams.get("developer"));
-  }, [location]);
+  }, [routeLocation]);
 
   useEffect(() => {
     getListings(setListings, "limit=9");
   }, []);
+
+  const handleSearch = async (values, { setSubmitting }) => {
+    setSubmitting(true);
+    setIsLoading(true);
+    const { priceRange, ...valuesCopy } = values;
+
+    const params = Object.entries(valuesCopy)
+      .filter(([key, value]) => !!value)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
+
+    history.push({
+      pathname: "/search",
+      search: "?" + params,
+    });
+
+    await getListings(setListings, params);
+
+    setSubmitting(false);
+    setIsLoading(false);
+  };
 
   return (
     <Layout>
@@ -63,25 +82,17 @@ const Search = (props) => {
         <Formik
           enableReinitialize
           initialValues={{
-            listingStatus,
-            query,
-            propertyType,
+            sale_status,
+            location,
+            development_type,
             priceRange,
+            price_low: "",
+            price_high: "",
             bathrooms,
             bedrooms,
             developer,
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            const params = Object.entries(values)
-              .filter(([key, value]) => !!value)
-              .map(([key, value]) => `${key}=${value}`)
-              .join("&");
-
-            history.push({
-              pathname: "/search",
-              search: "?" + params,
-            });
-          }}
+          onSubmit={handleSearch}
         >
           {({
             values,
@@ -91,57 +102,89 @@ const Search = (props) => {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            setFieldValue,
           }) => (
             <form onSubmit={handleSubmit}>
               <SearchFields showAdvanced={showAdvanced}>
                 <WhiteInput
                   scale={0.9}
                   as="select"
-                  name="listingStatus"
+                  name="sale_status"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.listingStatus}
-                  isDefault={!values.listingStatus}
+                  value={values.sale_status}
+                  isDefault={!values.sale_status}
                   mobileOrder={7}
                 >
-                  <option value="" selected>
-                    For Sale
-                  </option>
-                  <option value="For Sale">For Saleasdasdas</option>
+                  <option value="">Sale Status</option>
+                  {listingChoices.map((choice) => (
+                    <option value={choice.value} key={choice.value}>
+                      {choice.label}
+                    </option>
+                  ))}
                 </WhiteInput>
                 <GrayInput
                   scale={0.9}
                   style={{ flex: 1.5 }}
                   placeholder="Search for location or landmark"
-                  name="query"
+                  name="location"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.query}
+                  value={values.location}
                   mobileOrder={1}
                 />
                 <GrayInput
                   scale={0.9}
-                  as="select"
-                  name="propertyType"
+                  placeholder="Property Type (e.g. condominium)"
+                  name="development_type"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.propertyType}
-                  isDefault={!values.propertyType}
+                  value={values.development_type}
+                  mobileOrder={2}
+                />
+                {/* <GrayInput
+                  scale={0.9}
+                  as="select"
+                  name="development_type"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.development_type}
+                  isDefault={!values.development_type}
                   mobileOrder={2}
                 >
                   <option value="">Property Type</option>
-                </GrayInput>
+                </GrayInput> */}
                 <GrayInput
                   as="select"
+                  // onChange={handleChange}
                   name="priceRange"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
                   value={values.priceRange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    const currPriceRange = e.target.value;
+                    if (currPriceRange) {
+                      const priceOption = budgetChoices.find(
+                        (item) => item.value === currPriceRange
+                      );
+
+                      setFieldValue("price_low", priceOption.lowPrice);
+                      setFieldValue("price_high", priceOption.highPrice);
+                    } else {
+                      setFieldValue("price_low", "");
+                      setFieldValue("price_high", "");
+                    }
+                  }}
+                  onBlur={handleBlur}
                   scale={0.9}
                   mobileOrder={3}
                   isDefault={!values.priceRange}
                 >
                   <option value="">Price Range</option>
+                  {budgetChoices.map((choice) => (
+                    <option value={choice.value} key={choice.value}>
+                      {choice.label}
+                    </option>
+                  ))}
                 </GrayInput>
                 <GrayInput
                   scale={0.9}
@@ -155,6 +198,10 @@ const Search = (props) => {
                   mobileOrder={4}
                 >
                   <option value="">Bedrooms (All)</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
                 </GrayInput>
                 <GrayInput
                   scale={0.9}
@@ -168,6 +215,10 @@ const Search = (props) => {
                   mobileOrder={5}
                 >
                   <option value="">Bath (All)</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
                 </GrayInput>
                 <GrayInput
                   scale={0.9}
@@ -182,7 +233,7 @@ const Search = (props) => {
                 >
                   <option value="">Preferred Developer</option>
                 </GrayInput>
-                <SearchButton mobileOrder={7}>
+                <SearchButton mobileOrder={7} type="submit">
                   FIND&nbsp;MY&nbsp;HOME
                 </SearchButton>
               </SearchFields>
@@ -194,7 +245,7 @@ const Search = (props) => {
           showAdvanced={showAdvanced}
         />
         <div style={{ marginBottom: "2em" }}></div>
-        <ListingGrid listings={listings} />
+        {isLoading ? <Loading></Loading> : <ListingGrid listings={listings} />}
       </SearchContainer>
     </Layout>
   );

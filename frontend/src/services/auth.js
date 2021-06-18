@@ -22,7 +22,7 @@ export const login = (contactNumber, password, callback, errorCallback) => {
       callback();
     })
     .catch((err) => {
-      errorCallback();
+      errorCallback(err);
     });
 };
 

@@ -9,11 +9,12 @@ export const createUser = (
 ) => {
   return axiosClient
     .post(`/user/create/`, {
-      contactNumber,
-      email,
+      contact_number: contactNumber,
+      email: email || null,
       password,
     })
-    .then((res) => callback(res.data));
+    .then((res) => callback(res.data))
+    .catch((err) => errorCallback(err));
 };
 
 export const createProfile = (profile, inquiry, callback, errorCallback) => {
