@@ -33,8 +33,7 @@ const Search = (props) => {
   const history = useHistory();
   const routeLocation = useLocation();
 
-  useEffect(() => {
-    const { search } = routeLocation;
+  const changeParams = (search) => {
     const searchParams = new URLSearchParams(search);
     setSaleStatus(searchParams.get("sale_status"));
     setLocation(searchParams.get("location"));
@@ -43,10 +42,31 @@ const Search = (props) => {
     setBathrooms(searchParams.get("bathrooms"));
     setBedrooms(searchParams.get("bedrooms"));
     setDeveloper(searchParams.get("developer"));
+  };
+
+  useEffect(() => {
+    const { search } = routeLocation;
+    changeParams(search);
   }, [routeLocation]);
 
   useEffect(() => {
-    getListings(setListings, "limit=9");
+    const triggerSearch = async (search) => {
+      setIsLoading(true);
+      await getListings(setListings, search);
+      setIsLoading(false);
+    };
+
+    if (routeLocation.search) {
+      const { search } = routeLocation;
+      changeParams(search);
+      triggerSearch(search.slice(1));
+    } else {
+      triggerSearch("limit=9");
+    }
+
+    return function cleanup() {
+      setIsLoading(false);
+    };
   }, []);
 
   const handleSearch = async (values, { setSubmitting }) => {
@@ -156,7 +176,6 @@ const Search = (props) => {
                 </GrayInput> */}
                 <GrayInput
                   as="select"
-                  // onChange={handleChange}
                   name="priceRange"
                   value={values.priceRange}
                   onChange={(e) => {

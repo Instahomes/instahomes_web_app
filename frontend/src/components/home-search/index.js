@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 
 import { AdvancedSettings } from "../../components/elements";
+import { listingChoices, budgetChoices } from "../../misc/constants";
 
 const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
   const history = useHistory();
@@ -11,11 +12,13 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
   return (
     <Formik
       initialValues={{
-        listingStatus: "",
-        query: "",
-        propertyType: "",
-        keywords: "",
+        sale_status: "",
+        location: "",
+        development_type: "",
+        // keywords: "",
         priceRange: "",
+        price_low: "",
+        price_high: "",
         bathrooms: "",
         bedrooms: "",
         developer: "",
@@ -40,6 +43,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
         handleBlur,
         handleSubmit,
         isSubmitting,
+        setFieldValue,
       }) => (
         <form onSubmit={handleSubmit}>
           <SearchFrame>
@@ -51,40 +55,42 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
               <Input
                 scale={0.9}
                 as="select"
-                name="listingStatus"
+                name="sale_status"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.listingStatus}
-                isDefault={values.listingStatus == ""}
+                value={values.sale_status}
+                isDefault={values.sale_status == ""}
                 mobileOrder={1}
                 className="flex-grow-mobile"
               >
-                <option value="" selected>
-                  For Sale
-                </option>
-                <option value="For Sale">For Sale</option>
+                <option value="">Sale Status</option>
+                {listingChoices.map((choice) => (
+                  <option value={choice.value} key={choice.value}>
+                    {choice.label}
+                  </option>
+                ))}
               </Input>
               <Input
                 style={{ flex: 1 }}
                 placeholder="Search for location/city/subdivision"
-                name="query"
+                name="location"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.query}
+                value={values.location}
                 scale={0.9}
                 mobileOrder={2}
               />
               <Input
-                placeholder="Property Type"
-                name="propertyType"
+                placeholder="Property Type (e.g. condominium)"
+                name="development_type"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.propertyType}
+                value={values.development_type}
                 className="advanced-setting"
                 scale={0.9}
                 mobileOrder={3}
               />
-              <Input
+              {/* <Input
                 placeholder="Keywords (Pool, garage, etc.)"
                 name="keywords"
                 onChange={handleChange}
@@ -93,7 +99,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 className="advanced-setting"
                 scale={0.9}
                 mobileOrder={4}
-              />
+              /> */}
               <Input
                 as="select"
                 name="bedrooms"
@@ -106,6 +112,10 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 isDefault={values.bedrooms == ""}
               >
                 <option value="">Bedrooms (All)</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </Input>
               <Input
                 as="select"
@@ -119,11 +129,29 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 isDefault={values.bathrooms == ""}
               >
                 <option value="">Baths (All)</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </Input>
               <Input
                 as="select"
                 name="priceRange"
-                onChange={handleChange}
+                onChange={(e) => {
+                  handleChange(e);
+                  const currPriceRange = e.target.value;
+                  if (currPriceRange) {
+                    const priceOption = budgetChoices.find(
+                      (item) => item.value === currPriceRange
+                    );
+
+                    setFieldValue("price_low", priceOption.lowPrice);
+                    setFieldValue("price_high", priceOption.highPrice);
+                  } else {
+                    setFieldValue("price_low", "");
+                    setFieldValue("price_high", "");
+                  }
+                }}
                 onBlur={handleBlur}
                 value={values.priceRange}
                 className="advanced-setting"
@@ -144,7 +172,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={9}
               />
-              <SearchButton scale={0.9} mobileOrder={10}>
+              <SearchButton scale={0.9} mobileOrder={10} type="submit">
                 FIND&nbsp;MY&nbsp;HOME
               </SearchButton>
             </SearchForm>
