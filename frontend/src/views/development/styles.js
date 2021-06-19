@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import alveoProperty from "../../assets/development/alveoProperty.jpeg";
 
 export const DevelopmentContainer = styled.main`
   .h2 {
@@ -41,7 +40,7 @@ export const HeroSection = styled.section`
     z-index: 2;
     position: absolute;
     opacity: 0.3;
-    background: url(${alveoProperty});
+    background: url(${(image) => image});
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
@@ -94,8 +93,8 @@ export const ListingRow = styled.div`
     threeOrLess ? "center" : "space-between"};
   overflow-x: scroll;
   padding: 2em;
-  gap: 10px;
-  margin-top: -8em;
+  gap: 1em;
+  margin-top: -6.5em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     overflow: auto;
@@ -151,6 +150,8 @@ export const Amenities = styled.section`
 `;
 
 export const AmenitiesCard = styled.div`
+  flex: 1;
+
   .amenities-img {
     background: url(${({ image }) => image});
     background-size: cover;

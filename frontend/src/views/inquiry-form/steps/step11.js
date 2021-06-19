@@ -8,6 +8,7 @@ import {
 } from "../styles";
 import formComplete from "../../../assets/form/form-complete.svg";
 import logo from "../../../assets/navbar/largeLogoDark.svg";
+import { getProfile } from "../../../services/auth";
 import styled from "styled-components";
 
 const Step11Frame = styled(Frame)`
@@ -26,7 +27,9 @@ const Step11Button = styled(SignupOutlineButton)`
   color: ${({ theme }) => theme.colors.darkHeader};
 `;
 
-const Step11 = () => {
+const Step11 = ({ listing, values, isSigningUp }) => {
+  const profile = getProfile();
+
   return (
     <Step11Frame>
       <Content>
@@ -35,13 +38,24 @@ const Step11 = () => {
           alt="Form Complete"
           style={{ marginBottom: "1em" }}
         />
-        <h1>Hannah, you’re now signed up and your inquiry has been sent!</h1>
+        <h1>
+          {isSigningUp
+            ? `${values.name}, you’re now signed up and your inquiry has been sent!`
+            : `Your inquiry has been sent to ${listing.developer.name}`}
+        </h1>
         <p>
-          Please expect a reply from Alveo Land Corp. that will be sent to{" "}
-          <b>hannah@gmail.com</b>.
+          Please expect a reply from {listing.developer.name} that will be sent
+          to{" "}
+          <b>
+            {values.contactNumber ||
+              values.email ||
+              profile.contactNumber ||
+              profile.email}
+          </b>
+          .
           <br />
-          Alveo Land usually takes <b>30 minutes</b> to reply for inquiries sent
-          in business days.
+          {listing.developer.name} usually takes <b>30 minutes</b> to reply for
+          inquiries sent in business days.
         </p>
         <FormDiv>
           <FormFrame>

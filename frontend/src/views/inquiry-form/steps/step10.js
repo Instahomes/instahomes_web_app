@@ -7,11 +7,11 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
 } from "../styles";
 import { Field } from "formik";
 import security from "../../../assets/form/security.svg";
 import styled from "styled-components";
+import { FormErrorMessage } from "../../../components/elements";
 
 const PasswordFrame = styled(Frame)`
   background: ${({ theme }) => theme.colors.darkHeader};
@@ -27,50 +27,60 @@ const PasswordInput = styled(SignupInput)`
   border: 1px solid #879ebb;
 `;
 
-const Step10 = ({ isSubmitting, values, previous, errors }) => {
+const Step10 = ({
+  isSubmitting,
+  values,
+  previous,
+  errors,
+  FormLoading,
+  FormErrorsComponent,
+}) => {
   return (
     <PasswordFrame>
-      <Content>
-        <img src={security} alt="Security" />
-        <h1>Secure your account with a Password</h1>
-        <p>
-          Awesome! You're almost done. To save your information for other
-          inquiries, create a password.
-        </p>
-        <FormDiv>
-          <FormFrame>
-            <FormErrorMessage component="span" name="password" />
-            <FormErrorMessage component="span" name="confirmPassword" />
-            <PasswordInput
-              as={Field}
-              placeholder="Password"
-              type="password"
-              name="password"
-            />
-            <PasswordInput
-              as={Field}
-              placeholder="Retype Password"
-              type="password"
-              name="confirmPassword"
-            />
-            <SignupOrangeButton
-              disabled={
-                isSubmitting ||
-                values.password == "" ||
-                values.confirmPassword == "" ||
-                errors.password ||
-                errors.confirmPassword
-              }
-              type="submit"
-            >
-              SUBMIT FORM & SIGNUP
-            </SignupOrangeButton>
-            <SecondaryButton onClick={() => previous(values)}>
-              GO BACK
-            </SecondaryButton>
-          </FormFrame>
-        </FormDiv>
-      </Content>
+      <FormLoading>
+        <Content>
+          <img src={security} alt="Security" />
+          <h1>Secure your account with a Password</h1>
+          <p>
+            Awesome! You're almost done. To save your information for other
+            inquiries, create a password.
+          </p>
+          <FormDiv>
+            <FormFrame>
+              <FormErrorMessage component="span" name="password" />
+              <FormErrorMessage component="span" name="confirmPassword" />
+              <FormErrorsComponent />
+              <PasswordInput
+                as={Field}
+                placeholder="Password"
+                type="password"
+                name="password"
+              />
+              <PasswordInput
+                as={Field}
+                placeholder="Retype Password"
+                type="password"
+                name="confirmPassword"
+              />
+              <SignupOrangeButton
+                disabled={
+                  isSubmitting ||
+                  values.password == "" ||
+                  values.confirmPassword == "" ||
+                  errors.password ||
+                  errors.confirmPassword
+                }
+                type="submit"
+              >
+                SUBMIT FORM & SIGNUP
+              </SignupOrangeButton>
+              <SecondaryButton onClick={() => previous(values)}>
+                GO BACK
+              </SecondaryButton>
+            </FormFrame>
+          </FormDiv>
+        </Content>
+      </FormLoading>
     </PasswordFrame>
   );
 };

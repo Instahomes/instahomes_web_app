@@ -65,7 +65,7 @@ const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
           ARTICLES
         </NavbarSpan>
       )}
-      <NavbarSpan dark={dark} className={className}>
+      <NavbarSpan dark={dark} className={className} to="/search">
         DISCOVER LISTINGS
       </NavbarSpan>
       {isLoggedIn && (

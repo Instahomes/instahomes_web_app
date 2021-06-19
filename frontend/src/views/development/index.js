@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import ListingCard from "../../components/listing-card";
 import DeveloperContact from "../../components/developer-contact";
 import FeaturedSection from "../../components/featured-section";
+import Loading from "../../components/loading";
 
 import map from "../../assets/development/map.svg";
 import devMap from "../../assets/development/devMap.png";
-import house from "../../assets/card/sample_house.png";
 import {
   DevelopmentContainer,
   HeroSection,
@@ -18,166 +18,98 @@ import {
   AmenitiesCard,
 } from "./styles";
 import { Helmet } from "react-helmet";
-
-const sampleListings = [
-  {
-    id: 1,
-    name: "The Lattice Studio Unit",
-    size: 33,
-    price: "9,500,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 1,
-    bathrooms: 1,
-    isVerified: true,
-  },
-  {
-    id: 1,
-    name: "The Lattice 1-Bedroom",
-    size: 58,
-    price: "13,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 1,
-    bathrooms: 1,
-    isVerified: false,
-  },
-  {
-    id: 1,
-    name: "The Lattice 2-Bedroom",
-    size: 94,
-    price: "24,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 2,
-    bathrooms: 1,
-    isVerified: true,
-  },
-  {
-    id: 1,
-    name: "The Lattice 3-Bedroom",
-    size: 128,
-    price: "32,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 3,
-    bathrooms: 2,
-    isVerified: true,
-  },
-];
-
-const sampleAmenities = [
-  {
-    name: "MULTI-FUNCTION HALL",
-    description:
-      "The Lattice is Alveo Land's first upscale residential tower in Parklinks. Parklinks is a 35-hectare mixed-used development and the biggest estate along the prime C-5 corridor.",
-  },
-  {
-    name: "STATE-OF-THE-ART GYM",
-    description:
-      "The Lattice is Alveo Land's first upscale residential tower in Parklinks. Parklinks is a 35-hectare mixed-used development and the biggest estate along the prime C-5 corridor.",
-  },
-  {
-    name: "LUXURIOUS POOL & SPA",
-    description:
-      "The Lattice is Alveo Land's first upscale residential tower in Parklinks. Parklinks is a 35-hectare mixed-used development and the biggest estate along the prime C-5 corridor.",
-  },
-];
-
-const sampleFeatures = [
-  {
-    title: "5 Reasons to Invest in Philippine Real Estate",
-    url: "",
-    image: house,
-  },
-  {
-    title: "Top Indicators of A Valuable Property",
-    url: "",
-    image: house,
-  },
-  {
-    title: "The Best Areas to Invest in the Philippines in 2021",
-    url: "",
-    image: house,
-  },
-];
+import { getDevelopments } from "../../services/developments";
+import { useRouteMatch } from "react-router-dom";
 
 const Development = (props) => {
+  const [development, setDevelopment] = useState(null);
+  const match = useRouteMatch();
+
+  useEffect(() => {
+    getDevelopments(
+      (data) => data.length > 0 && setDevelopment(data[0]),
+      `id=${match.params.id}`
+    );
+  }, []);
+
   return (
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Instahomes | The Lattice at Parklinks</title>
-        <meta name="description" content=""></meta>
+        <title>{development ? development.seo_title : "Instahomes"}</title>
+        <meta
+          name="description"
+          content={development ? development.overview : ""}
+        ></meta>
       </Helmet>
       <Navbar dark />
-      <DevelopmentContainer>
-        <HeroSection>
-          <div className="hero-gradient">
-            <HeroContent>
-              <h1>The Lattice at Parklinks</h1>
-              <span>
-                <img src={map} />
-                &nbsp;&nbsp;C-5 Road, Brgy. Rosario, Pasig City
-              </span>
-              <p>
-                The Lattice is Alveo Land's first upscale residential tower in
-                Parklinks. Parklinks is a 35-hectare mixed-used development and
-                the biggest estate along the prime C-5 corridor. It is
-                envisioned to be the greenest urban estate in Metro Manila
-                dedicating 50% of the development to open spaces and greeneries.
-              </p>
-            </HeroContent>
-          </div>
-          <div className="hero-image"></div>
-          <div className="hero-black"></div>
-        </HeroSection>
-        <ListingRow threeOrLess={sampleListings.length <= 3}>
-          {sampleListings.map((listing) => (
-            <ListingCard
-              id={listing.id}
-              key={listing.name}
-              image={house}
-              name={listing.name}
-              size={listing.size}
-              price={listing.price}
-              address={listing.address}
-              bedrooms={listing.bedrooms}
-              bathrooms={listing.bathrooms}
-              isVerified={listing.isVerified}
-            />
-          ))}
-        </ListingRow>
-        <About backgroundImage={devMap}>
-          <div>
-            <h2 className="h2">About the Lattice at Parklinks</h2>
-            <span className="span">DEVELOPMENT OVERVIEW</span>
-            <p className="p">
-              The Lattice is Alveo Land's first upscale residential tower in
-              Parklinks. Parklinks is a 35-hectare mixed-used development and
-              the biggest estate along the prime C-5 corridor.
-            </p>
-            <p className="p">
-              It is envisioned to be the greenest urban estate in Metro Manila
-              dedicating 50% of the development to open spaces and greeneries.
-              It services upscale high-class living in the urban lands of the
-              metro and offers a wide selection of unit spaces suited for the
-              modern man.
-            </p>
-          </div>
-          <div className="about-map"></div>
-        </About>
-        <Amenities>
-          <h2 className="h2">Amenities in The Lattice at Parklinks </h2>
-          <div>
-            {sampleAmenities.map((amenity) => (
-              <AmenitiesCard key={amenity.name} image={devMap}>
-                <div className="amenities-img"></div>
-                <span className="span">{amenity.name}</span>
-                <p className="p">{amenity.description}</p>
-              </AmenitiesCard>
+      {development ? (
+        <DevelopmentContainer>
+          <HeroSection image={development.photo_main}>
+            <div className="hero-gradient">
+              <HeroContent>
+                <h1>{development.name}</h1>
+                <span>
+                  <img src={map} />
+                  &nbsp;&nbsp;{development.location}
+                </span>
+                <p>{development.overview}</p>
+              </HeroContent>
+            </div>
+            <div className="hero-image"></div>
+            <div className="hero-black"></div>
+          </HeroSection>
+          <ListingRow threeOrLess={development.listing_set.length <= 3}>
+            {development.listing_set.map((listing) => (
+              <ListingCard
+                id={listing.id}
+                key={listing.seo_title}
+                developer={development.developer.name}
+                image={listing.photo_main}
+                name={development.name + " " + listing.unit_name}
+                size={listing.floor_size_min}
+                price={listing.lowest_price}
+                address={development.location}
+                bedrooms={listing.bedrooms}
+                bathrooms={listing.bathrooms_min}
+                isVerified={true}
+              />
             ))}
-          </div>
-        </Amenities>
-        <DeveloperContact />
-        <FeaturedSection data={sampleFeatures} />
-      </DevelopmentContainer>
+          </ListingRow>
+          <About backgroundImage={devMap}>
+            <div>
+              <h2 className="h2">About the {development.name}</h2>
+              <span className="span">DEVELOPMENT OVERVIEW</span>
+              <p className="p">{development.overview}</p>
+            </div>
+            <div className="about-map"></div>
+          </About>
+          <Amenities>
+            <h2 className="h2">Amenities in {development.name}</h2>
+            <div>
+              {[
+                [development.amenity_1, development.amenity_1_desc],
+                [development.amenity_2, development.amenity_2_desc],
+                [development.amenity_3, development.amenity_3_desc],
+                [development.amenity_4, development.amenity_4_desc],
+              ].map(
+                ([amenityName, amenityDesc]) =>
+                  amenityName && (
+                    <AmenitiesCard key={amenityName} image={devMap}>
+                      <div className="amenities-img"></div>
+                      <span className="span">{amenityName}</span>
+                      <p className="p">{amenityDesc}</p>
+                    </AmenitiesCard>
+                  )
+              )}
+            </div>
+          </Amenities>
+          <DeveloperContact />
+          <FeaturedSection />
+        </DevelopmentContainer>
+      ) : (
+        <Loading></Loading>
+      )}
     </Layout>
   );
 };

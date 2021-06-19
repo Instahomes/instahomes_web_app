@@ -7,9 +7,9 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
 } from "../styles";
 import { Field } from "formik";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step2 = ({ isSubmitting, values, previous, errors }) => {
   return (

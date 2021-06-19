@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { LightInput, OrangeButton } from "../../components/elements";
+import {
+  FormErrorMessage,
+  FormWarningMessage,
+} from "../../components/elements";
 
 export const HeroFrame = styled.section`
   width: 100%;
@@ -77,6 +81,14 @@ export const SignupWrapper = styled.div`
   }
 `;
 
+export const ModifiedErrorMessage = styled(FormErrorMessage)`
+  margin-bottom: 1em;
+`;
+
+export const ModifiedWarningMessage = styled(FormWarningMessage)`
+  margin-bottom: 1em;
+`;
+
 export const SignupInput = styled(LightInput)`
   background: url(${({ icon }) => icon}) no-repeat scroll 13px 14px, #f3f4f4;
   // background: #F3F4F4;
@@ -106,4 +118,9 @@ export const SignupButtonsDiv = styled.div`
 export const SignupButton = styled(OrangeButton)`
   font-size: 1em;
   padding: 0.5em 2em;
+
+  background-color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.whiteInputColor : theme.colors.orange};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.lightGray : theme.colors.softWhite};
 `;

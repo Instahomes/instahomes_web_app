@@ -7,32 +7,14 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
   ChoiceGroup,
   Choice,
 } from "../styles";
 import { Field } from "formik";
-
-const progressChoices = [
-  {
-    value: "askingAround",
-    label: "I'm just asking around",
-  },
-  {
-    value: "visiting",
-    label: "I'm just visiting properties",
-  },
-  {
-    value: "readyToClose",
-    label: "I'm ready to close a deal",
-  },
-  {
-    value: "other",
-    label: "Other",
-  },
-];
+import { progressChoices } from "../../../misc/constants";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step8 = ({
   isSubmitting,

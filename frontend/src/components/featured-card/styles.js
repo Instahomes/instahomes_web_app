@@ -6,6 +6,11 @@ export const FeaturedCard = styled.div`
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   img {
     height: 150px;
     width: 100%;

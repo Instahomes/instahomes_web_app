@@ -7,38 +7,12 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
 import { Field } from "formik";
-
-const budgetChoices = [
-  {
-    value: "1-5",
-    label: "PHP 1-5 Million",
-  },
-  {
-    value: "5-10",
-    label: "PHP 5-10 Million",
-  },
-  {
-    value: "10-15",
-    label: "PHP 10-15 Million",
-  },
-  {
-    value: "15-20",
-    label: "PHP 15-20 Million",
-  },
-  {
-    value: "20-25",
-    label: "PHP 20-25 Million",
-  },
-  {
-    value: "25-",
-    label: "More than 25 Million",
-  },
-];
+import { budgetChoices } from "../../../misc/constants";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step6 = ({ isSubmitting, values, previous, errors }) => {
   return (

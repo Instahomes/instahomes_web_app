@@ -1,18 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import DeveloperContact from "../../components/developer-contact";
 import FeaturedSection from "../../components/featured-section";
-import circuitLane from "../../assets/developer/circuitLane.png";
-import ayalaLand from "../../assets/developer/logo-ayalaland.png";
-import amaia from "../../assets/developer/logo-amaia.png";
-import premier from "../../assets/developer/logo-premier.png";
-import avida from "../../assets/developer/logo-avida.png";
+import Loading from "../../components/loading";
 
 import map from "../../assets/development/map.svg";
-import devMap from "../../assets/development/devMap.png";
 import check from "../../assets/card/check.svg";
-import house from "../../assets/card/sample_house.png";
 import {
   DeveloperContainer,
   HeroSection,
@@ -28,92 +22,23 @@ import {
 } from "./styles";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { getDevelopers } from "../../services/developers";
+import { useRouteMatch } from "react-router-dom";
 
-const sampleDevelopments = [
-  {
-    id: 1,
-    name: "Callisto Towers",
-    type: "Commercial Condominium",
-    location: "Circuit Lane, Makati",
-    priceStart: "6,000,000",
-    priceEnd: "30,000,000",
-  },
-  {
-    id: 1,
-    name: "Orean Place",
-    type: "Commercial Condominium",
-    location: "Vertis North, Quezon City",
-    priceStart: "8,000,000",
-    priceEnd: "25,000,000",
-  },
-  {
-    id: 1,
-    name: "Parkford Suites",
-    type: "Commercial Condominium",
-    location: "Legaspi, Makati City",
-    priceStart: "10,000,000",
-    priceEnd: "40,000,000",
-  },
-];
-
-const sampleAffiliates = [
-  {
-    logo: premier,
-    alt: "AyalaLand Premier",
-  },
-  {
-    logo: amaia,
-    alt: "Amaia",
-  },
-  {
-    logo: ayalaLand,
-    alt: "AyalaLand",
-  },
-  {
-    logo: avida,
-    alt: "Avida",
-  },
-];
-
-const sampleFeatures = [
-  {
-    title: "5 Reasons to Invest in Philippine Real Estate",
-    url: "",
-    image: house,
-  },
-  {
-    title: "Top Indicators of A Valuable Property",
-    url: "",
-    image: house,
-  },
-  {
-    title: "The Best Areas to Invest in the Philippines in 2021",
-    url: "",
-    image: house,
-  },
-];
-
-const DevelopmentCard = ({
-  id,
-  name,
-  type,
-  location,
-  priceStart,
-  priceEnd,
-}) => (
-  <Link to={`/development/${id}`}>
-    <CardFrame background={circuitLane}>
+const DevelopmentCard = (development) => (
+  <Link to={`/development/${development.id}`}>
+    <CardFrame background={development.photo_main}>
       <div>
-        <h3 className="dev-type">{type}</h3>
-        <h3 className="dev-name">{name}</h3>
+        <h3 className="dev-type">{development.development_type}</h3>
+        <h3 className="dev-name">{development.name}</h3>
       </div>
       <div>
         <span className="dev-location">
           <img src={map} />
-          &nbsp;&nbsp;{location}
+          &nbsp;&nbsp;{development.location}
         </span>
         <h4 className="dev-price">
-          PHP {priceStart} - {priceEnd}
+          PHP {10000} - {100000}
         </h4>
       </div>
     </CardFrame>
@@ -123,130 +48,124 @@ const DevelopmentCard = ({
 const isVerified = true;
 
 const Developer = (props) => {
+  const [developer, setDeveloper] = useState(null);
+  const match = useRouteMatch();
+
+  useEffect(() => {
+    getDevelopers(
+      (data) => data.length > 0 && setDeveloper(data[0]),
+      `id=${match.params.id}`
+    );
+  }, []);
+
   return (
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Instahomes | Alveo Land Corporation</title>
-        <meta name="description" content=""></meta>
+        <title>{developer ? developer.seo_title : "Instahomes"}</title>
+        <meta
+          name="description"
+          content={developer ? developer.overview : ""}
+        ></meta>
       </Helmet>
       <Navbar dark />
-      <DeveloperContainer>
-        <HeroSection>
-          <div className="hero-gradient">
-            <HeroContent>
-              <h1>
-                Alveo Land Corporation&nbsp;&nbsp;
-                {isVerified && <img src={check} />}
-              </h1>
-              <p>
-                Alveo Land caters to the upscale market with its dynamic
-                portfolio of residential, business, commercial, and leisure
-                developments across the country.
-              </p>
-              <MetadataLine>
-                <div>
-                  <MetadataNumber>8</MetadataNumber>
-                  <MetadataProperty>Developments</MetadataProperty>
-                </div>
-                <div>
+      {developer ? (
+        <DeveloperContainer>
+          <HeroSection image={developer.featured_image}>
+            <div className="hero-gradient">
+              <HeroContent>
+                <h1>
+                  {developer.name}&nbsp;&nbsp;
+                  {isVerified && <img src={check} />}
+                </h1>
+                <p>{developer.overview}</p>
+                <MetadataLine>
+                  <div>
+                    <MetadataNumber>
+                      {developer.development_set.length}
+                    </MetadataNumber>
+                    <MetadataProperty>Developments</MetadataProperty>
+                  </div>
+                  {/* <div>
                   <MetadataNumber>32</MetadataNumber>
                   <MetadataProperty>Properties</MetadataProperty>
                 </div>
                 <div>
                   <MetadataNumber>6</MetadataNumber>
                   <MetadataProperty>Site Locations</MetadataProperty>
-                </div>
-              </MetadataLine>
-            </HeroContent>
-          </div>
-          <div className="hero-image"></div>
-          <div className="hero-black"></div>
-        </HeroSection>
-        <Developments>
-          <h2 className="h2">Alveo Land Developments</h2>
-          <div className="dev-row">
-            {sampleDevelopments.map((dev) => (
-              <DevelopmentCard key={dev.name} {...dev} />
-            ))}
-          </div>
-        </Developments>
-        <About>
-          <h2 className="h2">About Alveo Land Corporation</h2>
-          <div className="about-body">
+                </div> */}
+                </MetadataLine>
+              </HeroContent>
+            </div>
+            <div className="hero-image"></div>
+            <div className="hero-black"></div>
+          </HeroSection>
+          <Developments>
+            <h2 className="h2">{developer.name} Developments</h2>
+            <div className="dev-row">
+              {developer.development_set.map((dev) => (
+                <DevelopmentCard key={dev.name} {...dev} />
+              ))}
+            </div>
+          </Developments>
+          <About>
+            <h2 className="h2">About {developer.name}</h2>
+            <div className="about-body">
+              <div>
+                <h3 className="h3">COMPANY OVERVIEW</h3>
+                <p className="p">{developer.overview}</p>
+              </div>
+              <div>
+                <h3 className="h3">COMPANY VALUES</h3>
+                <p className="p">{developer.values_description}</p>
+              </div>
+            </div>
+          </About>
+          {developer.affiliate_name_1 && (
+            <Affiliates>
+              <h2 className="h2">Affiliates and Partners</h2>
+              <div className="affiliates-logos">
+                {[
+                  [developer.affiliate_name_1, developer.affiliate_logo_1],
+                  [developer.affiliate_name_2, developer.affiliate_logo_2],
+                  [developer.affiliate_name_3, developer.affiliate_logo_3],
+                  [developer.affiliate_name_4, developer.affiliate_logo_4],
+                ].map(([affName, affLogo]) => (
+                  <img src={affLogo} alt={affName} />
+                ))}
+              </div>
+            </Affiliates>
+          )}
+          <DeveloperContact />
+          <FeaturedSection />
+          {/* <OfficeLocations backgroundImage={devMap}>
             <div>
-              <h3 className="h3">COMPANY OVERVIEW</h3>
+              <h2 className="h2">Office Locations</h2>
+              <div className="office-map-mobile"></div>
               <p className="p">
-                A subsidiary of Ayala Land, Alveo offers a vibrant portfolio of
-                groundbreaking real estate developments that provides upscale
-                living and working spaces within various thriving and emerging
-                growth centers around the country.
+                Alveo Davao Showroom
+                <br />
+                Abreeza Mall, G/F, Bajada Flyover, Davao City, 8000 Davao del
+                Sur
               </p>
               <p className="p">
-                Armed with sharper foresight, unparalleled excellence, total
-                commitment, and an inherent passion and drive for innovation,
-                the company is committed to providing thoughtfully-designed and
-                master planned living environments for the unique needs of its
-                discerning market.
+                Alveo Land Office Complex
+                <br />
+                Celadon Park Manila, Flaming Tree Road, Sta. Cruz, Metro Manila,
+                Manila, 1014
+              </p>
+              <p className="p">
+                Alveo Land Corp
+                <br />
+                Ayala Tower One, 18th floor of, Ayala Ave, Makati, Metro Manila
               </p>
             </div>
-            <div>
-              <h3 className="h3">COMPANY VALUES</h3>
-              <p className="p">
-                We strive to elevate our customers’ quality of life through
-                innovative real estate solutions in vibrant growth centers all
-                over the country.
-              </p>
-              <p className="p">
-                We act responsibly with integrity, accountability and total
-                commitment.
-              </p>
-              <p className="p">
-                We achieve excellence through passion, focus and foresight.
-              </p>
-            </div>
-          </div>
-        </About>
-        <Affiliates>
-          <h2 className="h2">Affiliates and Partners</h2>
-          <div className="affiliates-logos">
-            {sampleAffiliates.map((partner) => (
-              <img src={partner.logo} alt={partner.alt} />
-            ))}
-          </div>
-        </Affiliates>
-        <DeveloperContact />
-        <FeaturedSection data={sampleFeatures} />
-        <OfficeLocations backgroundImage={devMap}>
-          <div>
-            <h2 className="h2">Office Locations</h2>
-            <div className="office-map-mobile"></div>
-            <p className="p">
-              ALVEO Corporate Center
-              <br />
-              728 28th Street, Bonifacio Global City 1634 Taguig City, Metro
-              Manila Philippines
-            </p>
-            <p className="p">
-              Alveo Davao Showroom
-              <br />
-              Abreeza Mall, G/F, Bajada Flyover, Davao City, 8000 Davao del Sur
-            </p>
-            <p className="p">
-              Alveo Land Office Complex
-              <br />
-              Celadon Park Manila, Flaming Tree Road, Sta. Cruz, Metro Manila,
-              Manila, 1014
-            </p>
-            <p className="p">
-              Alveo Land Corp
-              <br />
-              Ayala Tower One, 18th floor of, Ayala Ave, Makati, Metro Manila
-            </p>
-          </div>
-          <div className="office-map"></div>
-        </OfficeLocations>
-      </DeveloperContainer>
+            <div className="office-map"></div>
+          </OfficeLocations> */}
+        </DeveloperContainer>
+      ) : (
+        <Loading></Loading>
+      )}
     </Layout>
   );
 };

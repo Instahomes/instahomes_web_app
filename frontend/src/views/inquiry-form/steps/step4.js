@@ -7,9 +7,9 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
 } from "../styles";
 import { Field } from "formik";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step4 = ({ isSubmitting, values, previous, errors }) => {
   return (
@@ -22,7 +22,7 @@ const Step4 = ({ isSubmitting, values, previous, errors }) => {
         </p>
         <FormDiv>
           <FormFrame>
-            <FormErrorMessage component="span" name="name" />
+            <FormErrorMessage component="span" name="address" />
             <SignupInput
               as={Field}
               placeholder="Address or Landmark"

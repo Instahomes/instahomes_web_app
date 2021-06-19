@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import hero from "../../assets/developer/hero.png";
 
 export const DeveloperContainer = styled.main`
   .h2 {
@@ -48,7 +47,7 @@ export const HeroSection = styled.section`
     width: 100%;
     height: 100%;
     opacity: 0.4;
-    background: url(${hero});
+    background: url(${(image) => image});
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -113,7 +112,7 @@ export const HeroContent = styled.div`
 
 export const MetadataLine = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-top: 2em;
   width: 60%;
@@ -172,6 +171,7 @@ export const CardFrame = styled.div`
   background-position: center;
 
   min-width: 400px;
+  max-width: 400px;
   height: 250px;
   border-radius: 10px;
 
@@ -214,6 +214,7 @@ export const CardFrame = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     box-sizing: border-box;
     min-width: 350px;
+    max-width: 350px;
     padding: 1em;
   }
 `;

@@ -7,55 +7,14 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
   ChoiceGroup,
   Choice,
 } from "../styles";
 import { Field } from "formik";
-
-const purchaseTypeChoices = [
-  {
-    value: "buy",
-    label: "Buy",
-  },
-  {
-    value: "rentToOwn",
-    label: "Rent-to-own",
-  },
-  {
-    value: "rent",
-    label: "Rent",
-  },
-];
-
-const reasonChoices = [
-  {
-    value: "reside",
-    label: "To reside in",
-  },
-  {
-    value: "rented",
-    label: "To be rented",
-  },
-  {
-    value: "business",
-    label: "To use for business",
-  },
-  {
-    value: "secondHouse",
-    label: "To save for second house",
-  },
-  {
-    value: "invest",
-    label: "To invest in",
-  },
-  {
-    value: "other",
-    label: "Other",
-  },
-];
+import { purchaseTypeChoices, reasonChoices } from "../../../misc/constants";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step7 = ({
   isSubmitting,

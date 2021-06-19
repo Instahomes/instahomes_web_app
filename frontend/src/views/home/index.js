@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import ListingCard from "../../components/listing-card";
 import house from "../../assets/card/sample_house.png";
@@ -27,62 +27,15 @@ import {
 } from "../../components/elements";
 import heroBg from "../../assets/home/hero.jpeg";
 import { Helmet } from "react-helmet";
-import { useEffect } from "react";
-import { getDevelopers } from "../../services/developers";
-
-const sampleListings = [
-  {
-    id: 1,
-    name: "The Lattice Studio Unit",
-    developer: "Alveo",
-    size: 33,
-    price: "9,500,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 1,
-    bathrooms: 1,
-    isVerified: true,
-  },
-  {
-    id: 1,
-    name: "The Lattice 1-Bedroom",
-    developer: "Alveo",
-    size: 58,
-    price: "13,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 1,
-    bathrooms: 1,
-    isVerified: false,
-  },
-  {
-    id: 1,
-    name: "The Lattice 2-Bedroom",
-    developer: "Alveo",
-    size: 94,
-    price: "24,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 2,
-    bathrooms: 1,
-    isVerified: true,
-  },
-  {
-    id: 1,
-    name: "The Lattice 2-Bedrooms in this House",
-    developer: "Alveo",
-    size: 94,
-    price: "24,000,000.00",
-    address: "C-5 Road, Brgy. Rosario, Pasig City",
-    bedrooms: 2,
-    bathrooms: 1,
-    isVerified: true,
-  },
-];
+import { getListings } from "../../services/listings";
 
 const Home = (props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [listings, setListings] = useState([]);
 
-  // useEffect(() => {
-  //   getDevelopers().then((res) => console.log(res));
-  // }, []);
+  useEffect(() => {
+    getListings(setListings, "limit=5");
+  }, []);
 
   return (
     <Layout>
@@ -100,19 +53,19 @@ const Home = (props) => {
       </HeroFrame>
       <HomeListings>
         <h1 className="dark center">Newest listings in the market today</h1>
-        <ListingRow threeOrLess={sampleListings.length <= 3}>
-          {sampleListings.map((listing) => (
+        <ListingRow threeOrLess={listings.length <= 3}>
+          {listings.map((listing) => (
             <ListingCard
               id={listing.id}
-              key={listing.name}
-              developer={listing.developer}
-              image={house}
-              name={listing.name}
-              size={listing.size}
-              price={listing.price}
-              address={listing.address}
+              key={listing.seo_title}
+              developer={listing.development.developer.name}
+              image={listing.photo_main}
+              name={listing.development.name + " " + listing.unit_name}
+              size={listing.floor_size_min}
+              price={listing.lowest_price}
+              address={listing.development.location}
               bedrooms={listing.bedrooms}
-              bathrooms={listing.bathrooms}
+              bathrooms={listing.bathrooms_min}
               isVerified={true}
             />
           ))}

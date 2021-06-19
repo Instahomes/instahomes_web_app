@@ -2,6 +2,7 @@ import React from "react";
 import arrow from "../../assets/search/arrow.svg";
 import arrowUp from "../../assets/search/arrowUp.svg";
 import styled from "styled-components";
+import { ErrorMessage } from "formik";
 
 export const Input = styled.input`
   background-color: ${({ theme }) => theme.colors.inputBlue};
@@ -124,3 +125,19 @@ export const AdvancedSettings = ({ setShowAdvanced, showAdvanced }) => (
     )}
   </AdvancedSettingsStyle>
 );
+
+export const FormErrorMessage = styled(ErrorMessage)`
+  padding: 10px 20px;
+  background: #fff1f1;
+  border: 1px solid #9e0f0f;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #9e0f0f !important;
+`;
+
+export const FormWarningMessage = styled(FormErrorMessage)`
+  background: #fffcf1;
+  border: 1px solid #b88840;
+  color: #926624 !important;
+`;

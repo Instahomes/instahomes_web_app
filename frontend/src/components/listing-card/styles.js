@@ -7,15 +7,18 @@ export const ListingCard = styled.div`
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   min-width: 370px;
+  max-width: 370px;
   display: flex;
   flex-direction: column;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    min-width: 310px;
+    min-width: 330px;
+    max-width: 330px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     min-width: min(260px, 100%);
+    max-width: min(260px, 100%);
   }
 `;
 
@@ -32,16 +35,29 @@ export const WishlistHeart = styled.img`
   top: 10px;
 `;
 
-export const ListingImage = styled.img`
-  object-fit: cover;
-  width: 100%;
+export const ListingImage = styled.div`
+  height: 250px;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    height: 200px;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    height: 180px;
+  }
 `;
 
 export const ListingInfo = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.1em;
-  height: 100%;
+  // height: 100%;
 
   .view-home {
     margin-top: auto;

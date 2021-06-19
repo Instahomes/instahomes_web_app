@@ -7,38 +7,12 @@ import {
   SignupOrangeButton,
   SecondaryButton,
   SignupInput,
-  FormErrorMessage,
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
 import { Field } from "formik";
-
-const propertyChoices = [
-  {
-    value: "condo",
-    label: "Condominium",
-  },
-  {
-    value: "office",
-    label: "Commercial Office Space",
-  },
-  {
-    value: "houseAndLot",
-    label: "House and Lot",
-  },
-  {
-    value: "apartment",
-    label: "Apartment",
-  },
-  {
-    value: "lotOnly",
-    label: "Lot Only",
-  },
-  {
-    value: "townhouse",
-    label: "Townhouse",
-  },
-];
+import { propertyChoices } from "../../../misc/constants";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step5 = ({ isSubmitting, values, previous, errors }) => {
   return (
