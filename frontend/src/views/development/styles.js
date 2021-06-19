@@ -131,36 +131,3 @@ export const About = styled.section`
     }
   }
 `;
-
-export const Amenities = styled.section`
-  padding: 3em var(--main-padding-x);
-
-  & > div {
-    display: flex;
-    gap: 2em;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    text-align: center;
-
-    & > div {
-      flex-direction: column;
-    }
-  }
-`;
-
-export const AmenitiesCard = styled.div`
-  flex: 1;
-
-  .amenities-img {
-    background: url(${({ image }) => image});
-    background-size: cover;
-    border-radius: 10px;
-    height: 200px;
-    margin-bottom: 1em;
-  }
-
-  p {
-    margin-top: 0.5em;
-  }
-`;

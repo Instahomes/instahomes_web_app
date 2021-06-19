@@ -29,14 +29,14 @@ const NavbarSearch = ({ isHome, dark }) => {
       onSubmit={() => {
         history.push({
           pathname: "/search",
-          search: "?query=" + query,
+          search: "?location=" + query,
         });
       }}
     >
       <GrayInput
         style={{ width: "100%", display: isHome ? "none" : "block" }}
         scale={0.8}
-        placeholder="Search for location or landmark"
+        placeholder="Search for location/city/subdivision"
         name="query"
         onChange={(e) => setQuery(e.target.value)}
         value={query}

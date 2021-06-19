@@ -220,7 +220,7 @@ export const DevInformation = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 1.5em;
-  height: 100px;
+  // height: 100px;
   margin-top: 1em;
 
   h4,

@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar";
 import ProductInquiry from "../../components/product-inquiry";
 import ProductTour from "../../components/product-tour";
 import ListingImageGrid from "../../components/listing-image-grid";
+import Amenities from "../../components/amenities";
 import Loading from "../../components/loading";
 
 import heart from "../../assets/product/heart.svg";
@@ -49,7 +50,6 @@ import { Link } from "react-router-dom";
 
 const PropertyDetails = ({ active, floorPlan, ...props }) => {
   const { openLightbox } = useLightbox();
-  console.log(floorPlan);
 
   return (
     <React.Fragment>
@@ -104,7 +104,7 @@ const Listing = (props) => {
 
   useEffect(() => {
     getListings(
-      (data) => data.length > 0 && setListing(data[0]),
+      (data) => (data.length > 0 ? setListing(data[0]) : () => {}),
       `id=${match.params.id}`
     );
   }, []);
@@ -234,6 +234,28 @@ const Listing = (props) => {
               <DescriptionDiv active={active == "facts"} id="area-facts">
                 <h4>AREA FACTS</h4>
                 <p>{listing.area_facts}</p>
+                <Amenities
+                  amenities={[
+                    [
+                      listing.development.amenity_1,
+                      listing.development.amenity_1_desc,
+                    ],
+                    [
+                      listing.development.amenity_2,
+                      listing.development.amenity_2_desc,
+                    ],
+                    [
+                      listing.development.amenity_3,
+                      listing.development.amenity_3_desc,
+                    ],
+                    [
+                      listing.development.amenity_4,
+                      listing.development.amenity_4_desc,
+                    ],
+                  ]}
+                  direction="column"
+                  noPadding
+                />
               </DescriptionDiv>
               <DescriptionDiv active={active == "development"} id="development">
                 <h4>DEVELOPMENT INFORMATION</h4>

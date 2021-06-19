@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar";
 import ListingCard from "../../components/listing-card";
 import DeveloperContact from "../../components/developer-contact";
 import FeaturedSection from "../../components/featured-section";
+import Amenities from "../../components/amenities";
 import Loading from "../../components/loading";
 
 import map from "../../assets/development/map.svg";
@@ -14,8 +15,6 @@ import {
   HeroContent,
   ListingRow,
   About,
-  Amenities,
-  AmenitiesCard,
 } from "./styles";
 import { Helmet } from "react-helmet";
 import { getDevelopments } from "../../services/developments";
@@ -31,6 +30,19 @@ const Development = (props) => {
       `id=${match.params.id}`
     );
   }, []);
+
+  const truncateOverview = (overview) => {
+    const MAX_WORD_COUNT = 50;
+    const words = overview.split(" ");
+    if (words.length > MAX_WORD_COUNT) {
+      return words.slice(0, MAX_WORD_COUNT).join(" ") + "...";
+    }
+    return words.join(" ");
+  };
+
+  const headingComponent = () => (
+    <h2 className="h2">Amenities in {development.name}</h2>
+  );
 
   return (
     <Layout>
@@ -53,7 +65,7 @@ const Development = (props) => {
                   <img src={map} />
                   &nbsp;&nbsp;{development.location}
                 </span>
-                <p>{development.overview}</p>
+                <p>{truncateOverview(development.overview)}</p>
               </HeroContent>
             </div>
             <div className="hero-image"></div>
@@ -84,26 +96,15 @@ const Development = (props) => {
             </div>
             <div className="about-map"></div>
           </About>
-          <Amenities>
-            <h2 className="h2">Amenities in {development.name}</h2>
-            <div>
-              {[
-                [development.amenity_1, development.amenity_1_desc],
-                [development.amenity_2, development.amenity_2_desc],
-                [development.amenity_3, development.amenity_3_desc],
-                [development.amenity_4, development.amenity_4_desc],
-              ].map(
-                ([amenityName, amenityDesc]) =>
-                  amenityName && (
-                    <AmenitiesCard key={amenityName} image={devMap}>
-                      {/* <div className="amenities-img"></div> */}
-                      <span className="span">{amenityName}</span>
-                      <p className="p">{amenityDesc}</p>
-                    </AmenitiesCard>
-                  )
-              )}
-            </div>
-          </Amenities>
+          <Amenities
+            amenities={[
+              [development.amenity_1, development.amenity_1_desc],
+              [development.amenity_2, development.amenity_2_desc],
+              [development.amenity_3, development.amenity_3_desc],
+              [development.amenity_4, development.amenity_4_desc],
+            ]}
+            Heading={headingComponent}
+          />
           {/* <DeveloperContact /> */}
           <FeaturedSection />
         </DevelopmentContainer>

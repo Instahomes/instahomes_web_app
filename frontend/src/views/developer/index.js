@@ -58,6 +58,15 @@ const Developer = (props) => {
     );
   }, []);
 
+  const truncateOverview = (overview) => {
+    const MAX_WORD_COUNT = 80;
+    const words = overview.split(" ");
+    if (words.length > MAX_WORD_COUNT) {
+      return words.slice(0, MAX_WORD_COUNT).join(" ") + "...";
+    }
+    return words.join(" ");
+  };
+
   return (
     <Layout>
       <Helmet>
@@ -78,7 +87,7 @@ const Developer = (props) => {
                   {developer.name}&nbsp;&nbsp;
                   {isVerified && <img src={check} />}
                 </h1>
-                <p>{developer.overview}</p>
+                <p>{truncateOverview(developer.overview)}</p>
                 <MetadataLine>
                   <div>
                     <MetadataNumber>
