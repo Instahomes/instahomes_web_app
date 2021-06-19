@@ -24,6 +24,8 @@ export const ListingProductSearch = styled(ProductSearch)`
 
 export const ListingHeader = styled.div`
   display: flex;
+  align-items: flex-end;
+  gap: 2em;
   margin-top: 2rem;
   padding-bottom: 1em;
 
@@ -31,6 +33,7 @@ export const ListingHeader = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
+    gap: 0;
   }
 `;
 
@@ -58,12 +61,17 @@ export const ListingLine = styled.div`
 
 export const HeaderButtons = styled.div`
   display: flex;
+  justify-content: flex-end;
   margin-left: auto;
   padding: 12px 0;
+  min-width: 40%;
+  height: 50px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     margin-left: 0;
     flex-direction: column-reverse;
+    height: auto;
+    width: 100%;
   }
 `;
 
@@ -157,7 +165,7 @@ export const DescriptionLeft = styled.div`
 
       .floor-plan {
         max-width: 100%;
-        height: 100%;
+        max-height: 250px;
         cursor: pointer;
       }
 
@@ -230,7 +238,12 @@ export const DevInformation = styled.div`
   }
 
   .dev-info {
-    max-width: 50%;
+    max-width: 45%;
+
+    .dev-info-icon {
+      width: 12px;
+      height: 12px;
+    }
   }
 
   .logo {

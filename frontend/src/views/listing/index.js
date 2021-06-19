@@ -58,12 +58,12 @@ const PropertyDetails = ({ active, floorPlan, ...props }) => {
         id="property-details"
       >
         <h4>PROPERTY DETAILS</h4>
+        <SRLWrapper>
+          <div style={{ display: "none" }}>
+            <img src={floorPlan} />
+          </div>
+        </SRLWrapper>
         <div id="prop-details">
-          <SRLWrapper>
-            <div style={{ display: "none" }}>
-              <img src={floorPlan} />
-            </div>
-          </SRLWrapper>
           <img
             onClick={() => openLightbox(0)}
             className="floor-plan"
@@ -131,8 +131,8 @@ const Listing = (props) => {
                   <img src={check} alt="Heart" />
                   <img src={heart} alt="Heart" />
                 </ListingLine>
-                <ListingLine>
-                  <img src={map} alt="Map" />
+                <ListingLine style={{ alignItems: "flex-start" }}>
+                  <img src={map} alt="Map" style={{ marginTop: "5px" }} />
                   <span>{listing.development.location}</span>
                 </ListingLine>
               </div>
@@ -260,11 +260,15 @@ const Listing = (props) => {
               <DescriptionDiv active={active == "development"} id="development">
                 <h4>DEVELOPMENT INFORMATION</h4>
                 <DevInformation>
-                  <img src={parklinks} className="logo" alt="Parklinks" />
+                  <img
+                    src={listing.development.photo_main}
+                    className="logo"
+                    alt="Parklinks"
+                  />
                   <div className="dev-info">
                     <h4>{listing.development.name}</h4>
                     <p>
-                      <img src={map} alt="Map" />
+                      <img className="dev-info-icon" src={map} alt="Map" />
                       &nbsp;{listing.development.location}
                     </p>
                     <p className="orange-text m-plus">
@@ -281,7 +285,11 @@ const Listing = (props) => {
               <DescriptionDiv active={active == "developer"} id="developer">
                 <h4>DEVELOPER INFORMATION</h4>
                 <DevInformation>
-                  <img src={alveo} className="logo" alt="Alveo" />
+                  <img
+                    src={listing.development.developer.featured_image}
+                    className="logo"
+                    alt="Alveo"
+                  />
                   <div className="dev-info">
                     <h4>{listing.development.developer.name}</h4>
                     <p>More Developments!</p>
