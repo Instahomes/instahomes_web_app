@@ -181,6 +181,10 @@ export const CardFrame = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 
+  & > div {
+    width: 50%;
+  }
+
   .dev-type {
     color: ${({ theme }) => theme.colors.orange};
     font-size: 0.6em;
@@ -196,10 +200,13 @@ export const CardFrame = styled.div`
   }
 
   .dev-location {
-    color: ${({ theme }) => theme.colors.softWhite};
-    display: flex;
-    align-items: center;
-    font-size: 1em;
+    span {
+      color: ${({ theme }) => theme.colors.softWhite};
+      font-size: 0.9em;
+    }
+
+    // display: flex;
+    // align-items: center;
     margin-bottom: 0.1em;
     text-align: right;
   }

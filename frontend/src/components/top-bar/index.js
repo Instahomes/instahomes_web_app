@@ -12,8 +12,15 @@ const TopBar = () => (
       <TopBarPhoneIcon src={emailIcon} />
       <TopBarSpan>instahomes.ph@gmail.com</TopBarSpan>
     </TopBarPhone>
-    <TopBarSpan nodisplay>COMMERCIAL LEASING</TopBarSpan>
-    <TopBarSpan noRightPadding>CONTACT SUPPORT</TopBarSpan>
+    <TopBarSpan nodisplay>
+      <a href="mailto:instahomes.ph@gmail.com?subject=Commercial Leasing">
+        COMMERCIAL LEASING
+      </a>
+    </TopBarSpan>
+    <TopBarSpan noRightPadding>
+      {" "}
+      <a href="mailto:instahomes.ph@gmail.com">CONTACT SUPPORT</a>
+    </TopBarSpan>
   </TopBarFrame>
 );
 

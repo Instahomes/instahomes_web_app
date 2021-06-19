@@ -63,8 +63,8 @@ const Card = ({
             </span>
           </ListingPiece>
         </ListingLine>
-        <ListingLine>
-          <img src={map} alt="Map" />
+        <ListingLine style={{ alignItems: "flex-start" }}>
+          <img src={map} style={{ marginTop: "4px" }} alt="Map" />
           <ListingPiece marginLeft="10px">{address}</ListingPiece>
         </ListingLine>
         <ListingLine marginBottom="1em">

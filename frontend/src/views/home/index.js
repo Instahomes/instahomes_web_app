@@ -14,6 +14,7 @@ import {
   SignupForm,
   SignupInput,
   SignupButton,
+  BetaSignupButton,
   ListingFormFrame,
   ListingFormText,
   ListingForm,
@@ -28,10 +29,12 @@ import {
 import heroBg from "../../assets/home/hero.jpeg";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
+import { useHistory } from "react-router-dom";
 
 const Home = (props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [listings, setListings] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     getListings(setListings, "limit=5");
@@ -81,12 +84,15 @@ const Home = (props) => {
             and relevant properties suited for your area, budget, and investment
             needs through our algorithm.
           </p>
-          <form>
+          <BetaSignupButton onClick={() => history.push("/signup")}>
+            SIGN UP FOR BETA
+          </BetaSignupButton>
+          {/* <form>
             <SignupForm>
               <SignupInput placeholder="Email Address" />
               <SignupButton>JOIN OUR NEWSLETTER</SignupButton>
             </SignupForm>
-          </form>
+          </form> */}
         </NewsletterText>
       </NewsletterFrame>
       <ListingFormFrame id="#developer-signup">

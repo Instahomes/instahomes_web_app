@@ -40,7 +40,7 @@ export const HeroSection = styled.section`
     z-index: 2;
     position: absolute;
     opacity: 0.3;
-    background: url(${(image) => image});
+    background: url(${({ image }) => image});
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
@@ -61,7 +61,7 @@ export const HeroSection = styled.section`
 `;
 
 export const HeroContent = styled.div`
-  width: 40%;
+  width: 50%;
   margin: auto;
   text-align: center;
   padding: 10em 0;

@@ -76,7 +76,7 @@ const Development = (props) => {
               />
             ))}
           </ListingRow>
-          <About backgroundImage={devMap}>
+          <About backgroundImage={development.photo_main}>
             <div>
               <h2 className="h2">About the {development.name}</h2>
               <span className="span">DEVELOPMENT OVERVIEW</span>
@@ -96,7 +96,7 @@ const Development = (props) => {
                 ([amenityName, amenityDesc]) =>
                   amenityName && (
                     <AmenitiesCard key={amenityName} image={devMap}>
-                      <div className="amenities-img"></div>
+                      {/* <div className="amenities-img"></div> */}
                       <span className="span">{amenityName}</span>
                       <p className="p">{amenityDesc}</p>
                     </AmenitiesCard>
@@ -104,7 +104,7 @@ const Development = (props) => {
               )}
             </div>
           </Amenities>
-          <DeveloperContact />
+          {/* <DeveloperContact /> */}
           <FeaturedSection />
         </DevelopmentContainer>
       ) : (

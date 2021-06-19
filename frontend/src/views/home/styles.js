@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import signupImg from "../../assets/home/signup-img.png";
-import { Input } from "../../components/elements";
+import { Input, OutlineButton } from "../../components/elements";
 
 export const HeroFrame = styled.section`
   height: 550px;
@@ -65,6 +65,12 @@ export const NewsletterImage = styled.div`
     width: 100%;
     height: 70vw;
   }
+`;
+
+export const BetaSignupButton = styled(OutlineButton)`
+  margin-top: 0.5em;
+  border: 1px solid ${({ theme }) => theme.colors.softWhite};
+  color: ${({ theme }) => theme.colors.softWhite};
 `;
 
 export const NewsletterText = styled.div`

@@ -28,15 +28,15 @@ import { useRouteMatch } from "react-router-dom";
 const DevelopmentCard = (development) => (
   <Link to={`/development/${development.id}`}>
     <CardFrame background={development.photo_main}>
-      <div>
+      <div className="left-half">
         <h3 className="dev-type">{development.development_type}</h3>
         <h3 className="dev-name">{development.name}</h3>
       </div>
       <div>
-        <span className="dev-location">
+        <div className="dev-location">
           <img src={map} />
-          &nbsp;&nbsp;{development.location}
-        </span>
+          &nbsp;&nbsp;<span>{development.location}</span>
+        </div>
         <h4 className="dev-price">
           PHP {10000} - {100000}
         </h4>
@@ -136,7 +136,7 @@ const Developer = (props) => {
               </div>
             </Affiliates>
           )}
-          <DeveloperContact />
+          {/* <DeveloperContact /> */}
           <FeaturedSection />
           {/* <OfficeLocations backgroundImage={devMap}>
             <div>

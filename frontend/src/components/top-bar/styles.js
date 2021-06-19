@@ -18,6 +18,11 @@ export const TopBarSpan = styled.span`
   @media (max-width: 768px) {
     display: ${({ nodisplay }) => (nodisplay ? "none" : "block")};
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 export const TopBarPhone = styled.div`
