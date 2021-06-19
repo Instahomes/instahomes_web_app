@@ -59,7 +59,7 @@ const ProductInquiry = ({ listing }) => {
   const handleInquire = async () => {
     if (!category) {
       setMessage("Please select a category.");
-    } else if (isAuthenticated && hasProfile) {
+    } else if (isAuthenticated() && hasProfile()) {
       const profile = getProfile();
       setIsLoading(true);
       await createInquiry(
