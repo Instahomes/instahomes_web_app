@@ -12,6 +12,7 @@ import {
   WhiteInput,
   GrayInput,
   AdvancedSettings,
+  SearchSelect,
 } from "../../components/elements";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
@@ -32,6 +33,14 @@ const Search = (props) => {
 
   const history = useHistory();
   const routeLocation = useLocation();
+
+  const roomOptions = (placeholder) => [
+    { value: "", label: placeholder },
+    { value: "1", label: "1" },
+    { value: "2", label: "2" },
+    { value: "3", label: "3" },
+    { value: "4", label: "4" },
+  ];
 
   const changeParams = (search) => {
     const searchParams = new URLSearchParams(search);
@@ -126,23 +135,16 @@ const Search = (props) => {
           }) => (
             <form onSubmit={handleSubmit}>
               <SearchFields showAdvanced={showAdvanced}>
-                <WhiteInput
-                  scale={0.9}
-                  as="select"
-                  name="sale_status"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.sale_status}
-                  isDefault={!values.sale_status}
+                <SearchSelect
+                  fieldName="sale_status"
+                  options={[{ value: "", label: "Sale Status" }].concat(
+                    listingChoices
+                  )}
+                  isGray
+                  placeholder="Sale Status"
                   mobileOrder={7}
-                >
-                  <option value="">Sale Status</option>
-                  {listingChoices.map((choice) => (
-                    <option value={choice.value} key={choice.value}>
-                      {choice.label}
-                    </option>
-                  ))}
-                </WhiteInput>
+                  formik={{ handleBlur, values, setFieldValue }}
+                />
                 <GrayInput
                   scale={0.9}
                   style={{ flex: 1.5 }}
@@ -174,71 +176,53 @@ const Search = (props) => {
                 >
                   <option value="">Property Type</option>
                 </GrayInput> */}
-                <GrayInput
-                  as="select"
-                  name="priceRange"
-                  value={values.priceRange}
-                  onChange={(e) => {
-                    handleChange(e);
-                    const currPriceRange = e.target.value;
-                    if (currPriceRange) {
-                      const priceOption = budgetChoices.find(
-                        (item) => item.value === currPriceRange
-                      );
-
-                      setFieldValue("price_low", priceOption.lowPrice);
-                      setFieldValue("price_high", priceOption.highPrice);
-                    } else {
-                      setFieldValue("price_low", "");
-                      setFieldValue("price_high", "");
-                    }
-                  }}
-                  onBlur={handleBlur}
-                  scale={0.9}
+                <SearchSelect
+                  fieldName="priceRange"
+                  options={[{ value: "", label: "Price Range" }].concat(
+                    budgetChoices
+                  )}
+                  isGray
+                  placeholder="Price Range"
                   mobileOrder={3}
-                  isDefault={!values.priceRange}
-                >
-                  <option value="">Price Range</option>
-                  {budgetChoices.map((choice) => (
-                    <option value={choice.value} key={choice.value}>
-                      {choice.label}
-                    </option>
-                  ))}
-                </GrayInput>
-                <GrayInput
-                  scale={0.9}
-                  as="select"
-                  name="bedrooms"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.bedrooms}
-                  isDefault={!values.bedrooms}
+                  className="advanced-setting"
+                  formik={{
+                    handleBlur,
+                    values,
+                    handleChange: (e) => {
+                      setFieldValue("priceRange", e.value);
+                      const currPriceRange = e.value;
+                      if (currPriceRange) {
+                        const priceOption = budgetChoices.find(
+                          (item) => item.value === currPriceRange
+                        );
+
+                        setFieldValue("price_low", priceOption.lowPrice);
+                        setFieldValue("price_high", priceOption.highPrice);
+                      } else {
+                        setFieldValue("price_low", "");
+                        setFieldValue("price_high", "");
+                      }
+                    },
+                  }}
+                />
+                <SearchSelect
+                  fieldName="bedrooms"
+                  options={roomOptions("Bedrooms (All)")}
+                  placeholder="Bedrooms (All)"
+                  isGray
                   className="advanced-setting"
                   mobileOrder={4}
-                >
-                  <option value="">Bedrooms (All)</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </GrayInput>
-                <GrayInput
-                  scale={0.9}
-                  as="select"
-                  name="bathrooms"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.bathrooms}
-                  isDefault={!values.bathrooms}
+                  formik={{ handleBlur, values, setFieldValue }}
+                />
+                <SearchSelect
+                  fieldName="bathrooms"
+                  options={roomOptions("Baths (All)")}
+                  placeholder="Baths (All)"
+                  isGray
                   className="advanced-setting"
                   mobileOrder={5}
-                >
-                  <option value="">Bath (All)</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </GrayInput>
+                  formik={{ handleBlur, values, setFieldValue }}
+                />
                 <GrayInput
                   scale={0.9}
                   as="select"

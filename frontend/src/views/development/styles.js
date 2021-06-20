@@ -22,7 +22,7 @@ export const DevelopmentContainer = styled.main`
 export const HeroSection = styled.section`
   z-index: 0;
   position: relative;
-  height: 600px;
+  height: 500px;
 
   .hero-gradient {
     width: 100%;
@@ -56,7 +56,7 @@ export const HeroSection = styled.section`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    height: 500px;
+    height: 400px;
   }
 `;
 
@@ -69,6 +69,7 @@ export const HeroContent = styled.div`
   h1 {
     color: ${({ theme }) => theme.colors.lightGray};
     font-size: 2.5em;
+    margin-bottom: 0.5em;
   }
 
   span,

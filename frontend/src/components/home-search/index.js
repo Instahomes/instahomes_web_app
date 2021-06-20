@@ -3,11 +3,19 @@ import { SearchFrame, SearchForm, SearchButton, Input } from "./styles.js";
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 
-import { AdvancedSettings } from "../../components/elements";
+import { AdvancedSettings, SearchSelect } from "../../components/elements";
 import { listingChoices, budgetChoices } from "../../misc/constants";
 
 const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
   const history = useHistory();
+
+  const roomOptions = (placeholder) => [
+    { value: "", label: placeholder },
+    { value: "1", label: "1" },
+    { value: "2", label: "2" },
+    { value: "3", label: "3" },
+    { value: "4", label: "4" },
+  ];
 
   return (
     <Formik
@@ -52,24 +60,15 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
               Get in touch with the best developers directly easily and for free
             </p>
             <SearchForm showAdvanced={showAdvanced}>
-              <Input
-                scale={0.9}
-                as="select"
-                name="sale_status"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.sale_status}
-                isDefault={values.sale_status == ""}
+              <SearchSelect
+                fieldName="sale_status"
+                options={[{ value: "", label: "Sale Status" }].concat(
+                  listingChoices
+                )}
+                placeholder="Sale Status"
                 mobileOrder={1}
-                className="flex-grow-mobile"
-              >
-                <option value="">Sale Status</option>
-                {listingChoices.map((choice) => (
-                  <option value={choice.value} key={choice.value}>
-                    {choice.label}
-                  </option>
-                ))}
-              </Input>
+                formik={{ handleBlur, values, setFieldValue }}
+              />
               <Input
                 style={{ flex: 1 }}
                 placeholder="Search for location/city/subdivision"
@@ -100,67 +99,50 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={4}
               /> */}
-              <Input
-                as="select"
-                name="bedrooms"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.bedrooms}
+              <SearchSelect
+                fieldName="bedrooms"
+                options={roomOptions("Bedrooms (All)")}
+                placeholder="Bedrooms (All)"
                 className="advanced-setting"
-                scale={0.9}
                 mobileOrder={5}
-                isDefault={values.bedrooms == ""}
-              >
-                <option value="">Bedrooms (All)</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </Input>
-              <Input
-                as="select"
-                name="bathrooms"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.bathrooms}
+                formik={{ handleBlur, values, setFieldValue }}
+              />
+              <SearchSelect
+                fieldName="bathrooms"
+                options={roomOptions("Baths (All)")}
+                placeholder="Baths (All)"
                 className="advanced-setting"
-                scale={0.9}
                 mobileOrder={6}
-                isDefault={values.bathrooms == ""}
-              >
-                <option value="">Baths (All)</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </Input>
-              <Input
-                as="select"
-                name="priceRange"
-                onChange={(e) => {
-                  handleChange(e);
-                  const currPriceRange = e.target.value;
-                  if (currPriceRange) {
-                    const priceOption = budgetChoices.find(
-                      (item) => item.value === currPriceRange
-                    );
-
-                    setFieldValue("price_low", priceOption.lowPrice);
-                    setFieldValue("price_high", priceOption.highPrice);
-                  } else {
-                    setFieldValue("price_low", "");
-                    setFieldValue("price_high", "");
-                  }
-                }}
-                onBlur={handleBlur}
-                value={values.priceRange}
-                className="advanced-setting"
-                scale={0.9}
+                formik={{ handleBlur, values, setFieldValue }}
+              />
+              <SearchSelect
+                fieldName="priceRange"
+                options={[{ value: "", label: "Price Range" }].concat(
+                  budgetChoices
+                )}
+                placeholder="Price Range"
                 mobileOrder={7}
-                isDefault={values.priceRange == ""}
-              >
-                <option value="">Price Range</option>
-              </Input>
+                className="advanced-setting"
+                formik={{
+                  handleBlur,
+                  values,
+                  handleChange: (e) => {
+                    setFieldValue("priceRange", e.value);
+                    const currPriceRange = e.value;
+                    if (currPriceRange) {
+                      const priceOption = budgetChoices.find(
+                        (item) => item.value === currPriceRange
+                      );
+
+                      setFieldValue("price_low", priceOption.lowPrice);
+                      setFieldValue("price_high", priceOption.highPrice);
+                    } else {
+                      setFieldValue("price_low", "");
+                      setFieldValue("price_high", "");
+                    }
+                  },
+                }}
+              />
               <Input
                 placeholder="Preferred Developer (All)"
                 style={{ flex: 1 }}

@@ -65,7 +65,7 @@ const Development = (props) => {
                   <img src={map} />
                   &nbsp;&nbsp;{development.location}
                 </span>
-                <p>{truncateOverview(development.overview)}</p>
+                {/* <p>{truncateOverview(development.overview)}</p> */}
               </HeroContent>
             </div>
             <div className="hero-image"></div>

@@ -1,8 +1,9 @@
 import React from "react";
 import arrow from "../../assets/search/arrow.svg";
 import arrowUp from "../../assets/search/arrowUp.svg";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
 import { ErrorMessage } from "formik";
+import Select from "react-select";
 
 export const Input = styled.input`
   background-color: ${({ theme }) => theme.colors.inputBlue};
@@ -141,3 +142,90 @@ export const FormWarningMessage = styled(FormErrorMessage)`
   border: 1px solid #b88840;
   color: #926624 !important;
 `;
+
+const MobileSelect = styled(Select)`
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    order: ${({ mobileOrder }) => mobileOrder || "initial"};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    &.flex-grow-mobile {
+      flex: 1;
+    }
+  }
+`;
+
+export const SearchSelect = withTheme(
+  ({
+    isGray,
+    fieldName,
+    options,
+    placeholder,
+    mobileOrder,
+    theme,
+    formik,
+    className,
+  }) => {
+    const customStyles = {
+      control: (provided) => ({
+        ...provided,
+        backgroundColor: isGray
+          ? theme.colors.lightGray
+          : theme.colors.whiteInputBg,
+        border: `1px solid ${
+          isGray ? theme.colors.mutedGray : theme.colors.whiteInputColor
+        }`,
+        borderRadius: "4px",
+        fontFamily: "'Rubik', sans-serif",
+        fontSize: "0.9em",
+        height: "100%",
+        minWidth: "120px",
+      }),
+      placeholder: () => ({
+        color: theme.colors.whiteInputColor,
+      }),
+      singleValue: (styles, { data }) => ({
+        ...styles,
+        color:
+          data.value == ""
+            ? theme.colors.whiteInputColor
+            : isGray
+            ? theme.colors.darkHeader
+            : theme.colors.darkHeader,
+      }),
+      option: (styles, { data }) => ({
+        ...styles,
+        color:
+          data.value == ""
+            ? theme.colors.whiteInputColor
+            : theme.colors.darkHeader,
+        fontSize: "0.8em",
+      }),
+      indicatorSeparator: () => {},
+    };
+
+    return (
+      <MobileSelect
+        styles={customStyles}
+        options={options}
+        placeholder={placeholder}
+        name={fieldName}
+        onChange={(option) =>
+          formik.handleChange
+            ? formik.handleChange(option)
+            : formik.setFieldValue(fieldName, option.value)
+        }
+        onBlur={formik.handleBlur}
+        value={
+          options
+            ? options.find(
+                (option) => option.value === formik.values[fieldName]
+              )
+            : ""
+        }
+        mobileOrder={mobileOrder || null}
+        className={`flex-grow-mobile ${className}`}
+      />
+    );
+  }
+);
