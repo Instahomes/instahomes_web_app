@@ -16,6 +16,7 @@ import {
 } from "../../components/elements";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
+import { getDevelopers } from "../../services/developers";
 import { listingChoices, budgetChoices } from "../../misc/constants";
 
 const Search = (props) => {
@@ -26,7 +27,7 @@ const Search = (props) => {
   const [priceRange, setPriceRange] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [bedrooms, setBedrooms] = useState("");
-  const [developer, setDeveloper] = useState("");
+  const [developer_id, setDeveloper] = useState("");
 
   const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +51,7 @@ const Search = (props) => {
     setPriceRange(searchParams.get("priceRange"));
     setBathrooms(searchParams.get("bathrooms"));
     setBedrooms(searchParams.get("bedrooms"));
-    setDeveloper(searchParams.get("developer"));
+    setDeveloper(searchParams.get("developer_id"));
   };
 
   useEffect(() => {
@@ -81,7 +82,11 @@ const Search = (props) => {
   const handleSearch = async (values, { setSubmitting }) => {
     setSubmitting(true);
     setIsLoading(true);
-    const { priceRange, ...valuesCopy } = values;
+    const { priceRange, developer_id, ...valuesCopy } = values;
+
+    if (developer_id) {
+      valuesCopy.developer_id = developer_id.value;
+    }
 
     const params = Object.entries(valuesCopy)
       .filter(([key, value]) => !!value)
@@ -97,6 +102,24 @@ const Search = (props) => {
 
     setSubmitting(false);
     setIsLoading(false);
+  };
+
+  const asyncGetDevelopers = (inputValue, callback) => {
+    getDevelopers(
+      (data) =>
+        callback(
+          [{ value: "", label: "Preferred Developer" }].concat(
+            data.map((dev) => ({ value: dev.id, label: dev.name }))
+          )
+        ),
+      () => [
+        {
+          value: "",
+          label: "Something went wrong. Please try again in a bit!",
+        },
+      ],
+      `name=${inputValue}`
+    );
   };
 
   return (
@@ -119,7 +142,7 @@ const Search = (props) => {
             price_high: "",
             bathrooms,
             bedrooms,
-            developer,
+            developer_id,
           }}
           onSubmit={handleSearch}
         >
@@ -223,19 +246,23 @@ const Search = (props) => {
                   mobileOrder={5}
                   formik={{ handleBlur, values, setFieldValue }}
                 />
-                <GrayInput
-                  scale={0.9}
-                  as="select"
-                  name="developer"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.developer}
-                  isDefault={!values.developer}
+                <SearchSelect
+                  fieldName="developer_id"
+                  asyncLoadOptions={asyncGetDevelopers}
+                  placeholder="Preferred Developer"
+                  isGray
+                  isAsync
                   className="advanced-setting"
                   mobileOrder={6}
-                >
-                  <option value="">Preferred Developer</option>
-                </GrayInput>
+                  formik={{
+                    handleBlur,
+                    values,
+                    handleChange: (option) => {
+                      setFieldValue("developer_id", option);
+                    },
+                    getValue: () => values.developer_id,
+                  }}
+                />
                 <SearchButton mobileOrder={7} type="submit">
                   FIND&nbsp;MY&nbsp;HOME
                 </SearchButton>

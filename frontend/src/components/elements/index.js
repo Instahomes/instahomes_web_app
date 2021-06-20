@@ -4,6 +4,7 @@ import arrowUp from "../../assets/search/arrowUp.svg";
 import styled, { withTheme } from "styled-components";
 import { ErrorMessage } from "formik";
 import Select from "react-select";
+import AsyncSelect from "react-select/async";
 
 export const Input = styled.input`
   background-color: ${({ theme }) => theme.colors.inputBlue};
@@ -157,6 +158,7 @@ const MobileSelect = styled(Select)`
 
 export const SearchSelect = withTheme(
   ({
+    isAsync,
     isGray,
     fieldName,
     options,
@@ -165,6 +167,7 @@ export const SearchSelect = withTheme(
     theme,
     formik,
     className,
+    asyncLoadOptions,
   }) => {
     const customStyles = {
       control: (provided) => ({
@@ -206,6 +209,10 @@ export const SearchSelect = withTheme(
 
     return (
       <MobileSelect
+        as={isAsync ? AsyncSelect : Select}
+        cacheOptions
+        loadOptions={asyncLoadOptions}
+        defaultOptions
         styles={customStyles}
         options={options}
         placeholder={placeholder}
@@ -221,6 +228,8 @@ export const SearchSelect = withTheme(
             ? options.find(
                 (option) => option.value === formik.values[fieldName]
               )
+            : formik.getValue
+            ? formik.getValue()
             : ""
         }
         mobileOrder={mobileOrder || null}

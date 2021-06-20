@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import { AdvancedSettings, SearchSelect } from "../../components/elements";
 import { listingChoices, budgetChoices } from "../../misc/constants";
+import { getDevelopers } from "../../services/developers";
 
 const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
   const history = useHistory();
@@ -16,6 +17,24 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
     { value: "3", label: "3" },
     { value: "4", label: "4" },
   ];
+
+  const asyncGetDevelopers = (inputValue, callback) => {
+    getDevelopers(
+      (data) =>
+        callback(
+          [{ value: "", label: "Preferred Developer" }].concat(
+            data.map((dev) => ({ value: dev.id, label: dev.name }))
+          )
+        ),
+      () => [
+        {
+          value: "",
+          label: "Something went wrong. Please try again in a bit!",
+        },
+      ],
+      `name=${inputValue}`
+    );
+  };
 
   return (
     <Formik
@@ -29,10 +48,16 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
         price_high: "",
         bathrooms: "",
         bedrooms: "",
-        developer: "",
+        developer_id: "",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        const params = Object.entries(values)
+        const { developer_id, ...valuesCopy } = values;
+
+        if (developer_id) {
+          valuesCopy.developer_id = developer_id.value;
+        }
+
+        const params = Object.entries(valuesCopy)
           .filter(([key, value]) => !!value)
           .map(([key, value]) => `${key}=${value}`)
           .join("&");
@@ -143,16 +168,21 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                   },
                 }}
               />
-              <Input
-                placeholder="Preferred Developer (All)"
-                style={{ flex: 1 }}
-                name="preferredDeveloper"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.preferredDeveloper}
+              <SearchSelect
+                fieldName="developer_id"
+                asyncLoadOptions={asyncGetDevelopers}
+                placeholder="Preferred Developer"
+                isAsync
                 className="advanced-setting"
-                scale={0.9}
-                mobileOrder={9}
+                mobileOrder={6}
+                formik={{
+                  handleBlur,
+                  values,
+                  handleChange: (option) => {
+                    setFieldValue("developer_id", option);
+                  },
+                  getValue: () => values.developer_id,
+                }}
               />
               <SearchButton scale={0.9} mobileOrder={10} type="submit">
                 FIND&nbsp;MY&nbsp;HOME
