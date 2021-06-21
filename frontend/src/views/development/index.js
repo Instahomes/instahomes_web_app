@@ -51,7 +51,7 @@ const Development = (props) => {
         <title>{development ? development.seo_title : "Instahomes"}</title>
         <meta
           name="description"
-          content={development ? development.overview : ""}
+          content={development ? development.seo_desc : ""}
         ></meta>
       </Helmet>
       <Navbar dark />

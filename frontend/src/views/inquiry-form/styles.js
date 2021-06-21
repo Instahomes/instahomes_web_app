@@ -38,6 +38,19 @@ export const Content = styled.div`
   height: 500px;
 `;
 
+export const BackButton = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: var(--main-padding-x);
+  font-size: 0.8em;
+  cursor: pointer;
+
+  span {
+    margin-left: 10px;
+    color: ${({ theme }) => theme.colors.mutedBlue};
+  }
+`;
+
 export const ProgressBar = styled.div`
   width: 300px;
   margin: auto;

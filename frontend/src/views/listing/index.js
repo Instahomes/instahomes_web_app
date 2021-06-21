@@ -116,7 +116,7 @@ const Listing = (props) => {
         <title>{listing ? listing.seo_title : "Instahomes"}</title>
         <meta
           name="description"
-          content={listing ? listing.overview : ""}
+          content={listing ? listing.seo_desc : ""}
         ></meta>
       </Helmet>
       <Navbar />

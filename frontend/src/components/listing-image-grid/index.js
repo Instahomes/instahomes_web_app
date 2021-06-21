@@ -96,7 +96,7 @@ const ImageGrid = ({ imageMain, images }) => {
             onClick={() => openLightbox(idx + 1)}
           />
         ))}
-        <MoreImages>+10 more photos</MoreImages>
+        {/* <MoreImages>+10 more photos</MoreImages> */}
       </ImageContainer>
     </React.Fragment>
   );
