@@ -1,0 +1,21 @@
+version: "3.7"
+
+networks:
+  instahomes:
+    external: true
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_API_URL=http://instahomes_backend_web_1/api
+    networks:
+      - instahomes
