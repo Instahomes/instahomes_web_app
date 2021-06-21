@@ -6,6 +6,7 @@ import ProductTour from "../../components/product-tour";
 import ListingImageGrid from "../../components/listing-image-grid";
 import Amenities from "../../components/amenities";
 import Loading from "../../components/loading";
+import EmptyPage from "../../components/empty-page";
 
 import heart from "../../assets/product/heart.svg";
 import check from "../../assets/product/check.svg";
@@ -101,10 +102,11 @@ const Listing = (props) => {
   const [active, setActive] = useState("overview");
   const match = useRouteMatch();
   const [listing, setListing] = useState(null);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
     getListings(
-      (data) => (data.length > 0 ? setListing(data[0]) : () => {}),
+      (data) => (data.length > 0 ? setListing(data[0]) : setIsEmpty(true)),
       `id=${match.params.id}`
     );
   }, []);
@@ -120,265 +122,274 @@ const Listing = (props) => {
         ></meta>
       </Helmet>
       <Navbar />
-      {listing ? (
-        <ListingContainer>
-          {/* <ListingProductSearch /> */}
-          <ListingHeadContainer>
-            <ListingHeader>
-              <div>
-                <ListingLine>
-                  <h4>{listing.development.name + " " + listing.unit_name}</h4>
-                  <img src={check} alt="Heart" />
-                  <img src={heart} alt="Heart" />
-                </ListingLine>
-                <ListingLine style={{ alignItems: "flex-start" }}>
-                  <img src={map} alt="Map" style={{ marginTop: "5px" }} />
-                  <span>{listing.development.location}</span>
-                </ListingLine>
-              </div>
-              <HeaderButtons>
-                <WishlistButton>ADD TO WISHLIST</WishlistButton>
-                <InquireButton>SEND AN INQUIRY</InquireButton>
-              </HeaderButtons>
-            </ListingHeader>
-            <ListingImageGrid
-              imageMain={listing.photo_main}
-              images={[
-                listing.image_1,
-                listing.image_2,
-                listing.image_3,
-                listing.image_4,
-                listing.image_5,
-                listing.image_6,
-              ]}
-            />
-          </ListingHeadContainer>
-          <ProductTabContainer>
-            <ProductTab
-              onClick={() => setActive("overview")}
-              active={active == "overview"}
-              first
-            >
-              OVERVIEW
-            </ProductTab>
-            <ProductTab
-              onClick={() => setActive("propertyDetails")}
-              active={active == "propertyDetails"}
-              href="#property-details"
-            >
-              PROPERTY&nbsp;DETAILS
-            </ProductTab>
-            <ProductTab
-              href="#prop-directions"
-              onClick={() => setActive("propertyDirections")}
-              active={active == "propertyDirections"}
-            >
-              HOW&nbsp;TO&nbsp;GET&nbsp;THERE
-            </ProductTab>
-            <ProductTab
-              href="#area-facts"
-              onClick={() => setActive("facts")}
-              active={active == "facts"}
-            >
-              AREA&nbsp;FACTS
-            </ProductTab>
-            <ProductTab
-              href="#development"
-              onClick={() => setActive("development")}
-              active={active == "development"}
-            >
-              DEVELOPMENT&nbsp;INFORMATION
-            </ProductTab>
-            <ProductTab
-              href="#developer"
-              onClick={() => setActive("developer")}
-              active={active == "developer"}
-              last
-            >
-              DEVELOPER&nbsp;INFORMATION
-            </ProductTab>
-          </ProductTabContainer>
-          <DescriptionContainer>
-            <DescriptionLeft>
-              <DescriptionDiv active={active == "overview"}>
-                <h4>OVERVIEW</h4>
-                <p>{listing.overview}</p>
-              </DescriptionDiv>
-              <PropertyDetailsWrapper
-                active={active}
-                floorPlan={listing.floor_plan}
+      <EmptyPage isEmpty={isEmpty}>
+        {listing ? (
+          <ListingContainer>
+            {/* <ListingProductSearch /> */}
+            <ListingHeadContainer>
+              <ListingHeader>
+                <div>
+                  <ListingLine>
+                    <h4>
+                      {listing.development.name + " " + listing.unit_name}
+                    </h4>
+                    <img src={check} alt="Heart" />
+                    <img src={heart} alt="Heart" />
+                  </ListingLine>
+                  <ListingLine style={{ alignItems: "flex-start" }}>
+                    <img src={map} alt="Map" style={{ marginTop: "5px" }} />
+                    <span>{listing.development.location}</span>
+                  </ListingLine>
+                </div>
+                <HeaderButtons>
+                  <WishlistButton>ADD TO WISHLIST</WishlistButton>
+                  <InquireButton>SEND AN INQUIRY</InquireButton>
+                </HeaderButtons>
+              </ListingHeader>
+              <ListingImageGrid
+                imageMain={listing.photo_main}
+                images={[
+                  listing.image_1,
+                  listing.image_2,
+                  listing.image_3,
+                  listing.image_4,
+                  listing.image_5,
+                  listing.image_6,
+                ]}
               />
-              <DescriptionDiv
-                active={active == "propertyDirections"}
-                id="prop-directions"
+            </ListingHeadContainer>
+            <ProductTabContainer>
+              <ProductTab
+                onClick={() => setActive("overview")}
+                active={active == "overview"}
+                first
               >
-                <h4>HOW TO GET THERE</h4>
-                {/* <img
+                OVERVIEW
+              </ProductTab>
+              <ProductTab
+                onClick={() => setActive("propertyDetails")}
+                active={active == "propertyDetails"}
+                href="#property-details"
+              >
+                PROPERTY&nbsp;DETAILS
+              </ProductTab>
+              <ProductTab
+                href="#prop-directions"
+                onClick={() => setActive("propertyDirections")}
+                active={active == "propertyDirections"}
+              >
+                HOW&nbsp;TO&nbsp;GET&nbsp;THERE
+              </ProductTab>
+              <ProductTab
+                href="#area-facts"
+                onClick={() => setActive("facts")}
+                active={active == "facts"}
+              >
+                AREA&nbsp;FACTS
+              </ProductTab>
+              <ProductTab
+                href="#development"
+                onClick={() => setActive("development")}
+                active={active == "development"}
+              >
+                DEVELOPMENT&nbsp;INFORMATION
+              </ProductTab>
+              <ProductTab
+                href="#developer"
+                onClick={() => setActive("developer")}
+                active={active == "developer"}
+                last
+              >
+                DEVELOPER&nbsp;INFORMATION
+              </ProductTab>
+            </ProductTabContainer>
+            <DescriptionContainer>
+              <DescriptionLeft>
+                <DescriptionDiv active={active == "overview"}>
+                  <h4>OVERVIEW</h4>
+                  <p>{listing.overview}</p>
+                </DescriptionDiv>
+                <PropertyDetailsWrapper
+                  active={active}
+                  floorPlan={listing.floor_plan}
+                />
+                <DescriptionDiv
+                  active={active == "propertyDirections"}
+                  id="prop-directions"
+                >
+                  <h4>HOW TO GET THERE</h4>
+                  {/* <img
                   src={listing.floor_plan}
                   alt="Property Map"
                   id="prop-map"
                 /> */}
-                <div id="directions-details">
-                  <div>
-                    <h4>By Car</h4>
-                    <p>{listing.development.description_by_car}</p>
-                  </div>
-                  {listing.development.description_by_commute && (
+                  <div id="directions-details">
                     <div>
-                      <h4>By Commute</h4>
-                      <p>{listing.development.description_by_commute}</p>
+                      <h4>By Car</h4>
+                      <p>{listing.development.description_by_car}</p>
                     </div>
-                  )}
-                </div>
-              </DescriptionDiv>
-              <DescriptionDiv active={active == "facts"} id="area-facts">
-                <h4>AREA FACTS</h4>
-                <p>{listing.area_facts}</p>
-                <Amenities
-                  amenities={[
-                    [
-                      listing.development.amenity_1,
-                      listing.development.amenity_1_desc,
-                    ],
-                    [
-                      listing.development.amenity_2,
-                      listing.development.amenity_2_desc,
-                    ],
-                    [
-                      listing.development.amenity_3,
-                      listing.development.amenity_3_desc,
-                    ],
-                    [
-                      listing.development.amenity_4,
-                      listing.development.amenity_4_desc,
-                    ],
-                  ]}
-                  direction="column"
-                  noPadding
-                />
-              </DescriptionDiv>
-              <DescriptionDiv active={active == "development"} id="development">
-                <h4>DEVELOPMENT INFORMATION</h4>
-                <DevInformation>
-                  <img
-                    src={listing.development.photo_main}
-                    className="logo"
-                    alt="Parklinks"
+                    {listing.development.description_by_commute && (
+                      <div>
+                        <h4>By Commute</h4>
+                        <p>{listing.development.description_by_commute}</p>
+                      </div>
+                    )}
+                  </div>
+                </DescriptionDiv>
+                <DescriptionDiv active={active == "facts"} id="area-facts">
+                  <h4>AREA FACTS</h4>
+                  <p>{listing.area_facts}</p>
+                  <Amenities
+                    amenities={[
+                      [
+                        listing.development.amenity_1,
+                        listing.development.amenity_1_desc,
+                      ],
+                      [
+                        listing.development.amenity_2,
+                        listing.development.amenity_2_desc,
+                      ],
+                      [
+                        listing.development.amenity_3,
+                        listing.development.amenity_3_desc,
+                      ],
+                      [
+                        listing.development.amenity_4,
+                        listing.development.amenity_4_desc,
+                      ],
+                    ]}
+                    direction="column"
+                    noPadding
                   />
-                  <div className="dev-info">
-                    <h4>{listing.development.name}</h4>
-                    <p>
-                      <img className="dev-info-icon" src={map} alt="Map" />
-                      &nbsp;{listing.development.location}
-                    </p>
-                    <p className="orange-text m-plus">
-                      {listing.development.development_type}
-                    </p>
-                  </div>
-                  <ViewDev>
-                    <Link to={`/development/${listing.development.id}`}>
-                      VIEW DEVELOPMENT
-                    </Link>
-                  </ViewDev>
-                </DevInformation>
-              </DescriptionDiv>
-              <DescriptionDiv active={active == "developer"} id="developer">
-                <h4>DEVELOPER INFORMATION</h4>
-                <DevInformation>
-                  <img
-                    src={listing.development.developer.featured_image}
-                    className="logo"
-                    alt="Alveo"
-                  />
-                  <div className="dev-info">
-                    <h4>{listing.development.developer.name}</h4>
-                    <p>More Developments!</p>
-                  </div>
-                  <ViewDev>
-                    <Link to={`/developer/${listing.development.developer.id}`}>
-                      VIEW DEVELOPER
-                    </Link>
-                  </ViewDev>
-                </DevInformation>
-              </DescriptionDiv>
-            </DescriptionLeft>
-            <DescriptionRight>
-              <div className="sticky">
-                <MetadataLine>
-                  <div>
-                    <MetadataNumber>{listing.lot_size} sqm</MetadataNumber>
-                    <MetadataProperty>
-                      <img src={area} alt="Area" />
-                      <span>Lot Size</span>
-                    </MetadataProperty>
-                  </div>
-                  <div>
-                    <MetadataNumber>
-                      {`${listing.floor_size_min}${
-                        listing.floor_size_max
-                          ? `-${listing.floor_size_max}`
-                          : ""
-                      }`}{" "}
-                      sqm
-                    </MetadataNumber>
-                    <MetadataProperty>
-                      <img src={area} alt="Area" />
-                      <span>Floor Area</span>
-                    </MetadataProperty>
-                  </div>
-                  <div>
-                    <MetadataNumber>{listing.bedrooms}</MetadataNumber>
-                    <MetadataProperty>
-                      <img src={bed} alt="Bed" />
-                      <span>Bedrooms</span>
-                    </MetadataProperty>
-                  </div>
-                  <div>
-                    <MetadataNumber>
-                      {listing.bathrooms_min}
-                      {listing.bathrooms_max && "-" + listing.bathrooms_max}
-                    </MetadataNumber>
-                    <MetadataProperty>
-                      <img src={bath} alt="Bath" />
-                      <span>Bathrooms</span>
-                    </MetadataProperty>
-                  </div>
-                </MetadataLine>
-                <ProductPriceLine>
-                  <div>
-                    <img src={money} alt="Money" />
-                    <span className="body-dark">
-                      Est.&nbsp;Property&nbsp;Price
+                </DescriptionDiv>
+                <DescriptionDiv
+                  active={active == "development"}
+                  id="development"
+                >
+                  <h4>DEVELOPMENT INFORMATION</h4>
+                  <DevInformation>
+                    <img
+                      src={listing.development.photo_main}
+                      className="logo"
+                      alt="Parklinks"
+                    />
+                    <div className="dev-info">
+                      <h4>{listing.development.name}</h4>
+                      <p>
+                        <img className="dev-info-icon" src={map} alt="Map" />
+                        &nbsp;{listing.development.location}
+                      </p>
+                      <p className="orange-text m-plus">
+                        {listing.development.development_type}
+                      </p>
+                    </div>
+                    <ViewDev>
+                      <Link to={`/development/${listing.development.id}`}>
+                        VIEW DEVELOPMENT
+                      </Link>
+                    </ViewDev>
+                  </DevInformation>
+                </DescriptionDiv>
+                <DescriptionDiv active={active == "developer"} id="developer">
+                  <h4>DEVELOPER INFORMATION</h4>
+                  <DevInformation>
+                    <img
+                      src={listing.development.developer.featured_image}
+                      className="logo"
+                      alt="Alveo"
+                    />
+                    <div className="dev-info">
+                      <h4>{listing.development.developer.name}</h4>
+                      <p>More Developments!</p>
+                    </div>
+                    <ViewDev>
+                      <Link
+                        to={`/developer/${listing.development.developer.id}`}
+                      >
+                        VIEW DEVELOPER
+                      </Link>
+                    </ViewDev>
+                  </DevInformation>
+                </DescriptionDiv>
+              </DescriptionLeft>
+              <DescriptionRight>
+                <div className="sticky">
+                  <MetadataLine>
+                    <div>
+                      <MetadataNumber>{listing.lot_size} sqm</MetadataNumber>
+                      <MetadataProperty>
+                        <img src={area} alt="Area" />
+                        <span>Lot Size</span>
+                      </MetadataProperty>
+                    </div>
+                    <div>
+                      <MetadataNumber>
+                        {`${listing.floor_size_min}${
+                          listing.floor_size_max
+                            ? `-${listing.floor_size_max}`
+                            : ""
+                        }`}{" "}
+                        sqm
+                      </MetadataNumber>
+                      <MetadataProperty>
+                        <img src={area} alt="Area" />
+                        <span>Floor Area</span>
+                      </MetadataProperty>
+                    </div>
+                    <div>
+                      <MetadataNumber>{listing.bedrooms}</MetadataNumber>
+                      <MetadataProperty>
+                        <img src={bed} alt="Bed" />
+                        <span>Bedrooms</span>
+                      </MetadataProperty>
+                    </div>
+                    <div>
+                      <MetadataNumber>
+                        {listing.bathrooms_min}
+                        {listing.bathrooms_max && "-" + listing.bathrooms_max}
+                      </MetadataNumber>
+                      <MetadataProperty>
+                        <img src={bath} alt="Bath" />
+                        <span>Bathrooms</span>
+                      </MetadataProperty>
+                    </div>
+                  </MetadataLine>
+                  <ProductPriceLine>
+                    <div>
+                      <img src={money} alt="Money" />
+                      <span className="body-dark">
+                        Est.&nbsp;Property&nbsp;Price
+                      </span>
+                    </div>
+                    <span className="dark-blue">
+                      Php {listing.lowest_price.toLocaleString()}
                     </span>
-                  </div>
-                  <span className="dark-blue">
-                    Php {listing.lowest_price.toLocaleString()}
-                  </span>
-                </ProductPriceLine>
-                {/* <ProductTour />
+                  </ProductPriceLine>
+                  {/* <ProductTour />
                 <br />
                 <br /> */}
-                <ProductInquiry
-                  listing={{
-                    developer: {
-                      id: listing.development.developer.id,
-                      name: listing.development.developer.name,
-                    },
-                    development: {
-                      id: listing.development.id,
-                      name: listing.development.name,
-                    },
-                    name: listing.unit_name,
-                    id: listing.id,
-                  }}
-                />
-              </div>
-            </DescriptionRight>
-          </DescriptionContainer>
-        </ListingContainer>
-      ) : (
-        <Loading />
-      )}
+                  <ProductInquiry
+                    listing={{
+                      developer: {
+                        id: listing.development.developer.id,
+                        name: listing.development.developer.name,
+                      },
+                      development: {
+                        id: listing.development.id,
+                        name: listing.development.name,
+                      },
+                      name: listing.unit_name,
+                      id: listing.id,
+                    }}
+                  />
+                </div>
+              </DescriptionRight>
+            </DescriptionContainer>
+          </ListingContainer>
+        ) : (
+          <Loading height="100vh" />
+        )}
+      </EmptyPage>
     </Layout>
   );
 };

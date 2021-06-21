@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar";
 import DeveloperContact from "../../components/developer-contact";
 import FeaturedSection from "../../components/featured-section";
 import Loading from "../../components/loading";
+import EmptyPage from "../../components/empty-page";
 
 import map from "../../assets/development/map.svg";
 import check from "../../assets/card/check.svg";
@@ -49,11 +50,13 @@ const isVerified = true;
 
 const Developer = (props) => {
   const [developer, setDeveloper] = useState(null);
+  const [isEmpty, setIsEmpty] = useState(false);
   const match = useRouteMatch();
 
   useEffect(() => {
     getDevelopers(
-      (data) => data.length > 0 && setDeveloper(data[0]),
+      (data) => (data.length > 0 ? setDeveloper(data[0]) : setIsEmpty(true)),
+      () => {},
       `id=${match.params.id}`
     );
   }, []);
@@ -78,24 +81,25 @@ const Developer = (props) => {
         ></meta>
       </Helmet>
       <Navbar dark />
-      {developer ? (
-        <DeveloperContainer>
-          <HeroSection image={developer.featured_image}>
-            <div className="hero-gradient">
-              <HeroContent>
-                <h1>
-                  {developer.name}&nbsp;&nbsp;
-                  {isVerified && <img src={check} />}
-                </h1>
-                <p>{truncateOverview(developer.overview)}</p>
-                <MetadataLine>
-                  <div>
-                    <MetadataNumber>
-                      {developer.development_set.length}
-                    </MetadataNumber>
-                    <MetadataProperty>Developments</MetadataProperty>
-                  </div>
-                  {/* <div>
+      <EmptyPage isEmpty={isEmpty}>
+        {developer ? (
+          <DeveloperContainer>
+            <HeroSection image={developer.featured_image}>
+              <div className="hero-gradient">
+                <HeroContent>
+                  <h1>
+                    {developer.name}&nbsp;&nbsp;
+                    {isVerified && <img src={check} />}
+                  </h1>
+                  <p>{truncateOverview(developer.overview)}</p>
+                  <MetadataLine>
+                    <div>
+                      <MetadataNumber>
+                        {developer.development_set.length}
+                      </MetadataNumber>
+                      <MetadataProperty>Developments</MetadataProperty>
+                    </div>
+                    {/* <div>
                   <MetadataNumber>32</MetadataNumber>
                   <MetadataProperty>Properties</MetadataProperty>
                 </div>
@@ -103,51 +107,51 @@ const Developer = (props) => {
                   <MetadataNumber>6</MetadataNumber>
                   <MetadataProperty>Site Locations</MetadataProperty>
                 </div> */}
-                </MetadataLine>
-              </HeroContent>
-            </div>
-            <div className="hero-image"></div>
-            <div className="hero-black"></div>
-          </HeroSection>
-          <Developments>
-            <h2 className="h2">{developer.name} Developments</h2>
-            <div className="dev-row">
-              {developer.development_set.map((dev) => (
-                <DevelopmentCard key={dev.name} {...dev} />
-              ))}
-            </div>
-          </Developments>
-          <About>
-            <h2 className="h2">About {developer.name}</h2>
-            <div className="about-body">
-              <div>
-                <h3 className="h3">COMPANY OVERVIEW</h3>
-                <p className="p">{developer.overview}</p>
+                  </MetadataLine>
+                </HeroContent>
               </div>
-              <div>
-                <h3 className="h3">COMPANY VALUES</h3>
-                <p className="p">{developer.values_description}</p>
-              </div>
-            </div>
-          </About>
-          {developer.affiliate_name_1 && (
-            <Affiliates>
-              <h2 className="h2">Affiliates and Partners</h2>
-              <div className="affiliates-logos">
-                {[
-                  [developer.affiliate_name_1, developer.affiliate_logo_1],
-                  [developer.affiliate_name_2, developer.affiliate_logo_2],
-                  [developer.affiliate_name_3, developer.affiliate_logo_3],
-                  [developer.affiliate_name_4, developer.affiliate_logo_4],
-                ].map(([affName, affLogo]) => (
-                  <img src={affLogo} alt={affName} />
+              <div className="hero-image"></div>
+              <div className="hero-black"></div>
+            </HeroSection>
+            <Developments>
+              <h2 className="h2">{developer.name} Developments</h2>
+              <div className="dev-row">
+                {developer.development_set.map((dev) => (
+                  <DevelopmentCard key={dev.name} {...dev} />
                 ))}
               </div>
-            </Affiliates>
-          )}
-          {/* <DeveloperContact /> */}
-          <FeaturedSection />
-          {/* <OfficeLocations backgroundImage={devMap}>
+            </Developments>
+            <About>
+              <h2 className="h2">About {developer.name}</h2>
+              <div className="about-body">
+                <div>
+                  <h3 className="h3">COMPANY OVERVIEW</h3>
+                  <p className="p">{developer.overview}</p>
+                </div>
+                <div>
+                  <h3 className="h3">COMPANY VALUES</h3>
+                  <p className="p">{developer.values_description}</p>
+                </div>
+              </div>
+            </About>
+            {developer.affiliate_name_1 && (
+              <Affiliates>
+                <h2 className="h2">Affiliates and Partners</h2>
+                <div className="affiliates-logos">
+                  {[
+                    [developer.affiliate_name_1, developer.affiliate_logo_1],
+                    [developer.affiliate_name_2, developer.affiliate_logo_2],
+                    [developer.affiliate_name_3, developer.affiliate_logo_3],
+                    [developer.affiliate_name_4, developer.affiliate_logo_4],
+                  ].map(([affName, affLogo]) => (
+                    <img src={affLogo} alt={affName} />
+                  ))}
+                </div>
+              </Affiliates>
+            )}
+            {/* <DeveloperContact /> */}
+            <FeaturedSection />
+            {/* <OfficeLocations backgroundImage={devMap}>
             <div>
               <h2 className="h2">Office Locations</h2>
               <div className="office-map-mobile"></div>
@@ -171,10 +175,11 @@ const Developer = (props) => {
             </div>
             <div className="office-map"></div>
           </OfficeLocations> */}
-        </DeveloperContainer>
-      ) : (
-        <Loading></Loading>
-      )}
+          </DeveloperContainer>
+        ) : (
+          <Loading></Loading>
+        )}
+      </EmptyPage>
     </Layout>
   );
 };

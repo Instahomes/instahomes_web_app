@@ -13,6 +13,7 @@ import Wishlist from "./views/wishlist";
 import Development from "./views/development";
 import Developer from "./views/developer";
 import InquiryForm from "./views/inquiry-form";
+import EmptyPage from "./components/empty-page";
 
 function App() {
   return (
@@ -49,8 +50,11 @@ function App() {
             <Route exact path="/inquire">
               <InquiryForm />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
+            </Route>
+            <Route>
+              <EmptyPage isEmpty={true} />
             </Route>
           </Switch>
         </Router>
