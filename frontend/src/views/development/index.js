@@ -88,6 +88,7 @@ const Development = (props) => {
                   bedrooms={listing.bedrooms}
                   bathrooms={listing.bathrooms_min}
                   isVerified={true}
+                  isOnWishlist={listing.is_liked}
                 />
               ))}
             </ListingRow>

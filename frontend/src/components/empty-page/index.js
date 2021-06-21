@@ -28,16 +28,20 @@ const Frame = styled.section`
   }
 `;
 
-const EmptyPage = ({ children, isEmpty }) => {
+const EmptyPage = ({ children, isEmpty, header, body, buttonDisappear }) => {
   const history = useHistory();
 
   return isEmpty ? (
     <Frame>
-      <h1>Oh no! This page does not exist.</h1>
-      <p>No worries, it happens. Let’s get you back home instead.</p>
-      <OutlineButton onClick={() => history.push("/")}>
-        BACK TO HOME
-      </OutlineButton>
+      <h1>{header || "Oh no! This page does not exist."}</h1>
+      <p>
+        {body || "No worries, it happens. Let’s get you back home instead."}
+      </p>
+      {!buttonDisappear && (
+        <OutlineButton onClick={() => history.push("/")}>
+          BACK TO HOME
+        </OutlineButton>
+      )}
     </Frame>
   ) : (
     children

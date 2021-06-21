@@ -8,7 +8,8 @@ import Amenities from "../../components/amenities";
 import Loading from "../../components/loading";
 import EmptyPage from "../../components/empty-page";
 
-import heart from "../../assets/product/heart.svg";
+import heartFull from "../../assets/card/heartFull.svg";
+import heartEmpty from "../../assets/product/heart.svg";
 import check from "../../assets/product/check.svg";
 import map from "../../assets/product/map.svg";
 import specsArrow from "../../assets/product/specs_arrow.svg";
@@ -46,6 +47,7 @@ import SimpleReactLightbox, {
   SRLWrapper,
 } from "simple-react-lightbox";
 import { getListings } from "../../services/listings";
+import { updateWishlist } from "../../services/wishlist";
 import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -103,13 +105,33 @@ const Listing = (props) => {
   const match = useRouteMatch();
   const [listing, setListing] = useState(null);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [isHeartFilled, setIsHeartFilled] = useState(false);
 
   useEffect(() => {
+    const listingCallback = (listing) => {
+      setListing(listing);
+      setIsHeartFilled(listing.is_liked);
+    };
+
     getListings(
-      (data) => (data.length > 0 ? setListing(data[0]) : setIsEmpty(true)),
+      (data) => (data.length > 0 ? listingCallback(data[0]) : setIsEmpty(true)),
+      () => {},
       `id=${match.params.id}`
     );
   }, []);
+
+  const handleUpdateWishlist = () => {
+    const newState = !isHeartFilled;
+    setIsHeartFilled(newState);
+    setTimeout(() => {
+      updateWishlist(
+        listing.id,
+        newState,
+        () => {},
+        () => {}
+      );
+    }, 1000);
+  };
 
   return (
     <Layout>
@@ -134,7 +156,12 @@ const Listing = (props) => {
                       {listing.development.name + " " + listing.unit_name}
                     </h4>
                     <img src={check} alt="Heart" />
-                    <img src={heart} alt="Heart" />
+                    <img
+                      style={{ cursor: "pointer" }}
+                      src={isHeartFilled ? heartFull : heartEmpty}
+                      alt="Heart"
+                      onClick={handleUpdateWishlist}
+                    />
                   </ListingLine>
                   <ListingLine style={{ alignItems: "flex-start" }}>
                     <img src={map} alt="Map" style={{ marginTop: "5px" }} />
@@ -142,7 +169,9 @@ const Listing = (props) => {
                   </ListingLine>
                 </div>
                 <HeaderButtons>
-                  <WishlistButton>ADD TO WISHLIST</WishlistButton>
+                  <WishlistButton onClick={handleUpdateWishlist}>
+                    {isHeartFilled ? "REMOVE FROM" : "ADD TO"} WISHLIST
+                  </WishlistButton>
                   <InquireButton>SEND AN INQUIRY</InquireButton>
                 </HeaderButtons>
               </ListingHeader>

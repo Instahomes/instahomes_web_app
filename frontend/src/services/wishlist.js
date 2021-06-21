@@ -1,8 +1,8 @@
 import axiosClient from "./";
 
-export const getListings = (callback, errorCallback, queries = "") => {
+export const updateWishlist = (listing, is_liked, callback, errorCallback) => {
   return axiosClient
-    .get(`/listing?${queries}`)
+    .post(`/wishlist/create/`, { listing, is_liked })
     .then((res) => callback(res.data))
     .catch((err) => errorCallback(err));
 };

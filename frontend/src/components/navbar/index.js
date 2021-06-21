@@ -13,6 +13,7 @@ import { slide as Menu } from "react-burger-menu";
 import { withTheme } from "styled-components";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../../services/auth";
+import { getCurrentUser } from "../../services/users";
 import AccountDropdown from "../../components/account-dropdown";
 import { useHistory } from "react-router-dom";
 
@@ -46,7 +47,14 @@ const NavbarSearch = ({ isHome, dark }) => {
   );
 };
 
-const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
+const NavbarItems = ({
+  isMobile,
+  isHome,
+  className,
+  dark,
+  isLoggedIn,
+  wishlistCount,
+}) => (
   <React.Fragment>
     {!isMobile && <NavbarSearch isHome={isHome} dark={dark} />}
     <MenuItems>
@@ -70,7 +78,8 @@ const NavbarItems = ({ isMobile, isHome, className, dark, isLoggedIn }) => (
       </NavbarSpan>
       {isLoggedIn && (
         <NavbarSpan dark={dark} className={className} to="/wishlist">
-          WISHLIST&nbsp;&nbsp;<WishlistNumber>2</WishlistNumber>
+          WISHLIST&nbsp;&nbsp;
+          {!!wishlistCount && <WishlistNumber>{wishlistCount}</WishlistNumber>}
         </NavbarSpan>
       )}
       {isLoggedIn ? (
@@ -96,6 +105,7 @@ const Navbar = ({ theme, dark, isHome }) => {
   const finalMenuStyles = menuStyles(theme, dark);
   const isLoggedIn = isAuthenticated();
   const [width, setWidth] = useState(window.innerWidth);
+  const [wishlistCount, setWishlistCount] = useState(null);
   const isMediumScreen =
     width <=
     parseInt(
@@ -112,6 +122,15 @@ const Navbar = ({ theme, dark, isHome }) => {
     return () => {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      getCurrentUser(
+        (data) => setWishlistCount(data[0].wishlist_count),
+        () => {}
+      );
+    }
   }, []);
 
   return (
@@ -135,6 +154,7 @@ const Navbar = ({ theme, dark, isHome }) => {
             isLoggedIn={isLoggedIn}
             isHome={isHome}
             dark={dark}
+            wishlistCount={wishlistCount}
           />
         </React.Fragment>
       )}

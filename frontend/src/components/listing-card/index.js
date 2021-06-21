@@ -20,6 +20,8 @@ import {
   DirectToDeveloper,
 } from "./styles";
 import { Link } from "react-router-dom";
+import { updateWishlist } from "../../services/wishlist";
+import { isAuthenticated } from "../../services/auth";
 
 const Card = ({
   id,
@@ -36,17 +38,32 @@ const Card = ({
 }) => {
   const [isHeartFilled, setIsHeartFilled] = useState(isOnWishlist);
 
+  const handleUpdateWishlist = () => {
+    const newState = !isHeartFilled;
+    setIsHeartFilled(newState);
+    setTimeout(() => {
+      updateWishlist(
+        id,
+        newState,
+        () => {},
+        () => {}
+      );
+    }, 1000);
+  };
+
   return (
     <ListingCard>
       <ListingImage>
         <img src={image} alt="House" />
       </ListingImage>
       {developer == "Alveo" && <DeveloperLogo src={logo} alt="Alveo" />}
-      <WishlistHeart
-        src={isHeartFilled ? heartFull : heartEmpty}
-        alt="Heart"
-        onClick={() => setIsHeartFilled(!isHeartFilled)}
-      />
+      {isAuthenticated() && (
+        <WishlistHeart
+          src={isHeartFilled ? heartFull : heartEmpty}
+          alt="Heart"
+          onClick={handleUpdateWishlist}
+        />
+      )}
       <ListingInfo>
         <Link to={`/listing/${id}`}>
           <ListingName>

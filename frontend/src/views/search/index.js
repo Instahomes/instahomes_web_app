@@ -5,6 +5,7 @@ import Loading from "../../components/loading";
 import { Formik } from "formik";
 import { useHistory, useLocation } from "react-router-dom";
 import ListingGrid from "../../components/listing-grid";
+import EmptyPage from "../../components/empty-page";
 
 import { SearchContainer, SearchFields, SearchButton } from "./styles";
 
@@ -30,6 +31,7 @@ const Search = (props) => {
   const [developer_id, setDeveloper] = useState("");
 
   const [listings, setListings] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
@@ -62,7 +64,14 @@ const Search = (props) => {
   useEffect(() => {
     const triggerSearch = async (search) => {
       setIsLoading(true);
-      await getListings(setListings, search);
+      await getListings(
+        (data) =>
+          data.length > 0
+            ? setListings(data) || setIsEmpty(false)
+            : setIsEmpty(true),
+        () => {},
+        search
+      );
       setIsLoading(false);
     };
 
@@ -82,6 +91,7 @@ const Search = (props) => {
   const handleSearch = async (values, { setSubmitting }) => {
     setSubmitting(true);
     setIsLoading(true);
+    setIsEmpty(false);
     const { priceRange, developer_id, ...valuesCopy } = values;
 
     if (developer_id) {
@@ -98,7 +108,11 @@ const Search = (props) => {
       search: "?" + params,
     });
 
-    await getListings(setListings, params);
+    await getListings(
+      (data) => (data.length > 0 ? setListings(data) : setIsEmpty(true)),
+      () => {},
+      params
+    );
 
     setSubmitting(false);
     setIsLoading(false);
@@ -275,7 +289,18 @@ const Search = (props) => {
           showAdvanced={showAdvanced}
         />
         <div style={{ marginBottom: "2em" }}></div>
-        {isLoading ? <Loading></Loading> : <ListingGrid listings={listings} />}
+        <EmptyPage
+          isEmpty={isEmpty}
+          header={"There seems to be nothing at this moment..."}
+          body={"No worries, try tinkering with the search filters more!"}
+          buttonDisappear
+        >
+          {isLoading ? (
+            <Loading></Loading>
+          ) : (
+            <ListingGrid listings={listings} />
+          )}
+        </EmptyPage>
       </SearchContainer>
     </Layout>
   );

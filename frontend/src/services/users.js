@@ -51,3 +51,10 @@ export const createInquiry = (inquiry, callback, errorCallback) => {
     .then((res) => callback(res.data))
     .catch((err) => errorCallback(err));
 };
+
+export const getCurrentUser = (callback, errorCallback) => {
+  return axiosClient
+    .get(`/user/current/`)
+    .then((res) => callback(res.data))
+    .catch((err) => errorCallback(err));
+};

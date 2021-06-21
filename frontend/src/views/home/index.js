@@ -37,7 +37,7 @@ const Home = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    getListings(setListings, "limit=5");
+    getListings(setListings, () => {}, "limit=5");
   }, []);
 
   return (
@@ -70,6 +70,7 @@ const Home = (props) => {
               bedrooms={listing.bedrooms}
               bathrooms={listing.bathrooms_min}
               isVerified={true}
+              isOnWishlist={listing.is_liked}
             />
           ))}
         </ListingRow>

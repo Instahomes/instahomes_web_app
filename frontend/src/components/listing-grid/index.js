@@ -73,6 +73,7 @@ const ListingGrid = ({ listings }) => {
             bedrooms={listing.bedrooms}
             bathrooms={listing.bathrooms_min}
             isVerified={true}
+            isOnWishlist={listing.is_liked}
           />
         ))}
       </GridStyle>
