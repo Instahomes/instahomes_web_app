@@ -29,6 +29,7 @@ const Search = (props) => {
   const [bathrooms, setBathrooms] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [developer_id, setDeveloper] = useState("");
+  const [order_by, setOrderBy] = useState("-created_at");
 
   const [listings, setListings] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -105,7 +106,7 @@ const Search = (props) => {
 
     history.push({
       pathname: "/search",
-      search: "?" + params,
+      search: "?" + params + `&order_by=${order_by}`,
     });
 
     await getListings(
@@ -298,7 +299,11 @@ const Search = (props) => {
           {isLoading ? (
             <Loading></Loading>
           ) : (
-            <ListingGrid listings={listings} />
+            <ListingGrid
+              listings={listings}
+              order_by={order_by}
+              setOrderBy={setOrderBy}
+            />
           )}
         </EmptyPage>
       </SearchContainer>

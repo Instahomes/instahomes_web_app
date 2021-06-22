@@ -89,9 +89,9 @@ const Step1 = ({ isSubmitting, setInquiryState, listing, inquiryState }) => {
         &nbsp;&nbsp;
         <span className="what-for">What's this for?</span>&nbsp;
         <span className="normal-text">
-          Developers need information in creating bla bla bla bla. Instahomes
-          helps automate the process. Don’t worry, we can’t disclose this to
-          anyone.
+          Instahomes automates the initial agent-buyer interview questions to
+          make your buying process faster and easier. Don’t worry, this
+          information will only be shared to the developer you’re inquiring to.
         </span>
       </Step1TopBar>
       <Step1Frame>

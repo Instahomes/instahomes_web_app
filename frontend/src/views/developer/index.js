@@ -39,7 +39,8 @@ const DevelopmentCard = (development) => (
           &nbsp;&nbsp;<span>{development.location}</span>
         </div>
         <h4 className="dev-price">
-          PHP {10000} - {100000}
+          PHP {development.lowest_price.toLocaleString()} -{" "}
+          {development.highest_price.toLocaleString()}
         </h4>
       </div>
     </CardFrame>

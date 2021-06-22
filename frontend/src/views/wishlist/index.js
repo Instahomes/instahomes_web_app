@@ -12,13 +12,19 @@ import { Helmet } from "react-helmet";
 const Wishlist = (props) => {
   const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     getListings(
       (data) => {
-        setListings(data);
-        setIsLoading(false);
+        if (data.length > 0) {
+          setListings(data);
+          setIsLoading(false);
+        } else {
+          setIsEmpty(true);
+          setIsLoading(false);
+        }
       },
       () => {
         setIsLoading(false);
@@ -38,14 +44,14 @@ const Wishlist = (props) => {
       <WishlistContainer>
         <WishlistHeader>My Wishlist</WishlistHeader>
         <EmptyPage
-          isEmpty={listings.length == 0}
+          isEmpty={isEmpty}
           header={"Nothing is on your wishlist right now."}
           body={"Browse through more of our listings to see what you like!"}
         >
           {isLoading ? (
             <Loading></Loading>
           ) : (
-            <ListingGrid listings={listings} />
+            <ListingGrid listings={listings} noSort />
           )}
         </EmptyPage>
       </WishlistContainer>

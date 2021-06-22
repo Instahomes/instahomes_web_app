@@ -36,7 +36,7 @@ export const GridStyle = styled.section`
   }
 `;
 
-const ListingGrid = ({ listings }) => {
+const ListingGrid = ({ listings, setOrderBy, noSort }) => {
   return (
     <React.Fragment>
       <ListingsFilters>
@@ -44,13 +44,20 @@ const ListingGrid = ({ listings }) => {
           Showing <span className="count-emphasis">{listings.length}</span> out
           of <span className="count-emphasis">{listings.length}</span> listings
         </span>
-        <LightInput scale={0.8} as="select" className="listing-sort">
-          <option value="">Sort by Price (highest first)</option>
-          <option value="">Sort by Price (lowest first)</option>
-          <option value="">Sort by Size (highest first)</option>
-          <option value="">Sort by Size (lowest first)</option>
-          <option value="">Sort by Newest</option>
-        </LightInput>
+        {!noSort && (
+          <LightInput
+            scale={0.8}
+            as="select"
+            className="listing-sort"
+            onChange={(e) => setOrderBy(e.target.value)}
+          >
+            <option value="-created_at">Sort by Newest</option>
+            <option value="-lowest_price">Sort by Price (highest first)</option>
+            <option value="lowest_price">Sort by Price (lowest first)</option>
+            <option value="-lot_size">Sort by Size (highest first)</option>
+            <option value="lot_size">Sort by Size (lowest first)</option>
+          </LightInput>
+        )}
         {/* <OutlineButton
             className="remove-on-mobile btn-rubik"
             scale={0.8}
