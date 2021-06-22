@@ -17,6 +17,10 @@ export const HeroFrame = styled.section`
 export const HomeListings = styled.section`
   padding: 3em 0;
 
+  .center {
+    padding: 0 var(--main-padding-x);
+  }
+
   .listing-row-div {
     padding-left: var(--main-padding-x);
     padding-right: 0;

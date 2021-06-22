@@ -19,6 +19,7 @@ export const MenuItems = styled.div`
   display: flex;
   gap: 2.5em;
   align-items: center;
+  text-align: center;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;

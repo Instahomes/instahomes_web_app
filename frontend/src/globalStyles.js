@@ -33,7 +33,8 @@ export const theme = {
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --main-padding-x: 8.5rem;
+    // --main-padding-x: 8.5rem;
+    --main-padding-x: 10vw;
     --main-padding-y: 10rem;
   }
 
@@ -52,7 +53,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     :root {
-      --main-padding-x: 3.5rem;
+      --main-padding-x: 7vw;
+      // --main-padding-x: 3.5rem;
     }
 
     .remove-on-mobile {
