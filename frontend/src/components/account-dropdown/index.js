@@ -52,7 +52,6 @@ const AccountDropdown = ({ dark }) => {
 
   useEffect(() => {
     const currProfile = getProfile();
-    console.log(currProfile);
     if (currProfile) {
       setProfile(currProfile);
     }

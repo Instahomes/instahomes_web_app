@@ -17,6 +17,7 @@ export const login = (contactNumber, password, callback, errorCallback) => {
         ...response.data.profile,
         contactNumber: response.data.contact_number,
         email: response.data.email,
+        user_id: response.data.user_id,
       });
 
       callback();
@@ -37,7 +38,7 @@ export const isAuthenticated = () => {
 };
 
 export const hasProfile = () => {
-  return getProfile() !== null;
+  return !!getProfile().name;
 };
 
 export const getAuthentication = () => {
@@ -50,15 +51,10 @@ export const getNewToken = () => {
   return new Promise((resolve, reject) => {
     refreshToken(getRefreshToken())
       .then((response) => {
-        storeToken(response.data.token);
-        storeRefreshToken(response.data.refresh_token);
-        storeProfile({
-          ...response.data.profile,
-          contactNumber: response.data.contact_number,
-          email: response.data.email,
-        });
+        storeToken(response.data.access);
+        storeRefreshToken(response.data.refresh);
 
-        resolve(response.data.token);
+        resolve(response.data.access);
       })
       .catch((error) => {
         reject(error);

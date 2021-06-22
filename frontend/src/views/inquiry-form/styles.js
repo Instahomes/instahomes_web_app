@@ -40,7 +40,7 @@ export const Content = styled.div`
 
 export const BackButton = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 3rem;
   left: var(--main-padding-x);
   font-size: 0.8em;
   cursor: pointer;

@@ -225,7 +225,7 @@ const DeveloperForm = (props) => {
       case IS_AUTHENTICATED_WITH_PROFILE:
         break;
       case IS_AUTHENTICATED_NO_PROFILE:
-        const currId = getProfile().user;
+        const currId = getProfile().user_id;
         const currProfile = { ...profile, user: currId };
         await createProfile(
           currProfile,

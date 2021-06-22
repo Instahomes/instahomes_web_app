@@ -15,10 +15,17 @@ export const HeroFrame = styled.section`
 `;
 
 export const HomeListings = styled.section`
-  padding: 3em 0 3em var(--main-padding-x);
+  padding: 3em 0;
+
+  .listing-row-div {
+    padding-left: var(--main-padding-x);
+    padding-right: 0;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding-right: var(--main-padding-x);
+    .listing-row-div {
+      padding-right: var(--main-padding-x);
+    }
   }
 `;
 

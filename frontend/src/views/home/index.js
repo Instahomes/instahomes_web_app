@@ -56,24 +56,26 @@ const Home = (props) => {
       </HeroFrame>
       <HomeListings>
         <h1 className="dark center">Newest listings in the market today</h1>
-        <ListingRow threeOrLess={listings.length <= 3}>
-          {listings.map((listing) => (
-            <ListingCard
-              id={listing.id}
-              key={listing.seo_title}
-              developer={listing.development.developer.name}
-              image={listing.photo_main}
-              name={listing.development.name + " " + listing.unit_name}
-              size={listing.floor_size_min}
-              price={listing.lowest_price}
-              address={listing.development.location}
-              bedrooms={listing.bedrooms}
-              bathrooms={listing.bathrooms_min}
-              isVerified={true}
-              isOnWishlist={listing.is_liked}
-            />
-          ))}
-        </ListingRow>
+        <div className="listing-row-div">
+          <ListingRow threeOrLess={listings.length <= 3}>
+            {listings.map((listing) => (
+              <ListingCard
+                id={listing.id}
+                key={listing.seo_title}
+                developer={listing.development.developer.name}
+                image={listing.photo_main}
+                name={listing.development.name + " " + listing.unit_name}
+                size={listing.floor_size_min}
+                price={listing.lowest_price}
+                address={listing.development.location}
+                bedrooms={listing.bedrooms}
+                bathrooms={listing.bathrooms_min}
+                isVerified={true}
+                isOnWishlist={listing.is_liked}
+              />
+            ))}
+          </ListingRow>
+        </div>
       </HomeListings>
       <NewsletterFrame>
         <NewsletterImage />

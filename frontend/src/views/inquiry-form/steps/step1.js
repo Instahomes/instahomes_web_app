@@ -32,7 +32,6 @@ const Step1Frame = styled(Frame)`
     ),
     url(${step1Bg});
   background-size: cover;
-  height: 88vh;
 `;
 
 const Step1TopBar = styled.div`
@@ -42,7 +41,7 @@ const Step1TopBar = styled.div`
   text-align: center;
 
   span {
-    font-size: 15px;
+    font-size: 1em;
   }
 
   .icon {

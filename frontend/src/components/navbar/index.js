@@ -109,7 +109,7 @@ const Navbar = ({ theme, dark, isHome }) => {
   const isMediumScreen =
     width <=
     parseInt(
-      theme.breakpoints.md.substring(0, theme.breakpoints.md.length - 2)
+      theme.breakpoints.lg.substring(0, theme.breakpoints.lg.length - 2)
     ) +
       30;
 
@@ -136,7 +136,7 @@ const Navbar = ({ theme, dark, isHome }) => {
   return (
     <NavbarFrame>
       <Link to="/">
-        <img src={dark ? logoDark : logo} alt="Instahomes" />
+        <img src={!isHome || !dark ? logo : logoDark} alt="Instahomes" />
       </Link>
       {isMediumScreen ? (
         <Menu styles={finalMenuStyles} right>
