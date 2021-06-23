@@ -102,20 +102,16 @@ const Step1 = ({ isSubmitting, setInquiryState, listing, inquiryState }) => {
               `about ${listing.developer.name}’s ${listing.development.name} ${listing.name}`}{" "}
             today
           </h1>
-          <p>
-            Hi there! To make your investment process{" "}
-            {listing && `with ${listing.developer.name}`} easier, we’ll just
-            need a couple of preset information.{" "}
-            {isAuthenticatedNoProfile &&
-              "Since you're signed up, we'll only need you to answer once."}{" "}
-            <br />
-            Don’t worry, all information here will not be shared with anyone
-            aside from the direct developer.
-          </p>
-          {!isAuthenticatedNoProfile && (
+          {!isAuthenticatedNoProfile ? (
             <p>
               First, would you like to save your information for other inquiries
               by signing up?
+            </p>
+          ) : (
+            <p>
+              It seems like you haven't answered our customer data form yet.
+              Just answer this once and we'll automatically save it for future
+              reference if you inquire for other properties.
             </p>
           )}
           <FormDiv>

@@ -106,7 +106,7 @@ const AccountDropdown = ({ dark }) => {
         {isDropdownOpen && (
           <DropdownDiv>
             <ul>
-              <li>Account Settings</li>
+              {/* <li>Account Settings</li> */}
               <li onClick={handleLogout}>Log out</li>
             </ul>
           </DropdownDiv>

@@ -10,6 +10,12 @@ import formComplete from "../../../assets/form/form-complete.svg";
 import logo from "../../../assets/navbar/largeLogoDark.svg";
 import { getProfile } from "../../../services/auth";
 import styled from "styled-components";
+import {
+  IS_SIGNING_UP,
+  IS_NOT_SIGNING_UP,
+  IS_AUTHENTICATED_WITH_PROFILE,
+  IS_AUTHENTICATED_NO_PROFILE,
+} from "../constants";
 
 const Step11Frame = styled(Frame)`
   background: ${({ theme }) => theme.colors.mainBg};
@@ -27,8 +33,21 @@ const Step11Button = styled(SignupOutlineButton)`
   color: ${({ theme }) => theme.colors.darkHeader};
 `;
 
-const Step11 = ({ listing, values, isSigningUp }) => {
+const Step11 = ({ listing, values, inquiryState }) => {
   const profile = getProfile();
+
+  const getFinalMessage = () => {
+    switch (inquiryState) {
+      case IS_SIGNING_UP:
+        return `${values.name}, you’re now signed up and your inquiry has been sent!`;
+      case IS_NOT_SIGNING_UP:
+        return `Your inquiry has been sent to ${listing.developer.name}!`;
+      case IS_AUTHENTICATED_WITH_PROFILE:
+        return `${values.name}, your profile has been created and your inquiry has been sent!`;
+      case IS_AUTHENTICATED_NO_PROFILE:
+        return `Your inquiry has been sent to ${listing.developer.name}!`;
+    }
+  };
 
   return (
     <Step11Frame>
@@ -38,11 +57,7 @@ const Step11 = ({ listing, values, isSigningUp }) => {
           alt="Form Complete"
           style={{ marginBottom: "1em" }}
         />
-        <h1>
-          {isSigningUp
-            ? `${values.name}, you’re now signed up and your inquiry has been sent!`
-            : `Your inquiry has been sent to ${listing.developer.name}`}
-        </h1>
+        <h1>{getFinalMessage()}</h1>
         <p>
           Please expect a reply from {listing.developer.name} that will be sent
           to{" "}
