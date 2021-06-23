@@ -154,32 +154,3 @@ export const ListingFormText = styled.div`
     margin-bottom: 2rem;
   }
 `;
-
-export const ListingForm = styled.form`
-  width: 50%;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    width: initial;
-  }
-`;
-
-export const ListingButton = styled.div`
-  button {
-    font-size: 1em;
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    button {
-      width: 100%;
-    }
-  }
-`;
-
-export const ListingFormDiv = styled.div`
-  background-color: ${({ theme }) => theme.colors.mainBgColor};
-  box-shadow: 0px 4px 16px 0px rgb(0, 0, 0, 0.1);
-  padding: 1.6875em;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-`;

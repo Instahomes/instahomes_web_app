@@ -4,6 +4,7 @@ import ListingCard from "../../components/listing-card";
 import house from "../../assets/card/sample_house.png";
 import Navbar from "../../components/navbar";
 import HomeSearch from "../../components/home-search";
+import ListProperty from "../../components/list-property-form";
 import {
   HeroFrame,
   HomeListings,
@@ -17,9 +18,6 @@ import {
   BetaSignupButton,
   ListingFormFrame,
   ListingFormText,
-  ListingForm,
-  ListingFormDiv,
-  ListingButton,
 } from "./styles";
 import {
   LightInput,
@@ -129,39 +127,7 @@ const Home = (props) => {
             </li>
           </ul>
         </ListingFormText>
-        <ListingForm>
-          <ListingFormDiv>
-            <LightInput
-              marginBottom="1em"
-              type="text"
-              name="name"
-              placeholder="Full name or Company name"
-            />
-            <LightInput
-              marginBottom="1em"
-              type="email"
-              name="email"
-              placeholder="Email address"
-            />
-            <LightInput
-              marginBottom="1em"
-              type="text"
-              name="phone"
-              placeholder="Cellphone number"
-            />
-            <LightTextarea
-              marginBottom="1em"
-              name="details"
-              id="details"
-              placeholder="Any details about your properties (locations, types of property, prices, etc.)"
-            ></LightTextarea>
-            <ListingButton>
-              <OrangeButton>
-                LIST YOUR PROPERTY <i id="signup-free">it's free</i>
-              </OrangeButton>
-            </ListingButton>
-          </ListingFormDiv>
-        </ListingForm>
+        <ListProperty />
       </ListingFormFrame>
     </Layout>
   );
