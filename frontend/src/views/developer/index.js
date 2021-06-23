@@ -161,30 +161,16 @@ const Developer = (props) => {
             )}
             {/* <DeveloperContact /> */}
             <FeaturedSection />
-            {/* <OfficeLocations backgroundImage={devMap}>
-            <div>
-              <h2 className="h2">Office Locations</h2>
-              <div className="office-map-mobile"></div>
-              <p className="p">
-                Alveo Davao Showroom
-                <br />
-                Abreeza Mall, G/F, Bajada Flyover, Davao City, 8000 Davao del
-                Sur
-              </p>
-              <p className="p">
-                Alveo Land Office Complex
-                <br />
-                Celadon Park Manila, Flaming Tree Road, Sta. Cruz, Metro Manila,
-                Manila, 1014
-              </p>
-              <p className="p">
-                Alveo Land Corp
-                <br />
-                Ayala Tower One, 18th floor of, Ayala Ave, Makati, Metro Manila
-              </p>
-            </div>
-            <div className="office-map"></div>
-          </OfficeLocations> */}
+            {developer.office_locations && (
+              <OfficeLocations backgroundImage={developer.map_image}>
+                <div>
+                  <h2 className="h2">Office Locations</h2>
+                  <div className="office-map-mobile"></div>
+                  <p className="p">{developer.office_locations}</p>
+                </div>
+                <div className="office-map"></div>
+              </OfficeLocations>
+            )}
           </DeveloperContainer>
         ) : (
           <Loading></Loading>

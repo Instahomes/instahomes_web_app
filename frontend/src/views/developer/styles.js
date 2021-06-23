@@ -316,6 +316,10 @@ export const OfficeLocations = styled.section`
     width: 50%;
   }
 
+  p {
+    white-space: pre-line;
+  }
+
   .office-map,
   .office-map-mobile {
     background: url(${({ backgroundImage }) => backgroundImage});

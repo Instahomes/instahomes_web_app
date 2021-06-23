@@ -176,6 +176,7 @@ export const DescriptionLeft = styled.div`
       .plan-details {
         // max-width: 50%;
         flex: 1;
+        min-width: 200px;
       }
     }
   }
