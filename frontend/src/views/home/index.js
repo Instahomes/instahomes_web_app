@@ -44,8 +44,13 @@ const Home = (props) => {
     <Layout>
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Instahomes</title>
-        <meta name="description" content=""></meta>
+        <title>
+          Instahomes: Trusted Properties for Rent & Sale Philippines
+        </title>
+        <meta
+          name="description"
+          content="Find the best properties for sale and for rent in the Philippines through Instahomes’ partnerships with only the top & trusted real estate developers."
+        />
       </Helmet>
       <Navbar isHome dark />
       <HeroFrame heroBg={heroBg} showAdvanced={showAdvanced}>
