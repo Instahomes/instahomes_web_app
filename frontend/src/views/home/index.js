@@ -63,6 +63,7 @@ const Home = (props) => {
                 id={listing.id}
                 key={listing.seo_title}
                 developer={listing.development.developer.name}
+                developerLogo={listing.development.developer.featured_image}
                 image={listing.photo_main}
                 name={listing.development.name + " " + listing.unit_name}
                 size={listing.floor_size_min}

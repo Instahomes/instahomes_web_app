@@ -33,14 +33,14 @@ const Development = (props) => {
     );
   }, []);
 
-  const truncateOverview = (overview) => {
-    const MAX_WORD_COUNT = 50;
-    const words = overview.split(" ");
-    if (words.length > MAX_WORD_COUNT) {
-      return words.slice(0, MAX_WORD_COUNT).join(" ") + "...";
-    }
-    return words.join(" ");
-  };
+  // const truncateOverview = (overview) => {
+  //   const MAX_WORD_COUNT = 50;
+  //   const words = overview.split(" ");
+  //   if (words.length > MAX_WORD_COUNT) {
+  //     return words.slice(0, MAX_WORD_COUNT).join(" ") + "...";
+  //   }
+  //   return words.join(" ");
+  // };
 
   const headingComponent = () => (
     <h2 className="h2">Amenities in {development.name}</h2>
@@ -68,6 +68,7 @@ const Development = (props) => {
                     <img src={map} />
                     &nbsp;&nbsp;{development.location}
                   </span>
+                  <p>{development.developer.short_desc}</p>
                   {/* <p>{truncateOverview(development.overview)}</p> */}
                 </HeroContent>
               </div>
@@ -80,6 +81,7 @@ const Development = (props) => {
                   id={listing.id}
                   key={listing.seo_title}
                   developer={development.developer.name}
+                  developerLogo={development.developer.featured_image}
                   image={listing.photo_main}
                   name={development.name + " " + listing.unit_name}
                   size={listing.floor_size_min}
@@ -92,7 +94,9 @@ const Development = (props) => {
                 />
               ))}
             </ListingRow>
-            <About backgroundImage={development.photo_main}>
+            <About
+              backgroundImage={development.map_image || development.photo_main}
+            >
               <div>
                 <h2 className="h2">About the {development.name}</h2>
                 <span className="span">DEVELOPMENT OVERVIEW</span>
@@ -102,10 +106,26 @@ const Development = (props) => {
             </About>
             <Amenities
               amenities={[
-                [development.amenity_1, development.amenity_1_desc],
-                [development.amenity_2, development.amenity_2_desc],
-                [development.amenity_3, development.amenity_3_desc],
-                [development.amenity_4, development.amenity_4_desc],
+                [
+                  development.amenity_1,
+                  development.amenity_1_desc,
+                  development.amenity_1_image,
+                ],
+                [
+                  development.amenity_2,
+                  development.amenity_2_desc,
+                  development.amenity_2_image,
+                ],
+                [
+                  development.amenity_3,
+                  development.amenity_3_desc,
+                  development.amenity_3_image,
+                ],
+                [
+                  development.amenity_4,
+                  development.amenity_4_desc,
+                  development.amenity_4_image,
+                ],
               ]}
               Heading={headingComponent}
             />

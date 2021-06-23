@@ -45,10 +45,10 @@ const Amenities = ({ amenities, direction, Heading, noPadding }) => (
     {Heading && <Heading />}
     <div>
       {amenities.map(
-        ([amenityName, amenityDesc]) =>
+        ([amenityName, amenityDesc, amenityImage]) =>
           amenityName && (
-            <AmenitiesCard key={amenityName}>
-              {/* <div className="amenities-img"></div> */}
+            <AmenitiesCard key={amenityName} image={amenityImage}>
+              <div className="amenities-img"></div>
               <span className="span">{amenityName}</span>
               <p className="p">{amenityDesc}</p>
             </AmenitiesCard>

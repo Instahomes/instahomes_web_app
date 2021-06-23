@@ -39,8 +39,11 @@ const DevelopmentCard = (development) => (
           &nbsp;&nbsp;<span>{development.location}</span>
         </div>
         <h4 className="dev-price">
-          PHP {development.lowest_price.toLocaleString()} -{" "}
-          {development.highest_price.toLocaleString()}
+          {development.lowest_price &&
+            "PHP " +
+              development.lowest_price.toLocaleString() +
+              " - " +
+              development.highest_price.toLocaleString()}
         </h4>
       </div>
     </CardFrame>
@@ -62,14 +65,14 @@ const Developer = (props) => {
     );
   }, []);
 
-  const truncateOverview = (overview) => {
-    const MAX_WORD_COUNT = 80;
-    const words = overview.split(" ");
-    if (words.length > MAX_WORD_COUNT) {
-      return words.slice(0, MAX_WORD_COUNT).join(" ") + "...";
-    }
-    return words.join(" ");
-  };
+  // const truncateOverview = (overview) => {
+  //   const MAX_WORD_COUNT = 80;
+  //   const words = overview.split(" ");
+  //   if (words.length > MAX_WORD_COUNT) {
+  //     return words.slice(0, MAX_WORD_COUNT).join(" ") + "...";
+  //   }
+  //   return words.join(" ");
+  // };
 
   return (
     <Layout>
@@ -92,22 +95,26 @@ const Developer = (props) => {
                     {developer.name}&nbsp;&nbsp;
                     {isVerified && <img src={check} />}
                   </h1>
-                  <p>{truncateOverview(developer.overview)}</p>
+                  <p>{developer.short_desc}</p>
                   <MetadataLine>
                     <div>
                       <MetadataNumber>
-                        {developer.development_set.length}
+                        {developer.development_count}
                       </MetadataNumber>
                       <MetadataProperty>Developments</MetadataProperty>
                     </div>
-                    {/* <div>
-                  <MetadataNumber>32</MetadataNumber>
-                  <MetadataProperty>Properties</MetadataProperty>
-                </div>
-                <div>
-                  <MetadataNumber>6</MetadataNumber>
-                  <MetadataProperty>Site Locations</MetadataProperty>
-                </div> */}
+                    <div>
+                      <MetadataNumber>{developer.listing_count}</MetadataNumber>
+                      <MetadataProperty>Properties</MetadataProperty>
+                    </div>
+                    {developer.unique_locations && (
+                      <div>
+                        <MetadataNumber>
+                          {developer.unique_locations}
+                        </MetadataNumber>
+                        <MetadataProperty>Site Locations</MetadataProperty>
+                      </div>
+                    )}
                   </MetadataLine>
                 </HeroContent>
               </div>
@@ -145,7 +152,9 @@ const Developer = (props) => {
                     [developer.affiliate_name_3, developer.affiliate_logo_3],
                     [developer.affiliate_name_4, developer.affiliate_logo_4],
                   ].map(([affName, affLogo]) => (
-                    <img src={affLogo} alt={affName} />
+                    <div className="indiv-logo">
+                      <img src={affLogo} alt={affName} />
+                    </div>
                   ))}
                 </div>
               </Affiliates>

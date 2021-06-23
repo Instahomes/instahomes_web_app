@@ -22,10 +22,17 @@ export const ListingCard = styled.div`
   }
 `;
 
-export const DeveloperLogo = styled.img`
+export const DeveloperLogo = styled.div`
   position: absolute;
   right: 10px;
   top: 10px;
+  width: 60px;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
 `;
 
 export const WishlistHeart = styled.img`
@@ -58,6 +65,7 @@ export const ListingInfo = styled.div`
   flex-direction: column;
   padding: 1.1em;
   // height: 100%;
+  flex: 1;
 
   .view-home {
     margin-top: auto;

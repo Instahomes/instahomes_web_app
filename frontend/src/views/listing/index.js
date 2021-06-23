@@ -150,7 +150,7 @@ const Listing = (props) => {
             {/* <ListingProductSearch /> */}
             <ListingHeadContainer>
               <ListingHeader>
-                <div>
+                <div className="name-location">
                   <ListingLine>
                     <h4>
                       {listing.development.name + " " + listing.unit_name}
@@ -273,18 +273,22 @@ const Listing = (props) => {
                       [
                         listing.development.amenity_1,
                         listing.development.amenity_1_desc,
+                        listing.development.amenity_1_image,
                       ],
                       [
                         listing.development.amenity_2,
                         listing.development.amenity_2_desc,
+                        listing.development.amenity_2_image,
                       ],
                       [
                         listing.development.amenity_3,
                         listing.development.amenity_3_desc,
+                        listing.development.amenity_3_image,
                       ],
                       [
                         listing.development.amenity_4,
                         listing.development.amenity_4_desc,
+                        listing.development.amenity_4_image,
                       ],
                     ]}
                     direction="column"
@@ -325,7 +329,7 @@ const Listing = (props) => {
                     <img
                       src={listing.development.developer.featured_image}
                       className="logo"
-                      alt="Alveo"
+                      alt={listing.development.developer.name}
                     />
                     <div className="dev-info">
                       <h4>{listing.development.developer.name}</h4>

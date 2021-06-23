@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ListingCard from "../../components/listing-card";
+import { ListingInfo } from "../../components/listing-card/styles";
 import { LightInput, OutlineButton } from "../../components/elements";
 
 export const ListingsFilters = styled.div`
@@ -36,6 +37,19 @@ export const GridStyle = styled.section`
   }
 `;
 
+export const ModifiedListingCard = styled(ListingCard)`
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  @media (max-width: 700px) {
+    ${ListingInfo} {
+      height: auto;
+    }
+  }
+`;
+
 const ListingGrid = ({ listings, setOrderBy, noSort }) => {
   return (
     <React.Fragment>
@@ -68,7 +82,7 @@ const ListingGrid = ({ listings, setOrderBy, noSort }) => {
       </ListingsFilters>
       <GridStyle>
         {listings.map((listing) => (
-          <ListingCard
+          <ModifiedListingCard
             id={listing.id}
             key={listing.seo_title}
             developer={listing.development.developer.name}

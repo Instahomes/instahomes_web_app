@@ -40,7 +40,9 @@ export const ListingRow = styled.div`
   padding: 5px;
 
   display: flex;
-  justify-content: ${({ threeOrLess }) => (threeOrLess ? "center" : "start")};
+  // justify-content: ${({ threeOrLess }) =>
+    threeOrLess ? "center" : "flex-start"};
+  justify-content: flex-start;
   gap: 1em;
 
   // & > div:nth-child(3) {

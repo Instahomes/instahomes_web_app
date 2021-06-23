@@ -28,6 +28,7 @@ const Card = ({
   image,
   name,
   developer,
+  developerLogo,
   size,
   price,
   address,
@@ -35,6 +36,7 @@ const Card = ({
   bathrooms,
   isVerified,
   isOnWishlist,
+  className,
 }) => {
   const [isHeartFilled, setIsHeartFilled] = useState(isOnWishlist);
 
@@ -52,11 +54,15 @@ const Card = ({
   };
 
   return (
-    <ListingCard>
+    <ListingCard className={className}>
       <ListingImage>
         <img src={image} alt="House" />
       </ListingImage>
-      {developer == "Alveo" && <DeveloperLogo src={logo} alt="Alveo" />}
+      {/* {developerLogo && (
+        <DeveloperLogo>
+          <img src={developerLogo} alt={developer} />
+        </DeveloperLogo>
+      )} */}
       {isAuthenticated() && (
         <WishlistHeart
           src={isHeartFilled ? heartFull : heartEmpty}
@@ -76,7 +82,7 @@ const Card = ({
           <ListingPiece bold marginLeft="10px">
             Starts at{" "}
             <span className="orange bold">
-              PHP&nbsp;{price.toLocaleString()}
+              PHP&nbsp;{price && price.toLocaleString()}
             </span>
           </ListingPiece>
         </ListingLine>

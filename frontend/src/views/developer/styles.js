@@ -112,7 +112,7 @@ export const HeroContent = styled.div`
 
 export const MetadataLine = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   margin-top: 2em;
   width: 60%;
@@ -259,11 +259,22 @@ export const Affiliates = styled.section`
 
   .affiliates-logos {
     display: flex;
+    // flex-wrap: wrap;
     justify-content: space-between;
-    gap: 3em;
+    gap: 1em;
 
-    img {
-      max-width: 30%;
+    .indiv-logo {
+      max-height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        max-width: 100%;
+        // max-width: 30%;
+        // height: 100%;
+        object-fit: cover;
+      }
     }
   }
 
@@ -271,13 +282,26 @@ export const Affiliates = styled.section`
     text-align: center;
 
     .affiliates-logos {
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
       justify-content: center;
       gap: 1.5em;
 
       img {
-        max-width: 100%;
-        max-height: 25px;
+        max-width: 20%;
+      }
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    .affiliates-logos {
+      flex-wrap: wrap;
+
+      .indiv-logo {
+        max-height: 150px;
+        img {
+          max-height: 100%;
+          max-width: 100%;
+        }
       }
     }
   }

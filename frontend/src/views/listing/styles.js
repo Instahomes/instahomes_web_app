@@ -34,6 +34,10 @@ export const ListingHeader = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
     gap: 0;
+
+    .name-location {
+      width: 100%;
+    }
   }
 `;
 
@@ -213,6 +217,7 @@ export const DescriptionLeft = styled.div`
 
       .floor-plan {
         width: 100%;
+        max-height: 100% !important;
       }
     }
   }
