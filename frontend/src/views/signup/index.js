@@ -214,9 +214,11 @@ const Signup = ({ isLogin }) => {
                           onBlur={handleBlur}
                           value={values.contactNumber}
                         />
-                        <span onClick={() => setEmailShown(!isEmailShown)}>
-                          {isEmailShown ? "- remove" : "+ add"} email address
-                        </span>
+                        {!isLogin && (
+                          <span onClick={() => setEmailShown(!isEmailShown)}>
+                            {isEmailShown ? "- remove" : "+ add"} email address
+                          </span>
+                        )}
                       </SignupWrapper>
                       <ModifiedErrorMessage component="div" name="email" />
                       {isEmailShown && (

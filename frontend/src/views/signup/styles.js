@@ -15,7 +15,7 @@ export const HeroFrame = styled.section`
 export const HeroContent = styled.div`
   padding: 0 var(--main-padding-x);
   box-sizing: border-box;
-  height: 760px;
+  height: 850px;
   display: flex;
   align-items: center;
 
@@ -74,10 +74,10 @@ export const SignupWrapper = styled.div`
     cursor: pointer;
     position: absolute;
     right: 15px;
-    top: 16px;
+    top: 1.5em;
     color: ${({ theme }) => theme.colors.darkGray};
     text-decoration: underline;
-    font-size: 11px;
+    font-size: 0.7em;
   }
 `;
 

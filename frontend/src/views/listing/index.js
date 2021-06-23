@@ -48,7 +48,8 @@ import SimpleReactLightbox, {
 } from "simple-react-lightbox";
 import { getListings } from "../../services/listings";
 import { updateWishlist } from "../../services/wishlist";
-import { useRouteMatch } from "react-router-dom";
+import { isAuthenticated } from "../../services/auth";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const PropertyDetails = ({ active, floorPlan, ...props }) => {
@@ -103,6 +104,7 @@ const PropertyDetailsWrapper = ({ active, floorPlan }) => (
 const Listing = (props) => {
   const [active, setActive] = useState("overview");
   const match = useRouteMatch();
+  const history = useHistory();
   const [listing, setListing] = useState(null);
   const [isEmpty, setIsEmpty] = useState(false);
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -121,16 +123,20 @@ const Listing = (props) => {
   }, []);
 
   const handleUpdateWishlist = () => {
-    const newState = !isHeartFilled;
-    setIsHeartFilled(newState);
-    setTimeout(() => {
-      updateWishlist(
-        listing.id,
-        newState,
-        () => {},
-        () => {}
-      );
-    }, 1000);
+    if (isAuthenticated()) {
+      const newState = !isHeartFilled;
+      setIsHeartFilled(newState);
+      setTimeout(() => {
+        updateWishlist(
+          listing.id,
+          newState,
+          () => {},
+          () => {}
+        );
+      }, 1000);
+    } else {
+      history.push("/login");
+    }
   };
 
   return (
@@ -333,7 +339,12 @@ const Listing = (props) => {
                     />
                     <div className="dev-info">
                       <h4>{listing.development.developer.name}</h4>
-                      <p>More Developments!</p>
+                      <p>
+                        {listing.num_developments > 1
+                          ? listing.num_developments - 1 + " "
+                          : ""}
+                        More Developments!
+                      </p>
                     </div>
                     <ViewDev>
                       <Link

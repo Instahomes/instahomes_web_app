@@ -16,6 +16,7 @@ export const DevelopmentContainer = styled.main`
   .p {
     font-size: 1em;
     color: ${({ theme }) => theme.colors.darkHeader};
+    white-space: pre-line;
   }
 `;
 

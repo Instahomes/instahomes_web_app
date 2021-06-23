@@ -168,8 +168,13 @@ export const SearchSelect = withTheme(
     formik,
     className,
     asyncLoadOptions,
+    containerStyle,
   }) => {
     const customStyles = {
+      container: (provided) => ({
+        ...provided,
+        ...containerStyle,
+      }),
       control: (provided) => ({
         ...provided,
         backgroundColor: isGray
@@ -183,6 +188,10 @@ export const SearchSelect = withTheme(
         fontSize: "0.9em",
         height: "100%",
         minWidth: "120px",
+      }),
+      valueContainer: (provided) => ({
+        ...provided,
+        padding: "0.8em",
       }),
       placeholder: () => ({
         color: theme.colors.whiteInputColor,
@@ -233,7 +242,7 @@ export const SearchSelect = withTheme(
             : ""
         }
         mobileOrder={mobileOrder || null}
-        className={`flex-grow-mobile ${className}`}
+        className={`flex-grow-mobile ${className || ""}`}
       />
     );
   }

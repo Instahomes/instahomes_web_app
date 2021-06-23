@@ -174,6 +174,7 @@ const Search = (props) => {
             <form onSubmit={handleSubmit}>
               <SearchFields showAdvanced={showAdvanced}>
                 <SearchSelect
+                  containerStyle={{ maxWidth: "150px", flexBasis: "150px" }}
                   fieldName="sale_status"
                   options={[{ value: "", label: "Sale Status" }].concat(
                     listingChoices
@@ -184,8 +185,8 @@ const Search = (props) => {
                   formik={{ handleBlur, values, setFieldValue }}
                 />
                 <GrayInput
+                  style={{ flex: "2 0 30%" }}
                   scale={0.9}
-                  style={{ flex: 1.5 }}
                   placeholder="Search for location or landmark"
                   name="location"
                   onChange={handleChange}
@@ -215,6 +216,7 @@ const Search = (props) => {
                   <option value="">Property Type</option>
                 </GrayInput> */}
                 <SearchSelect
+                  containerStyle={{ flex: "2 0 180px !important" }}
                   fieldName="priceRange"
                   options={[{ value: "", label: "Price Range" }].concat(
                     budgetChoices
@@ -262,6 +264,7 @@ const Search = (props) => {
                   formik={{ handleBlur, values, setFieldValue }}
                 />
                 <SearchSelect
+                  containerStyle={{ flex: "3 0 180px !important" }}
                   fieldName="developer_id"
                   asyncLoadOptions={asyncGetDevelopers}
                   placeholder="Preferred Developer"

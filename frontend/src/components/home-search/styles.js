@@ -33,7 +33,7 @@ export const SearchForm = styled.div`
 
   .advanced-setting {
     display: ${({ showAdvanced }) => (showAdvanced ? "block" : "none")};
-    flex: 1;
+    flex: 1 0 120px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -43,6 +43,7 @@ export const SearchForm = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     .flex-grow-mobile {
       flex: 1;
+      max-width: initial;
     }
   }
 `;

@@ -59,7 +59,7 @@ const NavbarItems = ({
     {!isMobile && <NavbarSearch isHome={isHome} dark={dark} />}
     <MenuItems>
       {isMobile && (
-        <NavbarSpan dark={dark} className={className}>
+        <NavbarSpan dark={dark} className={className} to="/">
           HOME
         </NavbarSpan>
       )}

@@ -86,6 +86,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
             </p>
             <SearchForm showAdvanced={showAdvanced}>
               <SearchSelect
+                containerStyle={{ maxWidth: "150px", flexBasis: "150px" }}
                 fieldName="sale_status"
                 options={[{ value: "", label: "Sale Status" }].concat(
                   listingChoices
@@ -95,7 +96,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 formik={{ handleBlur, values, setFieldValue }}
               />
               <Input
-                style={{ flex: 1 }}
+                style={{ flex: "2 0 40%" }}
                 placeholder="Search for location/city/subdivision"
                 name="location"
                 onChange={handleChange}
@@ -105,6 +106,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 mobileOrder={2}
               />
               <Input
+                style={{ flex: "1 0 20%" }}
                 placeholder="Property Type (e.g. condominium)"
                 name="development_type"
                 onChange={handleChange}
@@ -141,6 +143,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 formik={{ handleBlur, values, setFieldValue }}
               />
               <SearchSelect
+                containerStyle={{ flex: "2 0 170px !important" }}
                 fieldName="priceRange"
                 options={[{ value: "", label: "Price Range" }].concat(
                   budgetChoices
@@ -169,6 +172,7 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
                 }}
               />
               <SearchSelect
+                containerStyle={{ flex: "3 0 180px !important" }}
                 fieldName="developer_id"
                 asyncLoadOptions={asyncGetDevelopers}
                 placeholder="Preferred Developer"
