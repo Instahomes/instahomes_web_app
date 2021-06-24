@@ -6,7 +6,7 @@ import { OutlineButton } from "../elements";
 const Frame = styled.section`
   background: ${({ theme }) => theme.colors.mainBg};
   max-width: 100%;
-  height: 100vh;
+  height: ${({ height }) => height || "100vh"};
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -28,11 +28,18 @@ const Frame = styled.section`
   }
 `;
 
-const EmptyPage = ({ children, isEmpty, header, body, buttonDisappear }) => {
+const EmptyPage = ({
+  children,
+  isEmpty,
+  header,
+  body,
+  buttonDisappear,
+  height,
+}) => {
   const history = useHistory();
 
   return isEmpty ? (
-    <Frame>
+    <Frame height={height}>
       <h1>{header || "Oh no! This page does not exist."}</h1>
       <p>
         {body || "No worries, it happens. Let’s get you back home instead."}

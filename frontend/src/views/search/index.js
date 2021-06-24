@@ -57,6 +57,15 @@ const Search = (props) => {
     setDeveloper(searchParams.get("developer_id"));
   };
 
+  const setEmptyAndRandomListings = async () => {
+    setIsEmpty(true);
+    await getListings(
+      (data) => setListings(data),
+      () => {},
+      "is_random=True"
+    );
+  };
+
   useEffect(() => {
     const { search } = routeLocation;
     changeParams(search);
@@ -69,7 +78,7 @@ const Search = (props) => {
         (data) =>
           data.length > 0
             ? setListings(data) || setIsEmpty(false)
-            : setIsEmpty(true),
+            : setEmptyAndRandomListings(),
         () => {},
         search
       );
@@ -110,7 +119,10 @@ const Search = (props) => {
     });
 
     await getListings(
-      (data) => (data.length > 0 ? setListings(data) : setIsEmpty(true)),
+      (data) =>
+        data.length > 0
+          ? setListings(data) || setIsEmpty(false)
+          : setEmptyAndRandomListings(),
       () => {},
       params
     );
@@ -294,21 +306,25 @@ const Search = (props) => {
         />
         <div style={{ marginBottom: "2em" }}></div>
         <EmptyPage
+          height={"auto"}
           isEmpty={isEmpty}
           header={"There seems to be nothing at this moment..."}
-          body={"No worries, try tinkering with the search filters more!"}
+          body={
+            "No worries, check out the randomly selected listings for you below instead!"
+          }
           buttonDisappear
         >
-          {isLoading ? (
-            <Loading></Loading>
-          ) : (
-            <ListingGrid
-              listings={listings}
-              order_by={order_by}
-              setOrderBy={setOrderBy}
-            />
-          )}
+          <div></div>
         </EmptyPage>
+        {isLoading ? (
+          <Loading></Loading>
+        ) : (
+          <ListingGrid
+            listings={listings}
+            order_by={order_by}
+            setOrderBy={setOrderBy}
+          />
+        )}
       </SearchContainer>
     </Layout>
   );
