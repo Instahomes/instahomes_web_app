@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ListingCard from "../../components/listing-card";
 import { ListingInfo } from "../../components/listing-card/styles";
 import { LightInput, OutlineButton } from "../../components/elements";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ReactLoading from "react-loading";
 
 export const ListingsFilters = styled.div`
   margin-bottom: 1em;
@@ -50,7 +52,46 @@ export const ModifiedListingCard = styled(ListingCard)`
   }
 `;
 
+const Loader = () => (
+  <div style={{ display: "flex", justifyContent: "center" }}>
+    <ReactLoading type="cylon" color="#BDBDBD" height="100%" width="20%" />
+  </div>
+);
+
 const ListingGrid = ({ listings, setOrderBy, noSort }) => {
+  const INTERVAL_SIZE = 6;
+  const [count, setCount] = useState({
+    prev: 0,
+    next: INTERVAL_SIZE,
+  });
+  const [hasMore, setHasMore] = useState(true);
+  const [current, setCurrent] = useState(
+    listings.slice(count.prev, count.next)
+  );
+  const getMoreData = () => {
+    if (current.length >= listings.length) {
+      setHasMore(false);
+      return;
+    }
+    setTimeout(() => {
+      setCurrent(
+        current.concat(
+          listings.slice(count.prev + INTERVAL_SIZE, count.next + INTERVAL_SIZE)
+        )
+      );
+    }, 2000);
+    setCount((prevState) => ({
+      prev: prevState.prev + INTERVAL_SIZE,
+      next: prevState.next + INTERVAL_SIZE,
+    }));
+  };
+
+  useEffect(() => {
+    if (current.length >= listings.length) {
+      setHasMore(false);
+    }
+  }, [count]);
+
   return (
     <React.Fragment>
       <ListingsFilters>
@@ -80,24 +121,31 @@ const ListingGrid = ({ listings, setOrderBy, noSort }) => {
             View with map <span id="beta">BETA</span>
           </OutlineButton> */}
       </ListingsFilters>
-      <GridStyle>
-        {listings.map((listing) => (
-          <ModifiedListingCard
-            id={listing.id}
-            key={listing.seo_title}
-            developer={listing.development.developer.name}
-            image={listing.photo_main}
-            name={listing.development.name + " " + listing.unit_name}
-            size={listing.floor_size_min}
-            price={listing.lowest_price}
-            address={listing.development.location}
-            bedrooms={listing.bedrooms}
-            bathrooms={listing.bathrooms_min}
-            isVerified={true}
-            isOnWishlist={listing.is_liked}
-          />
-        ))}
-      </GridStyle>
+      <InfiniteScroll
+        dataLength={current.length}
+        next={getMoreData}
+        hasMore={hasMore}
+        loader={<Loader />}
+      >
+        <GridStyle>
+          {current.map((listing) => (
+            <ModifiedListingCard
+              id={listing.id}
+              key={listing.seo_title}
+              developer={listing.development.developer.name}
+              image={listing.photo_main}
+              name={listing.development.name + " " + listing.unit_name}
+              size={listing.floor_size_min}
+              price={listing.lowest_price}
+              address={listing.development.location}
+              bedrooms={listing.bedrooms}
+              bathrooms={listing.bathrooms_min}
+              isVerified={true}
+              isOnWishlist={listing.is_liked}
+            />
+          ))}
+        </GridStyle>
+      </InfiniteScroll>
     </React.Fragment>
   );
 };
