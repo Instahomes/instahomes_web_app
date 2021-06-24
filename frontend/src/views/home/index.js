@@ -24,7 +24,7 @@ import {
   LightTextarea,
   OrangeButton,
 } from "../../components/elements";
-import heroBg from "../../assets/home/hero.jpeg";
+import heroBg from "../../assets/home/hero.webp";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { useHistory } from "react-router-dom";
