@@ -159,6 +159,7 @@ export const DescriptionLeft = styled.div`
     #view-specs {
       font-size: 0.9em;
       color: ${({ theme }) => theme.colors.darkBody};
+      cursor: pointer;
     }
 
     #prop-details {
@@ -177,6 +178,10 @@ export const DescriptionLeft = styled.div`
         // max-width: 50%;
         flex: 1;
         min-width: 200px;
+
+        p {
+          white-space: pre-line;
+        }
       }
     }
   }

@@ -52,7 +52,7 @@ import { isAuthenticated } from "../../services/auth";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const PropertyDetails = ({ active, floorPlan, ...props }) => {
+const PropertyDetails = ({ active, floorPlan, propDetails, ...props }) => {
   const { openLightbox } = useLightbox();
 
   return (
@@ -62,32 +62,29 @@ const PropertyDetails = ({ active, floorPlan, ...props }) => {
         id="property-details"
       >
         <h4>PROPERTY DETAILS</h4>
-        <SRLWrapper>
-          <div style={{ display: "none" }}>
-            <img src={floorPlan} />
-          </div>
-        </SRLWrapper>
+        {floorPlan && (
+          <SRLWrapper>
+            <div style={{ display: "none" }}>
+              <img src={floorPlan} />
+            </div>
+          </SRLWrapper>
+        )}
         <div id="prop-details">
-          <img
-            onClick={() => openLightbox(0)}
-            className="floor-plan"
-            src={floorPlan}
-            alt="Floor Plan"
-          />
+          {floorPlan && (
+            <img
+              onClick={() => openLightbox(0)}
+              className="floor-plan"
+              src={floorPlan}
+              alt="Floor Plan"
+            />
+          )}
           <div className="plan-details">
-            <p>
-              The Lattice at Parklinks’ 1 Bedroom Unit Condominium is a 58 sqm
-              space with refined finish.
-            </p>
-            <p>
-              The Living, Dining, Kitchen, and Balcony are built with 600x600mm
-              porcelain tile floors, while the Bedroom has Wood Laminated
-              Flooring. All parts of the unit have paint finished ceilings and
-              walls.
-            </p>
-            <span id="view-specs">
-              View All Specifications <img src={specsArrow} alt="Arrow" />
-            </span>
+            <p>{propDetails}</p>
+            {floorPlan && (
+              <span id="view-specs" onClick={() => openLightbox(0)}>
+                View All Specifications <img src={specsArrow} alt="Arrow" />
+              </span>
+            )}
           </div>
         </div>
       </DescriptionDiv>
@@ -95,9 +92,13 @@ const PropertyDetails = ({ active, floorPlan, ...props }) => {
   );
 };
 
-const PropertyDetailsWrapper = ({ active, floorPlan }) => (
+const PropertyDetailsWrapper = ({ active, floorPlan, propDetails }) => (
   <SimpleReactLightbox>
-    <PropertyDetails active={active} floorPlan={floorPlan} />
+    <PropertyDetails
+      active={active}
+      floorPlan={floorPlan}
+      propDetails={propDetails}
+    />
   </SimpleReactLightbox>
 );
 
@@ -247,6 +248,7 @@ const Listing = (props) => {
                 <PropertyDetailsWrapper
                   active={active}
                   floorPlan={listing.floor_plan}
+                  propDetails={listing.property_details}
                 />
                 <DescriptionDiv
                   active={active == "propertyDirections"}
