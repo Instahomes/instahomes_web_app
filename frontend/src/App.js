@@ -15,6 +15,7 @@ import Developer from "./views/developer";
 import InquiryForm from "./views/inquiry-form";
 import Maintenance from "./views/maintenance";
 import EmptyPage from "./components/empty-page";
+import ScrollToTop from "./components/scroll-to-top";
 
 function App() {
   return (
@@ -25,42 +26,44 @@ function App() {
           <Maintenance />
         ) : (
           <Router>
-            <Switch>
-              <ProtectedRoute
-                isAuthenticated={isAuthenticated()}
-                exact
-                path="/wishlist"
-              >
-                <Wishlist />
-              </ProtectedRoute>
-              <Route exact path="/signup">
-                <Signup />
-              </Route>
-              <Route exact path="/login">
-                <Signup isLogin />
-              </Route>
-              <Route exact path="/search">
-                <Search />
-              </Route>
-              <Route exact path="/listing/:id">
-                <Listing />
-              </Route>
-              <Route exact path="/development/:id">
-                <Development />
-              </Route>
-              <Route exact path="/developer/:id">
-                <Developer />
-              </Route>
-              <Route exact path="/inquire">
-                <InquiryForm />
-              </Route>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route>
-                <EmptyPage isEmpty={true} />
-              </Route>
-            </Switch>
+            <ScrollToTop>
+              <Switch>
+                <ProtectedRoute
+                  isAuthenticated={isAuthenticated()}
+                  exact
+                  path="/wishlist"
+                >
+                  <Wishlist />
+                </ProtectedRoute>
+                <Route exact path="/signup">
+                  <Signup />
+                </Route>
+                <Route exact path="/login">
+                  <Signup isLogin />
+                </Route>
+                <Route exact path="/search">
+                  <Search />
+                </Route>
+                <Route exact path="/listing/:id">
+                  <Listing />
+                </Route>
+                <Route exact path="/development/:id">
+                  <Development />
+                </Route>
+                <Route exact path="/developer/:id">
+                  <Developer />
+                </Route>
+                <Route exact path="/inquire">
+                  <InquiryForm />
+                </Route>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route>
+                  <EmptyPage isEmpty={true} />
+                </Route>
+              </Switch>
+            </ScrollToTop>
           </Router>
         )}
       </ThemeProvider>
