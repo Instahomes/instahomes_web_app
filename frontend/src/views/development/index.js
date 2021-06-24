@@ -21,7 +21,7 @@ import { Helmet } from "react-helmet";
 import { getDevelopments } from "../../services/developments";
 import { useRouteMatch } from "react-router-dom";
 
-const Development = (props) => {
+const Development = React.memo((props) => {
   const [development, setDevelopment] = useState(null);
   const [isEmpty, setIsEmpty] = useState(false);
   const match = useRouteMatch();
@@ -138,6 +138,6 @@ const Development = (props) => {
       </EmptyPage>
     </Layout>
   );
-};
+});
 
 export default Development;

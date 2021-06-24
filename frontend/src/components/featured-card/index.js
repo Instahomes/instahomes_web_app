@@ -1,7 +1,7 @@
 import React from "react";
 import { FeaturedCard, FeaturedInfo } from "./styles";
 
-const Card = ({ image, title, url }) => {
+const Card = React.memo(({ image, title, url }) => {
   return (
     <FeaturedCard>
       <a href={url}>
@@ -13,6 +13,6 @@ const Card = ({ image, title, url }) => {
       </a>
     </FeaturedCard>
   );
-};
+});
 
 export default Card;

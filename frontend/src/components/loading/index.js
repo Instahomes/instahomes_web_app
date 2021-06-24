@@ -10,7 +10,7 @@ const LoadingDiv = styled.div`
   height: ${({ height }) => height || "800px"};
 `;
 
-const Loading = ({ height, message }) => (
+const Loading = React.memo(({ height, message }) => (
   <LoadingDiv height={height}>
     <ReactLoading
       type="cylon"
@@ -21,6 +21,6 @@ const Loading = ({ height, message }) => (
     />
     {message && <p>{message}</p>}
   </LoadingDiv>
-);
+));
 
 export default Loading;

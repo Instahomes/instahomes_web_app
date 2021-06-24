@@ -29,7 +29,7 @@ import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { useHistory } from "react-router-dom";
 
-const Home = (props) => {
+const Home = React.memo((props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [listings, setListings] = useState([]);
   const history = useHistory();
@@ -131,6 +131,6 @@ const Home = (props) => {
       </ListingFormFrame>
     </Layout>
   );
-};
+});
 
 export default Home;

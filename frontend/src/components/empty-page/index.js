@@ -28,31 +28,26 @@ const Frame = styled.section`
   }
 `;
 
-const EmptyPage = ({
-  children,
-  isEmpty,
-  header,
-  body,
-  buttonDisappear,
-  height,
-}) => {
-  const history = useHistory();
+const EmptyPage = React.memo(
+  ({ children, isEmpty, header, body, buttonDisappear, height }) => {
+    const history = useHistory();
 
-  return isEmpty ? (
-    <Frame height={height}>
-      <h1>{header || "Oh no! This page does not exist."}</h1>
-      <p>
-        {body || "No worries, it happens. Let’s get you back home instead."}
-      </p>
-      {!buttonDisappear && (
-        <OutlineButton onClick={() => history.push("/")}>
-          BACK TO HOME
-        </OutlineButton>
-      )}
-    </Frame>
-  ) : (
-    children
-  );
-};
+    return isEmpty ? (
+      <Frame height={height}>
+        <h1>{header || "Oh no! This page does not exist."}</h1>
+        <p>
+          {body || "No worries, it happens. Let’s get you back home instead."}
+        </p>
+        {!buttonDisappear && (
+          <OutlineButton onClick={() => history.push("/")}>
+            BACK TO HOME
+          </OutlineButton>
+        )}
+      </Frame>
+    ) : (
+      children
+    );
+  }
+);
 
 export default EmptyPage;

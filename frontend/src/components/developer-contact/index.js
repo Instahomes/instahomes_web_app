@@ -10,7 +10,7 @@ import {
   Footnotes,
 } from "./styles";
 
-const Contact = ({ name }) => (
+const Contact = React.memo(({ name }) => (
   <ContactComponent>
     <h2 className="h2">Get in touch with {name} directly today!</h2>
     <InquiryButtons>
@@ -29,6 +29,6 @@ const Contact = ({ name }) => (
       </Footnotes>
     </div>
   </ContactComponent>
-);
+));
 
 export default Contact;

@@ -7,7 +7,7 @@ import { AdvancedSettings, SearchSelect } from "../../components/elements";
 import { listingChoices, budgetChoices } from "../../misc/constants";
 import { getDevelopers } from "../../services/developers";
 
-const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
+const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
   const history = useHistory();
 
   const roomOptions = (placeholder) => [
@@ -201,6 +201,6 @@ const HomeSearch = ({ showAdvanced, setShowAdvanced }) => {
       )}
     </Formik>
   );
-};
+});
 
 export default HomeSearch;

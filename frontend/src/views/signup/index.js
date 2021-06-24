@@ -50,7 +50,7 @@ const LoginSchema = Yup.object({
   password: Yup.string().required("Password is required"),
 });
 
-const Signup = ({ isLogin }) => {
+const Signup = React.memo(({ isLogin }) => {
   const history = useHistory();
   const location = useLocation();
 
@@ -297,6 +297,6 @@ const Signup = ({ isLogin }) => {
       </HeroFrame>
     </Layout>
   );
-};
+});
 
 export default Signup;

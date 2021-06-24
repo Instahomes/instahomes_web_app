@@ -26,7 +26,7 @@ import { Helmet } from "react-helmet";
 import { getDevelopers } from "../../services/developers";
 import { useRouteMatch } from "react-router-dom";
 
-const DevelopmentCard = (development) => (
+const DevelopmentCard = React.memo((development) => (
   <Link to={`/development/${development.id}`}>
     <CardFrame background={development.photo_main}>
       <div className="left-half">
@@ -48,11 +48,11 @@ const DevelopmentCard = (development) => (
       </div>
     </CardFrame>
   </Link>
-);
+));
 
 const isVerified = true;
 
-const Developer = (props) => {
+const Developer = React.memo((props) => {
   const [developer, setDeveloper] = useState(null);
   const [isEmpty, setIsEmpty] = useState(false);
   const match = useRouteMatch();
@@ -178,6 +178,6 @@ const Developer = (props) => {
       </EmptyPage>
     </Layout>
   );
-};
+});
 
 export default Developer;

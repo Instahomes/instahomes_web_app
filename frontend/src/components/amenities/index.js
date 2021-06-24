@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 export const AmenitiesStyle = styled.section`
@@ -40,7 +41,7 @@ export const AmenitiesCard = styled.div`
   }
 `;
 
-const Amenities = ({ amenities, direction, Heading, noPadding }) => (
+const Amenities = React.memo(({ amenities, direction, Heading, noPadding }) => (
   <AmenitiesStyle direction={direction} noPadding={noPadding}>
     {Heading && <Heading />}
     <div>
@@ -56,6 +57,6 @@ const Amenities = ({ amenities, direction, Heading, noPadding }) => (
       )}
     </div>
   </AmenitiesStyle>
-);
+));
 
 export default Amenities;

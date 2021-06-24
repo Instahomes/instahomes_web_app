@@ -24,7 +24,7 @@ const data = [
   },
 ];
 
-const Featured = () => (
+const Featured = React.memo(() => (
   <FeaturedNews>
     <h2 className="h2">Featured News and Press</h2>
     <div className="featured-row">
@@ -37,6 +37,6 @@ const Featured = () => (
       ))}
     </div>
   </FeaturedNews>
-);
+));
 
 export default Featured;

@@ -9,7 +9,7 @@ import { WishlistContainer, WishlistHeader } from "./styles";
 import { getListings } from "../../services/listings";
 import { Helmet } from "react-helmet";
 
-const Wishlist = (props) => {
+const Wishlist = React.memo((props) => {
   const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -57,6 +57,6 @@ const Wishlist = (props) => {
       </WishlistContainer>
     </Layout>
   );
-};
+});
 
 export default Wishlist;

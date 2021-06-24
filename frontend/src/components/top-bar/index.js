@@ -1,3 +1,4 @@
+import React from "react";
 import emailIcon from "../../assets/navbar/email.svg";
 import {
   TopBarFrame,
@@ -6,7 +7,7 @@ import {
   TopBarPhoneIcon,
 } from "./styles";
 
-const TopBar = () => (
+const TopBar = React.memo(() => (
   <TopBarFrame>
     <TopBarPhone>
       <TopBarPhoneIcon src={emailIcon} />
@@ -22,6 +23,6 @@ const TopBar = () => (
       <a href="mailto:instahomes.ph@gmail.com">CONTACT SUPPORT</a>
     </TopBarSpan>
   </TopBarFrame>
-);
+));
 
 export default TopBar;

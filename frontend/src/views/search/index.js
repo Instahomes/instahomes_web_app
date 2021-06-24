@@ -20,7 +20,7 @@ import { getListings } from "../../services/listings";
 import { getDevelopers } from "../../services/developers";
 import { listingChoices, budgetChoices } from "../../misc/constants";
 
-const Search = (props) => {
+const Search = React.memo((props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [sale_status, setSaleStatus] = useState("");
   const [location, setLocation] = useState("");
@@ -328,6 +328,6 @@ const Search = (props) => {
       </SearchContainer>
     </Layout>
   );
-};
+});
 
 export default Search;

@@ -73,7 +73,7 @@ const FooterIconRow = styled.div`
   }
 `;
 
-const Footer = () => (
+const Footer = React.memo(() => (
   <FooterFrame>
     <FooterList>
       <FooterItem>
@@ -141,6 +141,6 @@ const Footer = () => (
     </FooterList>
     <FooterText>© 2021 Instahomes Philippines</FooterText>
   </FooterFrame>
-);
+));
 
 export default Footer;

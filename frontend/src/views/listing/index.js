@@ -52,7 +52,7 @@ import { isAuthenticated } from "../../services/auth";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const PropertyDetails = ({ active, floorPlan, propDetails, ...props }) => {
+const PropertyDetails = React.memo(({ active, floorPlan, propDetails }) => {
   const { openLightbox } = useLightbox();
 
   return (
@@ -90,19 +90,21 @@ const PropertyDetails = ({ active, floorPlan, propDetails, ...props }) => {
       </DescriptionDiv>
     </React.Fragment>
   );
-};
+});
 
-const PropertyDetailsWrapper = ({ active, floorPlan, propDetails }) => (
-  <SimpleReactLightbox>
-    <PropertyDetails
-      active={active}
-      floorPlan={floorPlan}
-      propDetails={propDetails}
-    />
-  </SimpleReactLightbox>
+const PropertyDetailsWrapper = React.memo(
+  ({ active, floorPlan, propDetails }) => (
+    <SimpleReactLightbox>
+      <PropertyDetails
+        active={active}
+        floorPlan={floorPlan}
+        propDetails={propDetails}
+      />
+    </SimpleReactLightbox>
+  )
 );
 
-const Listing = (props) => {
+const Listing = React.memo((props) => {
   const [active, setActive] = useState("overview");
   const match = useRouteMatch();
   const history = useHistory();
@@ -438,6 +440,6 @@ const Listing = (props) => {
       </EmptyPage>
     </Layout>
   );
-};
+});
 
 export default Listing;

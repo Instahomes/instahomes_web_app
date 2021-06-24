@@ -41,7 +41,7 @@ export const DropdownDiv = styled.div`
   }
 `;
 
-const AccountDropdown = ({ dark }) => {
+const AccountDropdown = React.memo(({ dark }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [profile, setProfile] = useState({});
 
@@ -114,6 +114,6 @@ const AccountDropdown = ({ dark }) => {
       </AccountDropdownStyle>
     </React.Fragment>
   );
-};
+});
 
 export default AccountDropdown;

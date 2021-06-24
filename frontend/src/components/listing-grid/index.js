@@ -96,7 +96,7 @@ const ListingGrid = ({ listings, setOrderBy, noSort }) => {
     <React.Fragment>
       <ListingsFilters>
         <span className="listing-count">
-          Showing <span className="count-emphasis">{listings.length}</span> out
+          Showing <span className="count-emphasis">{current.length}</span> out
           of <span className="count-emphasis">{listings.length}</span> listings
         </span>
         {!noSort && (

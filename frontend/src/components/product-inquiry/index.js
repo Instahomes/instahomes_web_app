@@ -49,7 +49,7 @@ const inquiryTags = [
   },
 ];
 
-const ProductInquiry = ({ listing }) => {
+const ProductInquiry = React.memo(({ listing }) => {
   const [category, setCategory] = useState("");
   const [additional, setAdditional] = useState("");
   const [message, setMessage] = useState("");
@@ -145,6 +145,6 @@ const ProductInquiry = ({ listing }) => {
       )}
     </ProductInquiryContainer>
   );
-};
+});
 
 export default ProductInquiry;
