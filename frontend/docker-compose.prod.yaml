@@ -1,18 +1,20 @@
 version: "3.7"
 
-networks:
-  instahomes:
-    external: true
+# networks:
+#   instahomes:
+#     external: true
 
 services:
   frontend:
     container_name: frontend
+    image: 011095803615.dkr.ecr.ap-southeast-1.amazonaws.com/frontend
     build:
       context: .
       dockerfile: Dockerfile.prod
     ports:
-      - "1337:80"
+      - "80:80"
     environment:
-      - REACT_APP_API_URL=http://instahomes_backend_web_1/api
-    networks:
-      - instahomes
+      - REACT_APP_API_URL=https://api.instahomes.com.ph/api
+      - REACT_APP_MAINTENANCE_MODE=false
+    # networks:
+    #   - instahomes
