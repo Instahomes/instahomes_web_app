@@ -29,10 +29,7 @@ const SignupSchema = Yup.object({
   name: Yup.string().required("Full name is required"),
   contactNumber: Yup.string()
     .required("Contact number is required")
-    .matches(
-      /^(09|\+639)\d{9}$/,
-      "Please follow the correct format: +639171234567"
-    ),
+    .matches(/^\+639\d{9}$/, "Please follow the correct format: +639171234567"),
   email: Yup.string().email(),
   password: Yup.string().required("Password is required"),
   retypePassword: Yup.string().oneOf(
@@ -48,10 +45,7 @@ const SignupSchema = Yup.object({
 const LoginSchema = Yup.object({
   contactNumber: Yup.string()
     .required("Contact number is required")
-    .matches(
-      /^(09|\+639)\d{9}$/,
-      "Please follow the correct format: +639171234567"
-    ),
+    .matches(/^\+639\d{9}$/, "Please follow the correct format: +639171234567"),
   email: Yup.string().email(),
   password: Yup.string().required("Password is required"),
 });

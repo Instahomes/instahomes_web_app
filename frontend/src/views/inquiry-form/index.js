@@ -299,7 +299,7 @@ const DeveloperForm = (props) => {
               contactNumber: Yup.string()
                 .required("Please enter a contact number.")
                 .matches(
-                  /^(09|\+639)\d{9}$/,
+                  /^\+639\d{9}$/,
                   "Please follow the correct format: +639171234567"
                 ),
               email: Yup.string().email("Please input a correct email."),
