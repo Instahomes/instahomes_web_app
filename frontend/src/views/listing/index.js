@@ -181,7 +181,9 @@ const Listing = React.memo((props) => {
                   <WishlistButton onClick={handleUpdateWishlist}>
                     {isHeartFilled ? "REMOVE FROM" : "ADD TO"} WISHLIST
                   </WishlistButton>
-                  <InquireButton>SEND AN INQUIRY</InquireButton>
+                  <InquireButton>
+                    <a href="#listing-inquire">SEND AN INQUIRY</a>
+                  </InquireButton>
                 </HeaderButtons>
               </ListingHeader>
               <ListingImageGrid

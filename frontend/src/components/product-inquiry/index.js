@@ -58,8 +58,10 @@ const ProductInquiry = React.memo(({ listing }) => {
 
   const handleInquire = async () => {
     if (!category) {
-      setMessage("Please select a category.");
-    } else if (isAuthenticated() && hasProfile()) {
+      setCategory("other");
+      // setMessage("Please select a category.");
+    }
+    if (isAuthenticated() && hasProfile()) {
       const profile = getProfile();
       setIsLoading(true);
       await createInquiry(
@@ -85,7 +87,7 @@ const ProductInquiry = React.memo(({ listing }) => {
   };
 
   return (
-    <ProductInquiryContainer>
+    <ProductInquiryContainer id="listing-inquire">
       {isLoading ? (
         <Loading message="The inquiry is being sent, please wait a moment..." />
       ) : (

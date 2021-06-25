@@ -17,8 +17,8 @@ const Step4 = ({ isSubmitting, values, previous, errors }) => {
       <Content>
         <h1>Preferred Location</h1>
         <p>
-          Place your preferred location. To choose current location, click the
-          icon.
+          Place your preferred location(s). If more than one, separate by a
+          comma.
         </p>
         <FormDiv>
           <FormFrame>

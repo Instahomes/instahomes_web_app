@@ -102,6 +102,11 @@ export const InquireButton = styled(OrangeButton)`
   padding: 0 2em;
   margin-left: 10px;
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     margin-left: 0;
     padding: 0.7em 0;

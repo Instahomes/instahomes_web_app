@@ -68,7 +68,7 @@ const NavbarItems = ({
           dark={dark}
           className={className}
           as="a"
-          href="https://instahomes.com.ph/Articles.html"
+          href="https://blog.instahomes.com.ph/"
         >
           ARTICLES
         </NavbarSpan>

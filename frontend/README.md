@@ -81,6 +81,7 @@ Server:
 
 ```
 cd ~/build_docker/
+sudo docker stop <image_id>
 sudo docker build -t frontend .
 sudo docker run -dp 3000:3000 frontend
 ```

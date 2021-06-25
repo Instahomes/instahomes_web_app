@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import Loading from "../../components/loading";
@@ -61,6 +61,16 @@ const Signup = React.memo(({ isLogin }) => {
   const [formErrors, setFormErrors] = useState([]);
   const [isEmailShown, setEmailShown] = useState(false);
 
+  useEffect(() => {
+    if (location.state && location.state.message) {
+      setMessage(location.state.message);
+    }
+  }, [location.state]);
+
+  useEffect(() => {
+    setFormErrors([]);
+  }, [location]);
+
   const FormErrorsComponent = () =>
     formErrors.map((formError) => (
       <ModifiedErrorMessage as="div">{formError}</ModifiedErrorMessage>
@@ -69,18 +79,22 @@ const Signup = React.memo(({ isLogin }) => {
   const errorCallback = (err, setSubmitting) => {
     setIsLoading(false);
     setSubmitting(false);
-    if (err.response && err.response.data) {
-      setFormErrors(
-        [].concat(
-          ...Object.entries(err.response.data).map(
-            ([key, value]) => `${key}: ${value}`
-          )
-        )
-      );
-    } else {
+    if (isLogin) {
       setMessage(
         "Something went wrong. Please input your correct credentials."
       );
+    } else {
+      if (err.response && err.response.data) {
+        setFormErrors([
+          ...Object.entries(err.response.data).map(
+            ([key, value]) => `${key}: ${value}`
+          ),
+        ]);
+      } else {
+        setMessage(
+          "Something went wrong. Please input your correct credentials."
+        );
+      }
     }
   };
 
@@ -92,6 +106,7 @@ const Signup = React.memo(({ isLogin }) => {
       () => {
         setIsLoading(false);
         setSubmitting(false);
+        setFormErrors([]);
         history.push("/");
       },
       (err) => errorCallback(err, setSubmitting)
@@ -108,6 +123,7 @@ const Signup = React.memo(({ isLogin }) => {
       () => {
         setIsLoading(false);
         setSubmitting(false);
+        setFormErrors([]);
         history.push("/login", {
           message: "Account has been created! You may now log in.",
         });
@@ -162,6 +178,7 @@ const Signup = React.memo(({ isLogin }) => {
                           ? "Logging in, please wait a moment..."
                           : "Signing up, please wait a moment..."
                       }
+                      height="auto"
                     />
                   ) : (
                     <React.Fragment>
