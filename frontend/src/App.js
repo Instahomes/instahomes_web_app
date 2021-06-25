@@ -4,7 +4,7 @@ import { GlobalStyle, theme } from "./globalStyles";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProtectedRoute from "./misc/protectedRoutes";
-import { isAuthenticated } from "./services/auth";
+import { isAuthenticated, getProfile } from "./services/auth";
 import Home from "./views/home";
 import Listing from "./views/listing";
 import Search from "./views/search";
@@ -16,6 +16,15 @@ import InquiryForm from "./views/inquiry-form";
 import Maintenance from "./views/maintenance";
 import EmptyPage from "./components/empty-page";
 import ScrollToTop from "./components/scroll-to-top";
+import ReactGA from "react-ga";
+
+const TRACKING_ID = "UA-189988351-1";
+ReactGA.initialize(TRACKING_ID);
+
+isAuthenticated() &&
+  ReactGA.set({
+    userId: getProfile().user_id,
+  });
 
 function App() {
   return (
