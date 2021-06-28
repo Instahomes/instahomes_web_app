@@ -59,7 +59,7 @@ const ProductInquiry = React.memo(({ listing }) => {
 
   const handleInquire = async () => {
     if (!category) {
-      setCategory("other");
+      await setCategory("other");
       // setMessage("Please select a category.");
     }
     ReactPixel.track("InitiateCheckout", {
@@ -72,7 +72,7 @@ const ProductInquiry = React.memo(({ listing }) => {
       await createInquiry(
         {
           profile: profile.id,
-          category,
+          category: category || "other",
           additional,
           listing: listing.id,
           name: profile.name,
@@ -81,7 +81,11 @@ const ProductInquiry = React.memo(({ listing }) => {
           setIsLoading(false);
           history.push("/inquire", {
             listing,
-            inquiry: { category, additional, listing: listing.id },
+            inquiry: {
+              category: category || "other",
+              additional,
+              listing: listing.id,
+            },
           });
         },
         () => {
@@ -92,7 +96,11 @@ const ProductInquiry = React.memo(({ listing }) => {
     } else {
       history.push("/inquire", {
         listing,
-        inquiry: { category, additional, listing: listing.id },
+        inquiry: {
+          category: category || "other",
+          additional,
+          listing: listing.id,
+        },
       });
     }
   };

@@ -161,6 +161,9 @@ const DeveloperForm = (props) => {
     listing = location.state.listing;
     inquiry = location.state.inquiry;
   }
+
+  console.log(inquiry);
+
   useEffect(() => {
     if (!location.state) {
       history.push("/search");
@@ -233,6 +236,7 @@ const DeveloperForm = (props) => {
           successCallback,
           errorCallback
         );
+        break;
       case IS_SIGNING_UP:
         await createUserWithProfile(
           values.contactNumber,
@@ -243,8 +247,10 @@ const DeveloperForm = (props) => {
           successCallback,
           errorCallback
         );
+        break;
       case IS_NOT_SIGNING_UP:
         await createProfile(profile, inquiry, successCallback, errorCallback);
+        break;
     }
 
     return willProceed;
