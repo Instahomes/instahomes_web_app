@@ -17,6 +17,7 @@ import { isAuthenticated, hasProfile, getProfile } from "../../services/auth";
 import { createInquiry } from "../../services/users";
 import { FormErrorMessage } from "../elements";
 import Loading from "../loading";
+import ReactPixel from "react-facebook-pixel";
 
 const inquiryTags = [
   {
@@ -58,19 +59,33 @@ const ProductInquiry = React.memo(({ listing }) => {
 
   const handleInquire = async () => {
     if (!category) {
-      setCategory("other");
+      await setCategory("other");
       // setMessage("Please select a category.");
     }
+    ReactPixel.track("InitiateCheckout", {
+      content_ids: [listing],
+      content_category: category || "other",
+    });
     if (isAuthenticated() && hasProfile()) {
       const profile = getProfile();
       setIsLoading(true);
       await createInquiry(
-        { profile: profile.id, category, additional, listing: listing.id },
+        {
+          profile: profile.id,
+          category: category || "other",
+          additional,
+          listing: listing.id,
+          name: profile.name,
+        },
         () => {
           setIsLoading(false);
           history.push("/inquire", {
             listing,
-            inquiry: { category, additional, listing: listing.id },
+            inquiry: {
+              category: category || "other",
+              additional,
+              listing: listing.id,
+            },
           });
         },
         () => {
@@ -81,7 +96,11 @@ const ProductInquiry = React.memo(({ listing }) => {
     } else {
       history.push("/inquire", {
         listing,
-        inquiry: { category, additional, listing: listing.id },
+        inquiry: {
+          category: category || "other",
+          additional,
+          listing: listing.id,
+        },
       });
     }
   };
