@@ -17,9 +17,12 @@ import Maintenance from "./views/maintenance";
 import EmptyPage from "./components/empty-page";
 import ScrollToTop from "./components/scroll-to-top";
 import ReactGA from "react-ga";
+import ReactPixel from "react-facebook-pixel";
 
 const TRACKING_ID = "UA-189988351-1";
+const PIXEL_ID = "1136393116861058";
 ReactGA.initialize(TRACKING_ID);
+ReactPixel.init(PIXEL_ID);
 
 isAuthenticated() &&
   ReactGA.set({

@@ -1,4 +1,5 @@
 import axiosClient from "./";
+import ReactPixel from "react-facebook-pixel";
 
 export const createUser = (
   contactNumber,
@@ -7,6 +8,8 @@ export const createUser = (
   callback,
   errorCallback
 ) => {
+  ReactPixel.track("CompleteRegistration", { content_name: contactNumber });
+
   return axiosClient
     .post(`/user/create/`, {
       contact_number: contactNumber,
@@ -18,6 +21,12 @@ export const createUser = (
 };
 
 export const createProfile = (profile, inquiry, callback, errorCallback) => {
+  ReactPixel.track("Lead", {
+    name: profile.name,
+    listing: inquiry.listing,
+    category: inquiry.category,
+  });
+
   return axiosClient
     .post(`/profile/`, { profile, inquiry })
     .then((res) => callback(res.data))
@@ -33,6 +42,12 @@ export const createUserWithProfile = (
   callback,
   errorCallback
 ) => {
+  ReactPixel.track("CompleteRegistration", { content_name: contactNumber });
+  ReactPixel.track("Lead", {
+    content_name: inquiry.listing,
+    content_category: inquiry.category,
+  });
+
   return axiosClient
     .post(`/user/create/profile/`, {
       contact_number: contactNumber,
@@ -46,6 +61,11 @@ export const createUserWithProfile = (
 };
 
 export const createInquiry = (inquiry, callback, errorCallback) => {
+  ReactPixel.track("Lead", {
+    content_name: inquiry.listing,
+    content_category: inquiry.category,
+  });
+
   return axiosClient
     .post(`/inquire/`, inquiry)
     .then((res) => callback(res.data))

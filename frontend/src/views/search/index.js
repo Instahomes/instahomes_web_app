@@ -8,6 +8,7 @@ import ListingGrid from "../../components/listing-grid";
 import EmptyPage from "../../components/empty-page";
 
 import { SearchContainer, SearchFields, SearchButton } from "./styles";
+import ReactPixel from "react-facebook-pixel";
 
 import {
   WhiteInput,
@@ -99,6 +100,7 @@ const Search = React.memo((props) => {
   }, []);
 
   const handleSearch = async (values, { setSubmitting }) => {
+    ReactPixel.track("Search", { search_string: values.location });
     setSubmitting(true);
     setIsLoading(true);
     setIsEmpty(false);
