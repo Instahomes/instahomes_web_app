@@ -49,12 +49,13 @@ const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
         bathrooms: "",
         bedrooms: "",
         developer_id: "",
+        developer_name: "Preferred Developer",
       }}
       onSubmit={(values, { setSubmitting }) => {
         const { developer_id, ...valuesCopy } = values;
 
         if (developer_id) {
-          valuesCopy.developer_id = developer_id.value;
+          valuesCopy.developer_id = developer_id.value || developer_id;
         }
 
         const params = Object.entries(valuesCopy)
@@ -183,9 +184,16 @@ const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
                   handleBlur,
                   values,
                   handleChange: (option) => {
-                    setFieldValue("developer_id", option);
+                    setFieldValue(
+                      "developer_id",
+                      option.value == "" ? option.value : option
+                    );
+                    setFieldValue("developer_name", option.label);
                   },
-                  getValue: () => values.developer_id,
+                  getValue: () => ({
+                    value: values.developer_id || "",
+                    label: values.developer_name,
+                  }),
                 }}
               />
               <SearchButton scale={0.9} mobileOrder={10} type="submit">

@@ -34,7 +34,8 @@ const Card = React.memo(
     price,
     address,
     bedrooms,
-    bathrooms,
+    bathrooms_min,
+    bathrooms_max,
     isVerified,
     isOnWishlist,
     className,
@@ -98,7 +99,8 @@ const Card = React.memo(
             </ListingPiece>
             <img src={bath} alt="Bath" />
             <ListingPiece marginLeft="10px">
-              {bathrooms}&nbsp;Bathrooms
+              {bathrooms_min}
+              {bathrooms_max && "-" + bathrooms_max}&nbsp;Bathrooms
             </ListingPiece>
           </ListingLine>
           <Link to={`/listing/${id}`} className="view-home">

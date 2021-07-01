@@ -30,6 +30,7 @@ const Search = React.memo((props) => {
   const [bathrooms, setBathrooms] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [developer_id, setDeveloper] = useState("");
+  const [developer_name, setDeveloperName] = useState("");
   const [order_by, setOrderBy] = useState("-created_at");
 
   const [listings, setListings] = useState([]);
@@ -56,6 +57,7 @@ const Search = React.memo((props) => {
     setBathrooms(searchParams.get("bathrooms"));
     setBedrooms(searchParams.get("bedrooms"));
     setDeveloper(searchParams.get("developer_id"));
+    setDeveloperName(searchParams.get("developer_name"));
   };
 
   const setEmptyAndRandomListings = async () => {
@@ -81,7 +83,7 @@ const Search = React.memo((props) => {
             ? setListings(data) || setIsEmpty(false)
             : setEmptyAndRandomListings(),
         () => {},
-        search
+        search + `&order_by=${order_by}`
       );
       setIsLoading(false);
     };
@@ -107,7 +109,7 @@ const Search = React.memo((props) => {
     const { priceRange, developer_id, ...valuesCopy } = values;
 
     if (developer_id) {
-      valuesCopy.developer_id = developer_id.value;
+      valuesCopy.developer_id = developer_id.value || developer_id;
     }
 
     const params = Object.entries(valuesCopy)
@@ -126,7 +128,7 @@ const Search = React.memo((props) => {
           ? setListings(data) || setIsEmpty(false)
           : setEmptyAndRandomListings(),
       () => {},
-      params
+      params + `&order_by=${order_by}`
     );
 
     setSubmitting(false);
@@ -172,6 +174,7 @@ const Search = React.memo((props) => {
             bathrooms,
             bedrooms,
             developer_id,
+            developer_name,
           }}
           onSubmit={handleSearch}
         >
@@ -290,9 +293,16 @@ const Search = React.memo((props) => {
                     handleBlur,
                     values,
                     handleChange: (option) => {
-                      setFieldValue("developer_id", option);
+                      setFieldValue(
+                        "developer_id",
+                        option.value == "" ? option.value : option
+                      );
+                      setFieldValue("developer_name", option.label);
                     },
-                    getValue: () => values.developer_id,
+                    getValue: () => ({
+                      value: values.developer_id || "",
+                      label: values.developer_name,
+                    }),
                   }}
                 />
                 <SearchButton mobileOrder={7} type="submit">
