@@ -13,6 +13,21 @@ export const listingChoices = [
   },
 ];
 
+export const devTypeChoices = [
+  {
+    value: "residential",
+    label: "Residential",
+  },
+  {
+    value: "commercial",
+    label: "Commercial",
+  },
+  {
+    value: "lots",
+    label: "Lots",
+  },
+];
+
 export const purchaseTypeChoices = [
   {
     value: "buy",

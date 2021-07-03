@@ -19,7 +19,11 @@ import {
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { getDevelopers } from "../../services/developers";
-import { listingChoices, budgetChoices } from "../../misc/constants";
+import {
+  listingChoices,
+  budgetChoices,
+  devTypeChoices,
+} from "../../misc/constants";
 
 const Search = React.memo((props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -204,21 +208,23 @@ const Search = React.memo((props) => {
                 <GrayInput
                   style={{ flex: "2 0 30%" }}
                   scale={0.9}
-                  placeholder="Search for location or landmark"
+                  placeholder="Search for location/development/developer"
                   name="location"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.location}
                   mobileOrder={1}
                 />
-                <GrayInput
-                  scale={0.9}
-                  placeholder="Property Type (e.g. condominium)"
-                  name="development_type"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.development_type}
+                <SearchSelect
+                  containerStyle={{ maxWidth: "150px", flexBasis: "150px" }}
+                  fieldName="development_type"
+                  options={[{ value: "", label: "Property Type" }].concat(
+                    devTypeChoices
+                  )}
+                  isGray
+                  placeholder="Property Type"
                   mobileOrder={2}
+                  formik={{ handleBlur, values, setFieldValue }}
                 />
                 {/* <GrayInput
                   scale={0.9}
