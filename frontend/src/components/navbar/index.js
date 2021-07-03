@@ -37,8 +37,8 @@ const NavbarSearch = ({ isHome, dark }) => {
       <GrayInput
         style={{ width: "100%", display: isHome ? "none" : "block" }}
         scale={0.8}
-        placeholder="Search for location/city/subdivision"
-        name="query"
+        placeholder="Search for location/development/developer"
+        name="location"
         onChange={(e) => setQuery(e.target.value)}
         value={query}
         dark={dark}

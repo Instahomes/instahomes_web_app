@@ -69,11 +69,12 @@ const Home = React.memo((props) => {
                 developerLogo={listing.development.developer.featured_image}
                 image={listing.photo_main}
                 name={listing.development.name + " " + listing.unit_name}
-                size={listing.floor_size_min}
+                size={listing.lot_size}
                 price={listing.lowest_price}
                 address={listing.development.location}
                 bedrooms={listing.bedrooms}
-                bathrooms={listing.bathrooms_min}
+                bathrooms_min={listing.bathrooms_min}
+                bathrooms_max={listing.bathrooms_max}
                 isVerified={true}
                 isOnWishlist={listing.is_liked}
               />

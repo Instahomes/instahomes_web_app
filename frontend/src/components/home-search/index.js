@@ -4,7 +4,11 @@ import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 
 import { AdvancedSettings, SearchSelect } from "../../components/elements";
-import { listingChoices, budgetChoices } from "../../misc/constants";
+import {
+  listingChoices,
+  budgetChoices,
+  devTypeChoices,
+} from "../../misc/constants";
 import { getDevelopers } from "../../services/developers";
 
 const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
@@ -49,12 +53,13 @@ const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
         bathrooms: "",
         bedrooms: "",
         developer_id: "",
+        developer_name: "Preferred Developer",
       }}
       onSubmit={(values, { setSubmitting }) => {
         const { developer_id, ...valuesCopy } = values;
 
         if (developer_id) {
-          valuesCopy.developer_id = developer_id.value;
+          valuesCopy.developer_id = developer_id.value || developer_id;
         }
 
         const params = Object.entries(valuesCopy)
@@ -97,7 +102,7 @@ const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
               />
               <Input
                 style={{ flex: "2 0 40%" }}
-                placeholder="Search for location/city/subdivision"
+                placeholder="Search for location/development/developer"
                 name="location"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -105,16 +110,15 @@ const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
                 scale={0.9}
                 mobileOrder={2}
               />
-              <Input
-                style={{ flex: "1 0 20%" }}
-                placeholder="Property Type (e.g. condominium)"
-                name="development_type"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.development_type}
-                className="advanced-setting"
-                scale={0.9}
+              <SearchSelect
+                containerStyle={{ maxWidth: "150px", flexBasis: "150px" }}
+                fieldName="development_type"
+                options={[{ value: "", label: "Property Type" }].concat(
+                  devTypeChoices
+                )}
+                placeholder="Property Type"
                 mobileOrder={3}
+                formik={{ handleBlur, values, setFieldValue }}
               />
               {/* <Input
                 placeholder="Keywords (Pool, garage, etc.)"
@@ -183,9 +187,16 @@ const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
                   handleBlur,
                   values,
                   handleChange: (option) => {
-                    setFieldValue("developer_id", option);
+                    setFieldValue(
+                      "developer_id",
+                      option.value == "" ? option.value : option
+                    );
+                    setFieldValue("developer_name", option.label);
                   },
-                  getValue: () => values.developer_id,
+                  getValue: () => ({
+                    value: values.developer_id || "",
+                    label: values.developer_name,
+                  }),
                 }}
               />
               <SearchButton scale={0.9} mobileOrder={10} type="submit">
