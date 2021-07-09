@@ -108,7 +108,7 @@ const Footer = React.memo(() => (
             </a>
           </FooterText>
           <FooterText>
-            <a href="https://instahomes.com.ph/Articles.html">Blogs/Press</a>
+            <a href="https://blog.instahomes.com.ph/">Blogs/Press</a>
           </FooterText>
         </ul>
       </FooterItem>

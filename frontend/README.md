@@ -74,6 +74,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 Local:
 
 ```
+npm run build
 scp -r build/* ubuntu@54.179.171.239:~/build_docker/build
 ```
 
