@@ -10,6 +10,7 @@ import {
   devTypeChoices,
 } from "../../misc/constants";
 import { getDevelopers } from "../../services/developers";
+import ReactGA from "react-ga";
 
 const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
   const history = useHistory();
@@ -67,6 +68,24 @@ const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
           .map(([key, value]) => `${key}=${value}`)
           .join("&");
 
+        // Track search entry in GA
+        Object.entries(valuesCopy)
+          .filter(([key, value]) => !!value)
+          .forEach(([key, value]) => {
+            ReactGA.event({
+              category: "Search Home",
+              action: key,
+              label: value,
+            });
+          });
+
+        // Track search combination in GA
+        ReactGA.event({
+          category: "Search Combination",
+          action: "Searched for a combination of parameters",
+          label: params,
+        });
+
         history.push({
           pathname: "/search",
           search: "?" + params,
@@ -118,6 +137,7 @@ const HomeSearch = React.memo(({ showAdvanced, setShowAdvanced }) => {
                 )}
                 placeholder="Property Type"
                 mobileOrder={3}
+                className="advanced-setting"
                 formik={{ handleBlur, values, setFieldValue }}
               />
               {/* <Input

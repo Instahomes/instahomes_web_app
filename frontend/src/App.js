@@ -25,6 +25,7 @@ ReactGA.initialize(TRACKING_ID);
 ReactPixel.init(PIXEL_ID);
 
 isAuthenticated() &&
+  getProfile() &&
   ReactGA.set({
     userId: getProfile().user_id,
   });

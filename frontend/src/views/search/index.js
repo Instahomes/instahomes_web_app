@@ -9,6 +9,7 @@ import EmptyPage from "../../components/empty-page";
 
 import { SearchContainer, SearchFields, SearchButton } from "./styles";
 import ReactPixel from "react-facebook-pixel";
+import ReactGA from "react-ga";
 
 import {
   WhiteInput,
@@ -126,6 +127,24 @@ const Search = React.memo((props) => {
       search: "?" + params + `&order_by=${order_by}`,
     });
 
+    // Track search entry in GA
+    Object.entries(valuesCopy)
+      .filter(([key, value]) => !!value)
+      .forEach(([key, value]) => {
+        ReactGA.event({
+          category: "Search",
+          action: key,
+          label: value,
+        });
+      });
+
+    // Track search combination in GA
+    ReactGA.event({
+      category: "Search Combination",
+      action: "Searched for a combination of parameters",
+      label: params,
+    });
+
     await getListings(
       (data) =>
         data.length > 0
@@ -222,6 +241,7 @@ const Search = React.memo((props) => {
                     devTypeChoices
                   )}
                   isGray
+                  className="advanced-setting"
                   placeholder="Property Type"
                   mobileOrder={2}
                   formik={{ handleBlur, values, setFieldValue }}
