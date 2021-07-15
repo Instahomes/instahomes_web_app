@@ -168,6 +168,7 @@ const Signup = React.memo(({ isLogin }) => {
               handleBlur,
               handleSubmit,
               isSubmitting,
+              setFieldValue,
             }) => (
               <Form>
                 <SignupForm>
@@ -221,7 +222,16 @@ const Signup = React.memo(({ isLogin }) => {
                           scale={0.9}
                           placeholder="Contact Number"
                           name="contactNumber"
-                          onChange={handleChange}
+                          onChange={(e) => {
+                            if (e.target.value.startsWith("09")) {
+                              setFieldValue(
+                                "contactNumber",
+                                "+639" + e.target.value.substring(2)
+                              );
+                            } else {
+                              handleChange(e);
+                            }
+                          }}
                           onBlur={handleBlur}
                           value={values.contactNumber}
                         />

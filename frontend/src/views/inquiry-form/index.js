@@ -91,6 +91,7 @@ const Wizard = ({
           dirty,
           errors,
           touched,
+          handleChange,
         }) => (
           <Form>
             {React.isValidElement(step)
@@ -102,6 +103,7 @@ const Wizard = ({
                   dirty,
                   errors,
                   touched,
+                  handleChange,
                   previous,
                 })
               : step}
