@@ -13,7 +13,14 @@ import {
 import { Field } from "formik";
 import { FormErrorMessage } from "../../../components/elements";
 
-const Step3 = ({ isSubmitting, values, previous, errors }) => {
+const Step3 = ({
+  isSubmitting,
+  values,
+  previous,
+  errors,
+  setFieldValue,
+  handleChange,
+}) => {
   const [showEmail, setShowEmail] = useState(false);
 
   return (
@@ -32,6 +39,16 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
                 as={Field}
                 placeholder="Contact Number"
                 name="contactNumber"
+                onChange={(e) => {
+                  if (e.target.value.startsWith("09")) {
+                    setFieldValue(
+                      "contactNumber",
+                      "+639" + e.target.value.substring(2)
+                    );
+                  } else {
+                    handleChange(e);
+                  }
+                }}
               />
               <InputHelper
                 onClick={() => setShowEmail(!showEmail)}
