@@ -14,7 +14,7 @@ export default function Layout({ children }) {
       <TopBar />
       <MessengerCustomerChat
         pageId="100233035447229"
-        // appId="<APP_ID>"
+        appId="1024950421584974"
         // htmlRef="<REF_STRING>"
       />
       <Frame>{children}</Frame>
