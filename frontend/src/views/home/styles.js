@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import signupImg from "../../assets/home/signup-img.png";
 import { Input, OutlineButton } from "../../components/elements";
+import secondarySearch from "../../assets/home/secondarySearch.jpeg";
 
 export const HeroFrame = styled.section`
   height: 550px;
@@ -152,5 +153,24 @@ export const ListingFormText = styled.div`
     width: initial;
     padding-right: 0;
     margin-bottom: 2rem;
+  }
+`;
+
+export const SecondarySearchFrame = styled.section`
+  background-image: url(${secondarySearch});
+  background-position: 50% 85%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 3em var(--main-padding-x);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+
+  h1 {
+    color: ${({ theme }) => theme.colors.softWhite};
+    text-align: center;
   }
 `;

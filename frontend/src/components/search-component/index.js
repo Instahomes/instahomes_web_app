@@ -11,7 +11,13 @@ import {
 import { getDevelopers } from "../../services/developers";
 
 const SearchComponent = React.memo(
-  ({ handleSearchSubmit, showAdvanced, setShowAdvanced, children }) => {
+  ({
+    handleSearchSubmit,
+    showAdvanced,
+    setShowAdvanced,
+    children,
+    ParentFrame,
+  }) => {
     const roomOptions = (placeholder) => [
       { value: "", label: placeholder },
       { value: "1", label: "1" },
@@ -38,6 +44,8 @@ const SearchComponent = React.memo(
       );
     };
 
+    const SearchParentFrame = ParentFrame || SearchFrame;
+
     return (
       <Formik
         initialValues={{
@@ -63,7 +71,7 @@ const SearchComponent = React.memo(
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit}>
-            <SearchFrame>
+            <SearchParentFrame>
               {children}
               <SearchForm showAdvanced={showAdvanced}>
                 <SearchSelect
@@ -184,7 +192,7 @@ const SearchComponent = React.memo(
                 setShowAdvanced={setShowAdvanced}
                 showAdvanced={showAdvanced}
               />
-            </SearchFrame>
+            </SearchParentFrame>
           </form>
         )}
       </Formik>

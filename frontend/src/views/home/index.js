@@ -14,6 +14,7 @@ import {
   BetaSignupButton,
   ListingFormFrame,
   ListingFormText,
+  SecondarySearchFrame,
 } from "./styles";
 import SearchComponent from "../../components/search-component";
 import heroBg from "../../assets/home/hero.webp";
@@ -21,27 +22,6 @@ import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { useHistory } from "react-router-dom";
 import ReactGA from "react-ga";
-
-import styled from "styled-components";
-import secondarySearch from "../../assets/home/secondarySearch.jpeg";
-const SecondarySearchFrame = styled.section`
-  background-image: url(${secondarySearch});
-  background-position: 50% 85%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: 3em var(--main-padding-x);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5em;
-
-  h1 {
-    color: ${({ theme }) => theme.colors.softWhite};
-    text-align: center;
-  }
-`;
 
 const Home = React.memo((props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
