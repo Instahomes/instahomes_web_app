@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import ListingCard from "../../components/listing-card";
-import house from "../../assets/card/sample_house.png";
 import Navbar from "../../components/navbar";
 import HomeSearch from "../../components/home-search";
 import ListProperty from "../../components/list-property-form";
@@ -12,27 +11,78 @@ import {
   NewsletterFrame,
   NewsletterImage,
   NewsletterText,
-  SignupForm,
-  SignupInput,
-  SignupButton,
   BetaSignupButton,
   ListingFormFrame,
   ListingFormText,
 } from "./styles";
-import {
-  LightInput,
-  LightTextarea,
-  OrangeButton,
-} from "../../components/elements";
+import SearchComponent from "../../components/search-component";
 import heroBg from "../../assets/home/hero.webp";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { useHistory } from "react-router-dom";
+import ReactGA from "react-ga";
+
+import styled from "styled-components";
+import secondarySearch from "../../assets/home/secondarySearch.jpeg";
+const SecondarySearchFrame = styled.section`
+  background-image: url(${secondarySearch});
+  background-position: 50% 85%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 3em var(--main-padding-x);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+
+  h1 {
+    color: ${({ theme }) => theme.colors.softWhite};
+    text-align: center;
+  }
+`;
 
 const Home = React.memo((props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [listings, setListings] = useState([]);
   const history = useHistory();
+
+  const handleSearchSubmit = (values) => {
+    const { developer_id, ...valuesCopy } = values;
+
+    if (developer_id) {
+      valuesCopy.developer_id = developer_id.value || developer_id;
+    }
+
+    const params = Object.entries(valuesCopy)
+      .filter(([key, value]) => !!value)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
+
+    // Track search entry in GA
+    Object.entries(valuesCopy)
+      .filter(([key, value]) => !!value)
+      .forEach(([key, value]) => {
+        ReactGA.event({
+          category: "Search Home",
+          action: key,
+          label: value,
+        });
+      });
+
+    // Track search combination in GA
+    ReactGA.event({
+      category: "Search Combination",
+      action: "Searched for a combination of parameters",
+      label: params,
+    });
+
+    history.push({
+      pathname: "/search",
+      search: "?" + params,
+    });
+  };
 
   useEffect(() => {
     getListings(setListings, () => {}, "limit=5");
@@ -55,6 +105,7 @@ const Home = React.memo((props) => {
         <HomeSearch
           showAdvanced={showAdvanced}
           setShowAdvanced={setShowAdvanced}
+          handleSearchSubmit={handleSearchSubmit}
         />
       </HeroFrame>
       <HomeListings>
@@ -103,7 +154,7 @@ const Home = React.memo((props) => {
           </form> */}
         </NewsletterText>
       </NewsletterFrame>
-      <ListingFormFrame id="#developer-signup">
+      {/* <ListingFormFrame id="#developer-signup">
         <ListingFormText>
           <h1 className="dark">
             Interested in Joining Our Roster of Fast-Growing Developers?
@@ -129,7 +180,15 @@ const Home = React.memo((props) => {
           </ul>
         </ListingFormText>
         <ListProperty />
-      </ListingFormFrame>
+      </ListingFormFrame> */}
+      <SecondarySearchFrame>
+        <h1>Find your new dream home in just a click</h1>
+        <SearchComponent
+          showAdvanced={showAdvanced}
+          setShowAdvanced={setShowAdvanced}
+          handleSearchSubmit={handleSearchSubmit}
+        />
+      </SecondarySearchFrame>
     </Layout>
   );
 });
