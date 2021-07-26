@@ -100,6 +100,16 @@ export const NewsletterText = styled.div`
   }
 `;
 
+export const GuidedInvestingText = styled.span`
+  border: 1px solid ${({ theme }) => theme.colors.mutedLightBlue};
+  box-sizing: border-box;
+  border-radius: 20px;
+  color: #e6edf5;
+  font-size: 12px;
+  padding: 7px 15px;
+  margin-bottom: 2em;
+`;
+
 export const BetaSignupButton = styled(OutlineButton)`
   margin-top: 0.5em;
   border: 1px solid ${({ theme }) => theme.colors.softWhite};

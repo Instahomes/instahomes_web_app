@@ -1,21 +1,33 @@
 import React from "react";
 import SearchComponent from "../search-component";
 import { OrangeButton, OutlineButton } from "../elements";
+import { useHistory } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
-export const GuidedInvesting = () => (
-  <React.Fragment>
-    <h1>Get free curated investment picks now!</h1>
-    <p>
-      Don’t know which properties to invest in? Get hands-on guidance from our
-      Real Estate advisors on what fits your budget, needs, and preferences with
-      just a quick form.
-    </p>
-    <div style={{ display: "flex", gap: "10px" }}>
-      <OrangeButton scale={0.9}>GET FREE PERSONALIZED GUIDANCE</OrangeButton>
-      <OutlineButton scale={0.9}>KNOW MORE</OutlineButton>
-    </div>
-  </React.Fragment>
-);
+export const GuidedInvesting = () => {
+  const history = useHistory();
+  return (
+    <React.Fragment>
+      <h1>Get free curated investment picks now!</h1>
+      <p>
+        Don’t know which properties to invest in? Get hands-on guidance from our
+        Real Estate advisors on what fits your budget, needs, and preferences
+        with just a quick form.
+      </p>
+      <div style={{ display: "flex", gap: "10px" }}>
+        <OrangeButton scale={0.9}>GET FREE PERSONALIZED GUIDANCE</OrangeButton>
+        <OutlineButton scale={0.9}>
+          <HashLink
+            to="/#guided"
+            style={{ color: "inherit", textDecoration: "inherit" }}
+          >
+            KNOW MORE
+          </HashLink>
+        </OutlineButton>
+      </div>
+    </React.Fragment>
+  );
+};
 
 export const Search = ({
   showAdvanced,

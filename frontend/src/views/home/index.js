@@ -15,6 +15,7 @@ import {
   ListingFormFrame,
   ListingFormText,
   SecondarySearchFrame,
+  GuidedInvestingText,
 } from "./styles";
 import SearchComponent from "../../components/search-component";
 import heroBg from "../../assets/home/hero.webp";
@@ -113,10 +114,11 @@ const Home = React.memo((props) => {
           </ListingRow>
         </div>
       </HomeListings>
-      <NewsletterFrame>
+      <NewsletterFrame id="guided">
         <NewsletterImage />
         <NewsletterText>
-          <h1>
+          <GuidedInvestingText>Guided Investing</GuidedInvestingText>
+          <h1 style={{ marginTop: "20px" }}>
             Just starting out in Real Estate? Let’s plan your investment
             together!
           </h1>
