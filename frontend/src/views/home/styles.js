@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import signupImg from "../../assets/home/signup-img.png";
+import iconCheck from "../../assets/home/iconCheck.svg";
 import { Input, OutlineButton } from "../../components/elements";
 import secondarySearch from "../../assets/home/secondarySearch.jpeg";
 
@@ -46,14 +47,6 @@ export const ListingRow = styled.div`
   justify-content: flex-start;
   gap: 1em;
 
-  // & > div:nth-child(3) {
-  //   margin-right: 10px;
-  // }
-
-  // & > div:not(:first-child) {
-  //   margin-left: 20px;
-  // }
-
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding: 10px;
     overflow-x: scroll;
@@ -70,7 +63,7 @@ export const NewsletterFrame = styled.section`
 `;
 
 export const NewsletterImage = styled.div`
-  width: 95%;
+  width: 70%;
   background-image: url(${signupImg});
   background-size: cover;
   background-position: center;
@@ -81,18 +74,38 @@ export const NewsletterImage = styled.div`
   }
 `;
 
+export const NewsletterText = styled.div`
+  padding: 5em 5em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: 4em var(--main-padding-x);
+  }
+
+  h1 {
+    color: ${({ theme }) => theme.colors.lightGray};
+  }
+
+  p,
+  li {
+    color: ${({ theme }) => theme.colors.softWhite};
+  }
+
+  li {
+    margin-bottom: 20px;
+  }
+
+  ul {
+    font-size: 1em;
+    list-style-image: url(${iconCheck});
+  }
+`;
+
 export const BetaSignupButton = styled(OutlineButton)`
   margin-top: 0.5em;
   border: 1px solid ${({ theme }) => theme.colors.softWhite};
-  color: ${({ theme }) => theme.colors.softWhite};
-`;
-
-export const NewsletterText = styled.div`
-  padding: 10rem var(--main-padding-x);
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 4rem var(--main-padding-x);
-  }
+  color: ${({ theme }) => theme.colors.darkBlue};
+  background: #ffffff;
+  font-weight: 700;
 `;
 
 export const SignupForm = styled.div`

@@ -116,22 +116,25 @@ const Home = React.memo((props) => {
       <NewsletterFrame>
         <NewsletterImage />
         <NewsletterText>
-          <h1>Invest in Real Estate for your Family’s Future</h1>
+          <h1>
+            Just starting out in Real Estate? Let’s plan your investment
+            together!
+          </h1>
           <p>
-            Invest in real estate in the Philippines without having to worry
-            about legal concerns. We make sure you get recommended trustworthy
-            and relevant properties suited for your area, budget, and investment
-            needs through our algorithm.
+            Instahomes can provide a dedicated advisor that suggests great
+            properties based on your budget, goals, and preferences{" "}
+            <i>free of charge</i>.
           </p>
+          <ul>
+            <li>Save time sifting through various properties listed online</li>
+            <li>Find listings that fit exactly what you need</li>
+            <li>
+              Get extra Real Estate tips and secrets to maximize your investment
+            </li>
+          </ul>
           <BetaSignupButton onClick={() => history.push("/signup")}>
-            SIGN UP FOR BETA
+            GET FREE GUIDANCE
           </BetaSignupButton>
-          {/* <form>
-            <SignupForm>
-              <SignupInput placeholder="Email Address" />
-              <SignupButton>JOIN OUR NEWSLETTER</SignupButton>
-            </SignupForm>
-          </form> */}
         </NewsletterText>
       </NewsletterFrame>
       {/* <ListingFormFrame id="#developer-signup">
