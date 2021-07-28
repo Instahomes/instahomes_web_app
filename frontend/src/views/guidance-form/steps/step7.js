@@ -6,27 +6,27 @@ import {
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
-import { purchaseTypeChoices } from "../../../misc/constants";
+import { budgetChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step3 = ({ isSubmitting, values, previous, errors }) => {
+const Step7 = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
-      <h1 className="center">I want to...</h1>
+      <h1 className="center">My Estimated Budget is...</h1>
       <p className="subheader center">
         This will help us in facilitating the next steps to prepare for your
         investment.
       </p>
-      <FormErrorMessage component="span" name="purchaseType" />
+      <FormErrorMessage component="span" name="budget" />
       <CheckboxGroup>
-        {purchaseTypeChoices.map((choice) => (
+        {budgetChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
               type="radio"
-              name="purchaseType"
+              name="budget"
               value={choice.value}
-              checked={choice.value == values.purchaseType}
+              checked={choice.value == values.budget}
             />
             <span>{choice.label}</span>
           </CheckboxLabel>
@@ -35,9 +35,7 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
       <ButtonsDiv>
         <SubmitOrangeButton
           type="submit"
-          disabled={
-            isSubmitting || values.purchaseType == "" || errors.purchaseType
-          }
+          disabled={isSubmitting || values.budget == "" || errors.budget}
         >
           NEXT QUESTION
         </SubmitOrangeButton>
@@ -49,4 +47,4 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
   );
 };
 
-export default Step3;
+export default Step7;

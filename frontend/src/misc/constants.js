@@ -153,3 +153,22 @@ export const progressChoices = [
     label: "Other",
   },
 ];
+
+export const occupantsChoices = [
+  {
+    value: "individual",
+    label: "Individual",
+  },
+  {
+    value: "couple",
+    label: "Couple",
+  },
+  {
+    value: "smallFamily",
+    label: "Small Family",
+  },
+  {
+    value: "largeFamily",
+    label: "Large Family",
+  },
+];

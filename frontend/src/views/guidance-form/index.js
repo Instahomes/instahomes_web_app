@@ -12,9 +12,9 @@ import Step1 from "./steps/step1";
 import Step2 from "./steps/step2";
 import Step3 from "./steps/step3";
 import Step4 from "./steps/step4";
-// import Step5 from "./steps/step5";
-// import Step6 from "./steps/step6";
-// import Step7 from "./steps/step7";
+import Step5 from "./steps/step5";
+import Step6 from "./steps/step6";
+import Step7 from "./steps/step7";
 // import Step8 from "./steps/step8";
 // import Step9 from "./steps/step9";
 // import Step10 from "./steps/step10";
@@ -217,6 +217,7 @@ const GuidanceFormComponent = (props) => {
           budget: "",
           purchaseType: "",
           reason: "",
+          occupants: "",
           progress: "",
           hasAgent: false,
           password: "",
@@ -245,6 +246,30 @@ const GuidanceFormComponent = (props) => {
           {...props}
           validationSchema={Yup.object({
             reason: Yup.string().required("Please enter your reason."),
+          })}
+        />
+        <Step5
+          {...props}
+          validationSchema={Yup.object({
+            propertyTypes: Yup.array()
+              .of(Yup.string())
+              .required("Please choose your preferred type/s."),
+          })}
+        />
+        <Step6
+          {...props}
+          validationSchema={Yup.object({
+            occupants: Yup.string().required(
+              "Please enter the number of occupants."
+            ),
+          })}
+        />
+        <Step7
+          {...props}
+          validationSchema={Yup.object({
+            budget: Yup.string().required(
+              "Please enter the number of occupants."
+            ),
           })}
         />
       </Wizard>

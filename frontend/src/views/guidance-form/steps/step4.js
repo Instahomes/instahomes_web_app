@@ -7,9 +7,10 @@ import {
   CheckboxLabel,
 } from "../styles";
 import { reasonChoices } from "../../../misc/constants";
+import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step3 = ({ isSubmitting, values, previous, errors }) => {
+const Step4 = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
       <h1 className="center">What do you want to use the property for?</h1>
@@ -17,6 +18,7 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
         This will help us in facilitating the next steps to prepare for your
         investment.
       </p>
+      <FormErrorMessage component="span" name="reason" />
       <CheckboxGroup>
         {reasonChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
@@ -45,4 +47,4 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
   );
 };
 
-export default Step3;
+export default Step4;

@@ -8,6 +8,7 @@ import {
 } from "../styles";
 import { progressChoices } from "../../../misc/constants";
 import { Field } from "formik";
+import { FormErrorMessage } from "../../../components/elements";
 
 const Step2 = ({ isSubmitting, values, previous, errors }) => {
   return (
@@ -17,6 +18,7 @@ const Step2 = ({ isSubmitting, values, previous, errors }) => {
         This will help us in facilitating the next steps to prepare for your
         investment.
       </p>
+      <FormErrorMessage component="span" name="progress" />
       <CheckboxGroup>
         {progressChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
