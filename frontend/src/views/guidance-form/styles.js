@@ -3,16 +3,11 @@ import { Form } from "formik";
 import { OrangeButton, OutlineButton } from "../../components/elements";
 
 export const GuidanceContainer = styled.section`
-  // height: 550px;
   width: 100%;
   padding: 5em var(--main-padding-x);
   background: url(${({ heroBg }) => heroBg});
   background-size: cover;
   box-sizing: border-box;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    // height: ${({ showAdvanced }) => (showAdvanced ? "750px" : "460px")};
-  }
 `;
 
 export const GuidanceForm = styled(Form)`
@@ -39,7 +34,17 @@ export const GuidanceForm = styled(Form)`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    width: 70%;
+    // width: 90%;
+    height: 90vh;
+    padding: 1.5em;
+
+    h1 {
+      font-size: 1.5em;
+    }
+
+    .subheader {
+      font-size: 1em;
+    }
   }
 `;
 
@@ -58,6 +63,11 @@ export const ProgressBarContainer = styled.div`
   position: absolute;
   bottom: 3em;
   width: 90%;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 75%;
+    bottom: 2em;
+  }
 `;
 
 export const ProgressBar = styled.div`
@@ -66,9 +76,13 @@ export const ProgressBar = styled.div`
   display: flex;
   justify-content: space-evenly;
 
-  & > img {
+  & > svg {
     width: 0.5em;
     height: 0.5em;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: auto;
   }
 `;
 
@@ -79,7 +93,11 @@ export const ButtonsDiv = styled.div`
   gap: 10px;
   width: 300px;
   margin-top: auto;
-  margin-bottom: 2em;
+  ${({ hasNoProgressBar }) => !hasNoProgressBar && "margin-bottom: 2em;"}
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    max-width: 90%;
+  }
 `;
 
 export const SubmitOrangeButton = styled(OrangeButton).attrs(

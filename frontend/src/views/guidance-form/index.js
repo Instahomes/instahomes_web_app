@@ -20,12 +20,7 @@ import Step7 from "./steps/step7";
 // import Step10 from "./steps/step10";
 // import Step11 from "./steps/step11";
 import heroBg from "../../assets/home/hero.webp";
-import circleFilled from "../../assets/form/circle-filled.svg";
-import circleEmpty from "../../assets/form/circle-empty.svg";
-import { useHistory, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { createUserWithProfile, createProfile } from "../../services/users";
-import { isAuthenticated, hasProfile, getProfile } from "../../services/auth";
 import Loading from "../../components/loading";
 import { FormErrorMessage } from "../../components/elements";
 
@@ -46,7 +41,6 @@ const Wizard = ({
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
   const [snapshot, setSnapshot] = useState(initialValues);
-  const history = useHistory();
 
   const step = steps[stepNumber];
   const totalSteps = steps.length;
@@ -57,9 +51,13 @@ const Wizard = ({
     setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
   };
 
-  const previous = (values) => {
+  const previous = (values, nextStep = null) => {
     setSnapshot(values);
-    setStepNumber(Math.max(stepNumber - 1, 0));
+    if (nextStep != null) {
+      setStepNumber(nextStep);
+    } else {
+      setStepNumber(Math.max(stepNumber - 1, 0));
+    }
   };
 
   const handleSubmit = async (values, bag) => {
@@ -96,83 +94,85 @@ const Wizard = ({
             touched,
             handleChange,
           }) => (
-            <GuidanceForm>
-              {React.isValidElement(step)
-                ? React.cloneElement(step, {
-                    isSubmitting,
-                    values,
-                    setFieldValue,
-                    isValid,
-                    dirty,
-                    errors,
-                    touched,
-                    handleChange,
-                    previous,
-                  })
-                : step}
-              {!isLoading && stepNumber > 0 && (
-                <ProgressBarContainer>
-                  <ProgressBar>
-                    {steps.slice(1, steps.length).map((step, idx) =>
-                      stepNumber <= idx ? (
-                        <svg
-                          width="10"
-                          height="9"
-                          viewBox="0 0 10 9"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <circle
-                            cx="5.28321"
-                            cy="4.32324"
-                            r="3.57324"
-                            fill="#F6F6F6"
-                            stroke="#BABABA"
-                            stroke-width="1.5"
-                          />
-                        </svg>
-                      ) : (
-                        <svg
-                          width="9"
-                          height="9"
-                          viewBox="0 0 9 9"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <circle
-                            cx="4.32324"
-                            cy="4.32324"
-                            r="3.57324"
-                            fill="#BABABA"
-                            stroke="#BABABA"
-                            stroke-width="1.5"
-                          />
-                        </svg>
-                      )
-                    )}
-                  </ProgressBar>
-                </ProgressBarContainer>
+            <>
+              <GuidanceForm>
+                {React.isValidElement(step)
+                  ? React.cloneElement(step, {
+                      isSubmitting,
+                      values,
+                      setFieldValue,
+                      isValid,
+                      dirty,
+                      errors,
+                      touched,
+                      handleChange,
+                      previous,
+                    })
+                  : step}
+                {!isLoading && stepNumber > 0 && (
+                  <ProgressBarContainer>
+                    <ProgressBar>
+                      {steps.slice(1, steps.length).map((step, idx) =>
+                        stepNumber <= idx ? (
+                          <svg
+                            width="10"
+                            height="9"
+                            viewBox="0 0 10 9"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle
+                              cx="5.28321"
+                              cy="4.32324"
+                              r="3.57324"
+                              fill="#F6F6F6"
+                              stroke="#BABABA"
+                              stroke-width="1.5"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            width="9"
+                            height="9"
+                            viewBox="0 0 9 9"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <circle
+                              cx="4.32324"
+                              cy="4.32324"
+                              r="3.57324"
+                              fill="#BABABA"
+                              stroke="#BABABA"
+                              stroke-width="1.5"
+                            />
+                          </svg>
+                        )
+                      )}
+                    </ProgressBar>
+                  </ProgressBarContainer>
+                )}
+              </GuidanceForm>
+              {stepNumber != 0 && (
+                <BackButton onClick={() => previous(values, 0)}>
+                  <svg
+                    width="19"
+                    height="8"
+                    viewBox="0 0 19 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0.646446 3.64645C0.451185 3.84171 0.451185 4.15829 0.646446 4.35355L3.82843 7.53553C4.02369 7.7308 4.34027 7.7308 4.53553 7.53553C4.7308 7.34027 4.7308 7.02369 4.53553 6.82843L1.70711 4L4.53553 1.17157C4.7308 0.976311 4.7308 0.659728 4.53553 0.464466C4.34027 0.269204 4.02369 0.269204 3.82843 0.464466L0.646446 3.64645ZM19 3.5L1 3.5V4.5L19 4.5V3.5Z"
+                      fill="#F7F7F7"
+                    />
+                  </svg>
+                  <span className="m-plus">BACK TO START</span>
+                </BackButton>
               )}
-            </GuidanceForm>
+            </>
           )}
         </Formik>
-        {stepNumber != 0 && (
-          <BackButton onClick={() => history.goBack()}>
-            <svg
-              width="19"
-              height="8"
-              viewBox="0 0 19 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0.646446 3.64645C0.451185 3.84171 0.451185 4.15829 0.646446 4.35355L3.82843 7.53553C4.02369 7.7308 4.34027 7.7308 4.53553 7.53553C4.7308 7.34027 4.7308 7.02369 4.53553 6.82843L1.70711 4L4.53553 1.17157C4.7308 0.976311 4.7308 0.659728 4.53553 0.464466C4.34027 0.269204 4.02369 0.269204 3.82843 0.464466L0.646446 3.64645ZM19 3.5L1 3.5V4.5L19 4.5V3.5Z"
-                fill="#F7F7F7"
-              />
-            </svg>
-            <span className="m-plus">BACK TO START</span>
-          </BackButton>
-        )}
       </GuidanceContainer>
     </React.Fragment>
   );

@@ -134,7 +134,7 @@ const Home = React.memo((props) => {
               Get extra Real Estate tips and secrets to maximize your investment
             </li>
           </ul>
-          <BetaSignupButton onClick={() => history.push("/signup")}>
+          <BetaSignupButton onClick={() => history.push("/guidance")}>
             GET FREE GUIDANCE
           </BetaSignupButton>
         </NewsletterText>

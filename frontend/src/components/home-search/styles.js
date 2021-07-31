@@ -12,7 +12,12 @@ export const HomeSearchContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    width: 70%;
+    width: 80%;
+    font-size: 0.9em;
+
+    h1 {
+      font-size: 1.8em;
+    }
   }
 `;
 
@@ -44,4 +49,13 @@ export const Tab = styled.div`
   opacity: ${({ isSelected }) => (isSelected ? 1 : 0.8)};
   border-bottom: ${({ theme, isSelected }) =>
     isSelected && `2px solid ${theme.colors.softWhite}`};
+`;
+
+export const GuidedButtons = styled.div`
+  display: flex;
+  gap: 10px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column;
+  }
 `;

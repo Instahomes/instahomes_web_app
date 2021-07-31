@@ -12,7 +12,7 @@ const GuidanceSteps = styled.div`
   margin-top: 2em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    overflow: scroll;
+    overflow-x: scroll;
   }
 `;
 
@@ -28,7 +28,7 @@ const Step = styled.div`
   }
 
   .step-image {
-    height: 200px;
+    height: 12.5em;
     max-width: 95%;
   }
 
@@ -44,7 +44,11 @@ const Step = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    flex: 1 0 460px;
+    flex: 1 0 200px;
+
+    .step-image {
+      height: 8.5em;
+    }
   }
 `;
 
@@ -93,7 +97,7 @@ const Step1 = () => {
           </Step>
         ))}
       </GuidanceSteps>
-      <ButtonsDiv>
+      <ButtonsDiv hasNoProgressBar>
         <SubmitOrangeButton type="submit">START THE PROCESS</SubmitOrangeButton>
         <SecondaryButton onClick={() => history.push("/")}>
           BACK TO HOME

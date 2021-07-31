@@ -12,7 +12,7 @@ export const HeroFrame = styled.section`
   background-size: cover;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    height: ${({ showAdvanced }) => (showAdvanced ? "750px" : "460px")};
+    height: ${({ showAdvanced }) => (showAdvanced ? "750px" : "500px")};
   }
 `;
 

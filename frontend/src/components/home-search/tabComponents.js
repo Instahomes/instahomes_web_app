@@ -1,5 +1,6 @@
 import React from "react";
 import SearchComponent from "../search-component";
+import { GuidedButtons } from "./styles";
 import { OrangeButton, OutlineButton } from "../elements";
 import { useHistory } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
@@ -14,8 +15,10 @@ export const GuidedInvesting = () => {
         Real Estate advisors on what fits your budget, needs, and preferences
         with just a quick form.
       </p>
-      <div style={{ display: "flex", gap: "10px" }}>
-        <OrangeButton scale={0.9}>GET FREE PERSONALIZED GUIDANCE</OrangeButton>
+      <GuidedButtons>
+        <OrangeButton scale={0.9} onClick={() => history.push("/guidance")}>
+          GET FREE PERSONALIZED GUIDANCE
+        </OrangeButton>
         <OutlineButton scale={0.9}>
           <HashLink
             to="/#guided"
@@ -24,7 +27,7 @@ export const GuidedInvesting = () => {
             KNOW MORE
           </HashLink>
         </OutlineButton>
-      </div>
+      </GuidedButtons>
     </React.Fragment>
   );
 };
