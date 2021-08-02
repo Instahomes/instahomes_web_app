@@ -18,11 +18,11 @@ export const GuidanceForm = styled(Form)`
   align-items: center;
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 95vh;
   background-color: ${({ theme }) => theme.colors.softWhite};
   box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.1);
   border-radius: 9px;
-  padding: 3em 3em;
+  padding: 2em;
   margin: auto;
 
   h1 {

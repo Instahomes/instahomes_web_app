@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 const GuidanceSteps = styled.div`
   display: flex;
   gap: 2em;
-  margin-top: 2em;
+  // margin-top: 2em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     overflow-x: scroll;
