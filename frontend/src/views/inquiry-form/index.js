@@ -251,7 +251,16 @@ const DeveloperForm = (props) => {
         );
         break;
       case IS_NOT_SIGNING_UP:
-        await createProfile(profile, inquiry, successCallback, errorCallback);
+        await createProfile(
+          {
+            ...profile,
+            email: values.email || null,
+            contact_number: values.contactNumber,
+          },
+          inquiry,
+          successCallback,
+          errorCallback
+        );
         break;
     }
 
