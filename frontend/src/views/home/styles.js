@@ -56,6 +56,7 @@ export const ListingRow = styled.div`
 export const NewsletterFrame = styled.section`
   background-color: ${({ theme }) => theme.colors.signupBg};
   display: flex;
+  height: 100vh;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
@@ -75,11 +76,10 @@ export const NewsletterImage = styled.div`
 `;
 
 export const NewsletterText = styled.div`
-  padding: 5em 5em;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 4em var(--main-padding-x);
-  }
+  padding: 4em 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   h1 {
     color: ${({ theme }) => theme.colors.lightGray};
@@ -98,6 +98,15 @@ export const NewsletterText = styled.div`
     font-size: 1em;
     list-style-image: url(${iconCheck});
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: 4em var(--main-padding-x);
+    font-size: 0.8em;
+
+    li {
+      margin-bottom: inherit;
+    }
+  }
 `;
 
 export const GuidedInvestingText = styled.span`
@@ -105,16 +114,16 @@ export const GuidedInvestingText = styled.span`
   box-sizing: border-box;
   border-radius: 20px;
   color: #e6edf5;
-  font-size: 12px;
+  font-size: 0.8em;
   padding: 7px 15px;
   margin-bottom: 2em;
 `;
 
 export const BetaSignupButton = styled(OutlineButton)`
-  margin-top: 0.5em;
   border: 1px solid ${({ theme }) => theme.colors.softWhite};
   color: ${({ theme }) => theme.colors.darkBlue};
   background: #ffffff;
+  font-size: 1em;
   font-weight: 700;
 `;
 

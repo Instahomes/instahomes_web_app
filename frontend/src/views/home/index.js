@@ -89,6 +89,14 @@ const Home = React.memo((props) => {
           handleSearchSubmit={handleSearchSubmit}
         />
       </HeroFrame>
+      <SecondarySearchFrame>
+        <h1>Find your new dream home in just a click</h1>
+        <SearchComponent
+          showAdvanced={showAdvanced}
+          setShowAdvanced={setShowAdvanced}
+          handleSearchSubmit={handleSearchSubmit}
+        />
+      </SecondarySearchFrame>
       <HomeListings>
         <h1 className="dark center">Newest listings in the market today</h1>
         <div className="listing-row-div">
@@ -118,9 +126,9 @@ const Home = React.memo((props) => {
         <NewsletterImage />
         <NewsletterText>
           <GuidedInvestingText>Guided Investing</GuidedInvestingText>
-          <h1 style={{ marginTop: "20px" }}>
-            Just starting out in Real Estate? Let’s plan your investment
-            together!
+          <h1>
+            Just starting out in Real Estate? <br />
+            Let’s plan your investment together!
           </h1>
           <p>
             Instahomes can provide a dedicated advisor that suggests great
@@ -166,14 +174,6 @@ const Home = React.memo((props) => {
         </ListingFormText>
         <ListProperty />
       </ListingFormFrame> */}
-      <SecondarySearchFrame>
-        <h1>Find your new dream home in just a click</h1>
-        <SearchComponent
-          showAdvanced={showAdvanced}
-          setShowAdvanced={setShowAdvanced}
-          handleSearchSubmit={handleSearchSubmit}
-        />
-      </SecondarySearchFrame>
     </Layout>
   );
 });
