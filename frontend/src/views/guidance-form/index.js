@@ -23,6 +23,7 @@ import heroBg from "../../assets/home/hero.webp";
 import { Helmet } from "react-helmet";
 import Loading from "../../components/loading";
 import { FormErrorMessage } from "../../components/elements";
+import { createGuidance } from "../../services/guidance";
 
 // Wizard is a single Formik instance whose children are each page of the
 // multi-step form. The form is submitted on each forward transition (can only
@@ -197,6 +198,39 @@ const GuidanceFormComponent = (props) => {
       <FormErrorMessage as="span">{formError}</FormErrorMessage>
     ));
 
+  const handleSubmit = async (values) => {
+    const successCallback = () => {
+      setIsLoading(false);
+    };
+
+    const errorCallback = (err) => {
+      setIsLoading(false);
+      setFormErrors(
+        [].concat(
+          ...Object.entries(err.response.data).map(
+            ([key, value]) => `${key}: ${value}`
+          )
+        )
+      );
+    };
+
+    const guidance = {
+      name: values.name,
+      property_types: values.propertyTypes,
+      budget: values.budget,
+      occupants: values.occupants,
+      preferred_type: values.purchaseType,
+      preferred_use: values.reason,
+      process_stage: values.progress,
+      has_agent: values.hasAgent,
+      additional: values.additional,
+      primary_contact: values.primary_contact,
+      secondary_contact: values.secondary_contact,
+    };
+
+    await createGuidance(guidance, successCallback, errorCallback);
+  };
+
   return (
     <React.Fragment>
       <Helmet>
@@ -219,9 +253,6 @@ const GuidanceFormComponent = (props) => {
           reason: "",
           occupants: "",
           progress: "",
-          hasAgent: false,
-          password: "",
-          confirmPassword: "",
         }}
         isLoading={isLoading}
       >
