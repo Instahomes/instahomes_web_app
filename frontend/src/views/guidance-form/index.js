@@ -16,8 +16,8 @@ import Step5 from "./steps/step5";
 import Step6 from "./steps/step6";
 import Step7 from "./steps/step7";
 import Step8 from "./steps/step8";
-// import Step9 from "./steps/step9";
-// import Step10 from "./steps/step10";
+import Step9 from "./steps/step9";
+import Step10 from "./steps/step10";
 // import Step11 from "./steps/step11";
 import heroBg from "../../assets/home/hero.webp";
 import { Helmet } from "react-helmet";
@@ -262,7 +262,7 @@ const GuidanceFormComponent = (props) => {
         }}
         isLoading={isLoading}
       >
-        <Step1 {...props} validationSchema={Yup.object({})} />
+        {/* <Step1 {...props} validationSchema={Yup.object({})} />
         <Step2
           {...props}
           validationSchema={Yup.object({
@@ -370,6 +370,15 @@ const GuidanceFormComponent = (props) => {
             },
             [["secondary_contact", "secondary_contact_type"]]
           )}
+        /> */}
+        <Step9 {...props} />
+        <Step10
+          {...props}
+          validationSchema={Yup.object({
+            additional: Yup.string().required(
+              "Please enter additional information."
+            ),
+          })}
         />
       </Wizard>
     </React.Fragment>

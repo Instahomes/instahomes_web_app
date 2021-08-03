@@ -115,6 +115,22 @@ export const GuidanceInput = styled(Input).attrs(({ type }) => ({
   }
 `;
 
+export const GuidanceTextarea = styled.textarea`
+  display: block;
+  background-color: #f3f4f4;
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
+  color: ${({ theme }) => theme.colors.darkGray};
+  border-radius: 4px;
+  font-size: 1em;
+  padding: 1em;
+  resize: none;
+  height: 100px;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.whiteInputColor};
+  }
+`;
+
 export const SubmitOrangeButton = styled(OrangeButton).attrs(
   ({ type, disabled }) => ({
     type: type || "button",
