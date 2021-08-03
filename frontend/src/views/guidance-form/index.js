@@ -15,7 +15,7 @@ import Step4 from "./steps/step4";
 import Step5 from "./steps/step5";
 import Step6 from "./steps/step6";
 import Step7 from "./steps/step7";
-// import Step8 from "./steps/step8";
+import Step8 from "./steps/step8";
 // import Step9 from "./steps/step9";
 // import Step10 from "./steps/step10";
 // import Step11 from "./steps/step11";
@@ -225,7 +225,9 @@ const GuidanceFormComponent = (props) => {
       has_agent: values.hasAgent,
       additional: values.additional,
       primary_contact: values.primary_contact,
+      primary_contact_type: values.primary_contact_type,
       secondary_contact: values.secondary_contact,
+      secondary_contact_type: values.secondary_contact_type,
     };
 
     await createGuidance(guidance, successCallback, errorCallback);
@@ -253,6 +255,10 @@ const GuidanceFormComponent = (props) => {
           reason: "",
           occupants: "",
           progress: "",
+          primary_contact: "",
+          primary_contact_type: "",
+          secondary_contact: "",
+          secondary_contact_type: "",
         }}
         isLoading={isLoading}
       >
@@ -298,10 +304,72 @@ const GuidanceFormComponent = (props) => {
         <Step7
           {...props}
           validationSchema={Yup.object({
-            budget: Yup.string().required(
-              "Please enter the number of occupants."
-            ),
+            budget: Yup.string().required("Please enter your budget range."),
           })}
+        />
+        <Step8
+          {...props}
+          validationSchema={Yup.object().shape(
+            {
+              name: Yup.string().required("Please enter your full name."),
+              primary_contact: Yup.string()
+                .required("Please enter your primary contact details.")
+                .ensure()
+                .when(
+                  "primary_contact_type",
+                  (primary_contact_type, schema) => {
+                    if (primary_contact_type == "email") {
+                      return schema
+                        .email("Please enter a valid email")
+                        .required("Please enter your primary contact");
+                    } else if (
+                      primary_contact_type == "whatsapp" ||
+                      primary_contact_type == "viber"
+                    ) {
+                      return schema
+                        .required("Please enter your primary contact")
+                        .matches(
+                          /^\+639\d{9}$/,
+                          "Please follow the correct format for your primary contact: +639171234567"
+                        );
+                    }
+                  }
+                ),
+              primary_contact_type: Yup.string().required(
+                "Please enter the primary contact type."
+              ),
+              secondary_contact: Yup.string()
+                .ensure()
+                .when(
+                  "secondary_contact_type",
+                  (secondary_contact_type, schema) => {
+                    if (secondary_contact_type == "email") {
+                      return schema
+                        .email("Please enter a valid email")
+                        .required("Please enter your secondary contact");
+                    } else if (
+                      secondary_contact_type == "whatsapp" ||
+                      secondary_contact_type == "viber"
+                    ) {
+                      return schema
+                        .required("Please enter your secondary contact")
+                        .matches(
+                          /^\+639\d{9}$/,
+                          "Please follow the correct format for your secondary contact: +639171234567"
+                        );
+                    }
+                  }
+                ),
+              secondary_contact_type: Yup.string()
+                .ensure()
+                .when("secondary_contact", (secondary_contact, schema) => {
+                  return secondary_contact
+                    ? schema.required("Please enter a contact type")
+                    : schema;
+                }),
+            },
+            [["secondary_contact", "secondary_contact_type"]]
+          )}
         />
       </Wizard>
     </React.Fragment>

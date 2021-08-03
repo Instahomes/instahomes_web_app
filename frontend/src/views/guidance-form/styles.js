@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Form } from "formik";
-import { OrangeButton, OutlineButton } from "../../components/elements";
+import { OrangeButton, OutlineButton, Input } from "../../components/elements";
 
 export const GuidanceContainer = styled.section`
   width: 100%;
@@ -100,6 +100,21 @@ export const ButtonsDiv = styled.div`
   }
 `;
 
+export const GuidanceInput = styled(Input).attrs(({ type }) => ({
+  type: type || "text",
+}))`
+  background: #f3f4f4;
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
+  border-radius: 2px;
+  font-size: 1em;
+  color: ${({ theme }) => theme.colors.darkGray};
+  flex: 1;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.whiteInputColor};
+  }
+`;
+
 export const SubmitOrangeButton = styled(OrangeButton).attrs(
   ({ type, disabled }) => ({
     type: type || "button",
@@ -128,7 +143,8 @@ export const CheckboxGroup = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 300px;
+  width: ${({ width }) => width || "300px"};
+  ${({ hasInputs }) => hasInputs && "gap: 1em;"}
   margin: auto;
   margin-top: 1em;
   margin-bottom: 2em;
@@ -137,6 +153,15 @@ export const CheckboxGroup = styled.div`
   // display: grid;
   // grid-template-columns: repeat(2, 1fr);
   // gap: 10px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    ${({ mobileWidth }) => mobileWidth && `width: ${mobileWidth};`};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    justify-content: flex-start;
+    overflow-y: scroll;
+  }
 `;
 
 export const CheckboxLabel = styled.label`

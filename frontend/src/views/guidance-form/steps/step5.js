@@ -15,8 +15,7 @@ const Step5 = ({ isSubmitting, values, previous, errors }) => {
     <React.Fragment>
       <h1 className="center">The type/s of property I want is/are...</h1>
       <p className="subheader center">
-        This will help us in facilitating the next steps to prepare for your
-        investment.
+        This will narrow down our property selections for you.
       </p>
       <FormErrorMessage component="span" name="propertyTypes" />
       <CheckboxGroup>

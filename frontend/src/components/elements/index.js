@@ -170,8 +170,9 @@ export const SearchSelect = withTheme(
     className,
     asyncLoadOptions,
     containerStyle,
+    newCustomStyles,
   }) => {
-    const customStyles = {
+    const customStyles = newCustomStyles || {
       container: (provided) => ({
         ...provided,
         ...containerStyle,

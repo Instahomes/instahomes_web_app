@@ -6,7 +6,7 @@ import {
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
-import { budgetChoices } from "../../../misc/constants";
+import { guidanceBudgetChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
@@ -15,12 +15,11 @@ const Step7 = ({ isSubmitting, values, previous, errors }) => {
     <React.Fragment>
       <h1 className="center">My Estimated Budget is...</h1>
       <p className="subheader center">
-        This will help us in facilitating the next steps to prepare for your
-        investment.
+        This will help us select properties fit for your budget.
       </p>
       <FormErrorMessage component="span" name="budget" />
       <CheckboxGroup>
-        {budgetChoices.map((choice) => (
+        {guidanceBudgetChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
               type="radio"

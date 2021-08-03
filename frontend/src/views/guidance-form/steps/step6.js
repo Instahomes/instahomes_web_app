@@ -15,8 +15,7 @@ const Step6 = ({ isSubmitting, values, previous, errors }) => {
     <React.Fragment>
       <h1 className="center">How many people will be using the house?</h1>
       <p className="subheader center">
-        This will help us in facilitating the next steps to prepare for your
-        investment.
+        This will help us select the best property size and amenities for you.
       </p>
       <FormErrorMessage component="span" name="occupants" />
       <CheckboxGroup>

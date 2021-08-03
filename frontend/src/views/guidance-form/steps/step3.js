@@ -15,8 +15,7 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
     <React.Fragment>
       <h1 className="center">I want to...</h1>
       <p className="subheader center">
-        This will help us in facilitating the next steps to prepare for your
-        investment.
+        This will help us in seeking out the best properties for you.
       </p>
       <FormErrorMessage component="span" name="purchaseType" />
       <CheckboxGroup>
