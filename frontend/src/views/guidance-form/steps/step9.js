@@ -2,17 +2,22 @@ import React from "react";
 import { ButtonsDiv, SubmitOrangeButton, SecondaryButton } from "../styles";
 import styled from "styled-components";
 
-const Header = styled.h1`
-  text-align: center;
+const Step9Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 90%;
 `;
 
 const Step9 = ({ isSubmitting, values, previous }) => {
   return (
-    <React.Fragment>
+    <Step9Container>
       <h1 className="center">
         Would you want to add more information about your dream property?
       </h1>
-      <ButtonsDiv>
+      <ButtonsDiv style={{ marginTop: "2em" }}>
         <SubmitOrangeButton type="submit" disabled={isSubmitting}>
           YES. ADD MORE
         </SubmitOrangeButton>
@@ -20,7 +25,7 @@ const Step9 = ({ isSubmitting, values, previous }) => {
           NOT REALLY
         </SecondaryButton>
       </ButtonsDiv>
-    </React.Fragment>
+    </Step9Container>
   );
 };
 export default Step9;

@@ -18,7 +18,7 @@ import Step7 from "./steps/step7";
 import Step8 from "./steps/step8";
 import Step9 from "./steps/step9";
 import Step10 from "./steps/step10";
-// import Step11 from "./steps/step11";
+import Step11 from "./steps/step11";
 import heroBg from "../../assets/home/hero.webp";
 import { Helmet } from "react-helmet";
 import Loading from "../../components/loading";
@@ -380,6 +380,7 @@ const GuidanceFormComponent = (props) => {
             ),
           })}
         />
+        <Step11 {...props} />
       </Wizard>
     </React.Fragment>
   );
