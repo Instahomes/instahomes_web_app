@@ -16,9 +16,12 @@ const Step10 = ({
   errors,
   handleChange,
   handleBlur,
+  FormLoading,
+  FormErrorsComponent,
 }) => {
   return (
-    <React.Fragment>
+    <FormLoading>
+      <FormErrorsComponent />
       <h1 className="center">Add more information about your dream property</h1>
       <p className="subheader center">
         This will take our guided investing to the next level with active search
@@ -51,7 +54,7 @@ const Step10 = ({
           GO BACK
         </SecondaryButton>
       </ButtonsDiv>
-    </React.Fragment>
+    </FormLoading>
   );
 };
 export default Step10;

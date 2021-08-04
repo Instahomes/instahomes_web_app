@@ -32,13 +32,7 @@ import { createGuidance } from "../../services/guidance";
 // transition. Each page has an optional submit handler, and the top-level
 // submit is called when the final page is submitted.
 // Retrieved from: https://github.com/formium/formik/blob/master/examples/MultistepWizard.js
-const Wizard = ({
-  children,
-  initialValues,
-  onSubmit,
-  isLoading,
-  inquiryState,
-}) => {
+const Wizard = ({ children, initialValues, onSubmit, isLoading }) => {
   const [stepNumber, setStepNumber] = useState(0);
   const steps = React.Children.toArray(children);
   const [snapshot, setSnapshot] = useState(initialValues);
@@ -47,9 +41,9 @@ const Wizard = ({
   const totalSteps = steps.length;
   const isLastStep = stepNumber === totalSteps - 1;
 
-  const next = (values) => {
+  const next = (values, nextStep = 0) => {
     setSnapshot(values);
-    setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
+    setStepNumber(Math.min(stepNumber + 1 + nextStep, totalSteps - 1));
   };
 
   const previous = (values, nextStep = null) => {
@@ -62,14 +56,15 @@ const Wizard = ({
   };
 
   const handleSubmit = async (values, bag) => {
+    let nextStep;
     if (step.props.onSubmit) {
-      await step.props.onSubmit(values, bag);
+      nextStep = await step.props.onSubmit(values, bag);
     }
     if (isLastStep) {
       return onSubmit(values, bag);
     } else {
       bag.setTouched({});
-      next(values);
+      next(values, nextStep);
     }
   };
 
@@ -176,7 +171,7 @@ const Wizard = ({
 };
 
 const GuidanceFormComponent = (props) => {
-  const [isIncludingAdditional, setIsIncludingAdditional] = useState(false);
+  const [isIncludingAdditional, setIsIncludingAdditional] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState([]);
 
@@ -185,6 +180,7 @@ const GuidanceFormComponent = (props) => {
       <Loading
         height={"600px"}
         message="Inquiry is being sent, please wait a moment."
+        color="#3F526A"
       ></Loading>
     ) : (
       children
@@ -211,6 +207,7 @@ const GuidanceFormComponent = (props) => {
       );
     };
 
+    setIsLoading(true);
     const guidance = {
       name: values.name,
       property_types: values.propertyTypes,
@@ -357,17 +354,31 @@ const GuidanceFormComponent = (props) => {
             [["secondary_contact", "secondary_contact_type"]]
           )}
         />
-        <Step9 {...props} setIsIncludingAdditional={setIsIncludingAdditional} />
-        {isIncludingAdditional && (
-          <Step10
-            {...props}
-            validationSchema={Yup.object({
-              additional: Yup.string().required(
-                "Please enter additional information."
-              ),
-            })}
-          />
-        )}
+        <Step9
+          {...props}
+          onSubmit={async (values) => {
+            if (!isIncludingAdditional) {
+              await handleSubmit(values);
+              return 1;
+            }
+          }}
+          setIsIncludingAdditional={setIsIncludingAdditional}
+          FormLoading={FormLoading}
+          FormErrorsComponent={FormErrorsComponent}
+        />
+        <Step10
+          {...props}
+          onSubmit={async (values) => {
+            await handleSubmit(values);
+          }}
+          validationSchema={Yup.object({
+            additional: Yup.string().required(
+              "Please enter additional information."
+            ),
+          })}
+          FormLoading={FormLoading}
+          FormErrorsComponent={FormErrorsComponent}
+        />
         <Step11 {...props} />
       </Wizard>
     </React.Fragment>

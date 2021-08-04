@@ -2,6 +2,7 @@ import React from "react";
 import { SecondaryButton } from "../styles";
 import formComplete from "../../../assets/form/form-complete.svg";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const Step11Container = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ const BackToHomeButton = styled(SecondaryButton)`
 `;
 
 const Step11 = ({ isSubmitting, values, previous }) => {
+  const history = useHistory();
   return (
     <Step11Container>
       <img
@@ -37,7 +39,7 @@ const Step11 = ({ isSubmitting, values, previous }) => {
         within 2-4 hours. One of our experts will help you find the best fit
         with curated selections of properties. For now, just sit back and relax.
       </p>
-      <BackToHomeButton onClick={() => previous(values)}>
+      <BackToHomeButton onClick={() => history.push("/")}>
         BACK TO HOME
       </BackToHomeButton>
     </Step11Container>
