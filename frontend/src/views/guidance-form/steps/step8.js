@@ -11,9 +11,12 @@ import { Field } from "formik";
 import styled, { withTheme } from "styled-components";
 
 const contactTypes = [
+  { value: "sms", label: "SMS" },
   { value: "whatsapp", label: "WhatsApp" },
   { value: "viber", label: "Viber" },
   { value: "email", label: "Email" },
+  { value: "telegram", label: "Telegram" },
+  { value: "messenger", label: "Messenger" },
 ];
 
 const InputFlex = styled.div`
@@ -93,17 +96,6 @@ const Step8 = withTheme(
               {errors.primary_contact_type}
             </FormErrorMessage>
           )}
-          <FormErrorMessage component="span" name="secondary_contact" />
-          {errors.secondary_contact_type && (
-            <FormErrorMessage
-              as="span"
-              component="span"
-              name="secondary_contact_type"
-            >
-              {errors.secondary_contact_type}
-            </FormErrorMessage>
-          )}
-          {console.log(errors)}
           <InputFlex>
             <SearchSelect
               fieldName="primary_contact_type"
@@ -121,6 +113,16 @@ const Step8 = withTheme(
               style={{ flex: 1 }}
             />
           </InputFlex>
+          <FormErrorMessage component="span" name="secondary_contact" />
+          {errors.secondary_contact_type && (
+            <FormErrorMessage
+              as="span"
+              component="span"
+              name="secondary_contact_type"
+            >
+              {errors.secondary_contact_type}
+            </FormErrorMessage>
+          )}
           <InputFlex>
             <SearchSelect
               fieldName="secondary_contact_type"

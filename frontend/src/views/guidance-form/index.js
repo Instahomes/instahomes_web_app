@@ -62,18 +62,14 @@ const Wizard = ({
   };
 
   const handleSubmit = async (values, bag) => {
-    // let willProceed = true;
     if (step.props.onSubmit) {
       await step.props.onSubmit(values, bag);
-      // willProceed = await step.props.onSubmit(values, bag);
     }
     if (isLastStep) {
       return onSubmit(values, bag);
     } else {
-      // if (willProceed) {
       bag.setTouched({});
       next(values);
-      // }
     }
   };
 
@@ -180,6 +176,7 @@ const Wizard = ({
 };
 
 const GuidanceFormComponent = (props) => {
+  const [isIncludingAdditional, setIsIncludingAdditional] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState([]);
 
@@ -233,6 +230,33 @@ const GuidanceFormComponent = (props) => {
     await createGuidance(guidance, successCallback, errorCallback);
   };
 
+  const contactSchema = (contact_type, schema) => {
+    if (contact_type == "email") {
+      return schema
+        .email("Please enter a valid email")
+        .required("Please enter your contact details");
+    } else if (
+      contact_type == "whatsapp" ||
+      contact_type == "viber" ||
+      contact_type == "sms" ||
+      contact_type == "telegram"
+    ) {
+      return schema
+        .required("Please enter your contact details")
+        .matches(
+          /^\+639\d{9}$/,
+          "Please follow the correct format for your contact details: +639171234567"
+        );
+    } else if (contact_type == "messenger") {
+      return schema
+        .required("Please enter your contact details")
+        .matches(
+          /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+          "Please enter the URL to your Facebook account (e.g. facebook.com/username)"
+        );
+    }
+  };
+
   return (
     <React.Fragment>
       <Helmet>
@@ -262,7 +286,7 @@ const GuidanceFormComponent = (props) => {
         }}
         isLoading={isLoading}
       >
-        {/* <Step1 {...props} validationSchema={Yup.object({})} />
+        <Step1 {...props} validationSchema={Yup.object({})} />
         <Step2
           {...props}
           validationSchema={Yup.object({
@@ -315,51 +339,13 @@ const GuidanceFormComponent = (props) => {
               primary_contact: Yup.string()
                 .required("Please enter your primary contact details.")
                 .ensure()
-                .when(
-                  "primary_contact_type",
-                  (primary_contact_type, schema) => {
-                    if (primary_contact_type == "email") {
-                      return schema
-                        .email("Please enter a valid email")
-                        .required("Please enter your primary contact");
-                    } else if (
-                      primary_contact_type == "whatsapp" ||
-                      primary_contact_type == "viber"
-                    ) {
-                      return schema
-                        .required("Please enter your primary contact")
-                        .matches(
-                          /^\+639\d{9}$/,
-                          "Please follow the correct format for your primary contact: +639171234567"
-                        );
-                    }
-                  }
-                ),
+                .when("primary_contact_type", contactSchema),
               primary_contact_type: Yup.string().required(
                 "Please enter the primary contact type."
               ),
               secondary_contact: Yup.string()
                 .ensure()
-                .when(
-                  "secondary_contact_type",
-                  (secondary_contact_type, schema) => {
-                    if (secondary_contact_type == "email") {
-                      return schema
-                        .email("Please enter a valid email")
-                        .required("Please enter your secondary contact");
-                    } else if (
-                      secondary_contact_type == "whatsapp" ||
-                      secondary_contact_type == "viber"
-                    ) {
-                      return schema
-                        .required("Please enter your secondary contact")
-                        .matches(
-                          /^\+639\d{9}$/,
-                          "Please follow the correct format for your secondary contact: +639171234567"
-                        );
-                    }
-                  }
-                ),
+                .when("secondary_contact_type", contactSchema),
               secondary_contact_type: Yup.string()
                 .ensure()
                 .when("secondary_contact", (secondary_contact, schema) => {
@@ -370,16 +356,18 @@ const GuidanceFormComponent = (props) => {
             },
             [["secondary_contact", "secondary_contact_type"]]
           )}
-        /> */}
-        <Step9 {...props} />
-        <Step10
-          {...props}
-          validationSchema={Yup.object({
-            additional: Yup.string().required(
-              "Please enter additional information."
-            ),
-          })}
         />
+        <Step9 {...props} setIsIncludingAdditional={setIsIncludingAdditional} />
+        {isIncludingAdditional && (
+          <Step10
+            {...props}
+            validationSchema={Yup.object({
+              additional: Yup.string().required(
+                "Please enter additional information."
+              ),
+            })}
+          />
+        )}
         <Step11 {...props} />
       </Wizard>
     </React.Fragment>
