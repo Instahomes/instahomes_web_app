@@ -89,7 +89,8 @@ export const OrangeButton = styled.button`
   color: ${({ theme, disabled }) =>
     disabled ? theme.colors.mutedBlue : theme.colors.softWhite};
   padding: 0.8em 1em;
-  font-size: 0.8em;
+  font-size: ${({ scale, fontSize }) =>
+    scale ? `calc(1em * ${scale})` : fontSize || "0.8em"};
 `;
 
 export const OutlineButton = styled.button`
@@ -169,8 +170,9 @@ export const SearchSelect = withTheme(
     className,
     asyncLoadOptions,
     containerStyle,
+    newCustomStyles,
   }) => {
-    const customStyles = {
+    const customStyles = newCustomStyles || {
       container: (provided) => ({
         ...provided,
         ...containerStyle,

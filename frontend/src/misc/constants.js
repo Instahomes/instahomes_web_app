@@ -135,6 +135,43 @@ export const budgetChoices = [
   },
 ];
 
+export const guidanceBudgetChoices = [
+  {
+    value: "<1",
+    label: "Less than PHP 1 Million",
+    highPrice: "1000000",
+  },
+  {
+    value: "1-5",
+    label: "PHP 1-5 Million",
+    lowPrice: "1000000",
+    highPrice: "5000000",
+  },
+  {
+    value: "5-12",
+    label: "PHP 5-12 Million",
+    lowPrice: "5000000",
+    highPrice: "12000000",
+  },
+  {
+    value: "12-25",
+    label: "PHP 12-25 Million",
+    lowPrice: "12000000",
+    highPrice: "25000000",
+  },
+  {
+    value: "25-50",
+    label: "PHP 25-50 Million",
+    lowPrice: "25000000",
+    highPrice: "50000000",
+  },
+  {
+    value: ">50",
+    label: "More than 50 Million",
+    lowPrice: "50000000",
+  },
+];
+
 export const progressChoices = [
   {
     value: "asking_around",
@@ -151,5 +188,24 @@ export const progressChoices = [
   {
     value: "other",
     label: "Other",
+  },
+];
+
+export const occupantsChoices = [
+  {
+    value: "individual",
+    label: "Individual",
+  },
+  {
+    value: "couple",
+    label: "Couple",
+  },
+  {
+    value: "smallFamily",
+    label: "Small Family",
+  },
+  {
+    value: "largeFamily",
+    label: "Large Family",
   },
 ];

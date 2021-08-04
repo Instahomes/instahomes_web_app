@@ -164,8 +164,6 @@ const DeveloperForm = (props) => {
     inquiry = location.state.inquiry;
   }
 
-  console.log(inquiry);
-
   useEffect(() => {
     if (!location.state) {
       history.push("/search");
@@ -272,7 +270,10 @@ const DeveloperForm = (props) => {
       <Helmet>
         <meta charSet="utf-8" />
         <title>Inquire | Instahomes</title>
-        <meta name="description" content=""></meta>
+        <meta
+          name="description"
+          content="Inquire about your specified listing through this form | Instahomes"
+        ></meta>
       </Helmet>
       <Wizard
         initialValues={{
@@ -405,7 +406,6 @@ const DeveloperForm = (props) => {
         <Step11
           {...props}
           onSubmit={(values) => {
-            console.log(values);
             history.push("/");
           }}
           validationSchema={Yup.object({})}

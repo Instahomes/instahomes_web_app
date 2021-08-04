@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import ListingCard from "../../components/listing-card";
-import house from "../../assets/card/sample_house.png";
 import Navbar from "../../components/navbar";
 import HomeSearch from "../../components/home-search";
 import ListProperty from "../../components/list-property-form";
@@ -12,27 +11,59 @@ import {
   NewsletterFrame,
   NewsletterImage,
   NewsletterText,
-  SignupForm,
-  SignupInput,
-  SignupButton,
   BetaSignupButton,
   ListingFormFrame,
   ListingFormText,
+  SecondarySearchFrame,
+  GuidedInvestingText,
 } from "./styles";
-import {
-  LightInput,
-  LightTextarea,
-  OrangeButton,
-} from "../../components/elements";
+import SearchComponent from "../../components/search-component";
 import heroBg from "../../assets/home/hero.webp";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { useHistory } from "react-router-dom";
+import ReactGA from "react-ga";
 
 const Home = React.memo((props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [listings, setListings] = useState([]);
   const history = useHistory();
+
+  const handleSearchSubmit = (values) => {
+    const { developer_id, ...valuesCopy } = values;
+
+    if (developer_id) {
+      valuesCopy.developer_id = developer_id.value || developer_id;
+    }
+
+    const params = Object.entries(valuesCopy)
+      .filter(([key, value]) => !!value)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
+
+    // Track search entry in GA
+    Object.entries(valuesCopy)
+      .filter(([key, value]) => !!value)
+      .forEach(([key, value]) => {
+        ReactGA.event({
+          category: "Search Home",
+          action: key,
+          label: value,
+        });
+      });
+
+    // Track search combination in GA
+    ReactGA.event({
+      category: "Search Combination",
+      action: "Searched for a combination of parameters",
+      label: params,
+    });
+
+    history.push({
+      pathname: "/search",
+      search: "?" + params,
+    });
+  };
 
   useEffect(() => {
     getListings(setListings, () => {}, "limit=5");
@@ -55,8 +86,17 @@ const Home = React.memo((props) => {
         <HomeSearch
           showAdvanced={showAdvanced}
           setShowAdvanced={setShowAdvanced}
+          handleSearchSubmit={handleSearchSubmit}
         />
       </HeroFrame>
+      <SecondarySearchFrame>
+        <h1>Find your new dream home in just a click</h1>
+        <SearchComponent
+          showAdvanced={showAdvanced}
+          setShowAdvanced={setShowAdvanced}
+          handleSearchSubmit={handleSearchSubmit}
+        />
+      </SecondarySearchFrame>
       <HomeListings>
         <h1 className="dark center">Newest listings in the market today</h1>
         <div className="listing-row-div">
@@ -82,28 +122,32 @@ const Home = React.memo((props) => {
           </ListingRow>
         </div>
       </HomeListings>
-      <NewsletterFrame>
+      <NewsletterFrame id="guided">
         <NewsletterImage />
         <NewsletterText>
-          <h1>Invest in Real Estate for your Family’s Future</h1>
+          <GuidedInvestingText>Guided Investing</GuidedInvestingText>
+          <h1>
+            Just starting out in Real Estate? <br />
+            Let’s plan your investment together!
+          </h1>
           <p>
-            Invest in real estate in the Philippines without having to worry
-            about legal concerns. We make sure you get recommended trustworthy
-            and relevant properties suited for your area, budget, and investment
-            needs through our algorithm.
+            Instahomes can provide a dedicated advisor that suggests great
+            properties based on your budget, goals, and preferences{" "}
+            <i>free of charge</i>.
           </p>
-          <BetaSignupButton onClick={() => history.push("/signup")}>
-            SIGN UP FOR BETA
+          <ul>
+            <li>Save time sifting through various properties listed online</li>
+            <li>Find listings that fit exactly what you need</li>
+            <li>
+              Get extra Real Estate tips and secrets to maximize your investment
+            </li>
+          </ul>
+          <BetaSignupButton onClick={() => history.push("/guidance")}>
+            GET FREE GUIDANCE
           </BetaSignupButton>
-          {/* <form>
-            <SignupForm>
-              <SignupInput placeholder="Email Address" />
-              <SignupButton>JOIN OUR NEWSLETTER</SignupButton>
-            </SignupForm>
-          </form> */}
         </NewsletterText>
       </NewsletterFrame>
-      <ListingFormFrame id="#developer-signup">
+      {/* <ListingFormFrame id="#developer-signup">
         <ListingFormText>
           <h1 className="dark">
             Interested in Joining Our Roster of Fast-Growing Developers?
@@ -129,7 +173,7 @@ const Home = React.memo((props) => {
           </ul>
         </ListingFormText>
         <ListProperty />
-      </ListingFormFrame>
+      </ListingFormFrame> */}
     </Layout>
   );
 });

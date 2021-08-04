@@ -10,16 +10,16 @@ const LoadingDiv = styled.div`
   height: ${({ height }) => height || "800px"};
 `;
 
-const Loading = React.memo(({ height, message }) => (
+const Loading = React.memo(({ height, message, color }) => (
   <LoadingDiv height={height}>
     <ReactLoading
       type="cylon"
-      color="#BDBDBD"
+      color={color || "#BDBDBD"}
       height={"20%"}
       width={"20%"}
       // style={{ margin: "auto" }}
     />
-    {message && <p>{message}</p>}
+    {message && <p style={{ color: color || "#BACCE2" }}>{message}</p>}
   </LoadingDiv>
 ));
 
