@@ -4,10 +4,14 @@ import { OrangeButton, OutlineButton, Input } from "../../components/elements";
 
 export const GuidanceContainer = styled.section`
   width: 100%;
-  padding: 5em var(--main-padding-x);
+  padding: 2.5vh var(--main-padding-x);
   background: url(${({ heroBg }) => heroBg});
   background-size: cover;
   box-sizing: border-box;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: 5vh var(--main-padding-x);
+  }
 `;
 
 export const GuidanceForm = styled(Form)`
@@ -87,12 +91,12 @@ export const ProgressBar = styled.div`
 `;
 
 export const ButtonsDiv = styled.div`
-  padding-top: 1.5em;
+  // padding-top: 1.5em;
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 300px;
-  margin-top: auto;
+  margin-top: 1.5em;
   ${({ hasNoProgressBar }) => !hasNoProgressBar && "margin-bottom: 2em;"}
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -177,6 +181,7 @@ export const CheckboxGroup = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     justify-content: flex-start;
     overflow-y: scroll;
+    width: 95%;
   }
 `;
 
