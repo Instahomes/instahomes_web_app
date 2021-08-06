@@ -19,10 +19,11 @@ const Step4 = ({
   setFieldValue,
   handleChange,
 }) => {
-  const isOtherSelected = !reasonChoices
-    .slice(0, reasonChoices.length - 1)
-    .map((rChoice) => rChoice.value)
-    .includes(values.reason);
+  const isOtherSelected =
+    !reasonChoices
+      .slice(0, reasonChoices.length - 1)
+      .map((rChoice) => rChoice.value)
+      .includes(values.reason) && values.reason != null;
 
   const [otherValue, setOtherValue] = useState(
     isOtherSelected ? values.reason : ""

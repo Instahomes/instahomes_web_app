@@ -19,10 +19,11 @@ const Step2 = ({
   setFieldValue,
   handleChange,
 }) => {
-  const isOtherSelected = !progressChoices
-    .slice(0, progressChoices.length - 1)
-    .map((pChoice) => pChoice.value)
-    .includes(values.progress);
+  const isOtherSelected =
+    !progressChoices
+      .slice(0, progressChoices.length - 1)
+      .map((pChoice) => pChoice.value)
+      .includes(values.progress) && values.progress != null;
 
   const [otherValue, setOtherValue] = useState(
     isOtherSelected ? values.progress : ""
