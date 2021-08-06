@@ -4,14 +4,10 @@ import { OrangeButton, OutlineButton, Input } from "../../components/elements";
 
 export const GuidanceContainer = styled.section`
   width: 100%;
-  padding: 2.5vh var(--main-padding-x);
+  padding: 5vh var(--main-padding-x);
   background: url(${({ heroBg }) => heroBg});
   background-size: cover;
   box-sizing: border-box;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 5vh var(--main-padding-x);
-  }
 `;
 
 export const GuidanceForm = styled(Form)`
@@ -22,7 +18,10 @@ export const GuidanceForm = styled(Form)`
   align-items: center;
   position: relative;
   width: 100%;
-  height: 95vh;
+  height: calc(
+    100vh - 10vh
+      ${({ hasNoBackButton }) => !hasNoBackButton && "- 0.8em - 10px"}
+  );
   background-color: ${({ theme }) => theme.colors.softWhite};
   box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.1);
   border-radius: 9px;

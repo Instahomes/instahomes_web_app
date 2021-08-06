@@ -87,7 +87,11 @@ const Wizard = ({ children, initialValues, onSubmit, isLoading }) => {
             handleChange,
           }) => (
             <>
-              <GuidanceForm>
+              <GuidanceForm
+                hasNoBackButton={
+                  stepNumber == 0 || stepNumber == totalSteps - 1
+                }
+              >
                 {React.isValidElement(step)
                   ? React.cloneElement(step, {
                       isSubmitting,
