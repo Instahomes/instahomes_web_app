@@ -116,7 +116,7 @@ export const GuidanceInput = styled(Input).attrs(({ type }) => ({
   background: #f3f4f4;
   border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
   border-radius: 2px;
-  font-size: 1em;
+  font-size: ${({ scale }) => (scale ? `calc(${scale} * 1em)` : "1em")};
   color: ${({ theme }) => theme.colors.darkGray};
   flex: 1;
 

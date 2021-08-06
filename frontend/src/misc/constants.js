@@ -66,7 +66,7 @@ export const reasonChoices = [
   },
   {
     value: "other",
-    label: "Other",
+    label: "Others: ",
   },
 ];
 
@@ -187,7 +187,7 @@ export const progressChoices = [
   },
   {
     value: "other",
-    label: "Other",
+    label: "Others:",
   },
 ];
 
