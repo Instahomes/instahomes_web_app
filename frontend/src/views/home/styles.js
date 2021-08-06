@@ -16,6 +16,18 @@ export const HeroFrame = styled.section`
   }
 `;
 
+export const FeaturedSearchBar = styled.div`
+  width: 700px;
+  margin: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: auto;
+    padding: 2em var(--main-padding-x);
+  }
+`;
+
 export const HomeListings = styled.section`
   padding: 3em 0;
 

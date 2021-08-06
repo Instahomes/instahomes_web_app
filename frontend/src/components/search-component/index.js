@@ -16,6 +16,7 @@ const SearchComponent = React.memo(
     showAdvanced,
     setShowAdvanced,
     children,
+    buttonWidth,
     ParentFrame,
   }) => {
     const roomOptions = (placeholder) => [
@@ -184,7 +185,12 @@ const SearchComponent = React.memo(
                     }),
                   }}
                 />
-                <SearchButton scale={0.9} mobileOrder={10} type="submit">
+                <SearchButton
+                  buttonWidth={buttonWidth}
+                  scale={0.9}
+                  mobileOrder={10}
+                  type="submit"
+                >
                   FIND&nbsp;MY&nbsp;HOME
                 </SearchButton>
               </SearchForm>
