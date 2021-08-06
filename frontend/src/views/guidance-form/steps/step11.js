@@ -17,6 +17,10 @@ const BackToHomeButton = styled(SecondaryButton)`
   margin-top: 2em;
   border: 1.5px solid ${({ theme }) => theme.colors.darkHeader};
   width: 300px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 170px;
+  }
 `;
 
 const Step11 = ({ isSubmitting, values, previous }) => {

@@ -8,6 +8,10 @@ export const GuidanceContainer = styled.section`
   background: url(${({ heroBg }) => heroBg});
   background-size: cover;
   box-sizing: border-box;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: 6.2vh var(--main-padding-x);
+  }
 `;
 
 export const GuidanceForm = styled(Form)`
@@ -15,6 +19,7 @@ export const GuidanceForm = styled(Form)`
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   position: relative;
   width: 100%;
@@ -38,7 +43,9 @@ export const GuidanceForm = styled(Form)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     // width: 90%;
-    height: 90vh;
+    height: calc(
+      83vh ${({ hasNoBackButton }) => hasNoBackButton && "+ 0.8em + 18px"}
+    );
     padding: 1.5em;
 
     h1 {
