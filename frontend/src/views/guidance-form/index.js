@@ -291,9 +291,9 @@ const GuidanceFormComponent = (props) => {
         <Step2
           {...props}
           validationSchema={Yup.object({
-            progress: Yup.string().required(
-              "Please input where you're at right now."
-            ),
+            progress: Yup.string()
+              .required("Please input where you're at right now.")
+              .nullable(),
           })}
         />
         <Step3
@@ -307,7 +307,9 @@ const GuidanceFormComponent = (props) => {
         <Step4
           {...props}
           validationSchema={Yup.object({
-            reason: Yup.string().required("Please enter your reason."),
+            reason: Yup.string()
+              .required("Please enter your reason.")
+              .nullable(),
           })}
         />
         <Step5
