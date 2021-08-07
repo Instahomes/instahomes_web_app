@@ -205,7 +205,7 @@ export const SecondarySearchFrame = styled.section`
   background-position: 50% 85%;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 3em var(--main-padding-x);
+  padding: 18vh var(--main-padding-x);
 
   display: flex;
   flex-direction: column;
