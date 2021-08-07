@@ -12,7 +12,9 @@ const GuidanceSteps = styled.div`
   // margin-top: 2em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    overflow-x: scroll;
+    gap: 1em;
+    flex-direction: column;
+    overflow-y: scroll;
   }
 `;
 

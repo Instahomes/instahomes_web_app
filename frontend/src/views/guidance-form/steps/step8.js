@@ -36,6 +36,7 @@ const Step8 = withTheme(
     previous,
     errors,
     handleBlur,
+    handleChange,
     setFieldValue,
   }) => {
     const customStyles = {
@@ -111,6 +112,16 @@ const Step8 = withTheme(
               placeholder="Primary Number/Email"
               name="primary_contact"
               style={{ flex: 1 }}
+              onChange={(e) => {
+                if (e.target.value.startsWith("09")) {
+                  setFieldValue(
+                    "primary_contact",
+                    "+639" + e.target.value.substring(2)
+                  );
+                } else {
+                  handleChange(e);
+                }
+              }}
             />
           </InputFlex>
           <FormErrorMessage component="span" name="secondary_contact" />
@@ -138,6 +149,16 @@ const Step8 = withTheme(
               placeholder="Secondary Number/Email"
               name="secondary_contact"
               style={{ flex: 1 }}
+              onChange={(e) => {
+                if (e.target.value.startsWith("09")) {
+                  setFieldValue(
+                    "secondary_contact",
+                    "+639" + e.target.value.substring(2)
+                  );
+                } else {
+                  handleChange(e);
+                }
+              }}
             />
           </InputFlex>
         </CheckboxGroup>

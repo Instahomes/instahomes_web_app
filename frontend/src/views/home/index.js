@@ -7,6 +7,7 @@ import ListProperty from "../../components/list-property-form";
 import {
   HeroFrame,
   HomeListings,
+  FeaturedSearchBar,
   ListingRow,
   NewsletterFrame,
   NewsletterImage,
@@ -26,6 +27,8 @@ import ReactGA from "react-ga";
 
 const Home = React.memo((props) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showAdvancedFeatured, setShowAdvancedFeatured] = useState(false);
+  const [showAdvancedSecondary, setShowAdvancedSecondary] = useState(false);
   const [listings, setListings] = useState([]);
   const history = useHistory();
 
@@ -89,16 +92,15 @@ const Home = React.memo((props) => {
           handleSearchSubmit={handleSearchSubmit}
         />
       </HeroFrame>
-      <SecondarySearchFrame>
-        <h1>Find your new dream home in just a click</h1>
-        <SearchComponent
-          showAdvanced={showAdvanced}
-          setShowAdvanced={setShowAdvanced}
-          handleSearchSubmit={handleSearchSubmit}
-        />
-      </SecondarySearchFrame>
       <HomeListings>
         <h1 className="dark center">Newest listings in the market today</h1>
+        <SearchComponent
+          showAdvanced={showAdvancedFeatured}
+          setShowAdvanced={setShowAdvancedFeatured}
+          handleSearchSubmit={handleSearchSubmit}
+          ParentFrame={FeaturedSearchBar}
+          buttonWidth={"170px"}
+        />
         <div className="listing-row-div">
           <ListingRow threeOrLess={listings.length <= 3}>
             {listings.map((listing) => (
@@ -147,6 +149,14 @@ const Home = React.memo((props) => {
           </BetaSignupButton>
         </NewsletterText>
       </NewsletterFrame>
+      <SecondarySearchFrame>
+        <h1>Find your new dream home in just a click</h1>
+        <SearchComponent
+          showAdvanced={showAdvancedSecondary}
+          setShowAdvanced={setShowAdvancedSecondary}
+          handleSearchSubmit={handleSearchSubmit}
+        />
+      </SecondarySearchFrame>
       {/* <ListingFormFrame id="#developer-signup">
         <ListingFormText>
           <h1 className="dark">

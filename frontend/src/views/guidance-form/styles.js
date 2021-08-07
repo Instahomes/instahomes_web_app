@@ -4,10 +4,14 @@ import { OrangeButton, OutlineButton, Input } from "../../components/elements";
 
 export const GuidanceContainer = styled.section`
   width: 100%;
-  padding: 5em var(--main-padding-x);
+  padding: 5vh var(--main-padding-x);
   background: url(${({ heroBg }) => heroBg});
   background-size: cover;
   box-sizing: border-box;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: 6.2vh var(--main-padding-x);
+  }
 `;
 
 export const GuidanceForm = styled(Form)`
@@ -15,10 +19,14 @@ export const GuidanceForm = styled(Form)`
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   position: relative;
   width: 100%;
-  height: 95vh;
+  height: calc(
+    100vh - 10vh
+      ${({ hasNoBackButton }) => !hasNoBackButton && "- 0.8em - 10px"}
+  );
   background-color: ${({ theme }) => theme.colors.softWhite};
   box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.1);
   border-radius: 9px;
@@ -35,7 +43,9 @@ export const GuidanceForm = styled(Form)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     // width: 90%;
-    height: 90vh;
+    height: calc(
+      83vh ${({ hasNoBackButton }) => hasNoBackButton && "+ 0.8em + 18px"}
+    );
     padding: 1.5em;
 
     h1 {
@@ -87,12 +97,12 @@ export const ProgressBar = styled.div`
 `;
 
 export const ButtonsDiv = styled.div`
-  padding-top: 1.5em;
+  // padding-top: 1.5em;
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 300px;
-  margin-top: auto;
+  margin-top: 1.5em;
   ${({ hasNoProgressBar }) => !hasNoProgressBar && "margin-bottom: 2em;"}
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -106,7 +116,7 @@ export const GuidanceInput = styled(Input).attrs(({ type }) => ({
   background: #f3f4f4;
   border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
   border-radius: 2px;
-  font-size: 1em;
+  font-size: ${({ scale }) => (scale ? `calc(${scale} * 1em)` : "1em")};
   color: ${({ theme }) => theme.colors.darkGray};
   flex: 1;
 
@@ -177,6 +187,7 @@ export const CheckboxGroup = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     justify-content: flex-start;
     overflow-y: scroll;
+    width: 95%;
   }
 `;
 

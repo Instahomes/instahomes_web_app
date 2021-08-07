@@ -87,7 +87,11 @@ const Wizard = ({ children, initialValues, onSubmit, isLoading }) => {
             handleChange,
           }) => (
             <>
-              <GuidanceForm>
+              <GuidanceForm
+                hasNoBackButton={
+                  stepNumber == 0 || stepNumber == totalSteps - 1
+                }
+              >
                 {React.isValidElement(step)
                   ? React.cloneElement(step, {
                       isSubmitting,
@@ -273,9 +277,9 @@ const GuidanceFormComponent = (props) => {
           propertyTypes: [],
           budget: "",
           purchaseType: "",
-          reason: "",
+          reason: null,
           occupants: "",
-          progress: "",
+          progress: null,
           primary_contact: "",
           primary_contact_type: "",
           secondary_contact: "",
