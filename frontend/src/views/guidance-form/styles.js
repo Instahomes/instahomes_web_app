@@ -169,7 +169,7 @@ export const CheckboxGroup = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: ${({ width }) => width || "300px"};
+  width: ${({ width }) => width || "400px"};
   ${({ hasInputs }) => hasInputs && "gap: 1em;"}
   margin: auto;
   margin-top: 1em;
