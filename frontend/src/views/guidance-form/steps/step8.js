@@ -109,7 +109,7 @@ const Step8 = withTheme(
             />
             <GuidanceInput
               as={Field}
-              placeholder="Primary Number/Email"
+              placeholder="Primary Number/Email/FB Link"
               name="primary_contact"
               style={{ flex: 1 }}
               onChange={(e) => {
@@ -146,7 +146,7 @@ const Step8 = withTheme(
             />
             <GuidanceInput
               as={Field}
-              placeholder="Secondary Number/Email"
+              placeholder="Secondary Number/Email/FB Link"
               name="secondary_contact"
               style={{ flex: 1 }}
               onChange={(e) => {
