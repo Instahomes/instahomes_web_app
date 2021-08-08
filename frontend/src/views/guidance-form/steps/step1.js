@@ -30,7 +30,7 @@ const Step = styled.div`
   }
 
   .step-image {
-    height: 12.5em;
+    height: 20vh;
     max-width: 95%;
   }
 
@@ -79,7 +79,9 @@ const Step1 = () => {
 
   return (
     <React.Fragment>
-      <h1 className="center">How we personalize investment guidance for you</h1>
+      <h1 style={{ fontSize: "1.8em" }} className="center">
+        How we personalize investment guidance for you
+      </h1>
       <p className="subheader center">
         The benefits will be reiterated in this section right here
       </p>
