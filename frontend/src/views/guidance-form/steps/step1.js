@@ -1,9 +1,9 @@
 import React from "react";
 import { ButtonsDiv, SubmitOrangeButton, SecondaryButton } from "../styles";
 import styled from "styled-components";
-import Step1Image from "../../../assets/guidance-form/step1.svg";
-import Step2Image from "../../../assets/guidance-form/step2.svg";
-import Step3Image from "../../../assets/guidance-form/step3.svg";
+import Step1Image from "../../../assets/guidance-form/step1.png";
+import Step2Image from "../../../assets/guidance-form/step2.png";
+import Step3Image from "../../../assets/guidance-form/step3.png";
 import { useHistory } from "react-router-dom";
 
 const GuidanceSteps = styled.div`
