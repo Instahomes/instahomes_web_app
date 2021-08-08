@@ -1,9 +1,9 @@
 import React from "react";
 import { ButtonsDiv, SubmitOrangeButton, SecondaryButton } from "../styles";
 import styled from "styled-components";
-import Step1Image from "../../../assets/guidance-form/step1.svg";
-import Step2Image from "../../../assets/guidance-form/step2.svg";
-import Step3Image from "../../../assets/guidance-form/step3.svg";
+import Step1Image from "../../../assets/guidance-form/step1.png";
+import Step2Image from "../../../assets/guidance-form/step2.png";
+import Step3Image from "../../../assets/guidance-form/step3.png";
 import { useHistory } from "react-router-dom";
 
 const GuidanceSteps = styled.div`
@@ -30,7 +30,7 @@ const Step = styled.div`
   }
 
   .step-image {
-    height: 12.5em;
+    height: 20vh;
     max-width: 95%;
   }
 
@@ -79,7 +79,9 @@ const Step1 = () => {
 
   return (
     <React.Fragment>
-      <h1 className="center">How we personalize investment guidance for you</h1>
+      <h1 style={{ fontSize: "1.8em" }} className="center">
+        How we personalize investment guidance for you
+      </h1>
       <p className="subheader center">
         The benefits will be reiterated in this section right here
       </p>
