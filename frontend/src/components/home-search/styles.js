@@ -7,8 +7,21 @@ export const HomeSearchContainer = styled.div`
     color: ${({ theme }) => theme.colors.darkBlue};
   }
 
-  p {
+  p,
+  li {
     color: ${({ theme }) => theme.colors.darkHeader};
+  }
+
+  ul {
+    font-size: 1em;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 8px;
+  }
+
+  li:before {
+    content: "✓";
+    padding-right: 8px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
