@@ -83,7 +83,8 @@ const Step1 = () => {
         How we personalize investment guidance for you
       </h1>
       <p className="subheader center">
-        The benefits will be reiterated in this section right here
+        Unlike brokers, Instahomes can provide a wider perspective through its
+        many partnerships.
       </p>
       <GuidanceSteps>
         {guidanceStepValues.map((step, idx) => (

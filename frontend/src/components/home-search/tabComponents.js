@@ -11,10 +11,16 @@ export const GuidedInvesting = () => {
     <React.Fragment>
       <h1>Get free curated investment picks now!</h1>
       <p>
-        Don’t know which properties to invest in? Get hands-on guidance from our
-        Real Estate advisors on what fits your budget, needs, and preferences
-        with just a quick form.
+        Don’t know which properties to invest in? Try our{" "}
+        <strong>
+          <u>Guided Investing Now</u>
+        </strong>
       </p>
+      <ul style={{ marginBottom: "1.5em" }}>
+        <li>No bias due to partnerships with all the different developers</li>
+        <li>Direct to the Developer Partners</li>
+        <li>Curated Investments that meet your budget and preferences</li>
+      </ul>
       <GuidedButtons>
         <OrangeButton scale={0.9} onClick={() => history.push("/guidance")}>
           GET FREE PERSONALIZED GUIDANCE
