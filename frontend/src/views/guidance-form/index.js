@@ -8,17 +8,17 @@ import {
 } from "./styles";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import Step1 from "./steps/step1";
-import Step2 from "./steps/step2";
-import Step3 from "./steps/step3";
-import Step4 from "./steps/step4";
-import Step5 from "./steps/step5";
-import Step6 from "./steps/step6";
-import Step7 from "./steps/step7";
-import Step8 from "./steps/step8";
-import Step9 from "./steps/step9";
-import Step10 from "./steps/step10";
-import Step11 from "./steps/step11";
+import StepIntro from "./steps/stepIntro";
+import StepProgress from "./steps/stepProgress";
+import StepPurchaseType from "./steps/stepPurchaseType";
+import StepReason from "./steps/stepReason";
+import StepPropertyType from "./steps/stepPropertyType";
+import StepOccupants from "./steps/stepOccupants";
+import StepBudget from "./steps/stepBudget";
+import StepContact from "./steps/stepContact";
+import StepAdditionalQuestion from "./steps/stepAdditionalQuestion";
+import StepAdditional from "./steps/stepAdditional";
+import StepFinal from "./steps/stepFinal";
 import heroBg from "../../assets/home/hero.webp";
 import { Helmet } from "react-helmet";
 import Loading from "../../components/loading";
@@ -287,8 +287,8 @@ const GuidanceFormComponent = (props) => {
         }}
         isLoading={isLoading}
       >
-        <Step1 {...props} validationSchema={Yup.object({})} />
-        <Step2
+        <StepIntro {...props} validationSchema={Yup.object({})} />
+        <StepProgress
           {...props}
           validationSchema={Yup.object({
             progress: Yup.string()
@@ -296,7 +296,7 @@ const GuidanceFormComponent = (props) => {
               .nullable(),
           })}
         />
-        <Step3
+        <StepPurchaseType
           {...props}
           validationSchema={Yup.object({
             purchaseType: Yup.string().required(
@@ -304,7 +304,7 @@ const GuidanceFormComponent = (props) => {
             ),
           })}
         />
-        <Step4
+        <StepReason
           {...props}
           validationSchema={Yup.object({
             reason: Yup.string()
@@ -312,7 +312,7 @@ const GuidanceFormComponent = (props) => {
               .nullable(),
           })}
         />
-        <Step5
+        <StepPropertyType
           {...props}
           validationSchema={Yup.object({
             propertyTypes: Yup.array()
@@ -320,7 +320,7 @@ const GuidanceFormComponent = (props) => {
               .required("Please choose your preferred type/s."),
           })}
         />
-        <Step6
+        <StepOccupants
           {...props}
           validationSchema={Yup.object({
             occupants: Yup.string().required(
@@ -328,13 +328,13 @@ const GuidanceFormComponent = (props) => {
             ),
           })}
         />
-        <Step7
+        <StepBudget
           {...props}
           validationSchema={Yup.object({
             budget: Yup.string().required("Please enter your budget range."),
           })}
         />
-        <Step8
+        <StepContact
           {...props}
           validationSchema={Yup.object().shape(
             {
@@ -360,7 +360,7 @@ const GuidanceFormComponent = (props) => {
             [["secondary_contact", "secondary_contact_type"]]
           )}
         />
-        <Step9
+        <StepAdditionalQuestion
           {...props}
           onSubmit={async (values) => {
             if (!isIncludingAdditional) {
@@ -372,7 +372,7 @@ const GuidanceFormComponent = (props) => {
           FormLoading={FormLoading}
           FormErrorsComponent={FormErrorsComponent}
         />
-        <Step10
+        <StepAdditional
           {...props}
           onSubmit={async (values) => {
             await handleSubmit(values);
@@ -385,7 +385,7 @@ const GuidanceFormComponent = (props) => {
           FormLoading={FormLoading}
           FormErrorsComponent={FormErrorsComponent}
         />
-        <Step11 {...props} />
+        <StepFinal {...props} />
       </Wizard>
     </React.Fragment>
   );

@@ -28,7 +28,7 @@ const InputFlex = styled.div`
   }
 `;
 
-const Step8 = withTheme(
+const StepContact = withTheme(
   ({
     theme,
     isSubmitting,
@@ -201,4 +201,4 @@ const Step8 = withTheme(
   }
 );
 
-export default Step8;
+export default StepContact;

@@ -9,7 +9,7 @@ import {
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step10 = ({
+const StepAdditional = ({
   isSubmitting,
   values,
   previous,
@@ -57,4 +57,4 @@ const Step10 = ({
     </FormLoading>
   );
 };
-export default Step10;
+export default StepAdditional;

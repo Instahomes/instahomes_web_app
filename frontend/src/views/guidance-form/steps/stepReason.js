@@ -7,11 +7,11 @@ import {
   CheckboxLabel,
   GuidanceInput,
 } from "../styles";
-import { progressGuidanceChoices } from "../../../misc/constants";
-import { Field } from "formik";
+import { reasonGuidanceChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
+import { Field } from "formik";
 
-const Step2 = ({
+const StepReason = ({
   isSubmitting,
   values,
   previous,
@@ -20,55 +20,54 @@ const Step2 = ({
   handleChange,
 }) => {
   const isOtherSelected =
-    !progressGuidanceChoices
-      .slice(0, progressGuidanceChoices.length - 1)
-      .map((pChoice) => pChoice.value)
-      .includes(values.progress) && values.progress != null;
+    !reasonGuidanceChoices
+      .slice(0, reasonGuidanceChoices.length - 1)
+      .map((rChoice) => rChoice.value)
+      .includes(values.reason) && values.reason != null;
 
   const [otherValue, setOtherValue] = useState(
-    isOtherSelected ? values.progress : ""
+    isOtherSelected ? values.reason : ""
   );
 
   return (
     <React.Fragment>
-      <h1 className="center">Where in the process are you?</h1>
+      <h1 className="center">What do you want to use the property for?</h1>
       <p className="subheader center">
-        This will help us in facilitating the next steps to prepare for your
-        investment.
+        This will allow us to detail a game plan for your investment strategy.
       </p>
-      <FormErrorMessage component="span" name="progress" />
+      <FormErrorMessage component="span" name="reason" />
       <CheckboxGroup>
-        {progressGuidanceChoices.map((choice) => (
+        {reasonGuidanceChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
               type="radio"
-              name="progress"
+              name="reason"
               value={choice.value}
               checked={
                 choice ==
-                progressGuidanceChoices[progressGuidanceChoices.length - 1]
+                reasonGuidanceChoices[reasonGuidanceChoices.length - 1]
                   ? isOtherSelected
-                  : choice.value == values.progress
+                  : choice.value == values.reason
               }
               onChange={(e) => {
                 choice ==
-                progressGuidanceChoices[progressGuidanceChoices.length - 1]
-                  ? setFieldValue("progress", otherValue)
+                reasonGuidanceChoices[reasonGuidanceChoices.length - 1]
+                  ? setFieldValue("reason", otherValue)
                   : handleChange(e);
               }}
             />
             <span>
               {choice.label}&nbsp;&nbsp;
               {choice ==
-                progressGuidanceChoices[progressGuidanceChoices.length - 1] &&
+                reasonGuidanceChoices[reasonGuidanceChoices.length - 1] &&
                 (isOtherSelected ? (
                   <GuidanceInput
-                    placeholder="Your stage"
-                    name="progress"
+                    placeholder="Your reason"
+                    name="reason"
                     scale={0.8}
                     value={otherValue}
                     onChange={(e) => {
-                      setFieldValue("progress", e.target.value);
+                      setFieldValue("reason", e.target.value);
                       setOtherValue(e.target.value);
                     }}
                   />
@@ -82,7 +81,7 @@ const Step2 = ({
       <ButtonsDiv>
         <SubmitOrangeButton
           type="submit"
-          disabled={isSubmitting || values.progress == "" || errors.progress}
+          disabled={isSubmitting || values.reason == "" || errors.reason}
         >
           NEXT QUESTION
         </SubmitOrangeButton>
@@ -94,4 +93,4 @@ const Step2 = ({
   );
 };
 
-export default Step2;
+export default StepReason;

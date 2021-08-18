@@ -23,7 +23,7 @@ const BackToHomeButton = styled(SecondaryButton)`
   }
 `;
 
-const Step11 = ({ isSubmitting, values, previous }) => {
+const StepFinal = ({ isSubmitting, values, previous }) => {
   const history = useHistory();
   return (
     <Step11Container>
@@ -49,4 +49,4 @@ const Step11 = ({ isSubmitting, values, previous }) => {
     </Step11Container>
   );
 };
-export default Step11;
+export default StepFinal;

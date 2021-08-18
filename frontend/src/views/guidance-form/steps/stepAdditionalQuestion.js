@@ -18,7 +18,7 @@ const NotReallyButton = styled(SecondaryButton)`
   color: ${({ theme }) => theme.colors.darkHeader};
 `;
 
-const Step9 = ({
+const StepAdditionalQuestion = ({
   isSubmitting,
   values,
   setIsIncludingAdditional,
@@ -61,4 +61,4 @@ const Step9 = ({
     </FormLoading>
   );
 };
-export default Step9;
+export default StepAdditionalQuestion;

@@ -6,26 +6,26 @@ import {
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
-import { guidanceBudgetChoices } from "../../../misc/constants";
+import { propertyGuidanceChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step7 = ({ isSubmitting, values, previous, errors }) => {
+const StepPropertyType = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
-      <h1 className="center">My Estimated Budget is...</h1>
+      <h1 className="center">The type/s of property I want is/are...</h1>
       <p className="subheader center">
-        This will help us select properties fit for your budget.
+        This will narrow down our suggested options. Select as many as you like.
       </p>
-      <FormErrorMessage component="span" name="budget" />
+      <FormErrorMessage component="span" name="propertyTypes" />
       <CheckboxGroup>
-        {guidanceBudgetChoices.map((choice) => (
+        {propertyGuidanceChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
-              type="radio"
-              name="budget"
+              type="checkbox"
+              name="propertyTypes"
               value={choice.value}
-              checked={choice.value == values.budget}
+              checked={values.propertyTypes.includes(choice.value)}
             />
             <span>{choice.label}</span>
           </CheckboxLabel>
@@ -34,7 +34,9 @@ const Step7 = ({ isSubmitting, values, previous, errors }) => {
       <ButtonsDiv>
         <SubmitOrangeButton
           type="submit"
-          disabled={isSubmitting || values.budget == "" || errors.budget}
+          disabled={
+            isSubmitting || !values.propertyTypes.length || errors.propertyTypes
+          }
         >
           NEXT QUESTION
         </SubmitOrangeButton>
@@ -46,4 +48,4 @@ const Step7 = ({ isSubmitting, values, previous, errors }) => {
   );
 };
 
-export default Step7;
+export default StepPropertyType;

@@ -6,26 +6,26 @@ import {
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
-import { propertyGuidanceChoices } from "../../../misc/constants";
+import { occupantsChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step5 = ({ isSubmitting, values, previous, errors }) => {
+const StepOccupants = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
-      <h1 className="center">The type/s of property I want is/are...</h1>
+      <h1 className="center">How many people will be using the house?</h1>
       <p className="subheader center">
-        This will narrow down our suggested options. Select as many as you like.
+        This will help us select the best property size and amenities for you.
       </p>
-      <FormErrorMessage component="span" name="propertyTypes" />
+      <FormErrorMessage component="span" name="occupants" />
       <CheckboxGroup>
-        {propertyGuidanceChoices.map((choice) => (
+        {occupantsChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
-              type="checkbox"
-              name="propertyTypes"
+              type="radio"
+              name="occupants"
               value={choice.value}
-              checked={values.propertyTypes.includes(choice.value)}
+              checked={choice.value == values.occupants}
             />
             <span>{choice.label}</span>
           </CheckboxLabel>
@@ -34,9 +34,7 @@ const Step5 = ({ isSubmitting, values, previous, errors }) => {
       <ButtonsDiv>
         <SubmitOrangeButton
           type="submit"
-          disabled={
-            isSubmitting || !values.propertyTypes.length || errors.propertyTypes
-          }
+          disabled={isSubmitting || values.occupants == "" || errors.occupants}
         >
           NEXT QUESTION
         </SubmitOrangeButton>
@@ -48,4 +46,4 @@ const Step5 = ({ isSubmitting, values, previous, errors }) => {
   );
 };
 
-export default Step5;
+export default StepOccupants;
