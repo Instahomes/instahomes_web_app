@@ -17,6 +17,7 @@ import StepOccupants from "./steps/stepOccupants";
 import StepBudget from "./steps/stepBudget";
 import StepLocation from "./steps/stepLocation";
 import StepContact from "./steps/stepContact";
+import StepDevelopers from "./steps/stepDevelopers";
 import StepAdditionalQuestion from "./steps/stepAdditionalQuestion";
 import StepAdditional from "./steps/stepAdditional";
 import StepFinal from "./steps/stepFinal";
@@ -227,6 +228,8 @@ const GuidanceFormComponent = (props) => {
       secondary_contact: values.secondary_contact,
       secondary_contact_type: values.secondary_contact_type,
       location: values.location,
+      developers: values.developers,
+      developments: values.developments,
     };
 
     await createGuidance(guidance, successCallback, errorCallback);
@@ -287,10 +290,12 @@ const GuidanceFormComponent = (props) => {
           secondary_contact_type: "",
           additional: "",
           location: "",
+          developers: [],
+          developments: [],
         }}
         isLoading={isLoading}
       >
-        <StepIntro {...props} validationSchema={Yup.object({})} />
+        {/* <StepIntro {...props} validationSchema={Yup.object({})} />
         <StepProgress
           {...props}
           validationSchema={Yup.object({
@@ -380,6 +385,17 @@ const GuidanceFormComponent = (props) => {
           setIsIncludingAdditional={setIsIncludingAdditional}
           FormLoading={FormLoading}
           FormErrorsComponent={FormErrorsComponent}
+        /> */}
+        <StepDevelopers
+          {...props}
+          validationSchema={Yup.object({
+            developers: Yup.array().of(
+              Yup.object({ value: Yup.string(), label: Yup.string() })
+            ),
+            developments: Yup.array().of(
+              Yup.object({ value: Yup.string(), label: Yup.string() })
+            ),
+          })}
         />
         <StepAdditional
           {...props}
