@@ -40,8 +40,8 @@ const Step11 = ({ isSubmitting, values, previous }) => {
         <b>{`${values.primary_contact} (${values.primary_contact_type})`}</b>{" "}
         {values.secondary_contact &&
           `or ${values.secondary_contact} (${values.secondary_contact_type})`}{" "}
-        within 2-4 hours. One of our experts will help you find the best fit
-        with curated selections of properties. For now, just sit back and relax.
+        within 24 hours. One of our experts will help you find the best fit with
+        curated selections of properties. For now, just sit back and relax.
       </p>
       <BackToHomeButton onClick={() => history.push("/")}>
         BACK TO HOME

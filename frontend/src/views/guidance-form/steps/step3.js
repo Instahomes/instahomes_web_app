@@ -6,7 +6,7 @@ import {
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
-import { purchaseTypeChoices } from "../../../misc/constants";
+import { purchaseTypeGuidanceChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
@@ -19,7 +19,7 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
       </p>
       <FormErrorMessage component="span" name="purchaseType" />
       <CheckboxGroup>
-        {purchaseTypeChoices.map((choice) => (
+        {purchaseTypeGuidanceChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
               type="radio"

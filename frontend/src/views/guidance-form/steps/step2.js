@@ -7,7 +7,7 @@ import {
   CheckboxLabel,
   GuidanceInput,
 } from "../styles";
-import { progressChoices } from "../../../misc/constants";
+import { progressGuidanceChoices } from "../../../misc/constants";
 import { Field } from "formik";
 import { FormErrorMessage } from "../../../components/elements";
 
@@ -20,8 +20,8 @@ const Step2 = ({
   handleChange,
 }) => {
   const isOtherSelected =
-    !progressChoices
-      .slice(0, progressChoices.length - 1)
+    !progressGuidanceChoices
+      .slice(0, progressGuidanceChoices.length - 1)
       .map((pChoice) => pChoice.value)
       .includes(values.progress) && values.progress != null;
 
@@ -38,26 +38,29 @@ const Step2 = ({
       </p>
       <FormErrorMessage component="span" name="progress" />
       <CheckboxGroup>
-        {progressChoices.map((choice) => (
+        {progressGuidanceChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
               type="radio"
               name="progress"
               value={choice.value}
               checked={
-                choice == progressChoices[progressChoices.length - 1]
+                choice ==
+                progressGuidanceChoices[progressGuidanceChoices.length - 1]
                   ? isOtherSelected
                   : choice.value == values.progress
               }
               onChange={(e) => {
-                choice == progressChoices[progressChoices.length - 1]
+                choice ==
+                progressGuidanceChoices[progressGuidanceChoices.length - 1]
                   ? setFieldValue("progress", otherValue)
                   : handleChange(e);
               }}
             />
             <span>
               {choice.label}&nbsp;&nbsp;
-              {choice == progressChoices[progressChoices.length - 1] &&
+              {choice ==
+                progressGuidanceChoices[progressGuidanceChoices.length - 1] &&
                 (isOtherSelected ? (
                   <GuidanceInput
                     placeholder="Your stage"

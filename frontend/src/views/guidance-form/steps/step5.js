@@ -6,7 +6,7 @@ import {
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
-import { propertyChoices } from "../../../misc/constants";
+import { propertyGuidanceChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
@@ -15,11 +15,11 @@ const Step5 = ({ isSubmitting, values, previous, errors }) => {
     <React.Fragment>
       <h1 className="center">The type/s of property I want is/are...</h1>
       <p className="subheader center">
-        This will narrow down our property selections for you.
+        This will narrow down our suggested options. Select as many as you like.
       </p>
       <FormErrorMessage component="span" name="propertyTypes" />
       <CheckboxGroup>
-        {propertyChoices.map((choice) => (
+        {propertyGuidanceChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
               type="checkbox"

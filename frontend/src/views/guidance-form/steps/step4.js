@@ -7,7 +7,7 @@ import {
   CheckboxLabel,
   GuidanceInput,
 } from "../styles";
-import { reasonChoices } from "../../../misc/constants";
+import { reasonGuidanceChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
@@ -20,8 +20,8 @@ const Step4 = ({
   handleChange,
 }) => {
   const isOtherSelected =
-    !reasonChoices
-      .slice(0, reasonChoices.length - 1)
+    !reasonGuidanceChoices
+      .slice(0, reasonGuidanceChoices.length - 1)
       .map((rChoice) => rChoice.value)
       .includes(values.reason) && values.reason != null;
 
@@ -37,26 +37,29 @@ const Step4 = ({
       </p>
       <FormErrorMessage component="span" name="reason" />
       <CheckboxGroup>
-        {reasonChoices.map((choice) => (
+        {reasonGuidanceChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
               type="radio"
               name="reason"
               value={choice.value}
               checked={
-                choice == reasonChoices[reasonChoices.length - 1]
+                choice ==
+                reasonGuidanceChoices[reasonGuidanceChoices.length - 1]
                   ? isOtherSelected
                   : choice.value == values.reason
               }
               onChange={(e) => {
-                choice == reasonChoices[reasonChoices.length - 1]
+                choice ==
+                reasonGuidanceChoices[reasonGuidanceChoices.length - 1]
                   ? setFieldValue("reason", otherValue)
                   : handleChange(e);
               }}
             />
             <span>
               {choice.label}&nbsp;&nbsp;
-              {choice == reasonChoices[reasonChoices.length - 1] &&
+              {choice ==
+                reasonGuidanceChoices[reasonGuidanceChoices.length - 1] &&
                 (isOtherSelected ? (
                   <GuidanceInput
                     placeholder="Your reason"

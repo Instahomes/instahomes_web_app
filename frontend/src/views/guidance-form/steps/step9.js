@@ -42,7 +42,7 @@ const Step9 = ({
               submitForm();
             }}
           >
-            YES. ADD MORE
+            YES, ADD MORE INFO
           </SubmitOrangeButton>
           <NotReallyButton
             disabled={isSubmitting}
@@ -51,7 +51,7 @@ const Step9 = ({
               submitForm();
             }}
           >
-            NOT REALLY, SUBMIT
+            EVERYTHING LOOKS GOOD, SUBMIT
           </NotReallyButton>
           <SecondaryButton onClick={() => previous(values)}>
             GO BACK
