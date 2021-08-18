@@ -11,12 +11,12 @@ import { Field } from "formik";
 import styled, { withTheme } from "styled-components";
 
 const contactTypes = [
-  { value: "sms", label: "SMS" },
-  { value: "whatsapp", label: "WhatsApp" },
-  { value: "viber", label: "Viber" },
-  { value: "email", label: "Email" },
-  { value: "telegram", label: "Telegram" },
-  { value: "messenger", label: "Messenger" },
+  { value: "sms", label: "SMS", placeholder: "Number" },
+  { value: "whatsapp", label: "WhatsApp", placeholder: "WhatsApp Number" },
+  { value: "viber", label: "Viber", placeholder: "Viber Number" },
+  { value: "email", label: "Email", placeholder: "Email" },
+  { value: "telegram", label: "Telegram", placeholder: "Telegram Number" },
+  { value: "messenger", label: "Messenger", placeholder: "Facebook Link" },
 ];
 
 const InputFlex = styled.div`
@@ -78,13 +78,16 @@ const Step8 = withTheme(
       indicatorSeparator: () => {},
     };
 
+    const selectedContact = (contactType) =>
+      contactTypes.find((contact) => contact.value == contactType);
+
     return (
       <React.Fragment>
         <h1 className="center">Contact Information</h1>
         <p className="subheader center">
           We will connect with you through the information you provide below.
         </p>
-        <CheckboxGroup hasInputs width="500px" mobileWidth="90%">
+        <CheckboxGroup overflow hasInputs width="500px" mobileWidth="90%">
           <FormErrorMessage component="span" name="name" />
           <GuidanceInput as={Field} placeholder="Full Name" name="name" />
           <FormErrorMessage component="span" name="primary_contact" />
@@ -109,7 +112,12 @@ const Step8 = withTheme(
             />
             <GuidanceInput
               as={Field}
-              placeholder="Primary Number/Email/FB Link"
+              placeholder={
+                selectedContact(values.primary_contact_type)
+                  ? "Primary " +
+                    selectedContact(values.primary_contact_type).placeholder
+                  : "Primary Details"
+              }
               name="primary_contact"
               style={{ flex: 1 }}
               onChange={(e) => {
@@ -146,7 +154,12 @@ const Step8 = withTheme(
             />
             <GuidanceInput
               as={Field}
-              placeholder="Secondary Number/Email/FB Link"
+              placeholder={
+                selectedContact(values.secondary_contact_type)
+                  ? "Secondary " +
+                    selectedContact(values.secondary_contact_type).placeholder
+                  : "Secondary Details"
+              }
               name="secondary_contact"
               style={{ flex: 1 }}
               onChange={(e) => {

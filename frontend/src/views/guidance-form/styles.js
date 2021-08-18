@@ -175,12 +175,13 @@ export const CheckboxGroup = styled.div`
   margin-top: 2em;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: ${({ overflow }) => !overflow && "center"};
   width: ${({ width }) => width || "400px"};
   ${({ hasInputs }) => hasInputs && "gap: 1em;"}
   margin: auto;
   margin-top: 1em;
   margin-bottom: 2em;
+  overflow-y: ${({ overflow }) => overflow && "scroll"};
 
   // text-align: center;
   // display: grid;
