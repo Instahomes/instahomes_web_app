@@ -15,6 +15,7 @@ import StepReason from "./steps/stepReason";
 import StepPropertyType from "./steps/stepPropertyType";
 import StepOccupants from "./steps/stepOccupants";
 import StepBudget from "./steps/stepBudget";
+import StepLocation from "./steps/stepLocation";
 import StepContact from "./steps/stepContact";
 import StepAdditionalQuestion from "./steps/stepAdditionalQuestion";
 import StepAdditional from "./steps/stepAdditional";
@@ -220,12 +221,12 @@ const GuidanceFormComponent = (props) => {
       preferred_type: values.purchaseType,
       preferred_use: values.reason,
       process_stage: values.progress,
-      has_agent: values.hasAgent,
       additional: values.additional,
       primary_contact: values.primary_contact,
       primary_contact_type: values.primary_contact_type,
       secondary_contact: values.secondary_contact,
       secondary_contact_type: values.secondary_contact_type,
+      location: values.location,
     };
 
     await createGuidance(guidance, successCallback, errorCallback);
@@ -284,6 +285,8 @@ const GuidanceFormComponent = (props) => {
           primary_contact_type: "",
           secondary_contact: "",
           secondary_contact_type: "",
+          additional: "",
+          location: "",
         }}
         isLoading={isLoading}
       >
@@ -332,6 +335,12 @@ const GuidanceFormComponent = (props) => {
           {...props}
           validationSchema={Yup.object({
             budget: Yup.string().required("Please enter your budget range."),
+          })}
+        />
+        <StepLocation
+          {...props}
+          validationSchema={Yup.object({
+            location: Yup.string().required("Please enter your location/s."),
           })}
         />
         <StepContact
