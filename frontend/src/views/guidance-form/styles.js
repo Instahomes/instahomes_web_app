@@ -14,6 +14,8 @@ export const GuidanceContainer = styled.section`
   }
 `;
 
+const breakpointHeight = "610px";
+
 export const GuidanceForm = styled(Form)`
   box-sizing: border-box;
 
@@ -55,6 +57,11 @@ export const GuidanceForm = styled(Form)`
     .subheader {
       font-size: 1em;
     }
+  }
+
+  @media (max-height: ${breakpointHeight}) and (min-width: ${({ theme }) =>
+      theme.breakpoints.lg}) {
+    font-size: 0.8em;
   }
 `;
 
