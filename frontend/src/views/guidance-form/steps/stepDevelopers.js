@@ -46,8 +46,6 @@ const StepDevelopers = ({
     );
   };
 
-  console.log(values.developments);
-
   return (
     <React.Fragment>
       <h1 className="center">

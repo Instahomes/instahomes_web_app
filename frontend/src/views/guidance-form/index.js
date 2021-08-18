@@ -228,8 +228,8 @@ const GuidanceFormComponent = (props) => {
       secondary_contact: values.secondary_contact,
       secondary_contact_type: values.secondary_contact_type,
       location: values.location,
-      developers: values.developers,
-      developments: values.developments,
+      developers: values.developers.map((option) => option.label),
+      developments: values.developments.map((option) => option.label),
     };
 
     await createGuidance(guidance, successCallback, errorCallback);
@@ -295,7 +295,7 @@ const GuidanceFormComponent = (props) => {
         }}
         isLoading={isLoading}
       >
-        {/* <StepIntro {...props} validationSchema={Yup.object({})} />
+        <StepIntro {...props} validationSchema={Yup.object({})} />
         <StepProgress
           {...props}
           validationSchema={Yup.object({
@@ -379,13 +379,13 @@ const GuidanceFormComponent = (props) => {
           onSubmit={async (values) => {
             if (!isIncludingAdditional) {
               await handleSubmit(values);
-              return 1;
+              return 2;
             }
           }}
           setIsIncludingAdditional={setIsIncludingAdditional}
           FormLoading={FormLoading}
           FormErrorsComponent={FormErrorsComponent}
-        /> */}
+        />
         <StepDevelopers
           {...props}
           validationSchema={Yup.object({
