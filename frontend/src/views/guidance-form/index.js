@@ -26,6 +26,7 @@ import { Helmet } from "react-helmet";
 import Loading from "../../components/loading";
 import { FormErrorMessage } from "../../components/elements";
 import { createGuidance } from "../../services/guidance";
+import { getProfile } from "../../services/auth";
 
 // Wizard is a single Formik instance whose children are each page of the
 // multi-step form. The form is submitted on each forward transition (can only
@@ -180,6 +181,7 @@ const GuidanceFormComponent = (props) => {
   const [isIncludingAdditional, setIsIncludingAdditional] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState([]);
+  const profile = getProfile();
 
   const FormLoading = ({ children }) =>
     isLoading ? (
@@ -274,8 +276,7 @@ const GuidanceFormComponent = (props) => {
       </Helmet>
       <Wizard
         initialValues={{
-          name: "",
-          contactNumber: "",
+          name: profile ? profile.name : "",
           email: "",
           address: "",
           propertyTypes: [],
@@ -284,8 +285,8 @@ const GuidanceFormComponent = (props) => {
           reason: null,
           occupants: "",
           progress: null,
-          primary_contact: "",
-          primary_contact_type: "",
+          primary_contact: profile ? profile.contactNumber : "",
+          primary_contact_type: profile ? "sms" : "",
           secondary_contact: "",
           secondary_contact_type: "",
           additional: "",

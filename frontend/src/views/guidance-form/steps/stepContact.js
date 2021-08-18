@@ -7,7 +7,6 @@ import {
   GuidanceInput,
 } from "../styles";
 import { FormErrorMessage, SearchSelect } from "../../../components/elements";
-import { getProfile } from "../../../services/auth";
 import { Field } from "formik";
 import styled, { withTheme } from "styled-components";
 
@@ -40,9 +39,6 @@ const StepContact = withTheme(
     handleChange,
     setFieldValue,
   }) => {
-    const profile = getProfile();
-
-    console.log(profile);
     const customStyles = {
       container: (provided) => ({
         ...provided,
