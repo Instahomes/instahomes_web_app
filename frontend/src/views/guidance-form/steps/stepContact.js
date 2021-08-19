@@ -53,6 +53,7 @@ const StepContact = withTheme(
         fontSize: "1em",
         height: "100%",
       }),
+      menu: (provided) => ({ ...provided, zIndex: 999 }),
       valueContainer: (provided) => ({
         ...provided,
         padding: "0.8em 2em",
@@ -87,11 +88,22 @@ const StepContact = withTheme(
         <p className="subheader center">
           We will connect with you through the information you provide below.
         </p>
-        <CheckboxGroup overflow hasInputs width="500px" mobileWidth="90%">
-          <FormErrorMessage component="span" name="name" />
+        <CheckboxGroup hasInputs width="500px" mobileWidth="90%">
+          {/* <FormErrorMessage component="span" name="name" /> */}
           <GuidanceInput as={Field} placeholder="Full Name" name="name" />
-          <FormErrorMessage component="span" name="primary_contact" />
-          {errors.primary_contact_type && (
+          {/* <FormErrorMessage component="span" name="primary_contact" /> */}
+          {(errors.primary_contact || errors.secondary_contact) && (
+            <FormErrorMessage as="span" component="span" name="primary_contact">
+              {`${errors.primary_contact} ${
+                errors.primary_contact && "(primary)"
+              }`}
+              <br />
+              {`${errors.secondary_contact} ${
+                errors.secondary_contact && "(secondary)"
+              }`}
+            </FormErrorMessage>
+          )}
+          {/* {errors.primary_contact_type && (
             <FormErrorMessage
               as="span"
               component="span"
@@ -99,7 +111,7 @@ const StepContact = withTheme(
             >
               {errors.primary_contact_type}
             </FormErrorMessage>
-          )}
+          )} */}
           <InputFlex>
             <SearchSelect
               fieldName="primary_contact_type"
@@ -132,8 +144,8 @@ const StepContact = withTheme(
               }}
             />
           </InputFlex>
-          <FormErrorMessage component="span" name="secondary_contact" />
-          {errors.secondary_contact_type && (
+          {/* <FormErrorMessage component="span" name="secondary_contact" /> */}
+          {/* {errors.secondary_contact_type && (
             <FormErrorMessage
               as="span"
               component="span"
@@ -141,7 +153,7 @@ const StepContact = withTheme(
             >
               {errors.secondary_contact_type}
             </FormErrorMessage>
-          )}
+          )} */}
           <InputFlex>
             <SearchSelect
               fieldName="secondary_contact_type"
@@ -175,7 +187,7 @@ const StepContact = withTheme(
             />
           </InputFlex>
         </CheckboxGroup>
-        <ButtonsDiv>
+        <ButtonsDiv style={{ marginTop: "0" }}>
           <SubmitOrangeButton
             type="submit"
             disabled={

@@ -252,7 +252,7 @@ const GuidanceFormComponent = (props) => {
         .required("Please enter your contact details")
         .matches(
           /^\+639\d{9}$/,
-          "Please follow the correct format for your contact details: +639171234567"
+          "Please follow the correct format: +639171234567"
         );
     } else if (contact_type == "messenger") {
       return schema
