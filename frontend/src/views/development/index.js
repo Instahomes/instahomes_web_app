@@ -29,6 +29,7 @@ const Development = React.memo((props) => {
   useEffect(() => {
     getDevelopments(
       (data) => (data.length > 0 ? setDevelopment(data[0]) : setIsEmpty(true)),
+      () => setIsEmpty(true),
       `id=${match.params.id}`
     );
   }, []);

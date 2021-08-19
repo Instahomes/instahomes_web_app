@@ -10,7 +10,7 @@ import { occupantsChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step6 = ({ isSubmitting, values, previous, errors }) => {
+const StepOccupants = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
       <h1 className="center">How many people will be using the house?</h1>
@@ -46,4 +46,4 @@ const Step6 = ({ isSubmitting, values, previous, errors }) => {
   );
 };
 
-export default Step6;
+export default StepOccupants;

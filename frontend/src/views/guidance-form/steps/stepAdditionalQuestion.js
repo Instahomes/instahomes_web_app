@@ -18,7 +18,7 @@ const NotReallyButton = styled(SecondaryButton)`
   color: ${({ theme }) => theme.colors.darkHeader};
 `;
 
-const Step9 = ({
+const StepAdditionalQuestion = ({
   isSubmitting,
   values,
   setIsIncludingAdditional,
@@ -42,7 +42,7 @@ const Step9 = ({
               submitForm();
             }}
           >
-            YES. ADD MORE
+            YES, ADD MORE INFO
           </SubmitOrangeButton>
           <NotReallyButton
             disabled={isSubmitting}
@@ -51,7 +51,7 @@ const Step9 = ({
               submitForm();
             }}
           >
-            NOT REALLY, SUBMIT
+            EVERYTHING LOOKS GOOD, SUBMIT
           </NotReallyButton>
           <SecondaryButton onClick={() => previous(values)}>
             GO BACK
@@ -61,4 +61,4 @@ const Step9 = ({
     </FormLoading>
   );
 };
-export default Step9;
+export default StepAdditionalQuestion;

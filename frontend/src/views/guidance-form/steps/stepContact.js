@@ -11,12 +11,12 @@ import { Field } from "formik";
 import styled, { withTheme } from "styled-components";
 
 const contactTypes = [
-  { value: "sms", label: "SMS" },
-  { value: "whatsapp", label: "WhatsApp" },
-  { value: "viber", label: "Viber" },
-  { value: "email", label: "Email" },
-  { value: "telegram", label: "Telegram" },
-  { value: "messenger", label: "Messenger" },
+  { value: "sms", label: "SMS", placeholder: "Number" },
+  { value: "whatsapp", label: "WhatsApp", placeholder: "WhatsApp Number" },
+  { value: "viber", label: "Viber", placeholder: "Viber Number" },
+  { value: "email", label: "Email", placeholder: "Email" },
+  { value: "telegram", label: "Telegram", placeholder: "Telegram Number" },
+  { value: "messenger", label: "Messenger", placeholder: "Facebook Link" },
 ];
 
 const InputFlex = styled.div`
@@ -28,7 +28,7 @@ const InputFlex = styled.div`
   }
 `;
 
-const Step8 = withTheme(
+const StepContact = withTheme(
   ({
     theme,
     isSubmitting,
@@ -53,6 +53,7 @@ const Step8 = withTheme(
         fontSize: "1em",
         height: "100%",
       }),
+      menu: (provided) => ({ ...provided, zIndex: 999 }),
       valueContainer: (provided) => ({
         ...provided,
         padding: "0.8em 2em",
@@ -78,6 +79,9 @@ const Step8 = withTheme(
       indicatorSeparator: () => {},
     };
 
+    const selectedContact = (contactType) =>
+      contactTypes.find((contact) => contact.value == contactType);
+
     return (
       <React.Fragment>
         <h1 className="center">Contact Information</h1>
@@ -85,10 +89,21 @@ const Step8 = withTheme(
           We will connect with you through the information you provide below.
         </p>
         <CheckboxGroup hasInputs width="500px" mobileWidth="90%">
-          <FormErrorMessage component="span" name="name" />
+          {/* <FormErrorMessage component="span" name="name" /> */}
           <GuidanceInput as={Field} placeholder="Full Name" name="name" />
-          <FormErrorMessage component="span" name="primary_contact" />
-          {errors.primary_contact_type && (
+          {/* <FormErrorMessage component="span" name="primary_contact" /> */}
+          {(errors.primary_contact || errors.secondary_contact) && (
+            <FormErrorMessage as="span" component="span" name="primary_contact">
+              {`${errors.primary_contact} ${
+                errors.primary_contact && "(primary)"
+              }`}
+              <br />
+              {`${errors.secondary_contact} ${
+                errors.secondary_contact && "(secondary)"
+              }`}
+            </FormErrorMessage>
+          )}
+          {/* {errors.primary_contact_type && (
             <FormErrorMessage
               as="span"
               component="span"
@@ -96,7 +111,7 @@ const Step8 = withTheme(
             >
               {errors.primary_contact_type}
             </FormErrorMessage>
-          )}
+          )} */}
           <InputFlex>
             <SearchSelect
               fieldName="primary_contact_type"
@@ -109,7 +124,12 @@ const Step8 = withTheme(
             />
             <GuidanceInput
               as={Field}
-              placeholder="Primary Number/Email/FB Link"
+              placeholder={
+                selectedContact(values.primary_contact_type)
+                  ? "Primary " +
+                    selectedContact(values.primary_contact_type).placeholder
+                  : "Primary Details"
+              }
               name="primary_contact"
               style={{ flex: 1 }}
               onChange={(e) => {
@@ -124,8 +144,8 @@ const Step8 = withTheme(
               }}
             />
           </InputFlex>
-          <FormErrorMessage component="span" name="secondary_contact" />
-          {errors.secondary_contact_type && (
+          {/* <FormErrorMessage component="span" name="secondary_contact" /> */}
+          {/* {errors.secondary_contact_type && (
             <FormErrorMessage
               as="span"
               component="span"
@@ -133,7 +153,7 @@ const Step8 = withTheme(
             >
               {errors.secondary_contact_type}
             </FormErrorMessage>
-          )}
+          )} */}
           <InputFlex>
             <SearchSelect
               fieldName="secondary_contact_type"
@@ -146,7 +166,12 @@ const Step8 = withTheme(
             />
             <GuidanceInput
               as={Field}
-              placeholder="Secondary Number/Email/FB Link"
+              placeholder={
+                selectedContact(values.secondary_contact_type)
+                  ? "Secondary " +
+                    selectedContact(values.secondary_contact_type).placeholder
+                  : "Secondary Details"
+              }
               name="secondary_contact"
               style={{ flex: 1 }}
               onChange={(e) => {
@@ -162,7 +187,7 @@ const Step8 = withTheme(
             />
           </InputFlex>
         </CheckboxGroup>
-        <ButtonsDiv>
+        <ButtonsDiv style={{ marginTop: "0" }}>
           <SubmitOrangeButton
             type="submit"
             disabled={
@@ -188,4 +213,4 @@ const Step8 = withTheme(
   }
 );
 
-export default Step8;
+export default StepContact;

@@ -9,7 +9,7 @@ import {
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step10 = ({
+const StepAdditional = ({
   isSubmitting,
   values,
   previous,
@@ -22,7 +22,7 @@ const Step10 = ({
   return (
     <FormLoading>
       <FormErrorsComponent />
-      <h1 className="center">Add more information about your dream property</h1>
+      <h1 className="center">I want to see these things in the property...</h1>
       <p className="subheader center">
         This will take our guided investing to the next level with active search
         on the best property for you
@@ -57,4 +57,4 @@ const Step10 = ({
     </FormLoading>
   );
 };
-export default Step10;
+export default StepAdditional;

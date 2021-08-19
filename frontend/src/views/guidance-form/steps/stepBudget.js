@@ -10,7 +10,7 @@ import { guidanceBudgetChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step7 = ({ isSubmitting, values, previous, errors }) => {
+const StepBudget = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
       <h1 className="center">My Estimated Budget is...</h1>
@@ -46,4 +46,4 @@ const Step7 = ({ isSubmitting, values, previous, errors }) => {
   );
 };
 
-export default Step7;
+export default StepBudget;

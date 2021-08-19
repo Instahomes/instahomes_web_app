@@ -14,6 +14,8 @@ export const GuidanceContainer = styled.section`
   }
 `;
 
+const breakpointHeight = "610px";
+
 export const GuidanceForm = styled(Form)`
   box-sizing: border-box;
 
@@ -55,6 +57,11 @@ export const GuidanceForm = styled(Form)`
     .subheader {
       font-size: 1em;
     }
+  }
+
+  @media (max-height: ${breakpointHeight}) and (min-width: ${({ theme }) =>
+      theme.breakpoints.lg}) {
+    font-size: 0.8em;
   }
 `;
 
@@ -168,12 +175,13 @@ export const CheckboxGroup = styled.div`
   margin-top: 2em;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: ${({ overflow }) => !overflow && "center"};
   width: ${({ width }) => width || "400px"};
   ${({ hasInputs }) => hasInputs && "gap: 1em;"}
   margin: auto;
   margin-top: 1em;
   margin-bottom: 2em;
+  overflow-y: ${({ overflow }) => overflow && "scroll"};
 
   // text-align: center;
   // display: grid;

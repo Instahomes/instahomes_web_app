@@ -6,26 +6,26 @@ import {
   CheckboxGroup,
   CheckboxLabel,
 } from "../styles";
-import { purchaseTypeChoices } from "../../../misc/constants";
+import { propertyGuidanceChoices } from "../../../misc/constants";
 import { FormErrorMessage } from "../../../components/elements";
 import { Field } from "formik";
 
-const Step3 = ({ isSubmitting, values, previous, errors }) => {
+const StepPropertyType = ({ isSubmitting, values, previous, errors }) => {
   return (
     <React.Fragment>
-      <h1 className="center">I want to...</h1>
+      <h1 className="center">The type/s of property I want is/are...</h1>
       <p className="subheader center">
-        This will help us in seeking out the best properties for you.
+        This will narrow down our suggested options. Select as many as you like.
       </p>
-      <FormErrorMessage component="span" name="purchaseType" />
+      <FormErrorMessage component="span" name="propertyTypes" />
       <CheckboxGroup>
-        {purchaseTypeChoices.map((choice) => (
+        {propertyGuidanceChoices.map((choice) => (
           <CheckboxLabel key={choice.label}>
             <Field
-              type="radio"
-              name="purchaseType"
+              type="checkbox"
+              name="propertyTypes"
               value={choice.value}
-              checked={choice.value == values.purchaseType}
+              checked={values.propertyTypes.includes(choice.value)}
             />
             <span>{choice.label}</span>
           </CheckboxLabel>
@@ -35,7 +35,7 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
         <SubmitOrangeButton
           type="submit"
           disabled={
-            isSubmitting || values.purchaseType == "" || errors.purchaseType
+            isSubmitting || !values.propertyTypes.length || errors.propertyTypes
           }
         >
           NEXT QUESTION
@@ -48,4 +48,4 @@ const Step3 = ({ isSubmitting, values, previous, errors }) => {
   );
 };
 
-export default Step3;
+export default StepPropertyType;

@@ -74,7 +74,7 @@ const guidanceStepValues = [
   },
 ];
 
-const Step1 = () => {
+const StepIntro = () => {
   const history = useHistory();
 
   return (
@@ -112,4 +112,4 @@ const Step1 = () => {
   );
 };
 
-export default Step1;
+export default StepIntro;
