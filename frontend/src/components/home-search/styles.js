@@ -1,77 +1,74 @@
 import styled from "styled-components";
-import { OrangeButton } from "../elements";
-import { LightInput } from "../../components/elements";
-
-export const SearchFrame = styled.div`
-  width: 700px;
-  background-color: ${({ theme }) => theme.colors.softWhite};
-  padding: 2.5em 3.3em;
-  box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.1);
-  border-radius: 9px;
+export const HomeSearchContainer = styled.div`
+  width: 800px;
   margin: auto;
 
   h1 {
     color: ${({ theme }) => theme.colors.darkBlue};
   }
 
-  p {
+  p,
+  li {
     color: ${({ theme }) => theme.colors.darkHeader};
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    width: 70%;
+  ul {
+    font-size: 1em;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 8px;
   }
-`;
 
-export const SearchForm = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
-  width: 100%;
-  margin-top: 2rem;
-  margin-bottom: 10px;
-
-  .advanced-setting {
-    display: ${({ showAdvanced }) => (showAdvanced ? "block" : "none")};
-    flex: 1 0 120px;
+  li:before {
+    content: "✓";
+    padding-right: 8px;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-top: 1.5rem;
-  }
+    width: 80%;
+    font-size: 0.9em;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    .flex-grow-mobile {
-      flex: 1;
-      max-width: initial;
+    h1 {
+      font-size: 1.8em;
     }
   }
 `;
 
-export const SearchButton = styled(OrangeButton)`
-  width: 20%;
+export const HomeSearchFrame = styled.div`
+  background-color: ${({ theme }) => theme.colors.softWhite};
+  padding: 3em 3em;
+  box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.1);
+  border-radius: 9px;
+`;
+
+export const TabRow = styled.div`
+  display: flex;
+  gap: 1em;
+  margin-bottom: 15px;
+`;
+
+export const Tab = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 5px;
+
+  span {
+    font-size: 1em;
+    color: ${({ theme }) => theme.colors.mainBg};
+  }
+
+  opacity: ${({ isSelected }) => (isSelected ? 1 : 0.8)};
+  border-bottom: ${({ theme, isSelected }) =>
+    isSelected && `2px solid ${theme.colors.softWhite}`};
+`;
+
+export const GuidedButtons = styled.div`
+  display: flex;
+  gap: 10px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    width: 120px;
-    order: ${({ mobileOrder }) => mobileOrder || "initial"};
-    flex: 1;
+    flex-direction: column;
   }
-`;
-
-export const SearchAdvanced = styled.div`
-  margin-top: 0.75rem;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    text-align: center;
-  }
-`;
-
-export const SearchAdvancedSpan = styled.span`
-  color: ${({ theme }) => theme.colors.mutedBlue};
-  font-size: 0.75em;
-  margin-left: 6px;
-`;
-
-export const Input = styled(LightInput)`
-  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
 `;

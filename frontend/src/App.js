@@ -13,6 +13,7 @@ import Wishlist from "./views/wishlist";
 import Development from "./views/development";
 import Developer from "./views/developer";
 import InquiryForm from "./views/inquiry-form";
+import GuidanceForm from "./views/guidance-form";
 import Maintenance from "./views/maintenance";
 import EmptyPage from "./components/empty-page";
 import ScrollToTop from "./components/scroll-to-top";
@@ -68,6 +69,9 @@ function App() {
                 </Route>
                 <Route exact path="/inquire">
                   <InquiryForm />
+                </Route>
+                <Route exact path="/guidance">
+                  <GuidanceForm />
                 </Route>
                 <Route exact path="/">
                   <Home />

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import signupImg from "../../assets/home/signup-img.png";
+import iconCheck from "../../assets/home/iconCheck.svg";
 import { Input, OutlineButton } from "../../components/elements";
+import secondarySearch from "../../assets/home/secondarySearch.jpeg";
 
 export const HeroFrame = styled.section`
   height: 550px;
@@ -10,7 +12,19 @@ export const HeroFrame = styled.section`
   background-size: cover;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    height: ${({ showAdvanced }) => (showAdvanced ? "750px" : "460px")};
+    height: ${({ showAdvanced }) => (showAdvanced ? "750px" : "500px")};
+  }
+`;
+
+export const FeaturedSearchBar = styled.div`
+  width: 700px;
+  margin: auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: auto;
+    padding: 2em var(--main-padding-x);
   }
 `;
 
@@ -45,14 +59,6 @@ export const ListingRow = styled.div`
   justify-content: flex-start;
   gap: 1em;
 
-  // & > div:nth-child(3) {
-  //   margin-right: 10px;
-  // }
-
-  // & > div:not(:first-child) {
-  //   margin-left: 20px;
-  // }
-
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding: 10px;
     overflow-x: scroll;
@@ -62,6 +68,7 @@ export const ListingRow = styled.div`
 export const NewsletterFrame = styled.section`
   background-color: ${({ theme }) => theme.colors.signupBg};
   display: flex;
+  height: 100vh;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
@@ -69,7 +76,7 @@ export const NewsletterFrame = styled.section`
 `;
 
 export const NewsletterImage = styled.div`
-  width: 95%;
+  width: 70%;
   background-image: url(${signupImg});
   background-size: cover;
   background-position: center;
@@ -80,18 +87,56 @@ export const NewsletterImage = styled.div`
   }
 `;
 
-export const BetaSignupButton = styled(OutlineButton)`
-  margin-top: 0.5em;
-  border: 1px solid ${({ theme }) => theme.colors.softWhite};
-  color: ${({ theme }) => theme.colors.softWhite};
-`;
-
 export const NewsletterText = styled.div`
-  padding: 10rem var(--main-padding-x);
+  padding: 4em 5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  h1 {
+    color: ${({ theme }) => theme.colors.lightGray};
+  }
+
+  p,
+  li {
+    color: ${({ theme }) => theme.colors.softWhite};
+  }
+
+  li {
+    margin-bottom: 20px;
+  }
+
+  ul {
+    font-size: 1em;
+    list-style-image: url(${iconCheck});
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    padding: 4rem var(--main-padding-x);
+    padding: 4em var(--main-padding-x);
+    font-size: 0.8em;
+
+    li {
+      margin-bottom: inherit;
+    }
   }
+`;
+
+export const GuidedInvestingText = styled.span`
+  border: 1px solid ${({ theme }) => theme.colors.mutedLightBlue};
+  box-sizing: border-box;
+  border-radius: 20px;
+  color: #e6edf5;
+  font-size: 0.8em;
+  padding: 7px 15px;
+  margin-bottom: 2em;
+`;
+
+export const BetaSignupButton = styled(OutlineButton)`
+  border: 1px solid ${({ theme }) => theme.colors.softWhite};
+  color: ${({ theme }) => theme.colors.darkBlue};
+  background: #ffffff;
+  font-size: 1em;
+  font-weight: 700;
 `;
 
 export const SignupForm = styled.div`
@@ -152,5 +197,24 @@ export const ListingFormText = styled.div`
     width: initial;
     padding-right: 0;
     margin-bottom: 2rem;
+  }
+`;
+
+export const SecondarySearchFrame = styled.section`
+  background-image: url(${secondarySearch});
+  background-position: 50% 85%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 18vh var(--main-padding-x);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+
+  h1 {
+    color: ${({ theme }) => theme.colors.softWhite};
+    text-align: center;
   }
 `;

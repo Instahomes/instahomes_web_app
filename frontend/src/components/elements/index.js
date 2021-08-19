@@ -5,6 +5,7 @@ import styled, { withTheme } from "styled-components";
 import { ErrorMessage } from "formik";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
+import AsyncCreatableSelect from "react-select/async-creatable";
 
 export const Input = styled.input`
   background-color: ${({ theme }) => theme.colors.inputBlue};
@@ -89,7 +90,8 @@ export const OrangeButton = styled.button`
   color: ${({ theme, disabled }) =>
     disabled ? theme.colors.mutedBlue : theme.colors.softWhite};
   padding: 0.8em 1em;
-  font-size: 0.8em;
+  font-size: ${({ scale, fontSize }) =>
+    scale ? `calc(1em * ${scale})` : fontSize || "0.8em"};
 `;
 
 export const OutlineButton = styled.button`
@@ -158,6 +160,8 @@ const MobileSelect = styled(Select)`
 
 export const SearchSelect = withTheme(
   ({
+    isCreatableAndAsync,
+    isMulti,
     isAsync,
     isGray,
     fieldName,
@@ -169,8 +173,9 @@ export const SearchSelect = withTheme(
     className,
     asyncLoadOptions,
     containerStyle,
+    newCustomStyles,
   }) => {
-    const customStyles = {
+    const customStyles = newCustomStyles || {
       container: (provided) => ({
         ...provided,
         ...containerStyle,
@@ -218,7 +223,14 @@ export const SearchSelect = withTheme(
 
     return (
       <MobileSelect
-        as={isAsync ? AsyncSelect : Select}
+        isMulti={isMulti}
+        as={
+          isCreatableAndAsync
+            ? AsyncCreatableSelect
+            : isAsync
+            ? AsyncSelect
+            : Select
+        }
         cacheOptions
         loadOptions={asyncLoadOptions}
         defaultOptions

@@ -43,6 +43,25 @@ export const purchaseTypeChoices = [
   },
 ];
 
+export const purchaseTypeGuidanceChoices = [
+  {
+    value: "buy",
+    label: "Buy",
+  },
+  {
+    value: "rent_to_own",
+    label: "Rent to Own",
+  },
+  {
+    value: "rent",
+    label: "Rent",
+  },
+  {
+    value: "time_share",
+    label: "Own a Time Share",
+  },
+];
+
 export const reasonChoices = [
   {
     value: "reside",
@@ -66,7 +85,26 @@ export const reasonChoices = [
   },
   {
     value: "other",
-    label: "Other",
+    label: "Others: ",
+  },
+];
+
+export const reasonGuidanceChoices = [
+  {
+    value: "live",
+    label: "To live in",
+  },
+  {
+    value: "invest",
+    label: "To invest in (rent out or sell)",
+  },
+  {
+    value: "rest_house",
+    label: "To keep as rest house",
+  },
+  {
+    value: "other",
+    label: "Others: ",
   },
 ];
 
@@ -94,6 +132,37 @@ export const propertyChoices = [
   {
     value: "townhouse",
     label: "Townhouse",
+  },
+];
+
+export const propertyGuidanceChoices = [
+  {
+    value: "house_and_lot",
+    label: "House and Lot",
+  },
+  {
+    value: "condo",
+    label: "Condominium",
+  },
+  {
+    value: "townhouse",
+    label: "Townhouse",
+  },
+  {
+    value: "office",
+    label: "Office Space",
+  },
+  {
+    value: "lot",
+    label: "Lot Only",
+  },
+  {
+    value: "apartment",
+    label: "Apartment",
+  },
+  {
+    value: "commercial",
+    label: "Commercial Space",
   },
 ];
 
@@ -135,6 +204,43 @@ export const budgetChoices = [
   },
 ];
 
+export const guidanceBudgetChoices = [
+  {
+    value: "<1",
+    label: "Less than PHP1,000,000",
+    highPrice: "1000000",
+  },
+  {
+    value: "1-5",
+    label: "PHP1,000,000-PHP5,000,000",
+    lowPrice: "1000000",
+    highPrice: "5000000",
+  },
+  {
+    value: "5-12",
+    label: "PHP5,000,000-PHP12,000,000",
+    lowPrice: "5000000",
+    highPrice: "12000000",
+  },
+  {
+    value: "12-25",
+    label: "PHP12,000,000-PHP25,000,000",
+    lowPrice: "12000000",
+    highPrice: "25000000",
+  },
+  {
+    value: "25-50",
+    label: "PHP25,000,000-PHP50,000,000",
+    lowPrice: "25000000",
+    highPrice: "50000000",
+  },
+  {
+    value: ">50",
+    label: "More than PHP50,000,000",
+    lowPrice: "50000000",
+  },
+];
+
 export const progressChoices = [
   {
     value: "asking_around",
@@ -150,6 +256,44 @@ export const progressChoices = [
   },
   {
     value: "other",
-    label: "Other",
+    label: "Others:",
+  },
+];
+
+export const progressGuidanceChoices = [
+  {
+    value: "asking_around",
+    label: "I'm just asking around",
+  },
+  {
+    value: "visiting",
+    label: "I've been visiting properties",
+  },
+  {
+    value: "ready",
+    label: "I'm ready to close a deal in 3-6 months",
+  },
+  {
+    value: "other",
+    label: "Others:",
+  },
+];
+
+export const occupantsChoices = [
+  {
+    value: "individual",
+    label: "Individual",
+  },
+  {
+    value: "couple",
+    label: "Couple",
+  },
+  {
+    value: "smallFamily",
+    label: "Small Family (3-5 people)",
+  },
+  {
+    value: "largeFamily",
+    label: "Large Family (Over 6 people)",
   },
 ];
