@@ -2,7 +2,7 @@ import React from "react";
 import SearchComponent from "../search-component";
 import { GuidedButtons } from "./styles";
 import { OrangeButton, OutlineButton } from "../elements";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 export const GuidedInvesting = () => {
@@ -12,9 +12,9 @@ export const GuidedInvesting = () => {
       <h1>Get free curated investment picks now!</h1>
       <p>
         Don’t know which properties to invest in? Try our{" "}
-        <strong>
-          <u>Guided Investing Now</u>
-        </strong>
+        <Link to="/guidance" style={{ fontWeight: 500, color: "inherit" }}>
+          Guided Investing Now
+        </Link>
       </p>
       <ul style={{ marginBottom: "1.5em" }}>
         <li>No bias due to partnerships with all the different developers</li>
