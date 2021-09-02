@@ -4,6 +4,7 @@ export const SidebarFrame = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBg};
   width: 324px;
   height: 100vh;
+  border-right: 1px solid #dddddd;
 `;
 
 export const SidebarHeader = styled.div`
