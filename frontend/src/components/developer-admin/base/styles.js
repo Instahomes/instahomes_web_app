@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 export const BaseFrame = styled.main`
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
+  overflow-y: scroll;
 `;
 
 export const MainContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBg};
   flex: 1;
+  // width: calc(100% - clamp(180px, 40vw, 324px));
   padding: 1.5em 1.8em;
 `;
 
@@ -33,8 +35,14 @@ export const OrangeButton = styled.button`
 
   font-size: 0.9em;
   font-family: Rubik, sans-serif;
-  font-weight: normal;
+  font-weight: 500;
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.orange};
   color: ${({ theme }) => theme.colors.softWhite};
+`;
+
+export const OutlineButton = styled(OrangeButton)`
+  background-color: inherit;
+  color: ${({ theme }) => theme.colors.darkHeader};
+  border: 1px solid ${({ theme }) => theme.colors.darkHeader};
 `;

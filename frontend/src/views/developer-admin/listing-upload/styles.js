@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Switch from "react-switch";
 
 export const GridPreviewButton = styled.div`
   padding: 0 1.5em;
@@ -13,3 +14,14 @@ export const GridPreviewButton = styled.div`
     color: ${({ theme }) => theme.colors.darkHeader};
   }
 `;
+
+export const SwitchComponent = ({ checked, handleChange }) => (
+  <Switch
+    checked={checked}
+    onChange={handleChange}
+    onColor="#2DAA0D"
+    onHandleColor="#77E25C"
+    uncheckedIcon={false}
+    checkedIcon={false}
+  />
+);

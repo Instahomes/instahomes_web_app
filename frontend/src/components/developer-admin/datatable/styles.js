@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
-import Switch from "react-switch";
 
 export const Frame = styled.div`
   background: #fefefe;
@@ -8,17 +7,6 @@ export const Frame = styled.div`
   border-radius: 26px;
   padding: 2em 2.2em;
 `;
-
-export const SwitchComponent = ({ checked, handleChange }) => (
-  <Switch
-    checked={checked}
-    onChange={handleChange}
-    onColor="#2DAA0D"
-    onHandleColor="#77E25C"
-    uncheckedIcon={false}
-    checkedIcon={false}
-  />
-);
 
 export const useStyles = makeStyles({
   tableHeaderCell: {

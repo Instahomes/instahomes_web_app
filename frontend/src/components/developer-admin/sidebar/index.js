@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
 import {
   SidebarFrame,
+  SidebarFixed,
   SidebarHeader,
   InstahomesLogo,
   DeveloperName,

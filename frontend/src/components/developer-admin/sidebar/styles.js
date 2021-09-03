@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const SidebarFrame = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBg};
-  width: 324px;
-  height: 100vh;
+  width: clamp(180px, 40vw, 324px);
+  min-height: 100vh;
   border-right: 1px solid #dddddd;
 `;
 
@@ -12,7 +12,7 @@ export const SidebarHeader = styled.div`
 `;
 
 export const InstahomesLogo = styled.img`
-  width: 170px;
+  width: 70%;
   height: 100%;
   object-fit: cover;
 `;
@@ -37,7 +37,7 @@ export const DeveloperName = styled.div`
     color: ${({ theme }) => theme.colors.darkHeader};
     font-size: 1em;
     font-weight: 500;
-    line-height: 0;
+    line-height: 120%;
   }
 `;
 
