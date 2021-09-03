@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 import { BaseFrame, MainContainer, MainHeader, OrangeButton } from "./styles";
 
 const DeveloperAdminBase = withTheme(
-  React.memo(({ theme, headerName, HeaderElements }) => {
+  React.memo(({ theme, headerName, HeaderElements, Body }) => {
     return (
       <BaseFrame>
         <Sidebar />
@@ -18,8 +18,9 @@ const DeveloperAdminBase = withTheme(
           />
           <MainHeader>
             <span className="header">{headerName}</span>
-            <HeaderElements />
+            {HeaderElements}
           </MainHeader>
+          {Body}
         </MainContainer>
       </BaseFrame>
     );

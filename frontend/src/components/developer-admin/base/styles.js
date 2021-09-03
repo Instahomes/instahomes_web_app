@@ -13,6 +13,7 @@ export const MainContainer = styled.div`
 
 export const MainHeader = styled.div`
   margin-top: 1.5em;
+  margin-bottom: 2em;
   display: flex;
   align-items: center;
 

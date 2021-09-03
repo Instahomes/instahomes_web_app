@@ -2,20 +2,21 @@ import React, { useState, useEffect } from "react";
 import { GridPreviewButton } from "./styles";
 import { Icon } from "@iconify/react";
 import Base from "../../../components/developer-admin/base";
+import Datatable from "../../../components/developer-admin/datatable";
 import { OrangeButton } from "../../../components/developer-admin/base/styles";
 import { withTheme } from "styled-components";
 
-const HeaderElements = withTheme(({ theme }) => {
+const HeaderElements = withTheme(({ theme, showGrid, setShowGrid }) => {
   return (
     <React.Fragment>
-      <GridPreviewButton>
+      <GridPreviewButton onClick={() => setShowGrid(!showGrid)}>
         <Icon
-          icon="fa:eye"
+          icon={showGrid ? "fa:eye-slash" : "fa:eye"}
           color={theme.colors.darkHeader}
           width="1.1em"
           height="1.1em"
         />
-        <span>Open Grid Preview</span>
+        <span>{showGrid ? "Close" : "Open"} Grid Preview</span>
       </GridPreviewButton>
       <OrangeButton>+ Add New Listing</OrangeButton>
     </React.Fragment>
@@ -23,7 +24,17 @@ const HeaderElements = withTheme(({ theme }) => {
 });
 
 const ListingUpload = React.memo((props) => {
-  return <Base headerName="Listings" HeaderElements={HeaderElements}></Base>;
+  const [showGrid, setShowGrid] = useState(false);
+
+  return (
+    <Base
+      headerName="Listings"
+      HeaderElements={
+        <HeaderElements showGrid={showGrid} setShowGrid={setShowGrid} />
+      }
+      Body={<Datatable />}
+    />
+  );
 });
 
 export default ListingUpload;
