@@ -5,6 +5,7 @@ import {
   GridStyle,
   ModifiedListingCard,
 } from "./styles";
+import RowDropdown from "./rowDropdown";
 import { Icon } from "@iconify/react";
 import Base from "../../../components/developer-admin/base";
 import Datatable from "../../../components/developer-admin/datatable";
@@ -122,14 +123,7 @@ const ListingUpload = React.memo((props) => {
       {
         Header: "",
         accessor: "menu",
-        Cell: () => (
-          <Icon
-            icon="codicon:kebab-vertical"
-            color="#828282"
-            width="2em"
-            height="2em"
-          />
-        ),
+        Cell: RowDropdown,
       },
     ],
     []
