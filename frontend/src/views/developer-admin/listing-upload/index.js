@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { GridPreviewButton, SwitchComponent } from "./styles";
+import {
+  GridPreviewButton,
+  SwitchComponent,
+  GridStyle,
+  ModifiedListingCard,
+} from "./styles";
 import { Icon } from "@iconify/react";
 import Base from "../../../components/developer-admin/base";
 import Datatable from "../../../components/developer-admin/datatable";
@@ -27,21 +32,61 @@ const HeaderElements = withTheme(({ theme, showGrid, setShowGrid }) => {
   );
 });
 
+const ListingGrid = ({ data }) => {
+  return (
+    <GridStyle>
+      {data.map((listing) => (
+        <ModifiedListingCard
+          id={listing.id}
+          key={listing.seo_title + listing.id}
+          developer={listing.developer}
+          // image={listing.photo_main}
+          name={listing.development + " " + listing.name}
+          size={listing.lot_size}
+          price={listing.lowest_price}
+          address={listing.location}
+          bedrooms={listing.bedrooms}
+          bathrooms_min={listing.bathrooms_min}
+          bathrooms_max={listing.bathrooms_max}
+          isVerified={true}
+          isOnWishlist={listing.is_liked}
+        />
+      ))}
+    </GridStyle>
+  );
+};
+
 const ListingUpload = React.memo((props) => {
   const [showGrid, setShowGrid] = useState(false);
 
   const data = useMemo(
     () => [
       {
+        id: "12346",
+        seo_title: "1 Br Condominium Unit",
+        developer: "Test",
         name: "2 BR Condominium Unit",
         development: "Vertis North",
+        lot_size: "45",
+        lowest_price: 10000000,
+        bedrooms: 4,
+        bathrooms_min: 2,
+        is_liked: false,
         location: "Vertis Plaza, Quezon City",
         units: 2,
         isVisible: true,
       },
       {
+        id: "12346",
+        seo_title: "1 Br Condominium Unit",
+        developer: "Test",
         name: "1 BR Condominium Unit",
         development: "Vertis North",
+        lot_size: "45",
+        lowest_price: 10000000,
+        bedrooms: 4,
+        bathrooms_min: 2,
+        is_liked: false,
         location: "Vertis Plaza, Quezon City",
         units: 2,
         isVisible: false,
@@ -96,7 +141,13 @@ const ListingUpload = React.memo((props) => {
       HeaderElements={
         <HeaderElements showGrid={showGrid} setShowGrid={setShowGrid} />
       }
-      Body={<Datatable data={data} columns={columns} />}
+      Body={
+        showGrid ? (
+          <ListingGrid data={data} />
+        ) : (
+          <Datatable data={data} columns={columns} />
+        )
+      }
     />
   );
 });
