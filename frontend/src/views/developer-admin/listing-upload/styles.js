@@ -45,10 +45,10 @@ export const ModifiedListingCard = styled(ListingCard)`
   }
 `;
 
-export const SwitchComponent = ({ checked, handleChange }) => (
+export const SwitchComponent = ({ checked, onChange }) => (
   <Switch
     checked={checked}
-    onChange={handleChange}
+    onChange={onChange}
     onColor="#2DAA0D"
     onHandleColor="#77E25C"
     uncheckedIcon={false}

@@ -11,12 +11,24 @@ import Base from "../../../components/developer-admin/base";
 import Datatable from "../../../components/developer-admin/datatable";
 import { OrangeButton } from "../../../components/developer-admin/base/styles";
 import { withTheme } from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const VisibilityCell = ({ value, ...rest }) => {
-  return <SwitchComponent checked={value} onChange={() => {}} />;
+  const [checked, setChecked] = useState(!!value);
+
+  return (
+    <SwitchComponent
+      checked={checked}
+      onChange={() => {
+        setChecked(!checked);
+      }}
+    />
+  );
 };
 
 const HeaderElements = withTheme(({ theme, showGrid, setShowGrid }) => {
+  const history = useHistory();
+
   return (
     <React.Fragment>
       <GridPreviewButton onClick={() => setShowGrid(!showGrid)}>
@@ -28,7 +40,9 @@ const HeaderElements = withTheme(({ theme, showGrid, setShowGrid }) => {
         />
         <span>{showGrid ? "Close" : "Open"} Grid Preview</span>
       </GridPreviewButton>
-      <OrangeButton>+ Add New Listing</OrangeButton>
+      <OrangeButton onClick={() => history.push("/admin/listings/new")}>
+        + Add New Listing
+      </OrangeButton>
     </React.Fragment>
   );
 });
@@ -118,7 +132,6 @@ const ListingUpload = React.memo((props) => {
         Header: "Visible?",
         accessor: "isVisible",
         Cell: VisibilityCell,
-        getProps: () => ({ handleCheck: () => alert("clicked") }),
       },
       {
         Header: "",
