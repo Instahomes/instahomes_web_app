@@ -5,6 +5,9 @@ export const SidebarFrame = styled.div`
   width: clamp(180px, 40vw, 324px);
   min-height: 100vh;
   border-right: 1px solid #dddddd;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 export const SidebarHeader = styled.div`
@@ -13,7 +16,7 @@ export const SidebarHeader = styled.div`
 
 export const InstahomesLogo = styled.img`
   width: 70%;
-  height: 100%;
+  max-height: 100%;
   object-fit: cover;
 `;
 
@@ -45,6 +48,8 @@ export const TabGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 2em;
+  height: 100%;
+  padding-bottom: 2em;
 `;
 
 export const Tab = styled.nav`

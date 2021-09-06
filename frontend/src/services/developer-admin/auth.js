@@ -6,7 +6,7 @@ const LOCAL_STORAGE_PROFILE = "devadmin_profile";
 
 export const login = (contactNumber, password, callback, errorCallback) => {
   return axiosClient
-    .post("/token/obtain/", {
+    .post("/login/", {
       contact_number: contactNumber,
       password,
     })
@@ -17,7 +17,7 @@ export const login = (contactNumber, password, callback, errorCallback) => {
         storeToken(response.data.access);
         storeRefreshToken(response.data.refresh);
         storeProfile({
-          name: response.data.developer.name,
+          developer: response.data.developer,
           contactNumber: response.data.contact_number,
           email: response.data.email,
           user_id: response.data.user_id,
@@ -27,7 +27,7 @@ export const login = (contactNumber, password, callback, errorCallback) => {
       }
     })
     .catch((err) => {
-      errorCallback(err);
+      errorCallback("Please input your correct credentials.");
     });
 };
 

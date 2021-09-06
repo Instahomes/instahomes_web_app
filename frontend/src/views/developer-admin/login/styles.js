@@ -31,7 +31,7 @@ export const FormDiv = styled(Form)`
     background: #e6edf5;
     color: #637c9c;
     align-self: flex-start;
-    padding: 0.2em 1em;
+    padding: 0 1em;
     font-size: 0.9em;
     margin-bottom: 1em;
 

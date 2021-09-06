@@ -46,6 +46,7 @@ function App() {
                 <ProtectedRoute
                   isAuthenticated={isAuthenticated()}
                   exact
+                  redirectPath="/signup"
                   path="/wishlist"
                 >
                   <Wishlist />

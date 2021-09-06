@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import instahomesLogo from "../../../assets/navbar/logo.svg";
 import sampleLogo from "../../../assets/developer-admin/sampleLogo.png";
+import { clear } from "../../../services/developer-admin/auth";
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
 import {
   SidebarFrame,
-  SidebarFixed,
   SidebarHeader,
   InstahomesLogo,
   DeveloperName,
   TabGroup,
   Tab,
 } from "./styles";
+import { useHistory } from "react-router-dom";
 
 const developer = {
   logo: sampleLogo,
@@ -40,6 +41,12 @@ const Sidebar = withTheme(
   React.memo(({ theme }) => {
     const [activeTab, setActiveTab] = useState("listings");
     const isTabActive = (value) => value == activeTab;
+    const history = useHistory();
+
+    const logout = () => {
+      clear();
+      history.push("/admin/login");
+    };
 
     return (
       <SidebarFrame>
@@ -70,6 +77,15 @@ const Sidebar = withTheme(
               <span className="tab-name">{tab.label}</span>
             </Tab>
           ))}
+          <Tab style={{ marginTop: "auto" }} onClick={logout}>
+            <Icon
+              icon="ic:baseline-logout"
+              color={theme.colors.darkGray}
+              width="1.5em"
+              height="1.5em"
+            />
+            <span className="tab-name">Log Out</span>
+          </Tab>
         </TabGroup>
       </SidebarFrame>
     );
