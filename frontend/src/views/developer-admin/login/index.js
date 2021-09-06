@@ -41,7 +41,7 @@ const Login = React.memo(() => {
 
   return (
     <Frame>
-      <Logo src={instahomesLogo} />
+      <Logo src={instahomesLogo} onClick={() => history.push("/")} />
       <UnderlinedSpan style={{ position: "absolute", bottom: "2em" }}>
         Contact Support
       </UnderlinedSpan>

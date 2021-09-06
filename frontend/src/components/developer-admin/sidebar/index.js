@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import instahomesLogo from "../../../assets/navbar/logo.svg";
 import sampleLogo from "../../../assets/developer-admin/sampleLogo.png";
-import { clear } from "../../../services/developer-admin/auth";
+import { clear, getProfile } from "../../../services/developer-admin/auth";
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
 import {
@@ -13,11 +13,6 @@ import {
   Tab,
 } from "./styles";
 import { useHistory } from "react-router-dom";
-
-const developer = {
-  logo: sampleLogo,
-  name: "Alveo Land Corporation",
-};
 
 const sidebarTabs = [
   {
@@ -40,8 +35,13 @@ const sidebarTabs = [
 const Sidebar = withTheme(
   React.memo(({ theme }) => {
     const [activeTab, setActiveTab] = useState("listings");
+    const [developer, setDeveloper] = useState(null);
     const isTabActive = (value) => value == activeTab;
     const history = useHistory();
+    useEffect(() => {
+      const { developer } = getProfile();
+      setDeveloper(developer);
+    }, []);
 
     const logout = () => {
       clear();
@@ -51,11 +51,17 @@ const Sidebar = withTheme(
     return (
       <SidebarFrame>
         <SidebarHeader>
-          <InstahomesLogo src={instahomesLogo} alt="" />
-          <DeveloperName>
-            <img src={developer.logo} alt="Alveo" className="logo" />
-            <span className="dev-name">{developer.name}</span>
-          </DeveloperName>
+          <InstahomesLogo
+            src={instahomesLogo}
+            alt=""
+            onClick={() => history.push("/")}
+          />
+          {developer && (
+            <DeveloperName>
+              {/* <img src={developer.logo} alt={developer.name} className="logo" /> */}
+              <span className="dev-name">{developer.name}</span>
+            </DeveloperName>
+          )}
         </SidebarHeader>
         <TabGroup>
           {sidebarTabs.map((tab) => (

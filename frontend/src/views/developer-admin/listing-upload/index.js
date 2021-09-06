@@ -10,17 +10,33 @@ import { Icon } from "@iconify/react";
 import Base from "../../../components/developer-admin/base";
 import Datatable from "../../../components/developer-admin/datatable";
 import { OrangeButton } from "../../../components/developer-admin/base/styles";
+import { FormErrorMessage } from "../../../components/elements";
+import Loading from "../../../components/loading";
+import {
+  getListings,
+  partialUpdateListing,
+} from "../../../services/developer-admin/listings";
+import { getProfile } from "../../../services/developer-admin/auth";
 import { withTheme } from "styled-components";
 import { useHistory } from "react-router-dom";
 
-const VisibilityCell = ({ value, ...rest }) => {
+const VisibilityCell = ({ value, row, setMessage }) => {
   const [checked, setChecked] = useState(!!value);
+  const id = row.values.id;
 
   return (
     <SwitchComponent
       checked={checked}
       onChange={() => {
-        setChecked(!checked);
+        const newChecked = !checked;
+        partialUpdateListing(
+          id,
+          { is_published: newChecked },
+          () => setChecked(newChecked),
+          () => {
+            setMessage("Something went wrong. Please try again.");
+          }
+        );
       }}
     />
   );
@@ -48,15 +64,17 @@ const HeaderElements = withTheme(({ theme, showGrid, setShowGrid }) => {
 });
 
 const ListingGrid = ({ data }) => {
+  const { developer } = getProfile();
+
   return (
     <GridStyle>
       {data.map((listing) => (
         <ModifiedListingCard
           id={listing.id}
           key={listing.seo_title + listing.id}
-          developer={listing.developer}
-          // image={listing.photo_main}
-          name={listing.development + " " + listing.name}
+          developer={developer.name}
+          image={listing.photo_main}
+          name={listing.development_name + " " + listing.unit_name}
           size={listing.lot_size}
           price={listing.lowest_price}
           address={listing.location}
@@ -64,7 +82,6 @@ const ListingGrid = ({ data }) => {
           bathrooms_min={listing.bathrooms_min}
           bathrooms_max={listing.bathrooms_max}
           isVerified={true}
-          isOnWishlist={listing.is_liked}
         />
       ))}
     </GridStyle>
@@ -72,70 +89,53 @@ const ListingGrid = ({ data }) => {
 };
 
 const ListingUpload = React.memo((props) => {
+  const [loading, setLoading] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
+  const [listings, setListings] = useState([]);
+  const [message, setMessage] = useState("");
 
-  const data = useMemo(
-    () => [
-      {
-        id: "12346",
-        seo_title: "1 Br Condominium Unit",
-        developer: "Test",
-        name: "2 BR Condominium Unit",
-        development: "Vertis North",
-        lot_size: "45",
-        lowest_price: 10000000,
-        bedrooms: 4,
-        bathrooms_min: 2,
-        is_liked: false,
-        location: "Vertis Plaza, Quezon City",
-        units: 2,
-        isVisible: true,
+  useEffect(() => {
+    setLoading(true);
+    getListings(
+      (data) => {
+        setListings(data);
+        setLoading(false);
       },
-      {
-        id: "12346",
-        seo_title: "1 Br Condominium Unit",
-        developer: "Test",
-        name: "1 BR Condominium Unit",
-        development: "Vertis North",
-        lot_size: "45",
-        lowest_price: 10000000,
-        bedrooms: 4,
-        bathrooms_min: 2,
-        is_liked: false,
-        location: "Vertis Plaza, Quezon City",
-        units: 2,
-        isVisible: false,
-      },
-    ],
-    []
-  );
+      () => {
+        setLoading(false);
+      }
+    );
+  }, []);
+
+  const data = useMemo(() => listings, [listings]);
 
   const columns = useMemo(
     () => [
       {
         Header: "Property Name",
-        accessor: "name", // accessor is the "key" in the data
+        accessor: "unit_name",
       },
       {
         Header: "Development",
-        accessor: "development",
+        accessor: "development_name",
       },
       {
         Header: "Location",
         accessor: "location",
       },
-      {
-        Header: "Available Units",
-        accessor: "units",
-      },
+      // {
+      //   Header: "Available Units",
+      //   accessor: "units",
+      // },
       {
         Header: "Visible?",
-        accessor: "isVisible",
-        Cell: VisibilityCell,
+        accessor: "is_published",
+        Cell: (props) => <VisibilityCell setMessage={setMessage} {...props} />,
+        setMessage,
       },
       {
         Header: "",
-        accessor: "menu",
+        accessor: "id",
         Cell: RowDropdown,
       },
     ],
@@ -149,10 +149,17 @@ const ListingUpload = React.memo((props) => {
         <HeaderElements showGrid={showGrid} setShowGrid={setShowGrid} />
       }
       Body={
-        showGrid ? (
+        loading ? (
+          <Loading color="#3F526A" />
+        ) : showGrid ? (
           <ListingGrid data={data} />
         ) : (
-          <Datatable data={data} columns={columns} />
+          <React.Fragment>
+            {message && (
+              <FormErrorMessage as="span">{message}</FormErrorMessage>
+            )}
+            <Datatable data={data} columns={columns} />
+          </React.Fragment>
         )
       }
     />

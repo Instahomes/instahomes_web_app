@@ -18,6 +18,7 @@ export const InstahomesLogo = styled.img`
   width: 70%;
   max-height: 100%;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 export const DeveloperName = styled.div`
@@ -27,6 +28,7 @@ export const DeveloperName = styled.div`
   border-radius: 8px;
   background-color: #ededed;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 0.8em;
 

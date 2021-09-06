@@ -14,6 +14,7 @@ export const Frame = styled.main`
 
 export const Logo = styled.img`
   position: absolute;
+  cursor: pointer;
 `;
 
 export const FormContainer = styled.div`
