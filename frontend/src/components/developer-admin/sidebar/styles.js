@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const SidebarFrame = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBg};
@@ -54,7 +55,7 @@ export const TabGroup = styled.div`
   padding-bottom: 2em;
 `;
 
-export const Tab = styled.nav`
+export const Tab = styled(Link)`
   box-sizing: border-box;
   padding: 1em 3em;
   cursor: pointer;
@@ -62,6 +63,7 @@ export const Tab = styled.nav`
     active ? "rgba(255, 103, 0, 0.1)" : "inherit"};
   border-right: ${({ theme, active }) =>
     active ? `5px solid ${theme.colors.orange}` : "none"};
+  text-decoration: none;
 
   display: flex;
   align-items: flex-end;

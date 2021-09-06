@@ -16,14 +16,7 @@ export const getListingById = (id, callback, errorCallback) => {
 
 export const updateListing = (id, data, callback, errorCallback) => {
   return axiosClient
-    .put(`/listings/${id}/`, data)
-    .then((res) => callback(res.data))
-    .catch((err) => errorCallback(err));
-};
-
-export const partialUpdateListing = (id, data, callback, errorCallback) => {
-  return axiosClient
-    .put(`/listings/partial/${id}/`, data)
+    .patch(`/listings/${id}/`, data)
     .then((res) => callback(res.data))
     .catch((err) => errorCallback(err));
 };

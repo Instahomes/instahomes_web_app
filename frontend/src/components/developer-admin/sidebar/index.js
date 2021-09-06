@@ -19,16 +19,19 @@ const sidebarTabs = [
     label: "Developer Details",
     value: "developerDetails",
     iconName: "fluent:building-retail-toolbox-20-filled",
+    link: "/admin/developer",
   },
   {
-    label: "Developers",
+    label: "Developments",
     value: "developments",
     iconName: "fa:building",
+    link: "/admin/developments",
   },
   {
     label: "Listings",
     value: "listings",
     iconName: "fluent:home-add-24-filled",
+    link: "/admin/listings",
   },
 ];
 
@@ -69,6 +72,7 @@ const Sidebar = withTheme(
               key={tab.value}
               active={isTabActive(tab.value)}
               onClick={() => setActiveTab(tab.value)}
+              to={tab.link}
             >
               <Icon
                 icon={tab.iconName}

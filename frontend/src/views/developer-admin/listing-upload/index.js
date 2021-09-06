@@ -14,7 +14,7 @@ import { FormErrorMessage } from "../../../components/elements";
 import Loading from "../../../components/loading";
 import {
   getListings,
-  partialUpdateListing,
+  updateListing,
 } from "../../../services/developer-admin/listings";
 import { getProfile } from "../../../services/developer-admin/auth";
 import { withTheme } from "styled-components";
@@ -29,7 +29,7 @@ const VisibilityCell = ({ value, row, setMessage }) => {
       checked={checked}
       onChange={() => {
         const newChecked = !checked;
-        partialUpdateListing(
+        updateListing(
           id,
           { is_published: newChecked },
           () => setChecked(newChecked),
