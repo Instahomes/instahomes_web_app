@@ -9,7 +9,7 @@ export const getDeveloperById = (id, callback, errorCallback) => {
 
 export const updateDeveloper = (id, data, callback, errorCallback) => {
   return axiosClient
-    .put(`/developers/${id}/`, data)
+    .patch(`/developers/${id}/`, data)
     .then((res) => callback(res.data))
     .catch((err) => errorCallback(err));
 };

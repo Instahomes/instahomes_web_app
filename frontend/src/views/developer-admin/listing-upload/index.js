@@ -5,8 +5,8 @@ import {
   GridStyle,
   ModifiedListingCard,
 } from "./styles";
-import RowDropdown from "./rowDropdown";
 import { Icon } from "@iconify/react";
+import RowDropdown from "../../../components/developer-admin/rowDropdown";
 import Base from "../../../components/developer-admin/base";
 import Datatable from "../../../components/developer-admin/datatable";
 import { OrangeButton } from "../../../components/developer-admin/base/styles";
@@ -132,7 +132,7 @@ const ListingUpload = React.memo((props) => {
       {
         Header: "",
         accessor: "id",
-        Cell: RowDropdown,
+        Cell: (props) => <RowDropdown {...props} isListing />,
       },
     ],
     []

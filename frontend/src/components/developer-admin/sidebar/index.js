@@ -12,7 +12,7 @@ import {
   TabGroup,
   Tab,
 } from "./styles";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 const sidebarTabs = [
   {
@@ -37,10 +37,16 @@ const sidebarTabs = [
 
 const Sidebar = withTheme(
   React.memo(({ theme }) => {
-    const [activeTab, setActiveTab] = useState("listings");
+    const match = useRouteMatch();
+    const currentTab = sidebarTabs.find((tab) =>
+      match.path.includes(tab.value)
+    );
+
+    const [activeTab, setActiveTab] = useState(currentTab.value);
     const [developer, setDeveloper] = useState(null);
     const isTabActive = (value) => value == activeTab;
     const history = useHistory();
+
     useEffect(() => {
       const { developer } = getProfile();
       setDeveloper(developer);

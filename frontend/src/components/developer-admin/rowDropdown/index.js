@@ -12,14 +12,14 @@ const Parent = styled.div`
   position: relative;
 `;
 
-const StyledMenu = withStyles((theme) => ({
+const StyledMenu = withStyles(() => ({
   list: {
     backgroundColor: "#FEFEFE",
     borderRadius: "10px",
   },
 }))(Menu);
 
-const StyledMenuItem = withStyles((theme) => ({
+const StyledMenuItem = withStyles(() => ({
   root: {
     padding: "0.6em 2.5em",
     fontFamily: "Rubik, sans-serif",
@@ -29,7 +29,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const RowDropdown = ({ row }) => {
+const RowDropdown = ({ row, isListing }) => {
   const { original: data } = row;
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -48,18 +48,21 @@ const RowDropdown = ({ row }) => {
   };
 
   const handleDelete = () => {
-    deleteListing(
-      data.id,
-      () => {
-        window.location.reload();
-      },
-      () => {}
-    );
+    if (isListing)
+      deleteListing(
+        data.id,
+        () => {
+          window.location.reload();
+        },
+        () => {}
+      );
   };
 
   const handleEdit = () => {
     handleClose();
-    history.push(`/admin/listings/${data.id}`);
+    history.push(
+      `/admin/${isListing ? "listings" : "developments"}/${data.id}`
+    );
   };
 
   return (
@@ -97,16 +100,18 @@ const RowDropdown = ({ row }) => {
           />
           Edit
         </StyledMenuItem>
-        <StyledMenuItem onClick={handleOpenModal}>
-          <Icon
-            icon="fa-regular:trash-alt"
-            color="#828282"
-            width="1em"
-            height="1em"
-            style={{ marginRight: "1em" }}
-          />
-          Delete
-        </StyledMenuItem>
+        {isListing && (
+          <StyledMenuItem onClick={handleOpenModal}>
+            <Icon
+              icon="fa-regular:trash-alt"
+              color="#828282"
+              width="1em"
+              height="1em"
+              style={{ marginRight: "1em" }}
+            />
+            Delete
+          </StyledMenuItem>
+        )}
       </StyledMenu>
     </Parent>
   );

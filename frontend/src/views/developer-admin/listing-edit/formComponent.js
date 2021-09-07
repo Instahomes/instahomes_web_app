@@ -30,7 +30,7 @@ import * as Yup from "yup";
 const FormSchema = Yup.object({
   unit_name: Yup.string().required("Unit name is required"),
   seo_title: Yup.string().required("SEO name is required"),
-  seo_desc: Yup.string(),
+  seo_desc: Yup.string().required("SEO description is required"),
   development: Yup.number().required("Development is required"),
   lowest_price: Yup.number("Please input a valid number")
     .min(0)
@@ -53,8 +53,8 @@ const FormSchema = Yup.object({
   property_details: Yup.string().required(
     "An overview of the property is required"
   ),
-  photo_main: Yup.mixed(),
-  // photo_main: Yup.mixed().required("Main photo is required"),
+  // photo_main: Yup.mixed(),
+  photo_main: Yup.mixed().required("Main photo is required"),
   image_1: Yup.mixed(),
   image_2: Yup.mixed(),
   image_3: Yup.mixed(),
@@ -189,6 +189,7 @@ const FormComponent = ({
         ) : (
           <FormFrame id="edit-listing" formGridTemplates={formGridTemplates}>
             <ConfirmationModal
+              key={"edit-listing-modal"}
               open={openModal}
               setOpen={setOpenModal}
               title={isEditing ? `Edit ${unit_name}` : "Create Listing"}
@@ -236,7 +237,7 @@ const FormComponent = ({
                 style={{ marginBottom: "1em" }}
                 name="seo_desc"
               />
-              <Label>SEO Description</Label>
+              <Label>SEO Description*</Label>
               <HelperLabel>
                 Description that will appear in search results of your listing
               </HelperLabel>

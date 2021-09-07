@@ -30,7 +30,9 @@ export const MainHeader = styled.div`
   }
 `;
 
-export const OrangeButton = styled.button`
+export const OrangeButton = styled.button.attrs(({ type }) => ({
+  type: type || "submit",
+}))`
   padding: 0.7em 1.2em;
 
   font-size: 0.9em;

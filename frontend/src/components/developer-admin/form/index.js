@@ -102,7 +102,8 @@ export const ImagePicker = ({ image, setFieldValue, fieldName, newImage }) => {
   }, [image]);
 
   useEffect(() => {
-    if (newImage) setCurrImage(URL.createObjectURL(newImage));
+    if (newImage && newImage != image)
+      setCurrImage(URL.createObjectURL(newImage));
   }, [newImage]);
 
   const onFileChange = (e) => {

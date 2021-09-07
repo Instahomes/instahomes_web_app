@@ -2,6 +2,8 @@ import React from "react";
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
 import ListingUpload from "./listing-upload";
 import ListingEdit from "./listing-edit";
+import DevelopmentUpload from "./development-upload";
+import DevelopmentEdit from "./development-edit";
 import Login from "./login";
 import ProtectedRoute from "../../misc/protectedRoutes";
 import { isAuthenticated } from "../../services/developer-admin/auth";
@@ -31,6 +33,21 @@ const DeveloperAdmin = () => {
         path={`${match.path}/listings`}
       >
         <ListingUpload />
+      </ProtectedRoute>
+      <ProtectedRoute
+        isAuthenticated={isLoggedIn}
+        redirectPath={loginPath}
+        exact
+        path={`${match.path}/developments/:id`}
+      >
+        <DevelopmentEdit />
+      </ProtectedRoute>
+      <ProtectedRoute
+        isAuthenticated={isLoggedIn}
+        redirectPath={loginPath}
+        path={`${match.path}/developments`}
+      >
+        <DevelopmentUpload />
       </ProtectedRoute>
       <Route exact path={`${match.path}`}>
         {isLoggedIn ? (

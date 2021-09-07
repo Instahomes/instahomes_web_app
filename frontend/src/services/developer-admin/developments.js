@@ -16,7 +16,7 @@ export const getDevelopmentById = (id, callback, errorCallback) => {
 
 export const updateDevelopment = (id, data, callback, errorCallback) => {
   return axiosClient
-    .put(`/developments/${id}/`, data)
+    .patch(`/developments/${id}/`, data)
     .then((res) => callback(res.data))
     .catch((err) => errorCallback(err));
 };
