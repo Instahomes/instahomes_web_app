@@ -11,6 +11,7 @@ import {
   FormSelect,
 } from "../../../components/developer-admin/form";
 import Loading from "../../../components/loading";
+import ConfirmationModal from "../../../components/developer-admin/modal";
 import {
   FormWarningMessage,
   FormErrorMessage,
@@ -22,7 +23,7 @@ import {
   completionChoices,
 } from "../../../misc/constants";
 
-const FormComponent = ({ data, developments }) => {
+const FormComponent = ({ data, developments, openModal, setOpenModal }) => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -124,6 +125,14 @@ const FormComponent = ({ data, developments }) => {
           <Loading color="#3F526A" />
         ) : (
           <FormFrame id="edit-listing" formGridTemplates={formGridTemplates}>
+            <ConfirmationModal
+              open={openModal}
+              setOpen={setOpenModal}
+              title={`Edit ${unit_name}`}
+              content="Are you sure you want to edit the listing?"
+              confirmText="Confirm"
+              formName="edit-listing"
+            />
             {success && (
               <FormWarningMessage as="span" style={{ gridArea: "message" }}>
                 {success}

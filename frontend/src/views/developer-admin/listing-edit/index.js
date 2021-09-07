@@ -10,7 +10,7 @@ import { getListingById } from "../../../services/developer-admin/listings";
 import { getDevelopments } from "../../../services/developer-admin/developments";
 import FormComponent from "./formComponent";
 
-const HeaderElements = withTheme(() => {
+const HeaderElements = withTheme(({ setOpenModal }) => {
   return (
     <React.Fragment>
       {/* <OutlineButton style={{ marginLeft: "auto", marginRight: "1em" }}>
@@ -18,8 +18,7 @@ const HeaderElements = withTheme(() => {
       </OutlineButton> */}
       <OrangeButton
         style={{ marginLeft: "auto" }}
-        form="edit-listing"
-        type="submit"
+        onClick={() => setOpenModal(true)}
       >
         Save & Make Visible
       </OrangeButton>
@@ -30,6 +29,7 @@ const HeaderElements = withTheme(() => {
 const ListingEdit = React.memo((props) => {
   const match = useRouteMatch();
   const [data, setData] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
   const [developments, setDevelopments] = useState([]);
   const { id } = match.params;
   const isEditing = id != "new";
@@ -50,8 +50,15 @@ const ListingEdit = React.memo((props) => {
   return (
     <Base
       headerName={isEditing ? "Edit Listing" : "Add a New Listing"}
-      HeaderElements={<HeaderElements />}
-      Body={<FormComponent data={data} developments={developments} />}
+      HeaderElements={<HeaderElements setOpenModal={setOpenModal} />}
+      Body={
+        <FormComponent
+          data={data}
+          developments={developments}
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+        />
+      }
     />
   );
 });
