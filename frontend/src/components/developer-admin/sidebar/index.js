@@ -17,7 +17,7 @@ import { useHistory, useRouteMatch } from "react-router-dom";
 const sidebarTabs = [
   {
     label: "Developer Details",
-    value: "developerDetails",
+    value: "developer",
     iconName: "fluent:building-retail-toolbox-20-filled",
     link: "/admin/developer",
   },

@@ -4,6 +4,7 @@ import ListingUpload from "./listing-upload";
 import ListingEdit from "./listing-edit";
 import DevelopmentUpload from "./development-upload";
 import DevelopmentEdit from "./development-edit";
+import DeveloperEdit from "./developer-edit";
 import Login from "./login";
 import ProtectedRoute from "../../misc/protectedRoutes";
 import { isAuthenticated } from "../../services/developer-admin/auth";
@@ -48,6 +49,13 @@ const DeveloperAdmin = () => {
         path={`${match.path}/developments`}
       >
         <DevelopmentUpload />
+      </ProtectedRoute>
+      <ProtectedRoute
+        isAuthenticated={isLoggedIn}
+        redirectPath={loginPath}
+        path={`${match.path}/developer`}
+      >
+        <DeveloperEdit />
       </ProtectedRoute>
       <Route exact path={`${match.path}`}>
         {isLoggedIn ? (
