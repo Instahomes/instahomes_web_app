@@ -17,13 +17,22 @@ import {
   FormErrorMessage,
 } from "../../../components/elements";
 import { Formik } from "formik";
-import { updateListing } from "../../../services/developer-admin/listings";
+import {
+  createListing,
+  updateListing,
+} from "../../../services/developer-admin/listings";
 import {
   purchaseTypeChoices,
   completionChoices,
 } from "../../../misc/constants";
 
-const FormComponent = ({ data, developments, openModal, setOpenModal }) => {
+const FormComponent = ({
+  data,
+  developments,
+  openModal,
+  setOpenModal,
+  isEditing,
+}) => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -66,30 +75,36 @@ const FormComponent = ({ data, developments, openModal, setOpenModal }) => {
       "floor_plan image4 image5 image6";
   `;
 
+  const successCallback = (text) => {
+    setLoading(false);
+    setError("");
+    setSuccess(`Successfully ${text} the listing!`);
+  };
+
+  const errorCallback = (err) => {
+    setLoading(false);
+    setSuccess("");
+    setError("Something went wrong, please try again!");
+  };
+
   const handleSubmit = async (values) => {
     setLoading(true);
     const formData = new FormData();
-    Object.keys(values)
-      .filter((key) => values[key] != data[key])
-      .forEach((key) => {
-        formData.append(key, values[key]);
-      });
+    let tempData = Object.keys(values);
+    if (isEditing)
+      tempData = tempData.filter((key) => values[key] != data[key]);
+    tempData.forEach((key) => {
+      formData.append(key, values[key]);
+    });
 
-    updateListing(
-      id,
-      formData,
-      () => {
-        setLoading(false);
-        setError("");
-        setSuccess("Successfully updated the listing!");
-      },
-      (err) => {
-        console.log(err);
-        setLoading(false);
-        setSuccess("");
-        setError("Something went wrong, please try again!");
-      }
-    );
+    isEditing
+      ? createListing(formData, () => successCallback("created"), errorCallback)
+      : updateListing(
+          id,
+          formData,
+          () => successCallback("edited"),
+          errorCallback
+        );
   };
 
   return (
@@ -164,7 +179,7 @@ const FormComponent = ({ data, developments, openModal, setOpenModal }) => {
                 as="textarea"
                 name="seo_desc"
                 value={values.seo_desc}
-                handleChange={handleChange}
+                onChange={handleChange}
               />
             </InputGroup>
             <InputGroup style={{ gridArea: "development" }}>
@@ -244,11 +259,11 @@ const FormComponent = ({ data, developments, openModal, setOpenModal }) => {
                 as="textarea"
                 name="overview"
                 value={values.overview}
-                handleChange={handleChange}
+                onChange={handleChange}
               />
             </InputGroup>
             <InputGroup style={{ gridArea: "photo_main" }}>
-              <Label>Main Photo</Label>
+              <Label>Main Photo*</Label>
               <ImagePicker
                 setFieldValue={setFieldValue}
                 image={photo_main}
@@ -256,7 +271,7 @@ const FormComponent = ({ data, developments, openModal, setOpenModal }) => {
               />
             </InputGroup>
             <InputGroup style={{ gridArea: "floor_plan" }}>
-              <Label>Floor Plan</Label>
+              <Label>Floor Plan*</Label>
               <ImagePicker
                 setFieldValue={setFieldValue}
                 image={floor_plan}

@@ -57,6 +57,7 @@ const ListingEdit = React.memo((props) => {
           developments={developments}
           openModal={openModal}
           setOpenModal={setOpenModal}
+          isEditing={isEditing}
         />
       }
     />
