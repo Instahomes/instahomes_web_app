@@ -15,8 +15,10 @@ const ConfirmationModal = ({
   content,
   confirmText,
   formName,
+  onClick,
 }) => {
   const handleClose = () => {
+    if (onClick) onClick();
     setOpen(false);
   };
 

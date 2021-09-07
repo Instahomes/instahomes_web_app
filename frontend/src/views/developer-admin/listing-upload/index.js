@@ -123,10 +123,6 @@ const ListingUpload = React.memo((props) => {
         Header: "Location",
         accessor: "location",
       },
-      // {
-      //   Header: "Available Units",
-      //   accessor: "units",
-      // },
       {
         Header: "Visible?",
         accessor: "is_published",

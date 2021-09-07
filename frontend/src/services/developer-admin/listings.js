@@ -27,3 +27,10 @@ export const createListing = (data, callback, errorCallback) => {
     .then((res) => callback(res.data))
     .catch((err) => errorCallback(err));
 };
+
+export const deleteListing = (id, callback, errorCallback) => {
+  return axiosClient
+    .delete(`/listings/${id}/`)
+    .then((res) => callback(res.data))
+    .catch((err) => errorCallback(err));
+};

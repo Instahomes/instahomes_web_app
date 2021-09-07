@@ -5,6 +5,8 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import ConfirmationModal from "../../../components/developer-admin/modal";
+import { deleteListing } from "../../../services/developer-admin/listings";
 
 const Parent = styled.div`
   position: relative;
@@ -31,6 +33,7 @@ const RowDropdown = ({ row }) => {
   const { original: data } = row;
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleOpen = (e) => {
     setAnchorEl(e.currentTarget);
@@ -40,6 +43,20 @@ const RowDropdown = ({ row }) => {
     setAnchorEl(null);
   };
 
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleDelete = () => {
+    deleteListing(
+      data.id,
+      () => {
+        window.location.reload();
+      },
+      () => {}
+    );
+  };
+
   const handleEdit = () => {
     handleClose();
     history.push(`/admin/listings/${data.id}`);
@@ -47,6 +64,14 @@ const RowDropdown = ({ row }) => {
 
   return (
     <Parent>
+      <ConfirmationModal
+        open={openModal}
+        setOpen={setOpenModal}
+        title={"Delete Listing"}
+        content={`Are you sure you want to delete: ${data.development_name} ${data.unit_name}?`}
+        confirmText={"Delete"}
+        onClick={handleDelete}
+      />
       <Icon
         style={{ cursor: "pointer" }}
         icon="codicon:kebab-vertical"
@@ -72,7 +97,7 @@ const RowDropdown = ({ row }) => {
           />
           Edit
         </StyledMenuItem>
-        <StyledMenuItem onClick={handleClose}>
+        <StyledMenuItem onClick={handleOpenModal}>
           <Icon
             icon="fa-regular:trash-alt"
             color="#828282"
