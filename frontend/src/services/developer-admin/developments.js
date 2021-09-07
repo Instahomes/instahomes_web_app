@@ -1,8 +1,8 @@
 import axiosClient from "./";
 
-export const getDevelopments = (callback, errorCallback) => {
+export const getDevelopments = (callback, errorCallback, queries = "") => {
   return axiosClient
-    .get(`/developments/`)
+    .get(`/developments/?${queries}`)
     .then((res) => callback(res.data))
     .catch((err) => errorCallback(err));
 };

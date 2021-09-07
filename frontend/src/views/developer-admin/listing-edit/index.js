@@ -7,6 +7,7 @@ import {
 import { withTheme } from "styled-components";
 import { useRouteMatch } from "react-router-dom";
 import { getListingById } from "../../../services/developer-admin/listings";
+import { getDevelopments } from "../../../services/developer-admin/developments";
 import FormComponent from "./formComponent";
 
 const HeaderElements = withTheme(() => {
@@ -29,6 +30,7 @@ const HeaderElements = withTheme(() => {
 const ListingEdit = React.memo((props) => {
   const match = useRouteMatch();
   const [data, setData] = useState(null);
+  const [developments, setDevelopments] = useState([]);
   const { id } = match.params;
   const isEditing = id != "new";
 
@@ -36,13 +38,20 @@ const ListingEdit = React.memo((props) => {
     if (isEditing) {
       getListingById(id, setData, () => {});
     }
+    getDevelopments(
+      (devs) =>
+        setDevelopments(
+          devs.map((dev) => ({ label: dev.name, value: dev.id }))
+        ),
+      () => {}
+    );
   }, [id]);
 
   return (
     <Base
       headerName={isEditing ? "Edit Listing" : "Add a New Listing"}
       HeaderElements={<HeaderElements />}
-      Body={<FormComponent data={data} />}
+      Body={<FormComponent data={data} developments={developments} />}
     />
   );
 });

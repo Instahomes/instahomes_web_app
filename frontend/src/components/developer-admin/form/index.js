@@ -1,7 +1,11 @@
 import { useState, createRef, useEffect } from "react";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
 import { Form, Field } from "formik";
 import { Icon } from "@iconify/react";
+
+import Select from "react-select";
+import AsyncSelect from "react-select/async";
+import AsyncCreatableSelect from "react-select/async-creatable";
 
 export const FormFrame = styled(Form)`
   background: #fefefe;
@@ -34,7 +38,7 @@ export const HelperLabel = styled.span`
 `;
 
 export const Input = styled(Field)`
-  border: 1px solid #bdbdbd;
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
   box-sizing: border-box;
   border-radius: 6px;
   color: ${({ theme }) => theme.colors.darkHeader};
@@ -58,7 +62,7 @@ export const Textarea = styled(Input)`
 `;
 
 const ImagePickerContainer = styled.div`
-  border: 1px solid #bdbdbd;
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
   box-sizing: border-box;
   border-radius: 6px;
   font-size: 0.8em;
@@ -123,3 +127,74 @@ export const ImagePicker = ({ image, setFieldValue, fieldName }) => {
     </ImagePickerContainer>
   );
 };
+
+export const FormSelect = withTheme(
+  ({
+    isCreatableAndAsync,
+    isMulti,
+    isAsync,
+    fieldName,
+    options,
+    theme,
+    formik,
+    asyncLoadOptions,
+  }) => {
+    const customStyles = {
+      control: (provided) => ({
+        ...provided,
+        border: `1px solid ${theme.colors.whiteInputColor}`,
+        borderRadius: "6px",
+        fontFamily: "'Rubik', sans-serif",
+        fontSize: "1em",
+        marginTop: "0.5em",
+      }),
+      valueContainer: (provided) => ({
+        ...provided,
+        padding: "0.4em 1em",
+      }),
+      placeholder: () => ({
+        color: theme.colors.whiteInputColor,
+      }),
+      singleValue: (styles) => ({
+        ...styles,
+        color: theme.colors.darkHeader,
+      }),
+      option: (styles) => ({
+        ...styles,
+        color: theme.colors.darkHeader,
+        fontSize: "0.9em",
+      }),
+      indicatorSeparator: () => {},
+    };
+
+    return (
+      <Select
+        isMulti={isMulti}
+        as={
+          isCreatableAndAsync
+            ? AsyncCreatableSelect
+            : isAsync
+            ? AsyncSelect
+            : Select
+        }
+        cacheOptions
+        loadOptions={asyncLoadOptions}
+        defaultOptions
+        styles={customStyles}
+        options={options}
+        name={fieldName}
+        onChange={(option) => formik.setFieldValue(fieldName, option.value)}
+        onBlur={formik.handleBlur}
+        value={
+          options
+            ? options.find(
+                (option) => option.value === formik.values[fieldName]
+              )
+            : formik.getValue
+            ? formik.getValue()
+            : ""
+        }
+      />
+    );
+  }
+);

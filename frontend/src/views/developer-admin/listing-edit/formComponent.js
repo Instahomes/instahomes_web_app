@@ -8,6 +8,7 @@ import {
   ImagePicker,
   CheckboxGroup,
   Textarea,
+  FormSelect,
 } from "../../../components/developer-admin/form";
 import Loading from "../../../components/loading";
 import {
@@ -16,8 +17,12 @@ import {
 } from "../../../components/elements";
 import { Formik } from "formik";
 import { updateListing } from "../../../services/developer-admin/listings";
+import {
+  purchaseTypeChoices,
+  completionChoices,
+} from "../../../misc/constants";
 
-const FormComponent = ({ data }) => {
+const FormComponent = ({ data, developments }) => {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,6 +37,8 @@ const FormComponent = ({ data }) => {
     bathrooms_min,
     bathrooms_max,
     lot_size,
+    sale_status,
+    completion_status,
     floor_size_min,
     floor_size_max,
     overview,
@@ -50,7 +57,7 @@ const FormComponent = ({ data }) => {
       ${(success || error) && `"message message message message"`}
       "unit_name unit_name seo_title seo_title"
       "seo_desc seo_desc . ."
-      "development development . ."
+      "development development sale_status completion_status"
       "lowest_price bedrooms bathrooms_min bathrooms_max"
       "lot_size floor_size_min floor_size_max ."
       "overview overview . ."
@@ -97,6 +104,8 @@ const FormComponent = ({ data }) => {
         bathrooms_min: bathrooms_min || "",
         bathrooms_max: bathrooms_max || null,
         lot_size: lot_size,
+        sale_status: sale_status || "",
+        completion_status: completion_status || "",
         floor_size_min: floor_size_min || "",
         floor_size_max: floor_size_max || null,
         overview: overview || "",
@@ -110,14 +119,7 @@ const FormComponent = ({ data }) => {
       }}
       onSubmit={handleSubmit}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        isSubmitting,
-        setFieldValue,
-      }) =>
+      {({ values, handleChange, handleBlur, setFieldValue }) =>
         loading ? (
           <Loading color="#3F526A" />
         ) : (
@@ -158,11 +160,31 @@ const FormComponent = ({ data }) => {
             </InputGroup>
             <InputGroup style={{ gridArea: "development" }}>
               <Label>Development*</Label>
-              <Input name="development" />
+              <FormSelect
+                fieldName="development"
+                options={developments}
+                formik={{ values, setFieldValue, handleBlur }}
+              />
               {/* <CheckboxGroup>
                 <input type="checkbox" />
                 <label>Same Location as Development</label>
               </CheckboxGroup> */}
+            </InputGroup>
+            <InputGroup style={{ gridArea: "sale_status" }}>
+              <Label>Sale Status*</Label>
+              <FormSelect
+                fieldName="sale_status"
+                options={purchaseTypeChoices}
+                formik={{ values, setFieldValue, handleBlur }}
+              />
+            </InputGroup>
+            <InputGroup style={{ gridArea: "completion_status" }}>
+              <Label>Completion Status*</Label>
+              <FormSelect
+                fieldName="completion_status"
+                options={completionChoices}
+                formik={{ values, setFieldValue, handleBlur }}
+              />
             </InputGroup>
             <InputGroup style={{ gridArea: "lowest_price" }}>
               <Label>Lowest Price (PHP)*</Label>
