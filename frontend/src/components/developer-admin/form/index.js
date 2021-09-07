@@ -93,13 +93,17 @@ const Content = styled.div`
   color: #828282;
 `;
 
-export const ImagePicker = ({ image, setFieldValue, fieldName }) => {
+export const ImagePicker = ({ image, setFieldValue, fieldName, newImage }) => {
   const [currImage, setCurrImage] = useState(null);
   const fileRef = createRef();
 
   useEffect(() => {
     if (image) setCurrImage(image);
   }, [image]);
+
+  useEffect(() => {
+    if (newImage) setCurrImage(URL.createObjectURL(newImage));
+  }, [newImage]);
 
   const onFileChange = (e) => {
     const newImage = e.target.files[0];
