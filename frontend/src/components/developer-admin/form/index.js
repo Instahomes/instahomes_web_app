@@ -1,5 +1,7 @@
+import { useState, createRef, useEffect } from "react";
 import styled from "styled-components";
 import { Form, Field } from "formik";
+import { Icon } from "@iconify/react";
 
 export const FormFrame = styled(Form)`
   background: #fefefe;
@@ -54,3 +56,70 @@ export const Textarea = styled(Input)`
   resize: none;
   height: 100px;
 `;
+
+const ImagePickerContainer = styled.div`
+  border: 1px solid #bdbdbd;
+  box-sizing: border-box;
+  border-radius: 6px;
+  font-size: 0.8em;
+  padding: 0.7em 1em;
+  margin-top: 0.5em;
+  height: 150px;
+  position: relative;
+
+  cursor: pointer;
+`;
+
+const ImageBg = styled.img`
+  opacity: 0.6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #828282;
+`;
+
+export const ImagePicker = ({ image, setFieldValue, fieldName }) => {
+  const [currImage, setCurrImage] = useState(null);
+  const fileRef = createRef();
+
+  useEffect(() => {
+    if (image) setCurrImage(image);
+  }, [image]);
+
+  const onFileChange = (e) => {
+    const newImage = e.target.files[0];
+    setCurrImage(URL.createObjectURL(newImage));
+    setFieldValue(fieldName, newImage);
+  };
+
+  const triggerClick = () => {
+    fileRef.current.click();
+  };
+
+  return (
+    <ImagePickerContainer onClick={triggerClick}>
+      <ImageBg src={currImage} />
+      <Content>
+        <Icon
+          icon={"mdi:image-edit-outline"}
+          color="#828282"
+          width="3em"
+          height="3em"
+        />
+        Upload Image
+        <input type="file" onChange={onFileChange} ref={fileRef} hidden />
+      </Content>
+    </ImagePickerContainer>
+  );
+};
