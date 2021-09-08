@@ -6,6 +6,7 @@ import { OrangeButton } from "../../../components/developer-admin/base/styles";
 import Loading from "../../../components/loading";
 import { getDevelopments } from "../../../services/developer-admin/developments";
 import { useHistory } from "react-router-dom";
+import Helmet from "react-helmet";
 
 const HeaderElements = () => {
   const history = useHistory();
@@ -65,19 +66,29 @@ const DevelopmentUpload = React.memo((props) => {
   );
 
   return (
-    <Base
-      headerName="Developments"
-      HeaderElements={<HeaderElements />}
-      Body={
-        loading ? (
-          <Loading color="#3F526A" />
-        ) : (
-          <React.Fragment>
-            <Datatable data={data} columns={columns} />
-          </React.Fragment>
-        )
-      }
-    />
+    <React.Fragment>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Edit Developments | Instahomes</title>
+        <meta
+          name="description"
+          content="Edit developments | Instahomes"
+        ></meta>
+      </Helmet>
+      <Base
+        headerName="Developments"
+        HeaderElements={<HeaderElements />}
+        Body={
+          loading ? (
+            <Loading color="#3F526A" />
+          ) : (
+            <React.Fragment>
+              <Datatable data={data} columns={columns} />
+            </React.Fragment>
+          )
+        }
+      />
+    </React.Fragment>
   );
 });
 

@@ -15,6 +15,7 @@ import Loading from "../../../components/loading";
 import { Formik } from "formik";
 import { login } from "../../../services/developer-admin/auth";
 import { useHistory } from "react-router-dom";
+import Helmet from "react-helmet";
 
 const Login = React.memo(() => {
   const [message, setMessage] = useState("");
@@ -41,6 +42,11 @@ const Login = React.memo(() => {
 
   return (
     <Frame>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Admin Login | Instahomes</title>
+        <meta name="description" content="Admin Login | Instahomes"></meta>
+      </Helmet>
       <Logo src={instahomesLogo} onClick={() => history.push("/")} />
       <UnderlinedSpan style={{ position: "absolute", bottom: "2em" }}>
         Contact Support

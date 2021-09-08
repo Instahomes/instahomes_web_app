@@ -8,6 +8,7 @@ import { withTheme } from "styled-components";
 import { useRouteMatch } from "react-router-dom";
 import { getDevelopmentById } from "../../../services/developer-admin/developments";
 import FormComponent from "./formComponent";
+import Helmet from "react-helmet";
 
 const HeaderElements = withTheme(({ setOpenModal }) => {
   return (
@@ -39,18 +40,28 @@ const DevelopmentEdit = React.memo((props) => {
   }, [id]);
 
   return (
-    <Base
-      headerName={isEditing ? "Edit Development" : "Add a New Development"}
-      HeaderElements={<HeaderElements setOpenModal={setOpenModal} />}
-      Body={
-        <FormComponent
-          data={data}
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-          isEditing={isEditing}
-        />
-      }
-    />
+    <React.Fragment>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Edit Development Details | Instahomes</title>
+        <meta
+          name="description"
+          content="Edit development details | Instahomes"
+        ></meta>
+      </Helmet>
+      <Base
+        headerName={isEditing ? "Edit Development" : "Add a New Development"}
+        HeaderElements={<HeaderElements setOpenModal={setOpenModal} />}
+        Body={
+          <FormComponent
+            data={data}
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            isEditing={isEditing}
+          />
+        }
+      />
+    </React.Fragment>
   );
 });
 

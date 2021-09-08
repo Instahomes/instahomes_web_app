@@ -9,6 +9,7 @@ import { useRouteMatch } from "react-router-dom";
 import { getListingById } from "../../../services/developer-admin/listings";
 import { getDevelopments } from "../../../services/developer-admin/developments";
 import FormComponent from "./formComponent";
+import Helmet from "react-helmet";
 
 const HeaderElements = withTheme(({ setOpenModal }) => {
   return (
@@ -48,19 +49,29 @@ const ListingEdit = React.memo((props) => {
   }, [id]);
 
   return (
-    <Base
-      headerName={isEditing ? "Edit Listing" : "Add a New Listing"}
-      HeaderElements={<HeaderElements setOpenModal={setOpenModal} />}
-      Body={
-        <FormComponent
-          data={data}
-          developments={developments}
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-          isEditing={isEditing}
-        />
-      }
-    />
+    <React.Fragment>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Edit Listing Details | Instahomes</title>
+        <meta
+          name="description"
+          content="Edit listing details | Instahomes"
+        ></meta>
+      </Helmet>
+      <Base
+        headerName={isEditing ? "Edit Listing" : "Add a New Listing"}
+        HeaderElements={<HeaderElements setOpenModal={setOpenModal} />}
+        Body={
+          <FormComponent
+            data={data}
+            developments={developments}
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            isEditing={isEditing}
+          />
+        }
+      />
+    </React.Fragment>
   );
 });
 

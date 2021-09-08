@@ -19,6 +19,7 @@ import {
 import { getProfile } from "../../../services/developer-admin/auth";
 import { withTheme } from "styled-components";
 import { useHistory } from "react-router-dom";
+import Helmet from "react-helmet";
 
 const VisibilityCell = ({ value, row, setMessage }) => {
   const [checked, setChecked] = useState(!!value);
@@ -139,26 +140,33 @@ const ListingUpload = React.memo((props) => {
   );
 
   return (
-    <Base
-      headerName="Listings"
-      HeaderElements={
-        <HeaderElements showGrid={showGrid} setShowGrid={setShowGrid} />
-      }
-      Body={
-        loading ? (
-          <Loading color="#3F526A" />
-        ) : showGrid ? (
-          <ListingGrid data={data} />
-        ) : (
-          <React.Fragment>
-            {message && (
-              <FormErrorMessage as="span">{message}</FormErrorMessage>
-            )}
-            <Datatable data={data} columns={columns} />
-          </React.Fragment>
-        )
-      }
-    />
+    <React.Fragment>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Edit Listings | Instahomes</title>
+        <meta name="description" content="Edit listings | Instahomes"></meta>
+      </Helmet>
+      <Base
+        headerName="Listings"
+        HeaderElements={
+          <HeaderElements showGrid={showGrid} setShowGrid={setShowGrid} />
+        }
+        Body={
+          loading ? (
+            <Loading color="#3F526A" />
+          ) : showGrid ? (
+            <ListingGrid data={data} />
+          ) : (
+            <React.Fragment>
+              {message && (
+                <FormErrorMessage as="span">{message}</FormErrorMessage>
+              )}
+              <Datatable data={data} columns={columns} />
+            </React.Fragment>
+          )
+        }
+      />
+    </React.Fragment>
   );
 });
 
