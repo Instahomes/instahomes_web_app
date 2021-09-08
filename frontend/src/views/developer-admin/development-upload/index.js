@@ -60,6 +60,7 @@ const DevelopmentUpload = React.memo((props) => {
         Header: "",
         accessor: "id",
         Cell: RowDropdown,
+        disableSortBy: true,
       },
     ],
     []

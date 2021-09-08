@@ -1,16 +1,17 @@
 import React, { useMemo } from "react";
-import { useTable } from "react-table";
+import { useTable, useSortBy } from "react-table";
 import MaUTable from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Frame, SwitchComponent, useStyles } from "./styles";
+import { Icon } from "@iconify/react";
 
 const Datatable = ({ columns, data }) => {
   const classes = useStyles();
 
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns, data }, useSortBy);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
 
@@ -23,9 +24,36 @@ const Datatable = ({ columns, data }) => {
               {headerGroup.headers.map((column) => (
                 <TableCell
                   className={classes.tableHeaderCell}
-                  {...column.getHeaderProps()}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render("Header")}
+                  <span>
+                    {column.isSorted ? (
+                      column.isSortedDesc ? (
+                        <React.Fragment>
+                          &nbsp;
+                          <Icon
+                            icon="fa-solid:sort-down"
+                            color="#3F526A"
+                            width="1em"
+                            height="1em"
+                          />
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          &nbsp;
+                          <Icon
+                            icon="fa-solid:sort-up"
+                            color="#3F526A"
+                            width="1em"
+                            height="1em"
+                          />
+                        </React.Fragment>
+                      )
+                    ) : (
+                      ""
+                    )}
+                  </span>
                 </TableCell>
               ))}
             </TableRow>

@@ -10,12 +10,12 @@ const DeveloperAdminBase = withTheme(
       <BaseFrame>
         <Sidebar />
         <MainContainer>
-          <Icon
+          {/* <Icon
             icon="fluent:search-12-filled"
             color={theme.colors.whiteInputColor}
             width="1.5em"
             height="1.5em"
-          />
+          /> */}
           <MainHeader>
             <span className="header">{headerName}</span>
             {HeaderElements}

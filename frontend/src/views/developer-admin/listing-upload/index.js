@@ -129,11 +129,13 @@ const ListingUpload = React.memo((props) => {
         accessor: "is_published",
         Cell: (props) => <VisibilityCell setMessage={setMessage} {...props} />,
         setMessage,
+        disableSortBy: true,
       },
       {
         Header: "",
         accessor: "id",
         Cell: (props) => <RowDropdown {...props} isListing />,
+        disableSortBy: true,
       },
     ],
     []
