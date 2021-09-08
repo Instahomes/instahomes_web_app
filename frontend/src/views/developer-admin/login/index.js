@@ -48,10 +48,14 @@ const Login = React.memo(() => {
         <meta name="description" content="Admin Login | Instahomes"></meta>
       </Helmet>
       <Logo src={instahomesLogo} onClick={() => history.push("/")} />
-      <UnderlinedSpan style={{ position: "absolute", bottom: "2em" }}>
+      <UnderlinedSpan
+        href="https://m.me/instahomes.com.ph"
+        style={{ position: "absolute", bottom: "2em" }}
+      >
         Contact Support
       </UnderlinedSpan>
       <UnderlinedSpan
+        href="https://instahomes.com.ph/"
         style={{ position: "absolute", bottom: "2em", left: "12em" }}
       >
         Visit Website
@@ -101,7 +105,9 @@ const Login = React.memo(() => {
                   placeholder="Password"
                   style={{ marginBottom: "1em" }}
                 />
-                <UnderlinedSpan>Forgot Password?</UnderlinedSpan>
+                <UnderlinedSpan href="mailto:instahomes.ph@gmail.com?subject=Password Reset for Developers">
+                  Forgot Password?
+                </UnderlinedSpan>
                 <OrangeButton style={{ marginTop: "2em" }}>Login</OrangeButton>
               </FormDiv>
             )
