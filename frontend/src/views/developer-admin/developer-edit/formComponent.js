@@ -73,8 +73,8 @@ const FormComponent = ({ data, openModal, setOpenModal }) => {
       "overview overview values_description values_description"
       "office_locations office_locations unique_locations ."
       "featured_image featured_image map_image map_image"
-      "affiliate_logo_1 affiliate_logo_2 affiliate_logo_3 affiliate_logo_4"
       "affiliate_name_1 affiliate_name_2 affiliate_name_3 affiliate_name_4"
+      "affiliate_logo_1 affiliate_logo_2 affiliate_logo_3 affiliate_logo_4"
   `;
 
   const successCallback = () => {
