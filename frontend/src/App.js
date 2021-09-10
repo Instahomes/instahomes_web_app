@@ -15,6 +15,7 @@ import Developer from "./views/developer";
 import InquiryForm from "./views/inquiry-form";
 import GuidanceForm from "./views/guidance-form";
 import Maintenance from "./views/maintenance";
+import DeveloperAdmin from "./views/developer-admin";
 import EmptyPage from "./components/empty-page";
 import ScrollToTop from "./components/scroll-to-top";
 import ReactGA from "react-ga";
@@ -45,10 +46,14 @@ function App() {
                 <ProtectedRoute
                   isAuthenticated={isAuthenticated()}
                   exact
+                  redirectPath="/signup"
                   path="/wishlist"
                 >
                   <Wishlist />
                 </ProtectedRoute>
+                <Route path="/partner">
+                  <DeveloperAdmin />
+                </Route>
                 <Route exact path="/signup">
                   <Signup />
                 </Route>

@@ -1,3 +1,8 @@
+export const completionChoices = [
+  { value: "ready", label: "Ready for Occupancy" },
+  { value: "construction", label: "Under Construction" },
+];
+
 export const listingChoices = [
   {
     value: "buy",
