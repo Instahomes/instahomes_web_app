@@ -1,7 +1,12 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ children, isAuthenticated, ...rest }) => {
+const ProtectedRoute = ({
+  children,
+  isAuthenticated,
+  redirectPath,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
@@ -12,7 +17,7 @@ const ProtectedRoute = ({ children, isAuthenticated, ...rest }) => {
           return (
             <Redirect
               to={{
-                pathname: "/signup",
+                pathname: redirectPath,
                 // state: {
                 //   from: props.location,
                 // },
