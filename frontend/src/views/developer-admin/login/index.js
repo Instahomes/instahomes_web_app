@@ -31,7 +31,7 @@ const Login = React.memo(() => {
       () => {
         setMessage("");
         setLoading(false);
-        history.push("/admin/listings");
+        history.push("/partner/listings");
       },
       (err) => {
         setMessage(err);

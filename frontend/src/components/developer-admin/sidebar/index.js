@@ -19,19 +19,19 @@ const sidebarTabs = [
     label: "Developer Details",
     value: "developer",
     iconName: "fluent:building-retail-toolbox-20-filled",
-    link: "/admin/developer",
+    link: "/partner/developer",
   },
   {
     label: "Developments",
     value: "developments",
     iconName: "fa:building",
-    link: "/admin/developments",
+    link: "/partner/developments",
   },
   {
     label: "Listings",
     value: "listings",
     iconName: "fluent:home-add-24-filled",
-    link: "/admin/listings",
+    link: "/partner/listings",
   },
 ];
 
@@ -54,7 +54,7 @@ const Sidebar = withTheme(
 
     const logout = () => {
       clear();
-      history.push("/admin/login");
+      history.push("/partner/login");
     };
 
     return (

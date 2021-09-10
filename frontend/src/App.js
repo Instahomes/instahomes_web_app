@@ -51,7 +51,7 @@ function App() {
                 >
                   <Wishlist />
                 </ProtectedRoute>
-                <Route path="/admin">
+                <Route path="/partner">
                   <DeveloperAdmin />
                 </Route>
                 <Route exact path="/signup">

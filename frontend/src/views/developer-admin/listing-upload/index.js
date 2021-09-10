@@ -57,7 +57,7 @@ const HeaderElements = withTheme(({ theme, showGrid, setShowGrid }) => {
         />
         <span>{showGrid ? "Close" : "Open"} Grid Preview</span>
       </GridPreviewButton>
-      <OrangeButton onClick={() => history.push("/admin/listings/new")}>
+      <OrangeButton onClick={() => history.push("/partner/listings/new")}>
         + Add New Listing
       </OrangeButton>
     </React.Fragment>

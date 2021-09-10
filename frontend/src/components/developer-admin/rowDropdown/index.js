@@ -61,7 +61,7 @@ const RowDropdown = ({ row, isListing }) => {
   const handleEdit = () => {
     handleClose();
     history.push(
-      `/admin/${isListing ? "listings" : "developments"}/${data.id}`
+      `/partner/${isListing ? "listings" : "developments"}/${data.id}`
     );
   };
 
