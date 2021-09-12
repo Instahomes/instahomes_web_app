@@ -415,9 +415,9 @@ const Listing = React.memo((props) => {
                       Php {listing.lowest_price.toLocaleString()}
                     </span>
                   </ProductPriceLine>
-                  {/* <ProductTour />
-                <br />
-                <br /> */}
+                  <ProductTour />
+                  <br />
+                  <br />
                   <ProductInquiry
                     listing={{
                       developer: {
