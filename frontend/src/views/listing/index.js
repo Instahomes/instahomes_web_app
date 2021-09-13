@@ -415,7 +415,28 @@ const Listing = React.memo((props) => {
                       Php {listing.lowest_price.toLocaleString()}
                     </span>
                   </ProductPriceLine>
-                  <ProductTour />
+                  <ProductTour
+                    Header={
+                      <React.Fragment>
+                        <h2 className="btn-rubik">
+                          Book a tour in this home
+                          <img
+                            src={check}
+                            alt="Check"
+                            style={{
+                              marginLeft: "10px",
+                              width: "0.8em",
+                              height: "0.8em",
+                            }}
+                          />
+                        </h2>
+                        <i id="sms-charges">
+                          *Subject to availability of Developer
+                        </i>
+                      </React.Fragment>
+                    }
+                    showButtons
+                  />
                   <br />
                   <br />
                   <ProductInquiry

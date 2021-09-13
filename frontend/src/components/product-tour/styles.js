@@ -42,6 +42,19 @@ export const ProductInquiryContainer = styled.div`
   }
 `;
 
+export const TimeButtonsDiv = styled.div`
+  display: grid;
+  width: 100%;
+  margin-top: 1.5em;
+  padding-top: 1em;
+  border-top: 1px solid #e0e0e0;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  gap: 1em;
+  font-size: 0.8em;
+  justify-items: center;
+`;
+
 export const DateButtonsDiv = styled.div`
   display: flex;
   width: 100%;
@@ -57,6 +70,7 @@ export const DateButtons = styled.div`
 `;
 
 export const DateButton = styled.button`
+  font-size: 1em;
   width: 60px;
   height: 60px;
   background: ${({ selected, theme }) =>
@@ -78,6 +92,11 @@ export const DateButton = styled.button`
     color: ${({ theme, selected, disabled }) =>
       disabled ? "#AAAAAA" : selected ? "#FDFDFD" : theme.colors.darkHeader};
   }
+`;
+
+export const TimeButton = styled(DateButton)`
+  height: 75px;
+  width: 75px;
 `;
 
 export const InquiryButtons = styled.div`

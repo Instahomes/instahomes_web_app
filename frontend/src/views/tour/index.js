@@ -100,7 +100,23 @@ const Tour = withTheme(
                 <h4 style={{ marginBottom: "1em", marginTop: "2em" }}>
                   DATE & TIME
                 </h4>
-                <ProductTour />
+                <ProductTour
+                  withTime
+                  Header={
+                    <AlignFlexCenter
+                      gap={"0.7em"}
+                      style={{ marginBottom: "1em" }}
+                    >
+                      <h2 className="btn-rubik">September</h2>
+                      <Icon
+                        icon={"ph:caret-down-bold"}
+                        color="#E0E0E0"
+                        width="1em"
+                        height="1em"
+                      />
+                    </AlignFlexCenter>
+                  }
+                />
                 <OrangeButton
                   scale={1}
                   style={{ padding: "0.6em 4em", marginTop: "1.5em" }}
