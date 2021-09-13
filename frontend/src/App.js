@@ -7,6 +7,7 @@ import ProtectedRoute from "./misc/protectedRoutes";
 import { isAuthenticated, getProfile } from "./services/auth";
 import Home from "./views/home";
 import Listing from "./views/listing";
+import Tour from "./views/tour";
 import Search from "./views/search";
 import Signup from "./views/signup";
 import Wishlist from "./views/wishlist";
@@ -65,6 +66,9 @@ function App() {
                 </Route>
                 <Route exact path="/listing/:id">
                   <Listing />
+                </Route>
+                <Route exact path="/tour/:id">
+                  <Tour />
                 </Route>
                 <Route exact path="/development/:id">
                   <Development />
