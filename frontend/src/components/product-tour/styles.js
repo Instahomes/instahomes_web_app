@@ -33,6 +33,13 @@ export const ProductInquiryContainer = styled.div`
     color: ${({ theme }) => theme.colors.whiteInputColor};
     font-size: 0.8em;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    h2,
+    #sms-charges {
+      text-align: center;
+    }
+  }
 `;
 
 export const DateButtonsDiv = styled.div`
@@ -41,7 +48,7 @@ export const DateButtonsDiv = styled.div`
 `;
 
 export const DateButtons = styled.div`
-  // margin: 0 1em;
+  margin: 0 0.7em;
   width: 95%;
   display: flex;
   justify-content: space-between;
@@ -81,7 +88,7 @@ export const InquiryButtons = styled.div`
     margin-right: 10px;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
   }
 `;
@@ -99,7 +106,7 @@ export const InquiryButtonsChild = styled(OrangeButton)`
     color: ${({ theme }) => theme.colors.orange};
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 100%;
     margin-bottom: 5px;
   }

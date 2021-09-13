@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import walk from "../../assets/product/walk.svg";
 import online from "../../assets/product/online.svg";
 import leftArrow from "../../assets/product/leftArrow.svg";
@@ -19,10 +19,10 @@ import { dayStrings } from "./constants";
 
 const getWeekFromPivot = (pivot, numDays = 7) => {
   let dayOfPivot = pivot.getDay();
-  let startDate = new Date();
+  let startDate = new Date(pivot);
   startDate.setDate(pivot.getDate() - dayOfPivot);
 
-  let dateNextWeek = new Date();
+  let dateNextWeek = new Date(startDate);
   dateNextWeek.setDate(startDate.getDate() + numDays);
 
   let arrOfDates = [];
@@ -45,12 +45,33 @@ const ProductTour = withTheme(({ theme, initialPivot }) => {
   const [pivot, setPivot] = useState(
     initialPivot ? new Date(initialPivot) : new Date()
   );
-  let dates = getWeekFromPivot(pivot);
+  const [daysInterval, setDaysInterval] = useState(7);
+
+  let dates = getWeekFromPivot(pivot, daysInterval);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateDaysInterval);
+
+    return function cleanup() {
+      window.removeEventListener("resize", updateDaysInterval);
+    };
+  }, []);
+
+  const updateDaysInterval = () => {
+    // Boundaries for whether to go with seven days in the calendar or five days per week
+    const hasFiveDays =
+      (window.innerWidth > theme.breakpoints.lg.replace("px", "") &&
+        window.innerWidth < 1300) ||
+      window.innerWidth < theme.breakpoints.sm.replace("px", "");
+    setDaysInterval(hasFiveDays ? 5 : 7);
+  };
 
   const changePivot = (isPlus) => {
-    let dateNextWeek = new Date();
-    dateNextWeek.setDate(isPlus ? pivot.getDate() + 6 : pivot.getDate() - 6);
-    setPivot(dateNextWeek);
+    let newDate = new Date(pivot);
+    newDate.setDate(
+      isPlus ? pivot.getDate() + daysInterval : pivot.getDate() - daysInterval
+    );
+    setPivot(newDate);
   };
 
   return (
@@ -69,6 +90,15 @@ const ProductTour = withTheme(({ theme, initialPivot }) => {
           src={leftArrow}
           alt="Left Arrow"
           onClick={() => changePivot(false)}
+          style={{
+            display:
+              pivot.getDate().valueOf() == new Date().getDate().valueOf() ||
+              pivot.getDate().valueOf() ==
+                new Date(initialPivot).getDate().valueOf()
+                ? "none"
+                : "block",
+            cursor: "pointer",
+          }}
         />
         <DateButtons>
           {dates.map((date) => (
@@ -85,6 +115,7 @@ const ProductTour = withTheme(({ theme, initialPivot }) => {
           ))}
         </DateButtons>
         <img
+          style={{ cursor: "pointer" }}
           src={rightArrow}
           alt="Right Arrow"
           onClick={() => changePivot(true)}
@@ -99,7 +130,7 @@ const ProductTour = withTheme(({ theme, initialPivot }) => {
             height="1.2em"
             style={{ marginRight: "1em" }}
           />
-          TOUR&nbsp;IN&nbsp;VIDEO CALL
+          TOUR&nbsp;IN&nbsp;VIDEO&nbsp;CALL
         </InquiryButtonsChild>
         <InquiryButtonsChild className="muted">
           <Icon
