@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { OutlineButton, OrangeButton } from "../../components/elements";
+import { OrangeButton } from "../../components/elements";
 
 export const TourContainer = styled.main`
   padding: 2em var(--main-padding-x) 0 var(--main-padding-x);
@@ -21,12 +21,26 @@ export const TourContainer = styled.main`
     color: ${({ theme }) => theme.colors.darkHeader};
     margin-top: 1em;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    min-height: calc(100vh - 48px - 32px - 1.5rem);
+
+    h4 {
+      text-align: center;
+      margin-top: 2em;
+    }
+  }
 `;
 
 export const AlignFlexCenter = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ gap }) => gap || "1em"};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    justify-content: ${({ justifyCenter }) =>
+      justifyCenter ? "center" : "flex-start"};
+  }
 `;
 
 export const ContentContainer = styled.div`
@@ -86,5 +100,27 @@ export const ListingInfoDiv = styled.div`
         color: ${({ theme }) => theme.colors.darkHeader};
       }
     }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column;
+    gap: 1em;
+    text-align: center;
+    justify-content: center;
+
+    .listing-img {
+      margin: auto;
+      max-width: 13em;
+    }
+  }
+`;
+
+export const TourOrangeButton = styled(OrangeButton)`
+  background-color: ${({ theme, disabled }) =>
+    disabled ? theme.colors.whiteInputColor : theme.colors.orange};
+  color: ${({ theme }) => theme.colors.softWhite};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 100%;
   }
 `;

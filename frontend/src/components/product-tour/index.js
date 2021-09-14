@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import walk from "../../assets/product/walk.svg";
-import online from "../../assets/product/online.svg";
 import leftArrow from "../../assets/product/leftArrow.svg";
 import rightArrow from "../../assets/product/rightArrow.svg";
-import check from "../../assets/product/check.svg";
-import { LightTextarea } from "../elements";
 import {
   ProductInquiryContainer,
   DateButtonsDiv,
@@ -18,6 +14,7 @@ import {
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
 import { dayStrings, times } from "./constants";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 const getWeekFromPivot = (pivot, numDays = 7) => {
   let dayOfPivot = pivot.getDay();
@@ -61,13 +58,26 @@ const computeDays = (theme) => {
 };
 
 const ProductTour = withTheme(
-  ({ theme, initialPivot, showButtons, withTime, Header, scale }) => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
+  ({
+    theme,
+    showButtons,
+    withTime,
+    Header,
+    scale,
+    initialSelectedDate,
+    parentSetSelectedDate,
+    parentSetSelectedTime,
+  }) => {
+    const [selectedDate, setSelectedDate] = useState(
+      initialSelectedDate || null
+    );
     const [selectedTime, setSelectedTime] = useState(null);
     const [pivot, setPivot] = useState(
-      initialPivot ? new Date(initialPivot) : new Date()
+      initialSelectedDate ? new Date(initialSelectedDate) : new Date()
     );
     const [daysInterval, setDaysInterval] = useState(computeDays(theme));
+    const history = useHistory();
+    const match = useRouteMatch();
 
     let dates = getWeekFromPivot(pivot, daysInterval);
 
@@ -78,6 +88,11 @@ const ProductTour = withTheme(
         window.removeEventListener("resize", updateDaysInterval);
       };
     }, []);
+
+    useEffect(() => {
+      if (parentSetSelectedDate) parentSetSelectedDate(selectedDate);
+      if (parentSetSelectedTime) parentSetSelectedTime(selectedTime);
+    }, [selectedDate, selectedTime]);
 
     const updateDaysInterval = () => {
       const newDaysInterval = computeDays(theme);
@@ -91,6 +106,9 @@ const ProductTour = withTheme(
       );
       setPivot(newDate);
     };
+
+    const handleTourClick = (data) =>
+      history.push(`/tour/${match.params.id}`, data);
 
     return (
       <ProductInquiryContainer scale={scale || 1}>
@@ -137,7 +155,11 @@ const ProductTour = withTheme(
         )}
         {showButtons && (
           <InquiryButtons>
-            <InquiryButtonsChild>
+            <InquiryButtonsChild
+              onClick={() =>
+                handleTourClick({ selectedDate, platform: "video" })
+              }
+            >
               <Icon
                 icon={"bi:camera-video-fill"}
                 color="#FFE5D2"
@@ -147,7 +169,12 @@ const ProductTour = withTheme(
               />
               TOUR&nbsp;IN&nbsp;VIDEO&nbsp;CALL
             </InquiryButtonsChild>
-            <InquiryButtonsChild className="muted">
+            <InquiryButtonsChild
+              className="muted"
+              onClick={() =>
+                handleTourClick({ selectedDate, platform: "inPerson" })
+              }
+            >
               <Icon
                 icon={"ri:walk-fill"}
                 color={theme.colors.orange}

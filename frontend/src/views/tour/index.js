@@ -7,6 +7,7 @@ import EmptyPage from "../../components/empty-page";
 
 import {
   TourContainer,
+  TourOrangeButton,
   ContentContainer,
   ListingImageContainer,
   AlignFlexCenter,
@@ -15,17 +16,53 @@ import {
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { isAuthenticated } from "../../services/auth";
-import { useRouteMatch, useHistory, Link } from "react-router-dom";
+import { useRouteMatch, useLocation } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
 import { OrangeButton } from "../../components/elements";
 
+const platformLabel = (theme, platform) => {
+  switch (platform) {
+    case "video":
+      return (
+        <React.Fragment>
+          <Icon
+            icon={"bi:camera-video-fill"}
+            color={theme.colors.orange}
+            width="0.8em"
+            height="0.8em"
+            style={{ marginRight: "0.5em" }}
+          />
+          VIDEO CALL
+        </React.Fragment>
+      );
+    case "inPerson":
+      return (
+        <React.Fragment>
+          <Icon
+            icon={"ri-walk-fill"}
+            color={theme.colors.orange}
+            width="0.8em"
+            height="0.8em"
+            style={{ marginRight: "0.5em" }}
+          />
+          IN PERSON
+        </React.Fragment>
+      );
+  }
+};
+
 const Tour = withTheme(
   React.memo(({ theme }) => {
     const match = useRouteMatch();
-    const history = useHistory();
+    const location = useLocation();
     const [listing, setListing] = useState(null);
     const [isEmpty, setIsEmpty] = useState(false);
+    const { platform = "video", selectedDate: initialSelectedDate } =
+      location.state;
+
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(null);
 
     useEffect(() => {
       const listingCallback = (listing) => {
@@ -55,17 +92,10 @@ const Tour = withTheme(
           {listing ? (
             <TourContainer>
               <ContentContainer>
-                <AlignFlexCenter>
+                <AlignFlexCenter justifyCenter>
                   <h1>Book a tour&nbsp;&nbsp;</h1>
                   <span className="tour-platform">
-                    <Icon
-                      icon={"bi:camera-video-fill"}
-                      color={theme.colors.orange}
-                      width="0.8em"
-                      height="0.8em"
-                      style={{ marginRight: "0.5em" }}
-                    />
-                    VIDEO CALL
+                    {platformLabel(theme, platform)}
                   </span>
                 </AlignFlexCenter>
                 <h4>PROPERTY DETAILS</h4>
@@ -83,7 +113,7 @@ const Tour = withTheme(
                       {listing.development.developer.name}
                     </span>
                     <br />
-                    <AlignFlexCenter gap="0.5em">
+                    <AlignFlexCenter gap="0.5em" justifyCenter>
                       <Icon
                         icon={"ci:location"}
                         color={theme.colors.darkBlue}
@@ -100,6 +130,10 @@ const Tour = withTheme(
                   DATE & TIME
                 </h4>
                 <ProductTour
+                  parentSetSelectedDate={setSelectedDate}
+                  parentSetSelectedTime={setSelectedTime}
+                  initialSelectedDate={initialSelectedDate}
+                  platform={platform}
                   scale={0.85}
                   withTime
                   Header={
@@ -117,12 +151,13 @@ const Tour = withTheme(
                     </AlignFlexCenter>
                   }
                 />
-                <OrangeButton
+                <TourOrangeButton
+                  disabled={!selectedDate || !selectedTime}
                   scale={1}
                   style={{ padding: "0.6em 4em", marginTop: "1.5em" }}
                 >
                   NEXT PAGE
-                </OrangeButton>
+                </TourOrangeButton>
               </ContentContainer>
               <ListingImageContainer mainImage={listing.photo_main} />
             </TourContainer>
