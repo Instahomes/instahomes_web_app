@@ -5,8 +5,8 @@ export const ProductInquiryContainer = styled.div`
   background: ${({ theme }) => theme.colors.mainBgColor};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 19px;
-  padding: 2em 1.3em;
-  font-size: 1em;
+  padding: 1em 1.3em;
+  font-size: ${({ scale }) => `calc(1em * ${scale})`};
   display: flex;
   flex-direction: column;
 
@@ -42,19 +42,6 @@ export const ProductInquiryContainer = styled.div`
   }
 `;
 
-export const TimeButtonsDiv = styled.div`
-  display: grid;
-  width: 100%;
-  margin-top: 1.5em;
-  padding-top: 1em;
-  border-top: 1px solid #e0e0e0;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: auto;
-  gap: 1em;
-  font-size: 0.8em;
-  justify-items: center;
-`;
-
 export const DateButtonsDiv = styled.div`
   display: flex;
   width: 100%;
@@ -71,12 +58,12 @@ export const DateButtons = styled.div`
 
 export const DateButton = styled.button`
   font-size: 1em;
-  width: 60px;
-  height: 60px;
+  width: 5em;
+  height: 5em;
   background: ${({ selected, theme }) =>
     selected ? theme.colors.orange : "none"}};
   border-radius: 50%;
-  padding: 0.5em;
+  // padding: 0.5em;
   text-align: center;
 
   .day-of-week {
@@ -94,9 +81,22 @@ export const DateButton = styled.button`
   }
 `;
 
+export const TimeButtonsDiv = styled.div`
+  display: grid;
+  width: 100%;
+  margin-top: 1.5em;
+  padding-top: 1em;
+  border-top: 1px solid #e0e0e0;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  gap: 0 1em;
+  font-size: 0.8em;
+  justify-items: center;
+`;
+
 export const TimeButton = styled(DateButton)`
-  height: 75px;
-  width: 75px;
+  height: 6em;
+  width: 6em;
 `;
 
 export const InquiryButtons = styled.div`

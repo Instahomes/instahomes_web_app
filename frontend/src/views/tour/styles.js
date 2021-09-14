@@ -4,7 +4,7 @@ import { OutlineButton, OrangeButton } from "../../components/elements";
 export const TourContainer = styled.main`
   padding: 2em var(--main-padding-x) 0 var(--main-padding-x);
   padding-top: 6em;
-  height: calc(100vh - 48px - 32px - 3rem);
+  min-height: calc(100vh - 48px - 32px - 3rem);
   display: flex;
   gap: 6em;
 
@@ -47,9 +47,13 @@ export const ContentContainer = styled.div`
 export const ListingImageContainer = styled.div`
   border-radius: 20px;
   width: 420px;
-  height: 100%;
+  min-height: inherit;
   background: url(${({ mainImage }) => mainImage});
   background-size: cover;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: none;
+  }
 `;
 
 export const ListingInfoDiv = styled.div`
@@ -58,7 +62,7 @@ export const ListingInfoDiv = styled.div`
   gap: 2em;
 
   .listing-img {
-    max-width: 7.5em;
+    max-width: 6.5em;
     min-height: 100%;
     object-fit: cover;
     border-radius: 6px;

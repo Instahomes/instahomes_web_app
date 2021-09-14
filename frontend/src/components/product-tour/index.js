@@ -43,7 +43,7 @@ const getWeekFromPivot = (pivot, numDays = 7) => {
 };
 
 const ProductTour = withTheme(
-  ({ theme, initialPivot, showButtons, withTime, Header }) => {
+  ({ theme, initialPivot, showButtons, withTime, Header, scale }) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState(null);
     const [pivot, setPivot] = useState(
@@ -79,7 +79,7 @@ const ProductTour = withTheme(
     };
 
     return (
-      <ProductInquiryContainer>
+      <ProductInquiryContainer scale={scale || 1}>
         {Header}
         <DateButtonsDiv>
           <img
@@ -117,17 +117,19 @@ const ProductTour = withTheme(
             onClick={() => changePivot(true)}
           />
         </DateButtonsDiv>
-        <TimeButtonsDiv>
-          {times.map((time) => (
-            <TimeButton
-              onClick={() => setSelectedTime(time.value)}
-              selected={selectedTime == time.value}
-            >
-              <h2 className="btn-rubik">{time.label}</h2>
-              <span className="day-of-week">{time.period}</span>
-            </TimeButton>
-          ))}
-        </TimeButtonsDiv>
+        {withTime && (
+          <TimeButtonsDiv>
+            {times.map((time) => (
+              <TimeButton
+                onClick={() => setSelectedTime(time.value)}
+                selected={selectedTime == time.value}
+              >
+                <h2 className="btn-rubik">{time.label}</h2>
+                <span className="day-of-week">{time.period}</span>
+              </TimeButton>
+            ))}
+          </TimeButtonsDiv>
+        )}
         {showButtons && (
           <InquiryButtons>
             <InquiryButtonsChild>

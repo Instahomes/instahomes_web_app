@@ -94,13 +94,13 @@ const Tour = withTheme(
                         {listing.development.location}
                       </span>
                     </AlignFlexCenter>
-                    <br />
                   </div>
                 </ListingInfoDiv>
                 <h4 style={{ marginBottom: "1em", marginTop: "2em" }}>
                   DATE & TIME
                 </h4>
                 <ProductTour
+                  scale={0.8}
                   withTime
                   Header={
                     <AlignFlexCenter
