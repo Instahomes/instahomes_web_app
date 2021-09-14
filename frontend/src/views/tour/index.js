@@ -100,7 +100,7 @@ const Tour = withTheme(
                   DATE & TIME
                 </h4>
                 <ProductTour
-                  scale={0.8}
+                  scale={0.85}
                   withTime
                   Header={
                     <AlignFlexCenter

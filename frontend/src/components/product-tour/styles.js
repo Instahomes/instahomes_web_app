@@ -58,8 +58,8 @@ export const DateButtons = styled.div`
 
 export const DateButton = styled.button`
   font-size: 1em;
-  width: 5em;
-  height: 5em;
+  width: 4em;
+  height: 4em;
   background: ${({ selected, theme }) =>
     selected ? theme.colors.orange : "none"}};
   border-radius: 50%;
@@ -67,14 +67,14 @@ export const DateButton = styled.button`
   text-align: center;
 
   .day-of-week {
-    font-size: 0.8em;
+    font-size: 0.7em;
     font-weight: 400;
     color: ${({ theme, selected, disabled }) =>
       disabled ? "#AAAAAA" : selected ? "#FDFDFD" : theme.colors.darkHeader};
   }
 
   h2 {
-    font-size: 1.8em;
+    font-size: 1.6em;
     font-weight: 500;
     color: ${({ theme, selected, disabled }) =>
       disabled ? "#AAAAAA" : selected ? "#FDFDFD" : theme.colors.darkHeader};
@@ -95,8 +95,8 @@ export const TimeButtonsDiv = styled.div`
 `;
 
 export const TimeButton = styled(DateButton)`
-  height: 6em;
-  width: 6em;
+  height: 5.5em;
+  width: 5.5em;
 `;
 
 export const InquiryButtons = styled.div`

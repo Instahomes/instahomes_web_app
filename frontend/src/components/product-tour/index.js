@@ -22,7 +22,7 @@ import { dayStrings, times } from "./constants";
 const getWeekFromPivot = (pivot, numDays = 7) => {
   let dayOfPivot = pivot.getDay();
   let startDate = new Date(pivot);
-  startDate.setDate(pivot.getDate() - dayOfPivot);
+  if (numDays == 7) startDate.setDate(pivot.getDate() - dayOfPivot);
 
   let dateNextWeek = new Date(startDate);
   dateNextWeek.setDate(startDate.getDate() + numDays);
@@ -42,6 +42,24 @@ const getWeekFromPivot = (pivot, numDays = 7) => {
   return arrOfDates;
 };
 
+const computeDays = (theme) => {
+  // Boundaries for whether to go with seven days in the calendar or five days per week
+  let newDaysInterval;
+  if (window.innerWidth <= 320) {
+    newDaysInterval = 4;
+  } else if (
+    (window.innerWidth > theme.breakpoints.lg.replace("px", "") &&
+      window.innerWidth < 1300) ||
+    (window.innerWidth < theme.breakpoints.sm.replace("px", "") &&
+      window.innerWidth > 320)
+  ) {
+    newDaysInterval = 5;
+  } else {
+    newDaysInterval = 7;
+  }
+  return newDaysInterval;
+};
+
 const ProductTour = withTheme(
   ({ theme, initialPivot, showButtons, withTime, Header, scale }) => {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -49,7 +67,7 @@ const ProductTour = withTheme(
     const [pivot, setPivot] = useState(
       initialPivot ? new Date(initialPivot) : new Date()
     );
-    const [daysInterval, setDaysInterval] = useState(7);
+    const [daysInterval, setDaysInterval] = useState(computeDays(theme));
 
     let dates = getWeekFromPivot(pivot, daysInterval);
 
@@ -62,12 +80,8 @@ const ProductTour = withTheme(
     }, []);
 
     const updateDaysInterval = () => {
-      // Boundaries for whether to go with seven days in the calendar or five days per week
-      const hasFiveDays =
-        (window.innerWidth > theme.breakpoints.lg.replace("px", "") &&
-          window.innerWidth < 1300) ||
-        window.innerWidth < theme.breakpoints.sm.replace("px", "");
-      setDaysInterval(hasFiveDays ? 5 : 7);
+      const newDaysInterval = computeDays(theme);
+      setDaysInterval(newDaysInterval);
     };
 
     const changePivot = (isPlus) => {
@@ -86,15 +100,6 @@ const ProductTour = withTheme(
             src={leftArrow}
             alt="Left Arrow"
             onClick={() => changePivot(false)}
-            style={{
-              display:
-                pivot.getDate().valueOf() == new Date().getDate().valueOf() ||
-                pivot.getDate().valueOf() ==
-                  new Date(initialPivot).getDate().valueOf()
-                  ? "none"
-                  : "block",
-              cursor: "pointer",
-            }}
           />
           <DateButtons>
             {dates.map((date) => (

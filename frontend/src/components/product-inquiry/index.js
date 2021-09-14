@@ -18,6 +18,7 @@ import { createInquiry } from "../../services/users";
 import { FormErrorMessage } from "../elements";
 import Loading from "../loading";
 import ReactPixel from "react-facebook-pixel";
+import { Icon } from "@iconify/react";
 
 const inquiryTags = [
   {
@@ -112,12 +113,11 @@ const ProductInquiry = React.memo(({ listing }) => {
       ) : (
         <React.Fragment>
           <h2 className="btn-rubik">
-            Contact{" "}
-            <span id="property-developer">{listing.developer.name}</span>{" "}
-            directly &nbsp;
+            or contact {listing.developer.name} directly &nbsp;
+            {/* <span id="property-developer">{listing.developer.name}</span>{" "} */}
             <img src={check} alt="Check" />
           </h2>
-          <span>I want to inquire about...</span>
+          {/* <span>I want to inquire about...</span>
           <InquiryTags>
             {inquiryTags.map((tag) => (
               <Tag
@@ -139,14 +139,26 @@ const ProductInquiry = React.memo(({ listing }) => {
             value={additional}
             name="additional"
             onChange={(e) => setAdditional(e.target.value)}
-          ></LightTextarea>
+          ></LightTextarea> */}
           <InquiryButtons>
             <InquiryButtonsChild onClick={async () => await handleInquire()}>
-              <ButtonIcon src={email} alt="Email" />
+              <Icon
+                icon={"fluent:mail-16-filled"}
+                color="#3F526A"
+                width="1.2em"
+                height="1.2em"
+                style={{ marginRight: "0.5em" }}
+              />
               INQUIRE&nbsp;VIA&nbsp;EMAIL
             </InquiryButtonsChild>
             <InquiryButtonsChild onClick={async () => await handleInquire()}>
-              <ButtonIcon src={phone} alt="Phone" />
+              <Icon
+                icon={"bx:bxs-phone"}
+                color="#3F526A"
+                width="1.2em"
+                height="1.2em"
+                style={{ marginRight: "0.5em" }}
+              />
               INQUIRE&nbsp;VIA&nbsp;PHONE*
             </InquiryButtonsChild>
           </InquiryButtons>

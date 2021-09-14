@@ -245,6 +245,57 @@ const Listing = React.memo((props) => {
             </ProductTabContainer>
             <DescriptionContainer>
               <DescriptionLeft>
+                <MetadataLine>
+                  <div>
+                    <MetadataNumber>{listing.lot_size} sqm</MetadataNumber>
+                    <MetadataProperty>
+                      <img src={area} alt="Area" />
+                      <span>Lot Size</span>
+                    </MetadataProperty>
+                  </div>
+                  <div>
+                    <MetadataNumber>
+                      {`${listing.floor_size_min}${
+                        listing.floor_size_max
+                          ? `-${listing.floor_size_max}`
+                          : ""
+                      }`}{" "}
+                      sqm
+                    </MetadataNumber>
+                    <MetadataProperty>
+                      <img src={area} alt="Area" />
+                      <span>Floor Area</span>
+                    </MetadataProperty>
+                  </div>
+                  <div>
+                    <MetadataNumber>{listing.bedrooms}</MetadataNumber>
+                    <MetadataProperty>
+                      <img src={bed} alt="Bed" />
+                      <span>Bedrooms</span>
+                    </MetadataProperty>
+                  </div>
+                  <div>
+                    <MetadataNumber>
+                      {listing.bathrooms_min}
+                      {listing.bathrooms_max && "-" + listing.bathrooms_max}
+                    </MetadataNumber>
+                    <MetadataProperty>
+                      <img src={bath} alt="Bath" />
+                      <span>Bathrooms</span>
+                    </MetadataProperty>
+                  </div>
+                </MetadataLine>
+                <ProductPriceLine>
+                  <div>
+                    <img src={money} alt="Money" />
+                    <span className="body-dark">
+                      Est.&nbsp;Property&nbsp;Price
+                    </span>
+                  </div>
+                  <span className="dark-blue price">
+                    Php {listing.lowest_price.toLocaleString()}
+                  </span>
+                </ProductPriceLine>
                 <DescriptionDiv active={active == "overview"}>
                   <h4>OVERVIEW</h4>
                   <p>{listing.overview}</p>
@@ -364,57 +415,6 @@ const Listing = React.memo((props) => {
               </DescriptionLeft>
               <DescriptionRight>
                 <div className="sticky">
-                  <MetadataLine>
-                    <div>
-                      <MetadataNumber>{listing.lot_size} sqm</MetadataNumber>
-                      <MetadataProperty>
-                        <img src={area} alt="Area" />
-                        <span>Lot Size</span>
-                      </MetadataProperty>
-                    </div>
-                    <div>
-                      <MetadataNumber>
-                        {`${listing.floor_size_min}${
-                          listing.floor_size_max
-                            ? `-${listing.floor_size_max}`
-                            : ""
-                        }`}{" "}
-                        sqm
-                      </MetadataNumber>
-                      <MetadataProperty>
-                        <img src={area} alt="Area" />
-                        <span>Floor Area</span>
-                      </MetadataProperty>
-                    </div>
-                    <div>
-                      <MetadataNumber>{listing.bedrooms}</MetadataNumber>
-                      <MetadataProperty>
-                        <img src={bed} alt="Bed" />
-                        <span>Bedrooms</span>
-                      </MetadataProperty>
-                    </div>
-                    <div>
-                      <MetadataNumber>
-                        {listing.bathrooms_min}
-                        {listing.bathrooms_max && "-" + listing.bathrooms_max}
-                      </MetadataNumber>
-                      <MetadataProperty>
-                        <img src={bath} alt="Bath" />
-                        <span>Bathrooms</span>
-                      </MetadataProperty>
-                    </div>
-                  </MetadataLine>
-                  <ProductPriceLine>
-                    <div>
-                      <img src={money} alt="Money" />
-                      <span className="body-dark">
-                        Est.&nbsp;Property&nbsp;Price
-                      </span>
-                    </div>
-                    <span className="dark-blue">
-                      Php {listing.lowest_price.toLocaleString()}
-                    </span>
-                  </ProductPriceLine>
                   <ProductTour
                     Header={
                       <React.Fragment>

@@ -126,7 +126,7 @@ export const ProductTab = styled.a`
   font-size: 0.9em;
   font-weight: bold;
   color: ${({ theme, active }) =>
-    active ? theme.colors.mutedLightBlue : theme.colors.whiteInputColor};
+    active ? theme.colors.darkBlue : theme.colors.whiteInputColor};
   border-bottom: ${({ theme, active }) =>
     active ? `1.5px solid ${theme.colors.mutedLightBlue}` : "none"};
   margin-left: ${({ first }) => (first ? 0 : "1.5em")};
@@ -368,10 +368,16 @@ export const MetadataProperty = styled.div`
 export const ProductPriceLine = styled.div`
   display: flex;
   font-size: 1.3em;
-  margin-bottom: 2em;
+  padding-bottom: 1.5em;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mutedGray};
+  margin-bottom: 1.5em;
 
   img {
     margin-right: 10px;
+  }
+
+  .price {
+    font-weight: 500;
   }
 
   & > span {
