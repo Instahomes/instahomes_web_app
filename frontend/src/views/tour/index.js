@@ -26,6 +26,7 @@ const Tour = React.memo(() => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [additional, setAdditional] = useState("");
+  const [appInfo, setAppInfo] = useState({});
 
   const values = {
     selectedDate,
@@ -34,6 +35,7 @@ const Tour = React.memo(() => {
     name,
     email,
     additional,
+    appInfo,
   };
 
   const onChangeFuncs = {
@@ -43,6 +45,7 @@ const Tour = React.memo(() => {
     setName,
     setEmail,
     setAdditional,
+    setAppInfo,
   };
 
   useEffect(() => {

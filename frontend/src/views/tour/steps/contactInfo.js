@@ -11,7 +11,7 @@ import {
   TourTextarea,
   ContactFlex,
 } from "../styles";
-import { platformLabel } from "../../../components/tour";
+import { platformLabel, AdditionalInfoFields } from "../../../components/tour";
 import { videoApps } from "../constants";
 import ProductTour from "../../../components/product-tour";
 import { Icon } from "@iconify/react";
@@ -46,34 +46,40 @@ const ContactInfo = ({
             {platformLabel(props.theme, platform)}
           </span>
         </AlignFlexCenter>
-        <React.Fragment>
-          <h4>PREFERRED VIDEO CALL APP</h4>
-          <PlatformButtonsDiv>
-            {videoApps.map((app) => (
-              <TourOutlineButton
-                onClick={() => handleChooseApp(app)}
-                selected={isSelected(app)}
-                className="btn-rubik"
-                key={app}
-              >
-                <AlignFlexCenter
-                  style={{ justifyContent: "center" }}
-                  gap={"0.4em"}
+        {platform == "video" && (
+          <React.Fragment>
+            <h4>PREFERRED VIDEO CALL APPS</h4>
+            <PlatformButtonsDiv>
+              {videoApps.map((app) => (
+                <TourOutlineButton
+                  onClick={() => handleChooseApp(app)}
+                  selected={isSelected(app)}
+                  className="btn-rubik"
+                  key={app}
                 >
-                  {isSelected(app) && (
-                    <Icon
-                      icon={"akar-icons:check"}
-                      color={props.theme.colors.darkHeader}
-                      width="1.3em"
-                      height="1.3em"
-                    />
-                  )}
-                  {app}
-                </AlignFlexCenter>
-              </TourOutlineButton>
-            ))}
-          </PlatformButtonsDiv>
-        </React.Fragment>
+                  <AlignFlexCenter
+                    style={{ justifyContent: "center" }}
+                    gap={"0.4em"}
+                  >
+                    {isSelected(app) && (
+                      <Icon
+                        icon={"akar-icons:check"}
+                        color={props.theme.colors.darkHeader}
+                        width="1.3em"
+                        height="1.3em"
+                      />
+                    )}
+                    {app}
+                  </AlignFlexCenter>
+                </TourOutlineButton>
+              ))}
+            </PlatformButtonsDiv>
+            <AdditionalInfoFields
+              values={values}
+              onChangeFuncs={onChangeFuncs}
+            />
+          </React.Fragment>
+        )}
         <h4 style={{ marginBottom: "1em", marginTop: "2em" }}>
           CONTACT INFORMATION
         </h4>
