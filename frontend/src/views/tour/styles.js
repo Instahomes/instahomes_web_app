@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { OrangeButton } from "../../components/elements";
+import { OrangeButton, OutlineButton } from "../../components/elements";
 
 export const TourContainer = styled.main`
   padding: 2em var(--main-padding-x) 0 var(--main-padding-x);
@@ -119,8 +119,66 @@ export const TourOrangeButton = styled(OrangeButton)`
   background-color: ${({ theme, disabled }) =>
     disabled ? theme.colors.whiteInputColor : theme.colors.orange};
   color: ${({ theme }) => theme.colors.softWhite};
+  padding: 0.6em 4em;
+  margin-top: 1.5em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 100%;
   }
+`;
+
+export const PlatformButtonsDiv = styled.div`
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1em;
+`;
+
+export const TourOutlineButton = styled(OutlineButton)`
+  background-color: ${({ theme, selected }) =>
+    selected ? "#E6EDF5" : theme.colors.softWhite};
+  border: 2px solid ${({ theme }) => theme.colors.darkHeader};
+  color: ${({ theme }) => theme.colors.darkHeader};
+  text-transform: uppercase;
+  padding: 0.7em 0;
+  font-weight: 500;
+  font-size: 0.85em;
+  // flex: 1;
+`;
+
+export const TourInput = styled.input`
+  background-color: #f3f4f4;
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
+  border-radius: 5px;
+  color: ${({ theme }) => theme.colors.darkHeader};
+  font-size: 0.9em;
+  padding: 0.8em 1.3em;
+  min-width: 200px;
+  flex: 1 0 200px;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.darkGray};
+  }
+`;
+
+export const TourTextarea = styled.textarea`
+  background-color: #f3f4f4;
+  border: 1px solid ${({ theme }) => theme.colors.whiteInputColor};
+  border-radius: 5px;
+  color: ${({ theme }) => theme.colors.darkHeader};
+  font-size: 0.9em;
+  padding: 0.8em 1.3em;
+  resize: none;
+  height: 80px;
+  flex: 1;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.darkGray};
+  }
+`;
+
+export const ContactFlex = styled.div`
+  display: flex;
+  gap: 1em;
+  margin-bottom: 1em;
 `;
