@@ -18,6 +18,7 @@ const BookSchedule = ({
   onChangeFuncs,
   ...props
 }) => {
+  console.log(values);
   return (
     <TourContainer>
       <ContentContainer>
@@ -59,6 +60,7 @@ const BookSchedule = ({
           parentSetSelectedDate={onChangeFuncs.setSelectedDate}
           parentSetSelectedTime={onChangeFuncs.setSelectedTime}
           initialSelectedDate={props.initialSelectedDate}
+          initialSelectedTime={props.initialSelectedTime}
           platform={platform}
           scale={0.85}
           withTime

@@ -92,6 +92,10 @@ export const TimeButtonsDiv = styled.div`
   gap: 0 1em;
   font-size: 0.8em;
   justify-items: center;
+
+  @media (max-width: 320px) {
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  }
 `;
 
 export const TimeButton = styled(DateButton)`

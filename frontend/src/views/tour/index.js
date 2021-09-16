@@ -76,7 +76,8 @@ const Tour = React.memo(() => {
           <Wizard
             listing={listing}
             platform={platform}
-            initialSelectedDate={initialSelectedDate}
+            initialSelectedDate={initialSelectedDate || selectedDate}
+            initialSelectedTime={selectedTime}
             values={values}
             onChangeFuncs={onChangeFuncs}
           >

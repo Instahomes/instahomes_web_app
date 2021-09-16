@@ -4,6 +4,7 @@ import {
   TourOrangeButton,
   ContentContainer,
   ListingImageContainer,
+  MobileListingImageContainer,
   AlignFlexCenter,
   PlatformButtonsDiv,
   TourOutlineButton,
@@ -11,9 +12,12 @@ import {
   TourTextarea,
   ContactFlex,
 } from "../styles";
-import { platformLabel, AdditionalInfoFields } from "../../../components/tour";
+import {
+  platformLabel,
+  AdditionalInfoFields,
+  DateTimeInfo,
+} from "../../../components/tour";
 import { videoApps } from "../constants";
-import ProductTour from "../../../components/product-tour";
 import { Icon } from "@iconify/react";
 
 const ContactInfo = ({
@@ -21,6 +25,7 @@ const ContactInfo = ({
   platform,
   values,
   onChangeFuncs,
+  previous,
   ...props
 }) => {
   const isSelected = (app) => values.preferredApps.includes(app);
@@ -46,6 +51,15 @@ const ContactInfo = ({
             {platformLabel(props.theme, platform)}
           </span>
         </AlignFlexCenter>
+        <div style={{ marginTop: "1.5em" }}>
+          <MobileListingImageContainer mainImage={listing.photo_main} />
+          <DateTimeInfo
+            date={values.selectedDate}
+            time={values.selectedTime}
+            previous={previous}
+            className="mobile-only"
+          />
+        </div>
         {platform == "video" && (
           <React.Fragment>
             <h4>PREFERRED VIDEO CALL APPS</h4>
@@ -112,7 +126,13 @@ const ContactInfo = ({
           BOOK TOUR
         </TourOrangeButton>
       </ContentContainer>
-      <ListingImageContainer mainImage={listing.photo_main} />
+      <ListingImageContainer mainImage={listing.photo_main}>
+        <DateTimeInfo
+          date={values.selectedDate}
+          time={values.selectedTime}
+          previous={previous}
+        />
+      </ListingImageContainer>
     </TourContainer>
   );
 };

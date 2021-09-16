@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
-import { TourInput } from "../../views/tour/styles";
+import { TourInput, DateTimeInfoContainer } from "../../views/tour/styles";
 import { videoApps, videoAppsPlaceholders } from "../../views/tour/constants";
 
 export const platformLabel = (theme, platform) => {
@@ -42,6 +42,7 @@ export const Wizard = withTheme(
     theme,
     platform,
     initialSelectedDate,
+    initialSelectedTime,
     values,
     onChangeFuncs,
   }) => {
@@ -67,6 +68,7 @@ export const Wizard = withTheme(
               theme,
               platform,
               initialSelectedDate,
+              initialSelectedTime,
               values,
               onChangeFuncs,
               previous,
@@ -106,3 +108,45 @@ export const AdditionalInfoFields = ({ values, onChangeFuncs }) => {
     ));
   return finalInputs;
 };
+
+export const DateTimeInfo = withTheme(
+  ({ date, time, theme, previous, className }) => {
+    const chosenDateTime = new Date(date + " " + time);
+
+    Date.prototype.addHours = function (h) {
+      const newDate = new Date();
+      newDate.setTime(this.getTime() + h * 60 * 60 * 1000);
+      return newDate;
+    };
+
+    return (
+      <DateTimeInfoContainer className={className}>
+        <h1>
+          {chosenDateTime.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+          })}
+        </h1>
+        <h2>
+          {chosenDateTime.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}{" "}
+          -{" "}
+          {chosenDateTime
+            .addHours(1)
+            .toLocaleTimeString([], { hour: "numeric", minute: "numeric" })}
+        </h2>
+        <span onClick={previous}>
+          <Icon
+            icon={"fluent:arrow-swap-20-filled"}
+            color={theme.colors.darkBody}
+            width="1.3em"
+            height="1.3em"
+          />
+          Change Date/Time
+        </span>
+      </DateTimeInfoContainer>
+    );
+  }
+);

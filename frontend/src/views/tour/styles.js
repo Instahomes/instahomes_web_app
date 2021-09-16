@@ -23,6 +23,8 @@ export const TourContainer = styled.main`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column;
+    gap: 2em;
     min-height: calc(100vh - 48px - 32px - 1.5rem);
 
     h4 {
@@ -59,6 +61,7 @@ export const ContentContainer = styled.div`
 `;
 
 export const ListingImageContainer = styled.div`
+  position: relative;
   border-radius: 20px;
   width: 420px;
   min-height: inherit;
@@ -67,6 +70,21 @@ export const ListingImageContainer = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
+  }
+`;
+
+export const MobileListingImageContainer = styled.div`
+  display: none;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: block;
+    z-index: 1;
+    border-radius: 20px;
+    width: 100%;
+    height: 150px;
+    background: url(${({ mainImage }) => mainImage});
+    background-size: cover;
+    background-position: center;
   }
 `;
 
@@ -130,14 +148,14 @@ export const TourOrangeButton = styled(OrangeButton)`
 export const PlatformButtonsDiv = styled.div`
   margin-top: 1em;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 1em;
 `;
 
 export const TourOutlineButton = styled(OutlineButton)`
   background-color: ${({ theme, selected }) =>
     selected ? "#E6EDF5" : theme.colors.softWhite};
-  border: 2px solid ${({ theme }) => theme.colors.darkHeader};
+  border: 1.5px solid ${({ theme }) => theme.colors.darkHeader};
   color: ${({ theme }) => theme.colors.darkHeader};
   text-transform: uppercase;
   padding: 0.7em 0;
@@ -158,6 +176,11 @@ export const TourInput = styled.input`
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.darkGray};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    box-sizing: border-box;
+    width: 100%;
   }
 `;
 
@@ -181,4 +204,63 @@ export const ContactFlex = styled.div`
   display: flex;
   gap: 1em;
   margin-bottom: 1em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column;
+
+    & > input {
+      flex: 1;
+    }
+  }
+`;
+
+export const DateTimeInfoContainer = styled.div`
+  background: ${({ theme }) => theme.colors.mainBg};
+  box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 19px;
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  padding: 1em 2em;
+
+  h1 {
+    font-family: Rubik, sans-serif;
+    font-size: 1.4em;
+    color: ${({ theme }) => theme.colors.darkBlue};
+  }
+
+  h2 {
+    margin-top: 6px;
+    margin-bottom: 5px;
+    font-family: Rubik, sans-serif;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.darkBlue};
+  }
+
+  span {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.darkBody};
+    font-size: 0.7em;
+    display: flex;
+    align-items; center;
+    gap: 10px;
+  }
+
+  &.mobile-only {
+    display: none;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    position: static;
+    width: 120px;
+    margin: auto;
+    margin-top: -20px;
+    font-size: 0.9em;
+    z-index: 10;
+
+    &.mobile-only {
+      display: block;
+    }
+  }
 `;

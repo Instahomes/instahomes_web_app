@@ -65,13 +65,16 @@ const ProductTour = withTheme(
     Header,
     scale,
     initialSelectedDate,
+    initialSelectedTime,
     parentSetSelectedDate,
     parentSetSelectedTime,
   }) => {
     const [selectedDate, setSelectedDate] = useState(
       initialSelectedDate || null
     );
-    const [selectedTime, setSelectedTime] = useState(null);
+    const [selectedTime, setSelectedTime] = useState(
+      initialSelectedTime || null
+    );
     const [pivot, setPivot] = useState(
       initialSelectedDate ? new Date(initialSelectedDate) : new Date()
     );
