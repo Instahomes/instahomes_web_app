@@ -241,6 +241,15 @@ export const DateTimeInfoContainer = styled.div`
     font-size: 0.9em;
     font-weight: 500;
     color: ${({ theme }) => theme.colors.darkBlue};
+    
+    &.month {
+      font-size: 1em;
+      cursor: pointer;
+    }
+    
+    &.selected {
+      color: ${({ theme }) => theme.colors.darkGray};
+    }
   }
 
   span {
@@ -268,4 +277,12 @@ export const DateTimeInfoContainer = styled.div`
       display: block;
     }
   }
+`;
+
+export const MonthsDropdownContainer = styled(DateTimeInfoContainer)`
+  top: 2em;
+  background: ${({ theme }) => theme.colors.mainBgColor};
+  box-shadow: 0px 1px 16px rgba(0, 0, 0, 0.1);
+  bottom: initial;
+  left: initial;
 `;

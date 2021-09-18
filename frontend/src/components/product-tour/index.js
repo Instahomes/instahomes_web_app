@@ -115,7 +115,7 @@ const ProductTour = withTheme(
 
     return (
       <ProductInquiryContainer scale={scale || 1}>
-        {Header}
+        {<Header pivot={pivot} setPivot={setPivot} />}
         <DateButtonsDiv>
           <img
             src={leftArrow}

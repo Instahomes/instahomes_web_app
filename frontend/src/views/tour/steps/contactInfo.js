@@ -100,6 +100,7 @@ const ContactInfo = ({
             <AdditionalInfoFields
               values={values}
               setFieldValue={setFieldValue}
+              errors={errors}
             />
           </React.Fragment>
         )}

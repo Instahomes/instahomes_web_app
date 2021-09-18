@@ -416,7 +416,7 @@ const Listing = React.memo((props) => {
               <DescriptionRight>
                 <div className="sticky">
                   <ProductTour
-                    Header={
+                    Header={() => (
                       <React.Fragment>
                         <h2 className="btn-rubik">
                           Book a tour in this home
@@ -434,7 +434,7 @@ const Listing = React.memo((props) => {
                           *Subject to availability of Developer
                         </i>
                       </React.Fragment>
-                    }
+                    )}
                     showButtons
                   />
                   <br />

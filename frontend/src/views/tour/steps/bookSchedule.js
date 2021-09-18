@@ -7,9 +7,27 @@ import {
   AlignFlexCenter,
   ListingInfoDiv,
 } from "../styles";
-import { platformLabel } from "../../../components/tour";
+import { platformLabel, MonthsDropdown } from "../../../components/tour";
 import ProductTour from "../../../components/product-tour";
 import { Icon } from "@iconify/react";
+
+const Header = ({ pivot, setPivot }) => {
+  return (
+    <AlignFlexCenter
+      gap={"0.7em"}
+      style={{ marginBottom: "1em", position: "relative" }}
+    >
+      <h2 className="btn-rubik">September</h2>
+      <Icon
+        icon={"ph:caret-down-bold"}
+        color="#E0E0E0"
+        width="1em"
+        height="1em"
+      />
+      <MonthsDropdown pivot={pivot} setPivot={setPivot} />
+    </AlignFlexCenter>
+  );
+};
 
 const BookSchedule = ({
   listing,
@@ -68,17 +86,7 @@ const BookSchedule = ({
           platform={platform}
           scale={0.85}
           withTime
-          Header={
-            <AlignFlexCenter gap={"0.7em"} style={{ marginBottom: "1em" }}>
-              <h2 className="btn-rubik">September</h2>
-              <Icon
-                icon={"ph:caret-down-bold"}
-                color="#E0E0E0"
-                width="1em"
-                height="1em"
-              />
-            </AlignFlexCenter>
-          }
+          Header={(props) => <Header {...props} />}
         />
         <TourOrangeButton
           type="submit"

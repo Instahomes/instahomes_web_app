@@ -15,7 +15,11 @@ export const videoApps = [
 export const videoAppsValidation = (schema) => ({
   [VIDEO_CALL_ZOOM]: {
     placeholder: "Zoom Email",
-    schema: schema && schema.email("Please enter a valid email").required(),
+    schema:
+      schema &&
+      schema
+        .email("Please enter a valid email")
+        .required("Contact info is a required field"),
   },
   [VIDEO_CALL_MESSENGER]: {
     placeholder: "Messenger / FB Link",
@@ -26,11 +30,15 @@ export const videoAppsValidation = (schema) => ({
           /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
           "Please enter the URL to your Facebook account (e.g. facebook.com/username)"
         )
-        .required(),
+        .required("Contact info is a required field"),
   },
   [VIDEO_CALL_GMEET]: {
     placeholder: "Email for Google Meet",
-    schema: schema && schema.email("Please enter a valid email").required(),
+    schema:
+      schema &&
+      schema
+        .email("Please enter a valid email")
+        .required("Contact info is a required field"),
   },
   [VIDEO_CALL_WHATSAPP]: {
     placeholder: "Whatsapp Number",
@@ -41,7 +49,7 @@ export const videoAppsValidation = (schema) => ({
           /^\+639\d{9}$/,
           "Please follow the correct format: +639171234567"
         )
-        .required(),
+        .required("Contact info is a required field"),
   },
   [VIDEO_CALL_VIBER]: {
     placeholder: "Viber Number",
@@ -52,7 +60,7 @@ export const videoAppsValidation = (schema) => ({
           /^\+639\d{9}$/,
           "Please follow the correct format: +639171234567"
         )
-        .required(),
+        .required("Contact info is a required field"),
   },
 });
 

@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
-import { TourInput, DateTimeInfoContainer } from "../../views/tour/styles";
-import { videoApps, videoAppsValidation } from "../../views/tour/constants";
+import {
+  TourInput,
+  DateTimeInfoContainer,
+  MonthsDropdownContainer,
+} from "../../views/tour/styles";
+import { videoAppsValidation } from "../../views/tour/constants";
 import { Formik, Form } from "formik";
+import { FormErrorMessage } from "../../components/elements";
+import dayjs from "dayjs";
 
 export const platformLabel = (theme, platform) => {
   switch (platform) {
@@ -131,7 +137,7 @@ const AppContactInput = ({ values, setFieldValue, app, placeholder }) => {
   );
 };
 
-export const AdditionalInfoFields = ({ values, setFieldValue }) => {
+export const AdditionalInfoFields = ({ values, setFieldValue, errors }) => {
   const { preferredApps } = values;
   const finalInputs = preferredApps.map((app) => (
     <AppContactInput
@@ -142,16 +148,26 @@ export const AdditionalInfoFields = ({ values, setFieldValue }) => {
     />
   ));
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "1em",
-        marginTop: "1em",
-      }}
-    >
-      {finalInputs}
-    </div>
+    <React.Fragment>
+      {errors.preferredApps &&
+        errors.preferredApps.map((error) =>
+          Object.entries(error).map(([key, value]) => (
+            <FormErrorMessage as="div" style={{ marginTop: "1em" }}>
+              {value}
+            </FormErrorMessage>
+          ))
+        )}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "1em",
+          marginTop: "1em",
+        }}
+      >
+        {finalInputs}
+      </div>
+    </React.Fragment>
   );
 };
 
@@ -196,3 +212,28 @@ export const DateTimeInfo = withTheme(
     );
   }
 );
+
+export const MonthsDropdown = withTheme(({ pivot, setPivot, className }) => {
+  const rawMonths = [];
+  let dayIncrement = dayjs();
+  const endOfYear = dayIncrement.endOf("year");
+  while (dayIncrement.isBefore(endOfYear)) {
+    rawMonths.push(dayIncrement);
+    dayIncrement = dayIncrement.add(1, "month");
+  }
+
+  const pivotDate = dayjs(pivot);
+  return (
+    <MonthsDropdownContainer className={className}>
+      {rawMonths.map((rawMonth) => (
+        <h2
+          className={`month ${
+            pivotDate.month() == rawMonth.month() ? "selected" : ""
+          }`}
+        >
+          {rawMonth.format("MMMM")}
+        </h2>
+      ))}
+    </MonthsDropdownContainer>
+  );
+});
