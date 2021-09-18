@@ -10,7 +10,7 @@ import * as Yup from "yup";
 
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
-import { isAuthenticated } from "../../services/auth";
+import { getProfile } from "../../services/auth";
 import { useRouteMatch, useLocation } from "react-router-dom";
 import { videoAppSchema } from "./constants";
 
@@ -21,6 +21,9 @@ const Tour = React.memo(() => {
   const [isEmpty, setIsEmpty] = useState(false);
   const { platform = "video", selectedDate: initialSelectedDate } =
     location.state || {};
+
+  const profile = getProfile() || {};
+  const { name, email } = profile;
 
   useEffect(() => {
     const listingCallback = (listing) => {
@@ -52,8 +55,8 @@ const Tour = React.memo(() => {
               selectedDate: initialSelectedDate || null,
               selectedTime: null,
               preferredApps: [],
-              name: "",
-              email: "",
+              name: name || "",
+              email: email || "",
               additional: "",
             }}
             listing={listing}
