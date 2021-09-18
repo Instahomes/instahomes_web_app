@@ -19,26 +19,35 @@ import {
 } from "../../../components/tour";
 import { videoApps } from "../constants";
 import { Icon } from "@iconify/react";
+import { Field } from "formik";
 
 const ContactInfo = ({
   listing,
   platform,
   values,
-  onChangeFuncs,
+  errors,
+  setFieldValue,
+  handleChange,
+  handleBlur,
+  isSubmitting,
   previous,
   ...props
 }) => {
-  const isSelected = (app) => values.preferredApps.includes(app);
+  const isSelected = (app) =>
+    !!values.preferredApps.filter((curr) => app == curr.app).length;
 
   const handleChooseApp = (app) => {
     if (isSelected(app)) {
-      const index = values.preferredApps.findIndex((curr) => curr == app);
-      onChangeFuncs.setPreferredApps([
+      const index = values.preferredApps.findIndex((curr) => curr.app == app);
+      setFieldValue("preferredApps", [
         ...values.preferredApps.slice(0, index),
         ...values.preferredApps.slice(index + 1),
       ]);
     } else {
-      onChangeFuncs.setPreferredApps([...values.preferredApps, app]);
+      setFieldValue("preferredApps", [
+        ...values.preferredApps,
+        { app, contact: "" },
+      ]);
     }
   };
 
@@ -90,7 +99,7 @@ const ContactInfo = ({
             </PlatformButtonsDiv>
             <AdditionalInfoFields
               values={values}
-              onChangeFuncs={onChangeFuncs}
+              setFieldValue={setFieldValue}
             />
           </React.Fragment>
         )}
@@ -98,28 +107,31 @@ const ContactInfo = ({
           CONTACT INFORMATION
         </h4>
         <ContactFlex>
+          <TourInput as={Field} name="name" placeholder="Full Name" />
           <TourInput
-            name="name"
-            onChange={(e) => onChangeFuncs.setName(e.target.value)}
-            placeholder="Full Name"
-          />
-          <TourInput
+            as={Field}
             name="email"
             type="email"
-            onChange={(e) => onChangeFuncs.setEmail(e.target.value)}
             placeholder="Email Address"
           />
         </ContactFlex>
         <ContactFlex>
           <TourTextarea
             name="additional"
+            onChange={handleChange}
+            onBlur={handleBlur}
             placeholder="Additional Notes"
-            onChange={(e) => onChangeFuncs.setAdditional(e.target.value)}
           />
         </ContactFlex>
         <TourOrangeButton
+          type="submit"
           disabled={
-            !values.name || !values.email || !values.preferredApps.length
+            !values.name ||
+            errors.name ||
+            !values.email ||
+            errors.email ||
+            !values.preferredApps.length ||
+            errors.preferredApps
           }
           scale={1}
         >

@@ -125,6 +125,7 @@ const ProductTour = withTheme(
           <DateButtons>
             {dates.map((date) => (
               <DateButton
+                type="button"
                 onClick={() => setSelectedDate(date.value)}
                 selected={selectedDate == date.value}
                 disabled={date.rawDate < new Date()}
@@ -147,6 +148,7 @@ const ProductTour = withTheme(
           <TimeButtonsDiv>
             {times.map((time) => (
               <TimeButton
+                type="button"
                 onClick={() => setSelectedTime(time.value)}
                 selected={selectedTime == time.value}
               >

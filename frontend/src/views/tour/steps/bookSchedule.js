@@ -15,10 +15,10 @@ const BookSchedule = ({
   listing,
   platform,
   values,
-  onChangeFuncs,
+  errors,
+  setFieldValue,
   ...props
 }) => {
-  console.log(values);
   return (
     <TourContainer>
       <ContentContainer>
@@ -57,10 +57,14 @@ const BookSchedule = ({
         </ListingInfoDiv>
         <h4 style={{ marginBottom: "1em", marginTop: "2em" }}>DATE & TIME</h4>
         <ProductTour
-          parentSetSelectedDate={onChangeFuncs.setSelectedDate}
-          parentSetSelectedTime={onChangeFuncs.setSelectedTime}
-          initialSelectedDate={props.initialSelectedDate}
-          initialSelectedTime={props.initialSelectedTime}
+          parentSetSelectedDate={(value) =>
+            setFieldValue("selectedDate", value)
+          }
+          parentSetSelectedTime={(value) =>
+            setFieldValue("selectedTime", value)
+          }
+          initialSelectedDate={values.selectedDate}
+          initialSelectedTime={values.selectedTime}
           platform={platform}
           scale={0.85}
           withTime
@@ -77,8 +81,13 @@ const BookSchedule = ({
           }
         />
         <TourOrangeButton
-          onClick={props.next}
-          disabled={!values.selectedDate || !values.selectedTime}
+          type="submit"
+          disabled={
+            !values.selectedDate ||
+            errors.selectedDate ||
+            !values.selectedTime ||
+            errors.selectedTime
+          }
           scale={1}
         >
           NEXT PAGE

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
 import { TourInput, DateTimeInfoContainer } from "../../views/tour/styles";
-import { videoApps, videoAppsPlaceholders } from "../../views/tour/constants";
+import { videoApps, videoAppsValidation } from "../../views/tour/constants";
+import { Formik, Form } from "formik";
 
 export const platformLabel = (theme, platform) => {
   switch (platform) {
@@ -36,77 +37,122 @@ export const platformLabel = (theme, platform) => {
 };
 
 export const Wizard = withTheme(
-  ({
-    children,
-    listing,
-    theme,
-    platform,
-    initialSelectedDate,
-    initialSelectedTime,
-    values,
-    onChangeFuncs,
-  }) => {
+  ({ children, initialValues, listing, theme, platform, onSubmit }) => {
     const [stepNumber, setStepNumber] = useState(0);
     const steps = React.Children.toArray(children);
+    const [snapshot, setSnapshot] = useState(initialValues);
 
     const step = steps[stepNumber];
     const totalSteps = steps.length;
+    const isLastStep = stepNumber === totalSteps - 1;
 
-    const next = () => {
+    const next = (values) => {
+      setSnapshot(values);
       setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
     };
 
-    const previous = () => {
+    const previous = (values) => {
+      setSnapshot(values);
       setStepNumber(Math.max(stepNumber - 1, 0));
     };
 
+    const handleSubmit = async (values, bag) => {
+      if (isLastStep) {
+        return onSubmit(values, bag);
+      } else {
+        bag.setTouched({});
+        next(values);
+      }
+    };
+
     return (
-      <React.Fragment>
-        {React.isValidElement(step)
-          ? React.cloneElement(step, {
-              listing,
-              theme,
-              platform,
-              initialSelectedDate,
-              initialSelectedTime,
-              values,
-              onChangeFuncs,
-              previous,
-              next,
-            })
-          : step}
-      </React.Fragment>
+      <Formik
+        initialValues={snapshot}
+        onSubmit={handleSubmit}
+        validationSchema={step.props.validationSchema}
+      >
+        {({
+          isSubmitting,
+          values,
+          setFieldValue,
+          isValid,
+          errors,
+          touched,
+          handleChange,
+        }) => (
+          <Form>
+            {React.isValidElement(step)
+              ? React.cloneElement(step, {
+                  isSubmitting,
+                  values,
+                  listing,
+                  theme,
+                  platform,
+                  setFieldValue,
+                  errors,
+                  touched,
+                  isValid,
+                  handleChange,
+                  previous,
+                })
+              : step}
+          </Form>
+        )}
+      </Formik>
     );
   }
 );
 
-const AppContactInput = ({ values, onChangeFuncs, app, placeholder }) => (
-  <TourInput
-    name={app}
-    onChangeFuncs={(e) =>
-      onChangeFuncs.setAppInfo({ ...values.appInfo, [app]: e.target.value })
-    }
-    placeholder={placeholder}
-    style={{ marginTop: "0.5em" }}
-  />
-);
-
-export const AdditionalInfoFields = ({ values, onChangeFuncs }) => {
+const AppContactInput = ({ values, setFieldValue, app, placeholder }) => {
   const { preferredApps } = values;
-  const finalInputs = videoApps
-    .filter((app) => preferredApps.includes(app))
-    .map((app) => (
-      <React.Fragment>
-        <br />
-        <AppContactInput
-          values={values}
-          onChangeFuncs={onChangeFuncs}
-          app={app}
-          placeholder={videoAppsPlaceholders[app]}
-        />
-      </React.Fragment>
-    ));
-  return finalInputs;
+  const currAppIndex = preferredApps.findIndex((curr) => curr.app == app);
+  return (
+    <TourInput
+      name={app}
+      placeholder={placeholder}
+      value={preferredApps[currAppIndex].contact}
+      style={{ flex: 1, minWidth: "auto" }}
+      onChange={(e) => {
+        const newValue = (value) => [
+          ...preferredApps.slice(0, currAppIndex),
+          { app, contact: value },
+          ...preferredApps.slice(currAppIndex + 1),
+        ];
+        if (e.target.value.startsWith("09")) {
+          setFieldValue(
+            "preferredApps",
+            newValue("+639" + e.target.value.substring(2))
+          );
+        } else {
+          setFieldValue("preferredApps", newValue(e.target.value));
+        }
+      }}
+    />
+  );
+};
+
+export const AdditionalInfoFields = ({ values, setFieldValue }) => {
+  const { preferredApps } = values;
+  const finalInputs = preferredApps.map((app) => (
+    <AppContactInput
+      values={values}
+      setFieldValue={setFieldValue}
+      app={app.app}
+      placeholder={videoAppsValidation()[app.app].placeholder}
+    />
+  ));
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: "1em",
+        marginTop: "1em",
+      }}
+    >
+      {finalInputs}
+    </div>
+  );
 };
 
 export const DateTimeInfo = withTheme(
@@ -129,8 +175,8 @@ export const DateTimeInfo = withTheme(
         </h1>
         <h2>
           {chosenDateTime.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
+            hour: "numeric",
+            minute: "numeric",
           })}{" "}
           -{" "}
           {chosenDateTime

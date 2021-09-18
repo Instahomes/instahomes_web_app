@@ -133,7 +133,12 @@ export const ListingInfoDiv = styled.div`
   }
 `;
 
-export const TourOrangeButton = styled(OrangeButton)`
+export const TourOrangeButton = styled(OrangeButton).attrs(
+  ({ type, disabled }) => ({
+    type: type || "button",
+    disabled,
+  })
+)`
   background-color: ${({ theme, disabled }) =>
     disabled ? theme.colors.whiteInputColor : theme.colors.orange};
   color: ${({ theme }) => theme.colors.softWhite};
