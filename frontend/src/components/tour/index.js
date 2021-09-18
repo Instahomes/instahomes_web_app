@@ -173,31 +173,13 @@ export const AdditionalInfoFields = ({ values, setFieldValue, errors }) => {
 
 export const DateTimeInfo = withTheme(
   ({ date, time, theme, previous, className }) => {
-    const chosenDateTime = new Date(date + " " + time);
-
-    Date.prototype.addHours = function (h) {
-      const newDate = new Date();
-      newDate.setTime(this.getTime() + h * 60 * 60 * 1000);
-      return newDate;
-    };
-
+    const chosenDateTime = dayjs(date + " " + time);
     return (
       <DateTimeInfoContainer className={className}>
-        <h1>
-          {chosenDateTime.toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-          })}
-        </h1>
+        <h1>{chosenDateTime.format("MMMM D")}</h1>
         <h2>
-          {chosenDateTime.toLocaleTimeString([], {
-            hour: "numeric",
-            minute: "numeric",
-          })}{" "}
-          -{" "}
-          {chosenDateTime
-            .addHours(1)
-            .toLocaleTimeString([], { hour: "numeric", minute: "numeric" })}
+          {chosenDateTime.format("h:mm A")} -{" "}
+          {chosenDateTime.add(1, "hour").format("h:mm A")}
         </h2>
         <span onClick={previous}>
           <Icon
@@ -213,27 +195,35 @@ export const DateTimeInfo = withTheme(
   }
 );
 
-export const MonthsDropdown = withTheme(({ pivot, setPivot, className }) => {
-  const rawMonths = [];
-  let dayIncrement = dayjs();
-  const endOfYear = dayIncrement.endOf("year");
-  while (dayIncrement.isBefore(endOfYear)) {
-    rawMonths.push(dayIncrement);
-    dayIncrement = dayIncrement.add(1, "month");
-  }
+export const MonthsDropdown = withTheme(
+  ({ pivot, setPivot, setOpen, className }) => {
+    const rawMonths = [];
+    let dayIncrement = dayjs();
+    const endOfYear = dayIncrement.endOf("year");
+    while (dayIncrement.isBefore(endOfYear)) {
+      rawMonths.push(dayIncrement);
+      dayIncrement = dayIncrement.add(1, "month");
+    }
 
-  const pivotDate = dayjs(pivot);
-  return (
-    <MonthsDropdownContainer className={className}>
-      {rawMonths.map((rawMonth) => (
-        <h2
-          className={`month ${
-            pivotDate.month() == rawMonth.month() ? "selected" : ""
-          }`}
-        >
-          {rawMonth.format("MMMM")}
-        </h2>
-      ))}
-    </MonthsDropdownContainer>
-  );
-});
+    const handleClick = (month) => {
+      setOpen(false);
+      setPivot(month.date(1));
+    };
+
+    const pivotDate = dayjs(pivot);
+    return (
+      <MonthsDropdownContainer className={className}>
+        {rawMonths.map((rawMonth) => (
+          <h2
+            className={`month ${
+              pivotDate.month() == rawMonth.month() ? "selected" : ""
+            }`}
+            onClick={() => handleClick(rawMonth)}
+          >
+            {rawMonth.format("MMMM")}
+          </h2>
+        ))}
+      </MonthsDropdownContainer>
+    );
+  }
+);

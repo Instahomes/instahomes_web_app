@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TourContainer,
   TourOrangeButton,
@@ -12,19 +12,26 @@ import ProductTour from "../../../components/product-tour";
 import { Icon } from "@iconify/react";
 
 const Header = ({ pivot, setPivot }) => {
+  const [open, setOpen] = useState(false);
+
   return (
     <AlignFlexCenter
       gap={"0.7em"}
       style={{ marginBottom: "1em", position: "relative" }}
     >
-      <h2 className="btn-rubik">September</h2>
+      <h2 className="btn-rubik" onClick={() => setOpen(!open)}>
+        {pivot.format("MMMM")}
+      </h2>
       <Icon
         icon={"ph:caret-down-bold"}
         color="#E0E0E0"
         width="1em"
         height="1em"
+        onClick={() => setOpen(!open)}
       />
-      <MonthsDropdown pivot={pivot} setPivot={setPivot} />
+      {open && (
+        <MonthsDropdown pivot={pivot} setPivot={setPivot} setOpen={setOpen} />
+      )}
     </AlignFlexCenter>
   );
 };

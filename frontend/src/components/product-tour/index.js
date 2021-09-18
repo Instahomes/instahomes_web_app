@@ -13,28 +13,24 @@ import {
 } from "./styles";
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
-import { dayStrings, times } from "./constants";
+import { times } from "./constants";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import dayjs from "dayjs";
 
 const getWeekFromPivot = (pivot, numDays = 7) => {
-  let dayOfPivot = pivot.getDay();
-  let startDate = new Date(pivot);
-  if (numDays == 7) startDate.setDate(pivot.getDate() - dayOfPivot);
+  let startDate = pivot;
+  if (numDays == 7) startDate = startDate.day(0);
 
-  let dateNextWeek = new Date(startDate);
-  dateNextWeek.setDate(startDate.getDate() + numDays);
+  let dateNextWeek = startDate.add(numDays, "day");
 
   let arrOfDates = [];
-  for (
-    var dt = new Date(startDate);
-    dt < dateNextWeek;
-    dt.setDate(dt.getDate() + 1)
-  ) {
-    let currDate = new Date(dt);
+  let currDate = startDate;
+  while (currDate.isBefore(dateNextWeek)) {
     arrOfDates.push({
       rawDate: currDate,
-      value: currDate.toISOString().slice(0, 10),
+      value: currDate.format("YYYY-MM-DD"),
     });
+    currDate = currDate.add(1, "day");
   }
   return arrOfDates;
 };
@@ -76,7 +72,7 @@ const ProductTour = withTheme(
       initialSelectedTime || null
     );
     const [pivot, setPivot] = useState(
-      initialSelectedDate ? new Date(initialSelectedDate) : new Date()
+      initialSelectedDate ? dayjs(initialSelectedDate) : dayjs()
     );
     const [daysInterval, setDaysInterval] = useState(computeDays(theme));
     const history = useHistory();
@@ -103,10 +99,9 @@ const ProductTour = withTheme(
     };
 
     const changePivot = (isPlus) => {
-      let newDate = new Date(pivot);
-      newDate.setDate(
-        isPlus ? pivot.getDate() + daysInterval : pivot.getDate() - daysInterval
-      );
+      const newDate = isPlus
+        ? pivot.add(daysInterval, "day")
+        : pivot.subtract(daysInterval, "day");
       setPivot(newDate);
     };
 
@@ -128,11 +123,11 @@ const ProductTour = withTheme(
                 type="button"
                 onClick={() => setSelectedDate(date.value)}
                 selected={selectedDate == date.value}
-                disabled={date.rawDate < new Date()}
+                disabled={date.rawDate.isBefore(dayjs())}
               >
-                <h2 className="btn-rubik">{date.rawDate.getDate()}</h2>
+                <h2 className="btn-rubik">{date.rawDate.date()}</h2>
                 <span className="day-of-week">
-                  {dayStrings[date.rawDate.getDay()]}
+                  {date.rawDate.format("ddd")}
                 </span>
               </DateButton>
             ))}

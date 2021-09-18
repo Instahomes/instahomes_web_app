@@ -1,13 +1,3 @@
-export const dayStrings = {
-  0: "Sun",
-  1: "Mon",
-  2: "Tues",
-  3: "Wed",
-  4: "Thurs",
-  5: "Fri",
-  6: "Sat",
-};
-
 export const times = [
   { value: "09:00", label: "9:00", period: "AM" },
   { value: "10:00", label: "10:00", period: "AM" },
