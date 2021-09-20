@@ -149,14 +149,17 @@ export const AdditionalInfoFields = ({ values, setFieldValue, errors }) => {
   ));
   return (
     <React.Fragment>
-      {errors.preferredApps &&
-        errors.preferredApps.map((error) =>
-          Object.entries(error).map(([key, value]) => (
-            <FormErrorMessage as="div" style={{ marginTop: "1em" }}>
-              {value}
-            </FormErrorMessage>
-          ))
-        )}
+      {errors.preferredApps && errors.preferredApps.length && (
+        <FormErrorMessage
+          as="div"
+          style={{ marginTop: "1em", whiteSpace: "pre-line" }}
+        >
+          {errors.preferredApps
+            .filter((error) => !!error)
+            .map((error) => Object.values(error).join("\n"))
+            .join("\n")}
+        </FormErrorMessage>
+      )}
       <div
         style={{
           display: "flex",
