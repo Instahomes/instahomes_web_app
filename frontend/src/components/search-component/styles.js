@@ -44,7 +44,7 @@ export const SearchForm = styled.div`
 `;
 
 export const SearchButton = styled(OrangeButton)`
-  width: ${({ buttonWidth }) => buttonWidth || "20%"};
+  width: ${({ buttonWidth }) => buttonWidth || "150px"};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 120px;

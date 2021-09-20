@@ -16,8 +16,10 @@ const SearchComponent = React.memo(
     showAdvanced,
     setShowAdvanced,
     children,
+    style,
     buttonWidth,
     ParentFrame,
+    Footer,
   }) => {
     const roomOptions = (placeholder) => [
       { value: "", label: placeholder },
@@ -71,7 +73,7 @@ const SearchComponent = React.memo(
           handleSubmit,
           setFieldValue,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} style={style}>
             <SearchParentFrame>
               {children}
               <SearchForm showAdvanced={showAdvanced}>
@@ -86,7 +88,7 @@ const SearchComponent = React.memo(
                   formik={{ handleBlur, values, setFieldValue }}
                 />
                 <Input
-                  style={{ flex: "2 0 40%" }}
+                  style={{ flex: "2 0 30%" }}
                   placeholder="Search for location/development/developer"
                   name="location"
                   onChange={handleChange}
@@ -198,6 +200,7 @@ const SearchComponent = React.memo(
                 setShowAdvanced={setShowAdvanced}
                 showAdvanced={showAdvanced}
               />
+              {Footer && <Footer />}
             </SearchParentFrame>
           </form>
         )}

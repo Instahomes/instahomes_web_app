@@ -16,6 +16,7 @@ import {
   ListingLine,
   ListingPiece,
   ListingSize,
+  TourButton,
   ViewHomeButton,
   DirectToDeveloper,
 } from "./styles";
@@ -103,7 +104,10 @@ const Card = React.memo(
               {bathrooms_max && "-" + bathrooms_max}&nbsp;Bathrooms
             </ListingPiece>
           </ListingLine>
-          <Link to={`/listing/${id}`} className="view-home">
+          <Link to={`/tour/${id}`} className="view-home">
+            <TourButton>BOOK A TOUR</TourButton>
+          </Link>
+          <Link to={`/listing/${id}`}>
             <ViewHomeButton>VIEW HOME</ViewHomeButton>
           </Link>
           <DirectToDeveloper>
