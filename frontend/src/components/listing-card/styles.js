@@ -116,16 +116,16 @@ export const ListingSize = styled.span`
 export const TourButton = styled(OrangeButton)`
   font-size: 1em;
   font-weight: 700;
-  // font-family: "Rubik", sans-serif;
   width: 100%;
   margin-bottom: 0.5em;
+  padding: 0.5em 1.5em;
+  border: 1px solid ${({ theme }) => theme.colors.orange};
 `;
 
 export const ViewHomeButton = styled(OutlineButton)`
   border: 1px solid ${({ theme }) => theme.colors.mutedLightBlue};
   font-size: 1em;
   font-weight: 700;
-  // font-family: "Rubik", sans-serif;
   width: 100%;
 `;
 
