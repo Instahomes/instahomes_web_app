@@ -75,6 +75,7 @@ const ContactInfo = ({
             <PlatformButtonsDiv>
               {videoApps.map((app) => (
                 <TourOutlineButton
+                  type="button"
                   onClick={() => handleChooseApp(app)}
                   selected={isSelected(app)}
                   className="btn-rubik"

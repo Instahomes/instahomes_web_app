@@ -9,6 +9,7 @@ import {
 import { videoAppsValidation } from "../../views/tour/constants";
 import { Formik, Form } from "formik";
 import { FormErrorMessage } from "../../components/elements";
+import Loading from "../../components/loading";
 import dayjs from "dayjs";
 
 export const platformLabel = (theme, platform) => {
@@ -43,7 +44,15 @@ export const platformLabel = (theme, platform) => {
 };
 
 export const Wizard = withTheme(
-  ({ children, initialValues, listing, theme, platform, onSubmit }) => {
+  ({
+    children,
+    initialValues,
+    listing,
+    loading,
+    theme,
+    platform,
+    onSubmit,
+  }) => {
     const [stepNumber, setStepNumber] = useState(0);
     const steps = React.Children.toArray(children);
     const [snapshot, setSnapshot] = useState(initialValues);
@@ -87,21 +96,25 @@ export const Wizard = withTheme(
           handleChange,
         }) => (
           <Form>
-            {React.isValidElement(step)
-              ? React.cloneElement(step, {
-                  isSubmitting,
-                  values,
-                  listing,
-                  theme,
-                  platform,
-                  setFieldValue,
-                  errors,
-                  touched,
-                  isValid,
-                  handleChange,
-                  previous,
-                })
-              : step}
+            {loading || !listing ? (
+              <Loading height="100vh" />
+            ) : React.isValidElement(step) ? (
+              React.cloneElement(step, {
+                isSubmitting,
+                values,
+                listing,
+                theme,
+                platform,
+                setFieldValue,
+                errors,
+                touched,
+                isValid,
+                handleChange,
+                previous,
+              })
+            ) : (
+              step
+            )}
           </Form>
         )}
       </Formik>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
-import Loading from "../../components/loading";
 import EmptyPage from "../../components/empty-page";
 import { Wizard } from "../../components/tour";
 import BookSchedule from "./steps/bookSchedule";
@@ -11,19 +10,23 @@ import * as Yup from "yup";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { getProfile } from "../../services/auth";
+import { bookSchedule } from "../../services/schedule";
 import { useRouteMatch, useLocation } from "react-router-dom";
 import { videoAppSchema } from "./constants";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 const Tour = React.memo(() => {
   const match = useRouteMatch();
   const location = useLocation();
   const [listing, setListing] = useState(null);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { platform = "video", selectedDate: initialSelectedDate } =
     location.state || {};
 
   const profile = getProfile() || {};
-  const { name, email } = profile;
+  const { name, email, user_id } = profile;
 
   useEffect(() => {
     const listingCallback = (listing) => {
@@ -37,6 +40,38 @@ const Tour = React.memo(() => {
     );
   }, [match.params.id]);
 
+  const handleSubmit = (values) => {
+    setLoading(true);
+    const { email, preferredApps, selectedDate, selectedTime, ...rest } =
+      values;
+    dayjs.extend(utc);
+    // In UTC
+    const datetime = dayjs(selectedDate + " " + selectedTime)
+      .utc()
+      .format("YYYY-MM-DD HH:mm");
+    const data = {
+      schedule: {
+        ...rest,
+        listing: listing.id,
+        user_email: email,
+        user: user_id || null,
+        contact_info: preferredApps,
+        datetime,
+      },
+    };
+    bookSchedule(
+      data,
+      (data) => {
+        console.log(data);
+        setLoading(false);
+      },
+      (err) => {
+        console.log(err);
+        setLoading(false);
+      }
+    );
+  };
+
   return (
     <Layout noFooter>
       <Helmet>
@@ -49,46 +84,45 @@ const Tour = React.memo(() => {
       </Helmet>
       <Navbar />
       <EmptyPage isEmpty={isEmpty}>
-        {listing ? (
-          <Wizard
-            initialValues={{
-              selectedDate: initialSelectedDate || null,
-              selectedTime: null,
-              preferredApps: [],
-              name: name || "",
-              email: email || "",
-              additional: "",
-            }}
-            listing={listing}
-            platform={platform}
-          >
-            <BookSchedule
-              validationSchema={Yup.object({
-                selectedDate: Yup.string().required("Date is required"),
-                selectedTime: Yup.string().required("Time is required"),
-              })}
-            />
-            <ContactInfo
-              validationSchema={Yup.object({
-                name: Yup.string().required("Name is required"),
-                email: Yup.string()
-                  .email("Please input an email")
-                  .required("Email is required"),
-                additional: Yup.string(),
-                preferredApps: Yup.array()
-                  .of(
-                    Yup.object({
-                      app: Yup.string().required(),
-                      contact: Yup.string().when("app", videoAppSchema),
-                    })
-                  )
-                  .required("Please choose your preferred app/s."),
-              })}
-            />
-          </Wizard>
-        ) : (
-          <Loading height="100vh" />
-        )}
+        <Wizard
+          initialValues={{
+            selectedDate: initialSelectedDate || null,
+            selectedTime: null,
+            preferredApps: [],
+            name: name || "",
+            email: email || "",
+            additional: "",
+            platform,
+          }}
+          listing={listing}
+          loading={loading}
+          platform={platform}
+          onSubmit={handleSubmit}
+        >
+          <BookSchedule
+            validationSchema={Yup.object({
+              selectedDate: Yup.string().required("Date is required"),
+              selectedTime: Yup.string().required("Time is required"),
+            })}
+          />
+          <ContactInfo
+            validationSchema={Yup.object({
+              name: Yup.string().required("Name is required"),
+              email: Yup.string()
+                .email("Please input an email")
+                .required("Email is required"),
+              additional: Yup.string(),
+              preferredApps: Yup.array()
+                .of(
+                  Yup.object({
+                    app: Yup.string().required(),
+                    contact: Yup.string().when("app", videoAppSchema),
+                  })
+                )
+                .required("Please choose your preferred app/s."),
+            })}
+          />
+        </Wizard>
       </EmptyPage>
     </Layout>
   );

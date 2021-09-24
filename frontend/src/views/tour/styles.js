@@ -157,7 +157,12 @@ export const PlatformButtonsDiv = styled.div`
   gap: 1em;
 `;
 
-export const TourOutlineButton = styled(OutlineButton)`
+export const TourOutlineButton = styled(OutlineButton).attrs(
+  ({ type, disabled }) => ({
+    type: type || "button",
+    disabled,
+  })
+)`
   background-color: ${({ theme, selected }) =>
     selected ? "#E6EDF5" : theme.colors.softWhite};
   border: 1.5px solid ${({ theme }) => theme.colors.darkHeader};
