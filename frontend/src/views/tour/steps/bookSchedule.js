@@ -42,6 +42,7 @@ const BookSchedule = ({
   values,
   errors,
   setFieldValue,
+  unavailabilities,
   ...props
 }) => {
   return (
@@ -94,6 +95,7 @@ const BookSchedule = ({
           scale={0.85}
           withTime
           Header={(props) => <Header {...props} />}
+          unavailabilities={unavailabilities}
         />
         <TourOrangeButton
           type="submit"

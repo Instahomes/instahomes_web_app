@@ -10,18 +10,20 @@ import * as Yup from "yup";
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { getProfile } from "../../services/auth";
-import { bookSchedule } from "../../services/schedule";
+import { bookSchedule, getSchedules } from "../../services/schedule";
 import { useRouteMatch, useLocation } from "react-router-dom";
 import { videoAppSchema } from "./constants";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 const Tour = React.memo(() => {
+  dayjs.extend(utc);
   const match = useRouteMatch();
   const location = useLocation();
   const [listing, setListing] = useState(null);
   const [isEmpty, setIsEmpty] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [unavailabilities, setUnavailabilities] = useState([]);
   const { platform = "video", selectedDate: initialSelectedDate } =
     location.state || {};
 
@@ -39,6 +41,15 @@ const Tour = React.memo(() => {
       `id=${match.params.id}`
     );
   }, [match.params.id]);
+
+  useEffect(() => {
+    if (listing)
+      getSchedules(
+        listing.development.developer.id,
+        setUnavailabilities,
+        () => {}
+      );
+  }, [listing]);
 
   const handleSubmit = (values) => {
     setLoading(true);
@@ -104,6 +115,9 @@ const Tour = React.memo(() => {
               selectedDate: Yup.string().required("Date is required"),
               selectedTime: Yup.string().required("Time is required"),
             })}
+            unavailabilities={unavailabilities.map((time) =>
+              dayjs.utc(time).local()
+            )}
           />
           <ContactInfo
             validationSchema={Yup.object({

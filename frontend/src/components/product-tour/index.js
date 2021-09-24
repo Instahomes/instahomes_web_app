@@ -64,6 +64,7 @@ const ProductTour = withTheme(
     initialSelectedTime,
     parentSetSelectedDate,
     parentSetSelectedTime,
+    unavailabilities,
   }) => {
     const [selectedDate, setSelectedDate] = useState(
       initialSelectedDate || null
@@ -75,6 +76,7 @@ const ProductTour = withTheme(
       initialSelectedDate ? dayjs(initialSelectedDate) : dayjs()
     );
     const [daysInterval, setDaysInterval] = useState(computeDays(theme));
+    const [unavailabilityTimes, setUnavailabilityTimes] = useState([]);
     const history = useHistory();
     const match = useRouteMatch();
 
@@ -92,6 +94,22 @@ const ProductTour = withTheme(
       if (parentSetSelectedDate) parentSetSelectedDate(selectedDate);
       if (parentSetSelectedTime) parentSetSelectedTime(selectedTime);
     }, [selectedDate, selectedTime]);
+
+    useEffect(() => {
+      if (unavailabilities) {
+        setUnavailabilityTimes(
+          unavailabilities
+            .filter((time) => time.format("YYYY-MM-DD") == selectedDate)
+            .map((time) => time.format("HH:mm"))
+        );
+      }
+    }, [unavailabilities, selectedDate, selectedTime]);
+
+    useEffect(() => {
+      if (unavailabilityTimes.includes(selectedTime)) {
+        setSelectedTime(null);
+      }
+    }, [unavailabilityTimes]);
 
     const updateDaysInterval = () => {
       const newDaysInterval = computeDays(theme);
@@ -146,6 +164,7 @@ const ProductTour = withTheme(
                 type="button"
                 onClick={() => setSelectedTime(time.value)}
                 selected={selectedTime == time.value}
+                disabled={unavailabilityTimes.includes(time.value)}
               >
                 <h2 className="btn-rubik">{time.label}</h2>
                 <span className="day-of-week">{time.period}</span>
