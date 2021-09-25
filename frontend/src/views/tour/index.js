@@ -20,6 +20,7 @@ const Tour = React.memo(() => {
   dayjs.extend(utc);
   const match = useRouteMatch();
   const location = useLocation();
+  const [message, setMessage] = useState("");
   const [listing, setListing] = useState(null);
   const [isEmpty, setIsEmpty] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -51,6 +52,15 @@ const Tour = React.memo(() => {
       );
   }, [listing]);
 
+  const successCallback = (res) => {
+    setLoading(false);
+    setMessage("");
+    if (res.status == 200) {
+      setMessage(res.data.message);
+    } else {
+    }
+  };
+
   const handleSubmit = (values) => {
     setLoading(true);
     const { email, preferredApps, selectedDate, selectedTime, ...rest } =
@@ -70,17 +80,11 @@ const Tour = React.memo(() => {
         datetime,
       },
     };
-    bookSchedule(
-      data,
-      (data) => {
-        console.log(data);
-        setLoading(false);
-      },
-      (err) => {
-        console.log(err);
-        setLoading(false);
-      }
-    );
+    bookSchedule(data, successCallback, (err) => {
+      console.log(err);
+      setMessage("");
+      setLoading(false);
+    });
   };
 
   return (

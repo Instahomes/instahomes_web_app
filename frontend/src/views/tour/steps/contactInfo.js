@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TourContainer,
   TourOrangeButton,
@@ -20,6 +20,7 @@ import {
 import { videoApps } from "../constants";
 import { Icon } from "@iconify/react";
 import { Field } from "formik";
+import { FormErrorMessage } from "../../components/elements";
 
 const ContactInfo = ({
   listing,
@@ -33,6 +34,12 @@ const ContactInfo = ({
   previous,
   ...props
 }) => {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    if (initialMessage) setMessage(initialMessage);
+  }, [props.initialMessage]);
+
   const isSelected = (app) =>
     !!values.preferredApps.filter((curr) => app == curr.app).length;
 
@@ -104,6 +111,11 @@ const ContactInfo = ({
               errors={errors}
             />
           </React.Fragment>
+        )}
+        {message && (
+          <FormErrorMessage as="div" style={{ marginBottom: "1em" }}>
+            {message}
+          </FormErrorMessage>
         )}
         <h4 style={{ marginBottom: "1em", marginTop: "2em" }}>
           CONTACT INFORMATION
