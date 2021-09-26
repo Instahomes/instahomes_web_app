@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TourContainer,
   TourOrangeButton,
@@ -20,7 +20,7 @@ import {
 import { videoApps } from "../constants";
 import { Icon } from "@iconify/react";
 import { Field } from "formik";
-import { FormErrorMessage } from "../../components/elements";
+import { FormErrorMessage } from "../../../components/elements";
 
 const ContactInfo = ({
   listing,
@@ -32,6 +32,7 @@ const ContactInfo = ({
   handleBlur,
   isSubmitting,
   previous,
+  initialMessage,
   ...props
 }) => {
   const [message, setMessage] = useState("");

@@ -3,6 +3,7 @@ import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import EmptyPage from "../../components/empty-page";
 import { Wizard } from "../../components/tour";
+import ConfirmationModal from "../../components/tour/modal";
 import BookSchedule from "./steps/bookSchedule";
 import ContactInfo from "./steps/contactInfo";
 import * as Yup from "yup";
@@ -22,8 +23,10 @@ const Tour = React.memo(() => {
   const location = useLocation();
   const [message, setMessage] = useState("");
   const [listing, setListing] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [finalDatetime, setFinalDatetime] = useState(null);
   const [unavailabilities, setUnavailabilities] = useState([]);
   const { platform = "video", selectedDate: initialSelectedDate } =
     location.state || {};
@@ -58,6 +61,7 @@ const Tour = React.memo(() => {
     if (res.status == 200) {
       setMessage(res.data.message);
     } else {
+      setShowModal(true);
     }
   };
 
@@ -66,10 +70,10 @@ const Tour = React.memo(() => {
     const { email, preferredApps, selectedDate, selectedTime, ...rest } =
       values;
     dayjs.extend(utc);
+    const localDatetime = dayjs(selectedDate + " " + selectedTime);
+    setFinalDatetime(localDatetime.format("MMMM D h:mma"));
     // In UTC
-    const datetime = dayjs(selectedDate + " " + selectedTime)
-      .utc()
-      .format("YYYY-MM-DD HH:mm");
+    const datetime = localDatetime.utc().format("YYYY-MM-DD HH:mm");
     const data = {
       schedule: {
         ...rest,
@@ -99,6 +103,14 @@ const Tour = React.memo(() => {
       </Helmet>
       <Navbar />
       <EmptyPage isEmpty={isEmpty}>
+        {showModal && (
+          <ConfirmationModal
+            datetime={finalDatetime}
+            developer={listing.development.developer.name}
+            open={showModal}
+            setOpen={setShowModal}
+          />
+        )}
         <Wizard
           initialValues={{
             selectedDate: initialSelectedDate || null,
