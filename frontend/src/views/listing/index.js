@@ -418,7 +418,7 @@ const Listing = React.memo((props) => {
                   <ProductTour
                     Header={() => (
                       <React.Fragment>
-                        <h2 className="btn-rubik">
+                        <h2 id="tour" className="btn-rubik">
                           Book a tour in this home
                           <img
                             src={check}

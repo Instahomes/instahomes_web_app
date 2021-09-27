@@ -21,6 +21,7 @@ import {
   DirectToDeveloper,
 } from "./styles";
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { updateWishlist } from "../../services/wishlist";
 import { isAuthenticated } from "../../services/auth";
 
@@ -104,9 +105,9 @@ const Card = React.memo(
               {bathrooms_max && "-" + bathrooms_max}&nbsp;Bathrooms
             </ListingPiece>
           </ListingLine>
-          <Link to={`/tour/${id}`} className="view-home">
+          <HashLink to={`/listing/${id}#tour`} className="view-home">
             <TourButton>BOOK A TOUR</TourButton>
-          </Link>
+          </HashLink>
           <Link to={`/listing/${id}`}>
             <ViewHomeButton>VIEW HOME</ViewHomeButton>
           </Link>
