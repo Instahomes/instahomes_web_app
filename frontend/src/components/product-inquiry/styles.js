@@ -1,14 +1,12 @@
 import styled from "styled-components";
-import { OrangeButton } from "../elements";
+import { OutlineButton } from "../elements";
 
 export const ProductInquiryContainer = styled.div`
-  // position: sticky;
-  // top: 5%;
-  background: ${({ theme }) => theme.colors.mainBgColor};
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  // background: ${({ theme }) => theme.colors.mainBgColor};
+  // box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   padding: 1.5em 1.3em;
-  font-size: 1em;
+  font-size: 0.9em;
   display: flex;
   flex-direction: column;
 
@@ -17,7 +15,7 @@ export const ProductInquiryContainer = styled.div`
   }
 
   h2 {
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: 500;
     color: ${({ theme }) => theme.colors.darkBlue};
     line-height: 128%;
@@ -27,6 +25,12 @@ export const ProductInquiryContainer = styled.div`
       font-size: 1em;
       font-weight: 500;
       color: ${({ theme }) => theme.colors.orange};
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    h2 {
+      text-align: center;
     }
   }
 `;
@@ -55,19 +59,16 @@ export const Tag = styled.span`
 
 export const InquiryButtons = styled.div`
   display: flex;
-  margin-top: 1em;
-
-  button:nth-child(1) {
-    margin-right: 10px;
-  }
+  gap: 1em;
+  margin-top: 0.5em;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     flex-direction: column;
   }
 `;
 
-export const InquiryButtonsChild = styled(OrangeButton)`
-  font-size: 0.9em;
+export const InquiryButtonsChild = styled(OutlineButton)`
+  font-size: 1.1em;
   width: 50%;
   padding: 0.5em 1em;
   display: flex;
@@ -76,7 +77,6 @@ export const InquiryButtonsChild = styled(OrangeButton)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 100%;
-    margin-bottom: 5px;
   }
 `;
 

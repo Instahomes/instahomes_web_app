@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import check from "../../assets/card/check.svg";
+
 export const HomeSearchContainer = styled.div`
-  width: 800px;
+  width: 900px;
   margin: auto;
 
   h1 {
@@ -39,6 +41,37 @@ export const HomeSearchFrame = styled.div`
   padding: 3em 3em;
   box-shadow: 0px 4px 28px rgba(0, 0, 0, 0.1);
   border-radius: 9px;
+
+  &.tight-flex {
+    padding: 1.7em;
+    display: flex;
+    gap: 1.5em;
+  }
+`;
+
+export const SearchImage = styled.div`
+  border-radius: 28px;
+  width: 250px;
+  min-height: 100%;
+  background-image: url(${({ image }) => image});
+  background-size: cover;
+`;
+
+export const SearchFooter = styled.div`
+  margin-top: 2.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  img {
+    width: 0.7em;
+    height: 0.7em;
+  }
+
+  span {
+    color: ${({ theme }) => theme.colors.green};
+    font-size: 0.7em;
+  }
 `;
 
 export const TabRow = styled.div`

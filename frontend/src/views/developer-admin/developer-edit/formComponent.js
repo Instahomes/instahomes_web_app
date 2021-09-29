@@ -24,6 +24,7 @@ const FormSchema = Yup.object({
   seo_desc: Yup.string().required("SEO description is required"),
   short_desc: Yup.string(),
   overview: Yup.string().required("Overview is required"),
+  agent_email: Yup.string().required("Agent email is required"),
   values_description: Yup.string(),
   office_locations: Yup.string(),
   unique_locations: Yup.number(),
@@ -63,6 +64,7 @@ const FormComponent = ({ data, openModal, setOpenModal }) => {
     affiliate_name_3,
     affiliate_logo_4,
     affiliate_name_4,
+    agent_email,
   } = data || {};
 
   const formGridTemplates = `
@@ -71,7 +73,7 @@ const FormComponent = ({ data, openModal, setOpenModal }) => {
       "name name seo_title seo_title"
       "seo_desc seo_desc short_desc short_desc"
       "overview overview values_description values_description"
-      "office_locations office_locations unique_locations ."
+      "office_locations office_locations unique_locations agent_email"
       "featured_image featured_image map_image map_image"
       "affiliate_name_1 affiliate_name_2 affiliate_name_3 affiliate_name_4"
       "affiliate_logo_1 affiliate_logo_2 affiliate_logo_3 affiliate_logo_4"
@@ -113,6 +115,7 @@ const FormComponent = ({ data, openModal, setOpenModal }) => {
         values_description: values_description || "",
         featured_image: featured_image || null,
         map_image: map_image || null,
+        agent_email: agent_email || "",
         office_locations: office_locations || "",
         unique_locations: unique_locations || "",
         affiliate_logo_1: affiliate_logo_1 || null,
@@ -257,6 +260,16 @@ const FormComponent = ({ data, openModal, setOpenModal }) => {
               <Label>No. of Unique Locations</Label>
               <HelperLabel>Title</HelperLabel>
               <Input name="unique_locations" />
+            </InputGroup>
+            <InputGroup style={{ gridArea: "agent_email" }}>
+              <FormErrorMessage
+                component="div"
+                style={{ marginBottom: "1em" }}
+                name="agent_email"
+              />
+              <Label>Agent Email</Label>
+              <HelperLabel>Email that will be used for tours</HelperLabel>
+              <Input name="agent_email" />
             </InputGroup>
             <InputGroup style={{ gridArea: "affiliate_name_1" }}>
               <FormErrorMessage

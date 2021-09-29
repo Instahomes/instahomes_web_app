@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { OutlineButton } from "../../components/elements";
+import { OrangeButton, OutlineButton } from "../../components/elements";
 
 export const ListingCard = styled.div`
   position: relative;
@@ -113,10 +113,19 @@ export const ListingSize = styled.span`
   padding: 0.2em 0.5em;
 `;
 
+export const TourButton = styled(OrangeButton)`
+  font-size: 1em;
+  font-weight: 700;
+  width: 100%;
+  margin-bottom: 0.5em;
+  padding: 0.5em 1.5em;
+  border: 1px solid ${({ theme }) => theme.colors.orange};
+`;
+
 export const ViewHomeButton = styled(OutlineButton)`
   border: 1px solid ${({ theme }) => theme.colors.mutedLightBlue};
   font-size: 1em;
-  font-family: "Rubik", sans-serif;
+  font-weight: 700;
   width: 100%;
 `;
 
