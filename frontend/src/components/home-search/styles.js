@@ -47,12 +47,6 @@ export const HomeSearchFrame = styled.div`
     display: flex;
     gap: 1.5em;
   }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    // &.tight-flex {
-    //   flex-direction: column;
-    // }
-  }
 `;
 
 export const SearchImage = styled.div`

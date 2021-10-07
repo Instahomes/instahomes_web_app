@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { OrangeButton, OutlineButton } from "../../components/elements";
+import Navbar from "../../components/navbar";
 
 export const TourContainer = styled.main`
   padding: 2em var(--main-padding-x) 0 var(--main-padding-x);
@@ -23,6 +24,7 @@ export const TourContainer = styled.main`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding-top: 2em;
     flex-direction: column;
     gap: 2em;
     min-height: calc(100vh - 48px - 32px - 1.5rem);
@@ -30,6 +32,59 @@ export const TourContainer = styled.main`
     h4 {
       text-align: center;
       margin-top: 2em;
+    }
+  }
+`;
+
+export const DesktopNavbar = styled(Navbar)`
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: none;
+  }
+`;
+
+export const HeaderDiv = styled.div`
+  display: none;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: block;
+
+    position: relative;
+    background: url(${({ image }) => image});
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 33vh;
+
+    &:before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      content: "";
+      background: linear-gradient(
+        360deg,
+        rgba(33, 32, 30, 0.68) 9.33%,
+        rgba(27, 27, 27, 0) 100%
+      );
+    }
+
+    .listing-info {
+      position: absolute;
+      bottom: 1em;
+      left: var(--main-padding-x);
+
+      .listing-name {
+        color: ${({ theme }) => theme.colors.softWhite};
+        font-size: 1.1em;
+        font-weight: 500;
+      }
+
+      .listing-location {
+        color: ${({ theme }) => theme.colors.softWhite};
+        font-size: 0.8em;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+      }
     }
   }
 `;

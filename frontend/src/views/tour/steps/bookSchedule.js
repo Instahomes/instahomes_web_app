@@ -48,13 +48,13 @@ const BookSchedule = ({
   return (
     <TourContainer>
       <ContentContainer>
-        <AlignFlexCenter justifyCenter>
+        <AlignFlexCenter>
           <h1>Book a tour&nbsp;&nbsp;</h1>
           <span className="tour-platform">
             {platformLabel(props.theme, platform)}
           </span>
         </AlignFlexCenter>
-        <h4>PROPERTY DETAILS</h4>
+        {/* <h4>PROPERTY DETAILS</h4>
         <ListingInfoDiv>
           <img
             src={listing.photo_main}
@@ -80,7 +80,7 @@ const BookSchedule = ({
               </span>
             </AlignFlexCenter>
           </div>
-        </ListingInfoDiv>
+        </ListingInfoDiv> */}
         <h4 style={{ marginBottom: "1em", marginTop: "2em" }}>DATE & TIME</h4>
         <ProductTour
           parentSetSelectedDate={(value) =>
