@@ -326,15 +326,20 @@ export const DateTimeInfoContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    position: static;
-    width: 120px;
-    margin: auto;
-    margin-top: -20px;
-    font-size: 0.9em;
-    z-index: 10;
+    display: none;
 
     &.mobile-only {
       display: block;
+      position: absolute;
+      bottom: 1em;
+      left: var(--main-padding-x);
+      width: 120px;
+      z-index: 10;
+      font-size: 0.9em;
+
+      h1 {
+        font-weight: 500;
+      }
     }
   }
 `;

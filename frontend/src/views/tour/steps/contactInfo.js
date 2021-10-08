@@ -41,6 +41,17 @@ const ContactInfo = ({
     if (initialMessage) setMessage(initialMessage);
   }, [props.initialMessage]);
 
+  useEffect(() => {
+    props.setDateTimeInfo(
+      <DateTimeInfo
+        date={values.selectedDate}
+        time={values.selectedTime}
+        previous={previous}
+        className="mobile-only"
+      />
+    );
+  }, [values.selectedDate, values.selectedTime]);
+
   const isSelected = (app) =>
     !!values.preferredApps.filter((curr) => app == curr.app).length;
 
@@ -68,7 +79,7 @@ const ContactInfo = ({
             {platformLabel(props.theme, platform)}
           </span>
         </AlignFlexCenter>
-        <div style={{ marginTop: "1.5em" }}>
+        {/* <div style={{ marginTop: "1.5em" }}>
           <MobileListingImageContainer mainImage={listing.photo_main} />
           <DateTimeInfo
             date={values.selectedDate}
@@ -76,7 +87,7 @@ const ContactInfo = ({
             previous={previous}
             className="mobile-only"
           />
-        </div>
+        </div> */}
         {platform == "video" && (
           <React.Fragment>
             <h4>PREFERRED VIDEO CALL APPS</h4>

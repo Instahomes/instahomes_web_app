@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { withTheme } from "styled-components";
 import {
@@ -52,6 +52,7 @@ export const Wizard = withTheme(
     theme,
     platform,
     onSubmit,
+    setDateTimeInfo,
   }) => {
     const [stepNumber, setStepNumber] = useState(0);
     const steps = React.Children.toArray(children);
@@ -79,6 +80,12 @@ export const Wizard = withTheme(
         next(values);
       }
     };
+
+    useEffect(() => {
+      if (stepNumber == 0) {
+        setDateTimeInfo(null);
+      }
+    }, [stepNumber]);
 
     return (
       <Formik

@@ -30,6 +30,7 @@ const Tour = React.memo(() => {
   const [loading, setLoading] = useState(false);
   const [finalDatetime, setFinalDatetime] = useState(null);
   const [unavailabilities, setUnavailabilities] = useState([]);
+  const [dateTimeInfo, setDateTimeInfo] = useState(null);
   const { platform = "video", selectedDate: initialSelectedDate } =
     location.state || {};
 
@@ -106,7 +107,7 @@ const Tour = React.memo(() => {
       <DesktopNavbar />
       <HeaderDiv image={listing && listing.photo_main}>
         <Navbar dark isHome />
-        {listing && (
+        {listing && !dateTimeInfo && (
           <div className="listing-info">
             <span className="listing-name">{listing.unit_name}</span>
             <br />
@@ -121,6 +122,7 @@ const Tour = React.memo(() => {
             </span>
           </div>
         )}
+        {dateTimeInfo || null}
       </HeaderDiv>
       <EmptyPage isEmpty={isEmpty}>
         {showModal && (
@@ -145,6 +147,7 @@ const Tour = React.memo(() => {
           loading={loading}
           platform={platform}
           onSubmit={handleSubmit}
+          setDateTimeInfo={setDateTimeInfo}
         >
           <BookSchedule
             validationSchema={Yup.object({
@@ -171,6 +174,7 @@ const Tour = React.memo(() => {
                 )
                 .required("Please choose your preferred app/s."),
             })}
+            setDateTimeInfo={setDateTimeInfo}
           />
         </Wizard>
       </EmptyPage>
