@@ -74,6 +74,11 @@ export const Search = ({
         developments of 16 partner developers
       </p>
     </SearchComponent>
-    <SearchImage image={homeSearchImage}></SearchImage>
+    <SearchImage image={homeSearchImage}>
+      <p className="video-call">
+        Our new <span id="feature">Video Call Tour Feature</span> gets you in
+        touch with developer representative to answer all your questions.
+      </p>
+    </SearchImage>
   </HomeSearchFrame>
 );

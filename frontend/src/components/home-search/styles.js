@@ -50,11 +50,27 @@ export const HomeSearchFrame = styled.div`
 `;
 
 export const SearchImage = styled.div`
+  box-sizing: border-box;
   border-radius: 28px;
+  position: relative;
   width: 250px;
   min-height: 100%;
   background-image: url(${({ image }) => image});
   background-size: cover;
+  padding: 1em;
+
+  .video-call {
+    position: absolute;
+    bottom: 0;
+    font-size: 0.5em;
+    color: #f9f9f9;
+
+    #feature {
+      color: inherit;
+      font-size: inherit;
+      font-weight: 500;
+    }
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     display: none;
