@@ -55,6 +55,10 @@ export const SearchImage = styled.div`
   min-height: 100%;
   background-image: url(${({ image }) => image});
   background-size: cover;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: none;
+  }
 `;
 
 export const SearchFooter = styled.div`

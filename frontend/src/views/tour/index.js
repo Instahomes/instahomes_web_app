@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { HeaderDiv, DesktopNavbar } from "./styles";
 import Layout from "../../components/layout";
 import Navbar from "../../components/navbar";
 import EmptyPage from "../../components/empty-page";
@@ -16,6 +17,7 @@ import { useRouteMatch, useLocation } from "react-router-dom";
 import { videoAppSchema } from "./constants";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { Icon } from "@iconify/react";
 
 const Tour = React.memo(() => {
   dayjs.extend(utc);
@@ -28,6 +30,7 @@ const Tour = React.memo(() => {
   const [loading, setLoading] = useState(false);
   const [finalDatetime, setFinalDatetime] = useState(null);
   const [unavailabilities, setUnavailabilities] = useState([]);
+  const [dateTimeInfo, setDateTimeInfo] = useState(null);
   const { platform = "video", selectedDate: initialSelectedDate } =
     location.state || {};
 
@@ -101,7 +104,26 @@ const Tour = React.memo(() => {
           content="Book a tour with your preferred developer for specific properties, through Instahomes' touring feature!"
         ></meta>
       </Helmet>
-      <Navbar />
+      <DesktopNavbar />
+      <HeaderDiv image={listing && listing.photo_main}>
+        <Navbar dark isHome />
+        {listing && !dateTimeInfo && (
+          <div className="listing-info">
+            <span className="listing-name">{listing.unit_name}</span>
+            <br />
+            <span className="listing-location">
+              <Icon
+                icon="el:map-marker"
+                color="#F7F7F7"
+                width="0.9em"
+                height="0.9em"
+              />
+              {listing.development.location}
+            </span>
+          </div>
+        )}
+        {dateTimeInfo || null}
+      </HeaderDiv>
       <EmptyPage isEmpty={isEmpty}>
         {showModal && (
           <ConfirmationModal
@@ -125,6 +147,7 @@ const Tour = React.memo(() => {
           loading={loading}
           platform={platform}
           onSubmit={handleSubmit}
+          setDateTimeInfo={setDateTimeInfo}
         >
           <BookSchedule
             validationSchema={Yup.object({
@@ -151,6 +174,7 @@ const Tour = React.memo(() => {
                 )
                 .required("Please choose your preferred app/s."),
             })}
+            setDateTimeInfo={setDateTimeInfo}
           />
         </Wizard>
       </EmptyPage>

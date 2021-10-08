@@ -76,6 +76,7 @@ export const DateButton = styled.button`
   h2 {
     font-size: 1.6em;
     font-weight: 500;
+    margin-bottom: -5px;
     color: ${({ theme, selected, disabled }) =>
       disabled ? "#AAAAAA" : selected ? "#FDFDFD" : theme.colors.darkHeader};
   }
