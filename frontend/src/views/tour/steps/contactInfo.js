@@ -73,7 +73,7 @@ const ContactInfo = ({
   return (
     <TourContainer>
       <ContentContainer>
-        <AlignFlexCenter justifyCenter>
+        <AlignFlexCenter>
           <h1>Book a tour&nbsp;&nbsp;</h1>
           <span className="tour-platform">
             {platformLabel(props.theme, platform)}

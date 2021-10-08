@@ -27,10 +27,12 @@ export const TourContainer = styled.main`
     padding-top: 2em;
     flex-direction: column;
     gap: 2em;
-    min-height: calc(100vh - 48px - 32px - 1.5rem);
+    min-height: initial;
+    padding-bottom: 1em;
+    // min-height: calc(100vh - 48px - 32px - 1.5rem);
 
     h4 {
-      text-align: center;
+      // text-align: center;
       margin-top: 2em;
     }
   }
