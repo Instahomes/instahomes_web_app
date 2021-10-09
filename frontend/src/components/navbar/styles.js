@@ -13,6 +13,13 @@ export const NavbarFrame = styled.nav`
   margin-top: 1rem;
   z-index: 100;
   gap: 2em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    .logo {
+      width: clamp(12em, 30vw, 15em);
+      height: 100%;
+    }
+  }
 `;
 
 export const MenuItems = styled.div`
@@ -60,8 +67,8 @@ export const WishlistNumber = styled.span`
 export const menuStyles = (theme, dark) => ({
   bmBurgerButton: {
     position: "sticky",
-    width: "20px",
-    height: "15px",
+    width: "1.4em",
+    height: "1.0em",
   },
   bmBurgerBars: {
     background: dark ? theme.colors.softWhite : theme.colors.mutedBlue,

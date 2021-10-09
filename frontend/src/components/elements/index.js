@@ -87,6 +87,7 @@ export const LightTextarea = styled.textarea`
 export const OrangeButton = styled.button`
   background-color: ${({ theme, disabled }) =>
     disabled ? "#2C3A4D" : theme.colors.orange};
+  border-radius: 7px;
   color: ${({ theme, disabled }) =>
     disabled ? theme.colors.mutedBlue : theme.colors.softWhite};
   padding: 0.8em 1em;
@@ -105,7 +106,7 @@ export const OutlineButton = styled.button`
   border: 1px solid
     ${({ theme, dark }) =>
       dark ? theme.colors.softWhite : theme.colors.darkBlue};
-  border-radius: 1px;
+  border-radius: 7px;
 `;
 
 const AdvancedSettingsStyle = styled.span`

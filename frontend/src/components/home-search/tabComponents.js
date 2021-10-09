@@ -1,14 +1,21 @@
 import React from "react";
 import SearchComponent from "../search-component";
-import { GuidedButtons } from "./styles";
+import {
+  HomeSearchFrame,
+  SearchFooter,
+  SearchImage,
+  GuidedButtons,
+} from "./styles";
 import { OrangeButton, OutlineButton } from "../elements";
+import homeSearchImage from "../../assets/home/homeSearch.png";
+import check from "../../assets/card/check.svg";
 import { useHistory, Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 export const GuidedInvesting = () => {
   const history = useHistory();
   return (
-    <React.Fragment>
+    <HomeSearchFrame>
       <h1>Get free curated investment picks now!</h1>
       <p>
         Don’t know which properties to invest in? Try our{" "}
@@ -34,7 +41,7 @@ export const GuidedInvesting = () => {
           </HashLink>
         </OutlineButton>
       </GuidedButtons>
-    </React.Fragment>
+    </HomeSearchFrame>
   );
 };
 
@@ -43,16 +50,35 @@ export const Search = ({
   setShowAdvanced,
   handleSearchSubmit,
 }) => (
-  <SearchComponent
-    showAdvanced={showAdvanced}
-    setShowAdvanced={setShowAdvanced}
-    handleSearchSubmit={handleSearchSubmit}
-    ParentFrame={({ children }) => <React.Fragment>{children}</React.Fragment>}
-  >
-    <h1>Find your new dream home in just a click</h1>
-    <p style={{ marginTop: "5px" }}>
-      Search for over 200 new models in 50 different developments direct to
-      developer
-    </p>
-  </SearchComponent>
+  <HomeSearchFrame className="tight-flex">
+    <SearchComponent
+      showAdvanced={showAdvanced}
+      setShowAdvanced={setShowAdvanced}
+      handleSearchSubmit={handleSearchSubmit}
+      ParentFrame={({ children }) => (
+        <React.Fragment>{children}</React.Fragment>
+      )}
+      Footer={() => (
+        <SearchFooter>
+          <img src={check} alt="Check" />
+          <span className="verified">
+            All inquiries & bookings are sent direct to Official Developer
+          </span>
+        </SearchFooter>
+      )}
+      style={{ flex: 1 }}
+    >
+      <h1>Book a video call tour to your dream home instantly!</h1>
+      <p style={{ marginTop: "5px" }}>
+        Find great properties from over 200 new models within 50 different
+        developments of 16 partner developers
+      </p>
+    </SearchComponent>
+    <SearchImage image={homeSearchImage}>
+      <p className="video-call">
+        Our new <span id="feature">Video Call Tour Feature</span> gets you in
+        touch with developer representative to answer all your questions.
+      </p>
+    </SearchImage>
+  </HomeSearchFrame>
 );

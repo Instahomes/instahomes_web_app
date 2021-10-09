@@ -5,7 +5,7 @@ import { Input, OutlineButton } from "../../components/elements";
 import secondarySearch from "../../assets/home/secondarySearch.jpeg";
 
 export const HeroFrame = styled.section`
-  height: 550px;
+  height: 650px;
   width: 100%;
   padding-top: 10em;
   background: url(${({ heroBg }) => heroBg});

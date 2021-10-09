@@ -8,7 +8,7 @@ const Frame = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBg};
 `;
 
-export default function Layout({ children }) {
+export default function Layout({ children, noFooter }) {
   return (
     <React.Fragment>
       <TopBar />
@@ -18,7 +18,7 @@ export default function Layout({ children }) {
         // htmlRef="<REF_STRING>"
       />
       <Frame>{children}</Frame>
-      <Footer />
+      {!noFooter && <Footer />}
     </React.Fragment>
   );
 }

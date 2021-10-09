@@ -90,7 +90,7 @@ const NavbarItems = ({
         <NavbarSpan dark={dark} className={className} to="/signup">
           <OutlineButton
             dark={dark}
-            className={`btn-menu btn-rubik ${className}`}
+            className={["btn-menu", "btn-rubik", className]}
           >
             SIGNUP FOR BETA
           </OutlineButton>
@@ -100,7 +100,7 @@ const NavbarItems = ({
   </React.Fragment>
 );
 
-const Navbar = ({ theme, dark, isHome }) => {
+const Navbar = ({ theme, dark, isHome, className }) => {
   const history = useHistory();
   const finalMenuStyles = menuStyles(theme, dark);
   const isLoggedIn = isAuthenticated();
@@ -134,9 +134,13 @@ const Navbar = ({ theme, dark, isHome }) => {
   }, []);
 
   return (
-    <NavbarFrame>
+    <NavbarFrame className={className}>
       <Link to="/">
-        <img src={!isHome || !dark ? logo : logoDark} alt="Instahomes" />
+        <img
+          className="logo"
+          src={!isHome || !dark ? logo : logoDark}
+          alt="Instahomes"
+        />
       </Link>
       {isMediumScreen ? (
         <Menu styles={finalMenuStyles} right>

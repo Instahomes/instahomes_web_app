@@ -94,13 +94,13 @@ const Home = React.memo((props) => {
       </HeroFrame>
       <HomeListings>
         <h1 className="dark center">Newest listings in the market today</h1>
-        <SearchComponent
+        {/* <SearchComponent
           showAdvanced={showAdvancedFeatured}
           setShowAdvanced={setShowAdvancedFeatured}
           handleSearchSubmit={handleSearchSubmit}
           ParentFrame={FeaturedSearchBar}
           buttonWidth={"170px"}
-        />
+        /> */}
         <div className="listing-row-div">
           <ListingRow threeOrLess={listings.length <= 3}>
             {listings.map((listing) => (

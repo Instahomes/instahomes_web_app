@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HomeSearchContainer, HomeSearchFrame, TabRow, Tab } from "./styles";
+import { HomeSearchContainer, TabRow, Tab } from "./styles";
 import { GuidedInvesting, Search } from "./tabComponents";
 import iconSearch from "../../assets/home/iconSearch.svg";
 import iconGuided from "../../assets/home/iconGuided.svg";
@@ -17,14 +17,14 @@ const tabComponents = (showAdvanced, setShowAdvanced, handleSearchSubmit) => ({
 
 const tabOptions = [
   {
-    value: "guided_investing",
-    label: "Guided Investing",
-    icon: iconGuided,
-  },
-  {
     value: "search",
     label: "Search a Property",
     icon: iconSearch,
+  },
+  {
+    value: "guided_investing",
+    label: "Guided Investing",
+    icon: iconGuided,
   },
 ];
 
@@ -46,13 +46,7 @@ const HomeSearch = React.memo(
             </Tab>
           ))}
         </TabRow>
-        <HomeSearchFrame>
-          {
-            tabComponents(showAdvanced, setShowAdvanced, handleSearchSubmit)[
-              tab
-            ]
-          }
-        </HomeSearchFrame>
+        {tabComponents(showAdvanced, setShowAdvanced, handleSearchSubmit)[tab]}
       </HomeSearchContainer>
     );
   }

@@ -4,9 +4,9 @@ import { OrangeButton } from "../elements";
 export const ProductInquiryContainer = styled.div`
   background: ${({ theme }) => theme.colors.mainBgColor};
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-  padding: 1.5em 1.3em;
-  font-size: 1em;
+  border-radius: 19px;
+  padding: 1em 1.3em;
+  font-size: ${({ scale }) => `calc(1em * ${scale})`};
   display: flex;
   flex-direction: column;
 
@@ -19,7 +19,6 @@ export const ProductInquiryContainer = styled.div`
     font-weight: 500;
     color: ${({ theme }) => theme.colors.darkBlue};
     line-height: 128%;
-    margin-bottom: 1rem;
 
     #property-name {
       font-size: 1em;
@@ -29,48 +28,80 @@ export const ProductInquiryContainer = styled.div`
   }
 
   #sms-charges {
-    margin-top: 1.5em;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
     color: ${({ theme }) => theme.colors.whiteInputColor};
     font-size: 0.8em;
-    text-align: center;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    h2,
+    #sms-charges {
+      text-align: center;
+    }
   }
 `;
 
 export const DateButtonsDiv = styled.div`
   display: flex;
+  width: 100%;
 `;
 
 export const DateButtons = styled.div`
-  margin: 0 1em;
-  width: 90%;
+  margin: 0 0.7em;
+  width: 95%;
   display: flex;
   justify-content: space-between;
-  gap: 15px;
+  align-items: center;
+  flex: 1;
 `;
 
 export const DateButton = styled.button`
-  width: 70px;
-  height: 70px;
-  border: ${({ selected }) => (selected ? "2.5px" : "1.5px")} solid
-    ${({ theme, selected }) =>
-      selected ? theme.colors.darkHeader : theme.colors.whiteInputColor};
-  border-radius: 3px;
-  background: none;
-  padding: 0.5em;
+  font-size: 1em;
+  width: 4em;
+  height: 4em;
+  background: ${({ selected, theme }) =>
+    selected ? theme.colors.orange : "none"}};
+  border-radius: 50%;
+  // padding: 0.5em;
   text-align: center;
 
-  span {
-    font-size: 0.8em;
-    color: ${({ theme, selected }) =>
-      selected ? theme.colors.darkHeader : theme.colors.darkGray};
+  .day-of-week {
+    font-size: 0.7em;
+    font-weight: 400;
+    color: ${({ theme, selected, disabled }) =>
+      disabled ? "#AAAAAA" : selected ? "#FDFDFD" : theme.colors.darkHeader};
   }
 
   h2 {
-    font-size: 2em;
-    font-weight: 400;
-    color: ${({ theme, selected }) =>
-      selected ? theme.colors.darkHeader : theme.colors.darkGray};
+    font-size: 1.6em;
+    font-weight: 500;
+    margin-bottom: -5px;
+    color: ${({ theme, selected, disabled }) =>
+      disabled ? "#AAAAAA" : selected ? "#FDFDFD" : theme.colors.darkHeader};
   }
+`;
+
+export const TimeButtonsDiv = styled.div`
+  display: grid;
+  width: 100%;
+  margin-top: 1.5em;
+  padding-top: 1em;
+  border-top: 1px solid #e0e0e0;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  gap: 0 1em;
+  font-size: 0.8em;
+  justify-items: center;
+
+  @media (max-width: 320px) {
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  }
+`;
+
+export const TimeButton = styled(DateButton)`
+  height: 5.5em;
+  width: 5.5em;
 `;
 
 export const InquiryButtons = styled.div`
@@ -81,7 +112,7 @@ export const InquiryButtons = styled.div`
     margin-right: 10px;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
   }
 `;
@@ -94,7 +125,12 @@ export const InquiryButtonsChild = styled(OrangeButton)`
   align-items: center;
   justify-content: center;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  &.muted {
+    background: #ffe5d2;
+    color: ${({ theme }) => theme.colors.orange};
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     width: 100%;
     margin-bottom: 5px;
   }
