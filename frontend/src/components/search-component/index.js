@@ -53,7 +53,7 @@ const SearchComponent = React.memo(
       <Formik
         initialValues={{
           sale_status: "",
-          location: "",
+          query: "",
           development_type: "",
           // keywords: "",
           priceRange: "",
@@ -90,10 +90,10 @@ const SearchComponent = React.memo(
                 <Input
                   style={{ flex: "2 0 30%" }}
                   placeholder="Search for location/development/developer"
-                  name="location"
+                  name="query"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.location}
+                  value={values.query}
                   scale={0.9}
                   mobileOrder={2}
                 />
