@@ -38,7 +38,7 @@ const NavbarSearch = ({ isHome, dark }) => {
         style={{ width: "100%", display: isHome ? "none" : "block" }}
         scale={0.8}
         placeholder="Search for location/development/developer"
-        name="location"
+        name="query"
         onChange={(e) => setQuery(e.target.value)}
         value={query}
         dark={dark}
