@@ -189,7 +189,7 @@ const Search = React.memo((props) => {
           enableReinitialize
           initialValues={{
             sale_status,
-            location,
+            query: location,
             development_type,
             priceRange,
             price_low: "",
@@ -228,10 +228,10 @@ const Search = React.memo((props) => {
                   style={{ flex: "2 0 30%" }}
                   scale={0.9}
                   placeholder="Search for location/development/developer"
-                  name="location"
+                  name="query"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.location}
+                  value={values.query}
                   mobileOrder={1}
                 />
                 <SearchSelect
