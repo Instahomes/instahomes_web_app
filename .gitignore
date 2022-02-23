@@ -20,7 +20,6 @@ yarn-debug.log*
 yarn-error.log*
 /.changelog
 .npm/
-yarn.lock
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
