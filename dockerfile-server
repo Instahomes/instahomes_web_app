@@ -1,6 +1,0 @@
-FROM python:3.8-slim-buster
-WORKDIR '/usr/backend/'
-COPY ./requirements.txt /usr/backend/
-RUN pip install -r requirements.txt
-COPY ./instahomes/ /usr/backend/
-CMD python manage.py runserver 8000
