@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import {
+  OrangeButton,
+  OutlineButton,
+} from "../../../components/developer-admin/base/styles";
 
 export const DevelopmentPage = styled.main`
   background: ${({ theme }) => theme.colors.mainBg};
@@ -214,6 +218,9 @@ export const DevListings = styled.section`
   .title {
     padding: 0 var(--main-padding-x);
     color: ${({ theme }) => theme.colors.darkest};
+    font-family: "Rubik";
+    font-weight: 500;
+    font-size: 1.7em;
   }
 
   .listing-row-div {
@@ -242,4 +249,37 @@ export const ListingRow = styled.div`
     padding: 10px;
     overflow-x: scroll;
   }
+`;
+
+export const ContactSection = styled.section`
+  padding: 7em var(--main-padding-x);
+  background: ${({ theme }) => theme.colors.darkest};
+
+  h1 {
+    color: ${({ theme }) => theme.colors.softWhite};
+    font-family: "Rubik";
+    font-weight: 500;
+    font-size: 1.7em;
+  }
+
+  p {
+    color: ${({ theme }) => theme.colors.softWhite};
+  }
+
+  .buttons {
+    margin-top: 2em;
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+  }
+`;
+
+export const MainButton = styled(OrangeButton)`
+  padding: 1em 2em;
+`;
+
+export const SecondaryButton = styled(OutlineButton)`
+  padding: 1em 2em;
+  border: 1px solid ${({ theme }) => theme.colors.orange};
+  color: ${({ theme }) => theme.colors.orange};
 `;

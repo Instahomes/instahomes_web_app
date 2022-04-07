@@ -18,10 +18,11 @@ import {
   MapSection,
   DevListings,
   ListingRow,
+  ContactSection,
+  MainButton,
+  SecondaryButton,
 } from "./styles";
 import { Helmet } from "react-helmet";
-
-import styled from "styled-components";
 
 const Development = React.memo((props) => {
   return (
@@ -151,6 +152,18 @@ const Development = React.memo((props) => {
             </ListingRow>
           </div>
         </DevListings>
+        <ContactSection>
+          <h1>Contact Alveo Land Corporation Directly</h1>
+          <p>
+            Skip the lines and sketchy agents. Get in touch our in-house brokers
+            direct to developer today!
+          </p>
+          <div className="buttons">
+            <MainButton>BOOK AN ONLINE TOUR</MainButton>
+            <SecondaryButton>GET PHONE NUMBER</SecondaryButton>
+            <SecondaryButton>GET EMAIL ADDRESS</SecondaryButton>
+          </div>
+        </ContactSection>
       </EmptyPage>
     </DevelopmentPage>
   );
