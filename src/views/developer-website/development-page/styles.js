@@ -2,11 +2,27 @@ import styled from "styled-components";
 
 export const DevelopmentPage = styled.main`
   background: ${({ theme }) => theme.colors.mainBg};
-  padding-left: var(--main-padding-x);
-  padding-right: var(--main-padding-x);
+
+  label {
+    font-size: 0.9em;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #939393;
+  }
+
+  p {
+    font-size: 1.1em;
+    font-family: "Rubik";
+    font-weight: 400;
+    color: #1a2534;
+  }
 `;
 
 export const Landing = styled.section`
+  padding-left: var(--main-padding-x);
+  padding-right: var(--main-padding-x);
+
   box-sizing: border-box;
 
   display: flex;
@@ -29,7 +45,7 @@ export const DevelopmentComponent = styled.article`
   border-radius: 0px 0px 26px 26px;
   filter: drop-shadow(0px 4px 50px rgba(0, 0, 0, 0.15));
 
-  padding: 2em 3em;
+  padding: 3.5em 3em;
 
   display: flex;
   flex-direction: column;
@@ -80,5 +96,113 @@ export const PoweredBy = styled.aside`
 
   .logo {
     height: 1em;
+  }
+`;
+
+export const DevelopmentFields = styled.section`
+  padding-top: 2em;
+  padding-bottom: 4em;
+  padding: 2em calc(2em + var(--main-padding-x)) 4em
+    calc(2em + var(--main-padding-x));
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em 1em;
+
+  & > div {
+    width: 45%;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding-left: var(--main-padding-x);
+    padding-right: var(--main-padding-x);
+    gap: 1em;
+
+    & > div {
+      width: 100%;
+    }
+  }
+`;
+
+export const AmenitiesSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 10em;
+
+  padding-bottom: 10em;
+  padding-left: var(--main-padding-x);
+  padding-right: var(--main-padding-x);
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+`;
+
+export const ImageWithDesc = styled.article`
+  display: flex;
+  flex-direction: ${({ reverse }) => (reverse ? "row-reverse" : "row")};
+
+  .image {
+    box-sizing: border-box;
+    width: 60%;
+    object-fit: cover;
+    border-radius: 26px;
+
+    height: ${({ bigImage }) => (bigImage ? "500px" : "400px")};
+  }
+
+  .about {
+    align-self: center;
+    margin-left: ${({ reverse }) => (reverse ? "0" : "-2.5em")};
+    margin-right: ${({ reverse }) => (reverse ? "-2.5em" : "0")};
+    background: #ffffff;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.1);
+    border-radius: 26px;
+    padding: 2.5em 2em 1.5em 2em;
+
+    h2 {
+      font-family: "Rubik";
+      font-weight: 500;
+      font-size: 1.7em;
+      color: #1a2534;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: ${({ bigImage }) => (bigImage ? "row" : "column")};
+
+    .image {
+      border-radius: 7px;
+      width: ${({ bigImage }) => (bigImage ? "80%" : "auto")};
+      height: ${({ bigImage }) => (bigImage ? "80vh" : "200px")};
+      margin-left: ${({ reverse, bigImage }) =>
+        bigImage ? "0" : reverse ? "var(--main-padding-x)" : "0"};
+      margin-right: ${({ reverse, bigImage }) =>
+        bigImage ? "0" : reverse ? "0" : "var(--main-padding-x)"};
+    }
+
+    .about {
+      margin-top: ${({ bigImage }) => (bigImage ? "0" : "-5em")};
+
+      margin-left: ${({ reverse, bigImage }) =>
+        bigImage ? "-17em" : reverse ? "0" : "3em"};
+      margin-right: ${({ reverse }) => (reverse ? "3em" : "0")};
+    }
+  }
+`;
+
+export const MapSection = styled.section`
+  padding: 0 var(--main-padding-x) 10em var(--main-padding-x);
+
+  .map {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    margin-bottom: 2em;
+  }
+
+  .details {
+    padding-left: 2em;
+    padding-right: 2em;
   }
 `;
