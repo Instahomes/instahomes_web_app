@@ -15,7 +15,7 @@ export const DevelopmentPage = styled.main`
     font-size: 1.1em;
     font-family: "Rubik";
     font-weight: 400;
-    color: #1a2534;
+    color: ${({ theme }) => theme.colors.darkest};
   }
 `;
 
@@ -164,7 +164,7 @@ export const ImageWithDesc = styled.article`
       font-family: "Rubik";
       font-weight: 500;
       font-size: 1.7em;
-      color: #1a2534;
+      color: ${({ theme }) => theme.colors.darkest};
     }
   }
 
@@ -204,5 +204,42 @@ export const MapSection = styled.section`
   .details {
     padding-left: 2em;
     padding-right: 2em;
+  }
+`;
+
+export const DevListings = styled.section`
+  background: #f1f1f1;
+  padding: 6em 0;
+
+  .title {
+    padding: 0 var(--main-padding-x);
+    color: ${({ theme }) => theme.colors.darkest};
+  }
+
+  .listing-row-div {
+    padding-left: var(--main-padding-x);
+    padding-right: 0;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    .listing-row-div {
+      padding-right: var(--main-padding-x);
+    }
+  }
+`;
+
+export const ListingRow = styled.div`
+  margin-top: 2em;
+  margin-bottom: 2em;
+  overflow-x: scroll;
+  padding: 5px;
+
+  display: flex;
+  justify-content: flex-start;
+  gap: 1em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding: 10px;
+    overflow-x: scroll;
   }
 `;

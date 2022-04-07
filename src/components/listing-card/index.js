@@ -30,8 +30,6 @@ const Card = React.memo(
     id,
     image,
     name,
-    developer,
-    developerLogo,
     size,
     price,
     address,
@@ -41,6 +39,7 @@ const Card = React.memo(
     isVerified,
     isOnWishlist,
     className,
+    noTourButton,
   }) => {
     const [isHeartFilled, setIsHeartFilled] = useState(isOnWishlist);
 
@@ -105,9 +104,11 @@ const Card = React.memo(
               {bathrooms_max && "-" + bathrooms_max}&nbsp;Bathrooms
             </ListingPiece>
           </ListingLine>
-          <HashLink to={`/listing/${id}#tour`} className="view-home">
-            <TourButton>BOOK A TOUR</TourButton>
-          </HashLink>
+          {!noTourButton && (
+            <HashLink to={`/listing/${id}#tour`} className="view-home">
+              <TourButton>BOOK A TOUR</TourButton>
+            </HashLink>
+          )}
           <Link to={`/listing/${id}`}>
             <ViewHomeButton>VIEW HOME</ViewHomeButton>
           </Link>

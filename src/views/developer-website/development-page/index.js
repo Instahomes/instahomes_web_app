@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../../components/layout";
+import ListingCard from "../../../components/listing-card";
 import EmptyPage from "../../../components/empty-page";
 import development1 from "./images/development1.webp";
 import map from "./images/map.png";
 import logo from "../../../assets/navbar/logo.svg";
 import { Icon } from "@iconify/react";
+import listings from "./sampleListings.json";
 
 import {
   DevelopmentPage,
@@ -15,6 +16,8 @@ import {
   AmenitiesSection,
   ImageWithDesc,
   MapSection,
+  DevListings,
+  ListingRow,
 } from "./styles";
 import { Helmet } from "react-helmet";
 
@@ -120,6 +123,34 @@ const Development = React.memo((props) => {
             </p>
           </div>
         </MapSection>
+        <DevListings>
+          <h1 className="title">
+            View Available Properties in Callisto Towers
+          </h1>
+          <div className="listing-row-div">
+            <ListingRow threeOrLess={listings.length <= 3}>
+              {listings.map((listing) => (
+                <ListingCard
+                  noTourButton
+                  id={listing.id}
+                  key={listing.seo_title}
+                  developer={listing.development.developer.name}
+                  developerLogo={listing.development.developer.featured_image}
+                  image={listing.photo_main}
+                  name={listing.development.name + " " + listing.unit_name}
+                  size={listing.lot_size}
+                  price={listing.lowest_price}
+                  address={listing.development.location}
+                  bedrooms={listing.bedrooms}
+                  bathrooms_min={listing.bathrooms_min}
+                  bathrooms_max={listing.bathrooms_max}
+                  isVerified={true}
+                  isOnWishlist={listing.is_liked}
+                />
+              ))}
+            </ListingRow>
+          </div>
+        </DevListings>
       </EmptyPage>
     </DevelopmentPage>
   );
