@@ -22,6 +22,7 @@ export const theme = {
     mutedGray: "#E0E0E0",
     lightGray: "#F2F2F2",
     darkGray: "#828282",
+    darkest: "#1A2534",
   },
   breakpoints: {
     sm: "576px",
