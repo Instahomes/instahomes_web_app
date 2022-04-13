@@ -46,10 +46,11 @@ const Sidebar = withTheme(
     const [developer, setDeveloper] = useState(null);
     const isTabActive = (value) => value == activeTab;
     const history = useHistory();
-
     useEffect(() => {
-      const { developer } = getProfile();
-      setDeveloper(developer);
+      if (developer) {
+        const { developer } = getProfile();
+        setDeveloper(developer);
+      }
     }, []);
 
     const logout = () => {
