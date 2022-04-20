@@ -12,7 +12,7 @@ const DeveloperWebsite = () => {
 
   return (
     <Switch>
-      <Route exact path={`${match.path}/development`}>
+      <Route exact path={`${match.path}/development/:id`}>
         <DevelopmentPage />
       </Route>
       <Route>
