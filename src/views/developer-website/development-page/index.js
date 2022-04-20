@@ -8,6 +8,7 @@ import logo from "../../../assets/navbar/logo.svg";
 import { Icon } from "@iconify/react";
 import { getDevelopments } from "../../../services/developer-website/developments";
 import { getListings } from "../../../services/developer-website/listings";
+import { getDeveloperProfile } from "../../../services/developer-website/developers";
 import {
   DevelopmentPage,
   Landing,
@@ -27,6 +28,7 @@ import { useRouteMatch } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const Development = React.memo((props) => {
+  const developer = getDeveloperProfile();
   const [development, setDevelopment] = useState(null);
   const [listings, setListings] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
@@ -50,8 +52,6 @@ const Development = React.memo((props) => {
     }
   }, [development]);
 
-  console.log(development);
-
   return (
     <DevelopmentPage>
       <Helmet>
@@ -67,7 +67,7 @@ const Development = React.memo((props) => {
           <React.Fragment>
             <Landing>
               <DevelopmentComponent image={development.photo_main}>
-                <span className="developer">ALVEO LAND CORPORATION</span>
+                <span className="developer">{developer.name}</span>
                 <h1 className="name">{development.name}</h1>
                 <h2 className="location">
                   <Icon
@@ -194,7 +194,7 @@ const Development = React.memo((props) => {
               </div>
             </DevListings>
             <ContactSection>
-              <h1>Contact {development.name}</h1>
+              <h1>Contact {developer.name}</h1>
               <p>
                 Skip the lines and sketchy agents. Get in touch our in-house
                 brokers direct to developer today!
