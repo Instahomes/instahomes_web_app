@@ -4,6 +4,10 @@ export const BaseFrame = styled.main`
   min-height: 100vh;
   display: flex;
   overflow-y: scroll;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column;
+  }
 `;
 
 export const MainContainer = styled.div`
@@ -11,6 +15,11 @@ export const MainContainer = styled.div`
   flex: 1;
   // width: calc(100% - clamp(180px, 40vw, 324px));
   padding: 1.5em 1.8em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    padding-left: var(--main-padding-x);
+    padding-right: var(--main-padding-x);
+  }
 `;
 
 export const MainHeader = styled.div`
