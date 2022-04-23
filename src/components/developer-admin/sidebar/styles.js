@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const SidebarFrame = styled.div`
   background-color: ${({ theme }) => theme.colors.mainBg};
-  width: clamp(180px, 40vw, 324px);
+  width: clamp(150px, 45vw, 324px);
   min-height: 100vh;
   border-right: 1px solid #dddddd;
 
@@ -81,7 +81,7 @@ export const Tab = styled(Link)`
   text-decoration: none;
 
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 1.3em;
 
   .tab-name {

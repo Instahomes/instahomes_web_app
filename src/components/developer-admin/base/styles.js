@@ -37,6 +37,19 @@ export const MainHeader = styled.div`
   .right-side {
     margin-left: auto;
   }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column;
+    align-items: center;
+
+    .header {
+      margin-bottom: 1.5em;
+    }
+
+    .right-side {
+      margin-left: 0;
+    }
+  }
 `;
 
 export const OrangeButton = styled.button.attrs(({ type }) => ({
