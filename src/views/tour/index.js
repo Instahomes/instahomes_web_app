@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { HeaderDiv, DesktopNavbar } from "./styles";
-import Layout from "../../components/layout";
-import Navbar from "../../components/navbar";
-import EmptyPage from "../../components/empty-page";
-import { Wizard } from "../../components/tour";
-import ConfirmationModal from "../../components/tour/modal";
-import BookSchedule from "./steps/bookSchedule";
-import ContactInfo from "./steps/contactInfo";
-import * as Yup from "yup";
+import TourBase from "../../components/tour/base";
 
 import { Helmet } from "react-helmet";
 import { getListings } from "../../services/listings";
 import { getProfile } from "../../services/auth";
 import { bookSchedule, getSchedules } from "../../services/schedule";
 import { useRouteMatch, useLocation } from "react-router-dom";
-import { videoAppSchema } from "./constants";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import { Icon } from "@iconify/react";
 
 const Tour = React.memo(() => {
   dayjs.extend(utc);
@@ -30,9 +20,17 @@ const Tour = React.memo(() => {
   const [loading, setLoading] = useState(false);
   const [finalDatetime, setFinalDatetime] = useState(null);
   const [unavailabilities, setUnavailabilities] = useState([]);
-  const [dateTimeInfo, setDateTimeInfo] = useState(null);
-  const { platform = "video", selectedDate: initialSelectedDate } =
-    location.state || {};
+  const initialState = location.state || {};
+
+  const viewState = {
+    showModal,
+    showModal,
+    setShowModal,
+    isEmpty,
+    loading,
+    unavailabilities,
+    finalDatetime,
+  };
 
   const profile = getProfile() || {};
   const { name, email, user_id } = profile;
@@ -94,91 +92,28 @@ const Tour = React.memo(() => {
     });
   };
 
+  const HelmetComponent = () => (
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>Book a Tour | Instahomes</title>
+      <meta
+        name="description"
+        content="Book a tour with your preferred developer for specific properties, through Instahomes' touring feature!"
+      ></meta>
+    </Helmet>
+  );
+
   return (
-    <Layout noFooter>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Book a Tour | Instahomes</title>
-        <meta
-          name="description"
-          content="Book a tour with your preferred developer for specific properties, through Instahomes' touring feature!"
-        ></meta>
-      </Helmet>
-      <DesktopNavbar />
-      <HeaderDiv image={listing && listing.photo_main}>
-        <Navbar dark isHome />
-        {listing && !dateTimeInfo && (
-          <div className="listing-info">
-            <span className="listing-name">{listing.unit_name}</span>
-            <br />
-            <span className="listing-location">
-              <Icon
-                icon="el:map-marker"
-                color="#F7F7F7"
-                width="0.9em"
-                height="0.9em"
-              />
-              {listing.development.location}
-            </span>
-          </div>
-        )}
-        {dateTimeInfo || null}
-      </HeaderDiv>
-      <EmptyPage isEmpty={isEmpty}>
-        {showModal && (
-          <ConfirmationModal
-            datetime={finalDatetime}
-            developer={listing.development.developer.name}
-            open={showModal}
-            setOpen={setShowModal}
-          />
-        )}
-        <Wizard
-          initialValues={{
-            selectedDate: initialSelectedDate || null,
-            selectedTime: null,
-            preferredApps: [],
-            name: name || "",
-            email: email || "",
-            additional: "",
-            platform,
-          }}
-          listing={listing}
-          loading={loading}
-          platform={platform}
-          onSubmit={handleSubmit}
-          setDateTimeInfo={setDateTimeInfo}
-        >
-          <BookSchedule
-            validationSchema={Yup.object({
-              selectedDate: Yup.string().required("Date is required"),
-              selectedTime: Yup.string().required("Time is required"),
-            })}
-            unavailabilities={unavailabilities.map((time) =>
-              dayjs.utc(time).local()
-            )}
-          />
-          <ContactInfo
-            validationSchema={Yup.object({
-              name: Yup.string().required("Name is required"),
-              email: Yup.string()
-                .email("Please input an email")
-                .required("Email is required"),
-              additional: Yup.string(),
-              preferredApps: Yup.array()
-                .of(
-                  Yup.object({
-                    app: Yup.string().required(),
-                    contact: Yup.string().when("app", videoAppSchema),
-                  })
-                )
-                .required("Please choose your preferred app/s."),
-            })}
-            setDateTimeInfo={setDateTimeInfo}
-          />
-        </Wizard>
-      </EmptyPage>
-    </Layout>
+    <TourBase
+      withLayout
+      withNavbar
+      HelmetComponent={HelmetComponent}
+      listing={listing}
+      handleSubmit={handleSubmit}
+      viewState={viewState}
+      profile={{ name, email }}
+      initialState={initialState}
+    />
   );
 });
 export default Tour;

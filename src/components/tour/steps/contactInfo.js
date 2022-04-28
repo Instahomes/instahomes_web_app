@@ -11,16 +11,12 @@ import {
   TourInput,
   TourTextarea,
   ContactFlex,
-} from "../styles";
-import {
-  platformLabel,
-  AdditionalInfoFields,
-  DateTimeInfo,
-} from "../../../components/tour";
+} from "../base/styles";
+import { platformLabel, AdditionalInfoFields, DateTimeInfo } from "..";
 import { videoApps } from "../constants";
 import { Icon } from "@iconify/react";
 import { Field } from "formik";
-import { FormErrorMessage } from "../../../components/elements";
+import { FormErrorMessage } from "../../elements";
 
 const ContactInfo = ({
   listing,

@@ -6,7 +6,7 @@ import {
   ListingImageContainer,
   AlignFlexCenter,
   ListingInfoDiv,
-} from "../styles";
+} from "../base/styles";
 import { platformLabel, MonthsDropdown } from "../../../components/tour";
 import ProductTour from "../../../components/product-tour";
 import { Icon } from "@iconify/react";

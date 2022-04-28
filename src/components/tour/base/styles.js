@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { OrangeButton, OutlineButton } from "../../components/elements";
-import Navbar from "../../components/navbar";
+import { OrangeButton, OutlineButton } from "../../elements";
+import Navbar from "../../navbar";
 
 export const TourContainer = styled.main`
   padding: 2em var(--main-padding-x) 0 var(--main-padding-x);
