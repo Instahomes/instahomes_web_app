@@ -6,6 +6,7 @@ import {
   ListingImageContainer,
   AlignFlexCenter,
   ListingInfoDiv,
+  PropertyDetails,
 } from "../base/styles";
 import { platformLabel, MonthsDropdown } from "../../../components/tour";
 import ProductTour from "../../../components/product-tour";
@@ -46,41 +47,57 @@ const BookSchedule = ({
   ...props
 }) => {
   return (
-    <TourContainer>
+    <TourContainer withNavbar={props.withNavbar} withLayout={props.withLayout}>
       <ContentContainer>
         <AlignFlexCenter>
-          <h1>Book a tour&nbsp;&nbsp;</h1>
+          <h1>
+            Book a tour
+            {!props.withNavbar && !props.withLayout && (
+              <>
+                {" "}
+                with
+                <span className="developer-name">
+                  {" "}
+                  {listing.development.developer.name}
+                </span>
+              </>
+            )}
+            &nbsp;&nbsp;
+          </h1>
           <span className="tour-platform">
             {platformLabel(props.theme, platform)}
           </span>
         </AlignFlexCenter>
-        {/* <h4>PROPERTY DETAILS</h4>
-        <ListingInfoDiv>
-          <img
-            src={listing.photo_main}
-            alt={listing.unit_name}
-            className="listing-img"
-          />
-          <div className="listing-info">
-            <span className="listing-title">{listing.unit_name}</span>
-            <br />
-            <span>
-              {listing.development.name} - {listing.development.developer.name}
-            </span>
-            <br />
-            <AlignFlexCenter gap="0.5em" justifyCenter>
-              <Icon
-                icon={"ci:location"}
-                color={props.theme.colors.darkBlue}
-                width="1em"
-                height="1em"
-              />
-              <span className="listing-location">
-                {listing.development.location}
+        <PropertyDetails>
+          <h4>PROPERTY DETAILS</h4>
+          <ListingInfoDiv>
+            <img
+              src={listing.photo_main}
+              alt={listing.unit_name}
+              className="listing-img"
+            />
+            <div className="listing-info">
+              <span className="listing-title">{listing.unit_name}</span>
+              <br />
+              <span>
+                {listing.development.name} -{" "}
+                {listing.development.developer.name}
               </span>
-            </AlignFlexCenter>
-          </div>
-        </ListingInfoDiv> */}
+              <br />
+              <AlignFlexCenter gap="0.5em" justifyCenter>
+                <Icon
+                  icon={"ci:location"}
+                  color={props.theme.colors.darkBlue}
+                  width="1em"
+                  height="1em"
+                />
+                <span className="listing-location">
+                  {listing.development.location}
+                </span>
+              </AlignFlexCenter>
+            </div>
+          </ListingInfoDiv>
+        </PropertyDetails>
         <h4 style={{ marginBottom: "1em", marginTop: "2em" }}>DATE & TIME</h4>
         <ProductTour
           parentSetSelectedDate={(value) =>

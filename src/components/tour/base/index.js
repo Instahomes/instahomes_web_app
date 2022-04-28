@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { HeaderDiv, DesktopNavbar } from "./styles";
-import Layout from "../../layout";
+import {
+  Background,
+  TourBaseContainer,
+  HeaderDiv,
+  DesktopNavbar,
+} from "./styles";
 import Navbar from "../../navbar";
 import EmptyPage from "../../empty-page";
 import { Wizard } from "..";
@@ -13,18 +17,6 @@ import { videoAppSchema } from "../constants";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Icon } from "@iconify/react";
-
-import styled from "styled-components";
-const Background = styled.main`
-  background: ${({ theme }) => theme.colors.mainBg};
-`;
-
-const TourContainer = ({ withLayout, children, ...props }) =>
-  withLayout ? (
-    <Layout {...props}>{children}</Layout>
-  ) : (
-    <Background {...props}>{children}</Background>
-  );
 
 const TourBase = React.memo(
   ({
@@ -45,10 +37,10 @@ const TourBase = React.memo(
     const { name, email } = profile;
 
     return (
-      <TourContainer withLayout={withLayout} noFooter>
+      <TourBaseContainer withLayout={withLayout} noFooter>
         <HelmetComponent />
         {withNavbar && <DesktopNavbar />}
-        <HeaderDiv withNavbar image={listing && listing.photo_main}>
+        <HeaderDiv image={listing && listing.photo_main}>
           {withNavbar && <Navbar dark isHome />}
           {listing && !dateTimeInfo && (
             <div className="listing-info">
@@ -100,6 +92,8 @@ const TourBase = React.memo(
               unavailabilities={viewState.unavailabilities.map((time) =>
                 dayjs.utc(time).local()
               )}
+              withNavbar={withNavbar}
+              withLayout={withLayout}
             />
             <ContactInfo
               validationSchema={Yup.object({
@@ -118,10 +112,12 @@ const TourBase = React.memo(
                   .required("Please choose your preferred app/s."),
               })}
               setDateTimeInfo={setDateTimeInfo}
+              withNavbar={withNavbar}
+              withLayout={withLayout}
             />
           </Wizard>
         </EmptyPage>
-      </TourContainer>
+      </TourBaseContainer>
     );
   }
 );

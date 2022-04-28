@@ -67,7 +67,7 @@ const ContactInfo = ({
   };
 
   return (
-    <TourContainer>
+    <TourContainer withNavbar={props.withNavbar} withLayout={props.withLayout}>
       <ContentContainer>
         <AlignFlexCenter>
           <h1>Book a tour&nbsp;&nbsp;</h1>

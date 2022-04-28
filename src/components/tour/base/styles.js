@@ -1,11 +1,26 @@
 import styled from "styled-components";
 import { OrangeButton, OutlineButton } from "../../elements";
 import Navbar from "../../navbar";
+import Layout from "../../layout";
+
+export const Background = styled.main`
+  background: ${({ theme }) => theme.colors.mainBg};
+`;
+
+export const TourBaseContainer = ({ withLayout, children, ...props }) =>
+  withLayout ? (
+    <Layout {...props}>{children}</Layout>
+  ) : (
+    <Background {...props}>{children}</Background>
+  );
 
 export const TourContainer = styled.main`
   padding: 2em var(--main-padding-x) 0 var(--main-padding-x);
   padding-top: 6em;
-  min-height: calc(100vh - 48px - 32px - 3rem);
+  min-height: ${({ withLayout, withNavbar }) =>
+    withLayout && withNavbar
+      ? "calc(100vh - 48px - 32px - 3rem)"
+      : "calc(100vh - 6em)"};
   display: flex;
   gap: 6em;
 
@@ -23,16 +38,21 @@ export const TourContainer = styled.main`
     margin-top: 1em;
   }
 
+  .developer-name {
+    font-size: 1em;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.orange};
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     padding-top: 2em;
     flex-direction: column;
     gap: 2em;
-    min-height: initial;
+    min-height: ${({ withLayout, withNavbar }) =>
+      withLayout && withNavbar ? "initial" : "calc(100vh - 33vh)"};
     padding-bottom: 1em;
-    // min-height: calc(100vh - 48px - 32px - 1.5rem);
 
     h4 {
-      // text-align: center;
       margin-top: 2em;
     }
   }
@@ -142,6 +162,12 @@ export const MobileListingImageContainer = styled.div`
     background: url(${({ mainImage }) => mainImage});
     background-size: cover;
     background-position: center;
+  }
+`;
+
+export const PropertyDetails = styled.section`
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: none;
   }
 `;
 
