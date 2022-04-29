@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
 import DevelopmentPage from "./development-page";
+import DeveloperPage from "./developer-page";
 import ProtectedRoute from "../../misc/protectedRoutes";
 import {
   hasDeveloperProfile,
@@ -29,6 +30,9 @@ const DeveloperWebsite = () => {
     <Switch>
       <Route exact path={`${match.path}/development/:id`}>
         <DevelopmentPage />
+      </Route>
+      <Route exact path={`${match.path}`}>
+        <DeveloperPage />
       </Route>
       <Route>
         <EmptyPage isEmpty={true} />
