@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { theme } from "../../globalStyles";
+import { theme } from "../../../globalStyles";
 
 export const Wrapper = styled.section`
   background: ${({ theme }) => theme.colors.mainBg};
   padding: 0 var(--main-padding-x);
   height: 100vh;
-  top: -100vh;
-  padding: 10rem 20rem 0rem 20rem;
+  padding: 10rem 12rem 0rem 12rem;
   display: flex;
   flex-direction: column;
 
@@ -31,8 +30,10 @@ export const Wrapper = styled.section`
   }
 
   @media (max-width: ${theme.breakpoints.lg}) {
+    overflow: hidden;
     margin: 0 auto;
     padding: 5rem 5rem 5rem 5rem;
+
     body {
       width: 100%;
       margin: 0 auto;
@@ -43,19 +44,18 @@ export const Wrapper = styled.section`
     }
   }
   @media (max-width: ${theme.breakpoints.md}) {
+    overflow: hidden;
     margin: 0 auto;
-    padding: 5rem 5rem 5rem 5rem;
-    body {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0;
-    }
+    padding: 2rem 2rem 2rem 2rem;
+
     div {
       flex-direction: column;
     }
   }
   @media (max-width: ${theme.breakpoints.sm}) {
     padding: 1rem;
+    overflow: hidden;
+
     body {
       width: 100%;
       margin: 0 auto;
@@ -72,64 +72,50 @@ export const Footer = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
   img {
     display: flex;
     align-items: center;
     justify-content: center;
     position: fixed;
-    padding: 10px 10px 50px 10px;
+    padding: 0.625rem 0.625rem 3.75rem 0.625rem;
     bottom: 0;
     width: 100%;
-    height: 20px;
+    height: 1.25rem;
   }
 
   @media (max-width: ${theme.breakpoints.lg}) {
-    body {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0;
-    }
     img {
       display: flex;
       align-items: center;
       justify-content: center;
       position: fixed;
-      padding: 10px 10px 60px 10px;
+      padding: 0.625rem;
       bottom: 0;
-      height: 20px;
+      height: 0.938rem;
     }
   }
   @media (max-width: ${theme.breakpoints.md}) {
-    body {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0;
-    }
     img {
       display: flex;
       align-items: center;
       justify-content: center;
       position: fixed;
-      padding: 10px 10px 60px 10px;
+      padding: 1.25rem;
       bottom: 0;
-      height: 20px;
+      height: 1.25rem;
     }
   }
   @media (max-width: ${theme.breakpoints.sm}) {
-    body {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0;
-    }
     img {
       display: flex;
       align-items: center;
       justify-content: center;
       position: fixed;
-      padding: 10px 10px 60px 10px;
+      padding: 0.625rem;
       bottom: 0;
-      height: 20px;
+      height: 0.938rem;
     }
   }
 `;

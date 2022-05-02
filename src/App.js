@@ -22,7 +22,7 @@ import EmptyPage from "./components/empty-page";
 import ScrollToTop from "./components/scroll-to-top";
 import ReactGA from "react-ga";
 import ReactPixel from "react-facebook-pixel";
-import DeveloperLanding from "./views/developer-landing";
+import DeveloperLanding from "./views/developer-website/developer-landing/index.js";
 
 const TRACKING_ID = "UA-189988351-1";
 const PIXEL_ID = "1136393116861058";
@@ -90,10 +90,9 @@ function App() {
                 <Route exact path="/">
                   <Home />
                 </Route>
-                <Route exact path="/developer-landing">
+                <Route exact path="/test">
                   <DeveloperLanding />
                 </Route>
-
                 <Route>
                   <EmptyPage isEmpty={true} />
                 </Route>
