@@ -14,7 +14,7 @@ const HeaderElements = () => {
   return (
     <React.Fragment>
       <OrangeButton
-        style={{ marginLeft: "auto" }}
+        className="right-side"
         onClick={() => history.push("/partner/developments/new")}
       >
         + Add New Development

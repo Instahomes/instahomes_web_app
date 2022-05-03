@@ -5,8 +5,8 @@ import {
   TourInput,
   DateTimeInfoContainer,
   MonthsDropdownContainer,
-} from "../../views/tour/styles";
-import { videoAppsValidation } from "../../views/tour/constants";
+} from "./base/styles";
+import { videoAppsValidation } from "./constants";
 import { Formik, Form } from "formik";
 import { FormErrorMessage } from "../../components/elements";
 import Loading from "../../components/loading";
