@@ -17,10 +17,7 @@ const HeaderElements = withTheme(({ setOpenModal }) => {
       {/* <OutlineButton style={{ marginLeft: "auto", marginRight: "1em" }}>
         Save for Later
       </OutlineButton> */}
-      <OrangeButton
-        style={{ marginLeft: "auto" }}
-        onClick={() => setOpenModal(true)}
-      >
+      <OrangeButton className="right-side" onClick={() => setOpenModal(true)}>
         Save & Make Visible
       </OrangeButton>
     </React.Fragment>

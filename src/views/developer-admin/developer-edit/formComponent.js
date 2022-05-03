@@ -76,7 +76,7 @@ const FormComponent = ({ data, openModal, setOpenModal }) => {
       "office_locations office_locations unique_locations agent_email"
       "featured_image featured_image map_image map_image"
       "affiliate_name_1 affiliate_name_2 affiliate_name_3 affiliate_name_4"
-      "affiliate_logo_1 affiliate_logo_2 affiliate_logo_3 affiliate_logo_4"
+      "affiliate_logo_1 affiliate_logo_2 affiliate_logo_3 affiliate_logo_4";
   `;
 
   const successCallback = () => {
