@@ -6,6 +6,10 @@ export const Frame = styled.div`
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
   border-radius: 26px;
   padding: 2em 2.2em;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    overflow: scroll;
+  }
 `;
 
 export const useStyles = makeStyles({
