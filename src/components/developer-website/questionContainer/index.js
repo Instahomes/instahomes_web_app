@@ -1,6 +1,6 @@
 import React from "react";
 import { withTheme } from "styled-components";
-import { MainHeader, OrangeButton } from "./style.js";
+import { MainHeader, OrangeButton } from "./styles.js";
 const Question = withTheme(
   React.memo(({ QuestionHeading, PlaceHolder }) => {
     return (

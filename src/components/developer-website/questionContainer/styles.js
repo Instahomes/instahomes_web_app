@@ -9,7 +9,7 @@ export const MainHeader = styled.div`
   .header {
     font-family: "Rubik";
     margin-top: 0.1696rem;
-    color: #1a2534;
+    color: ${({theme}) => theme.colors.darkest};
     font-style: normal;
     font-weight: 500;
     font-size: 3.75rem;
@@ -27,13 +27,14 @@ export const MainHeader = styled.div`
     width: 34.688rem;
     font-size: 2.5rem;
     line-height: 138.5%;
-    margin-top: 2rem;
+    margin-top: 2.333rem;
     border-top: 0rem;
     border-right: 0rem;
     border-left: 0rem;
     display: flex;
+    color: #426799;
     align-items: center;
-    background-color: #f6f6f6;
+    background-color: ${({theme}) => theme.colors.mainBg};
     letter-spacing: 0.025rem;
   }
 `;
@@ -41,16 +42,15 @@ export const MainHeader = styled.div`
 export const OrangeButton = styled.button.attrs(({ type }) => ({
   type: type || "submit",
 }))`
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 265px;
-  height: 65px;
-  margin-top: 2rem;
-  font-size: 2rem;
-
-  background: #ff6700;
+  padding: 0.844rem 5.938rem;
+  margin-top: 3.625rem;
+  font-size: 2em;
+  background: ${({ theme }) => theme.colors.orange};
   border-radius: 0.313rem;
   background-color: ${({ theme }) => theme.colors.orange};
   color: ${({ theme }) => theme.colors.softWhite};
