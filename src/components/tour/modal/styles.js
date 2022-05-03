@@ -3,8 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import MuiDialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
 import MuiDialogActions from "@material-ui/core/DialogActions";
-import formComplete from "../../assets/form/form-complete.svg";
-import { OutlineButton } from "../elements";
+import formComplete from "../../../assets/form/form-complete.svg";
+import { OutlineButton } from "../../elements";
 
 const styles = () => ({
   root: {
