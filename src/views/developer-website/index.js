@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
 import DevelopmentPage from "./development-page";
+import ListingPage from "./listing-page";
 import Tour from "./tour";
 import ProtectedRoute from "../../misc/protectedRoutes";
 import {
@@ -30,6 +31,9 @@ const DeveloperWebsite = () => {
     <Switch>
       <Route exact path={`${match.path}/development/:id`}>
         <DevelopmentPage />
+      </Route>
+      <Route exact path={`${match.path}/listings`}>
+        <ListingPage />
       </Route>
       <Route exact path={`${match.path}/tour/:id`}>
         <Tour />
