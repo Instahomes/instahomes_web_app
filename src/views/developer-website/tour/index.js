@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import TourBase from "../../components/tour/base";
+import TourBase from "../../../components/tour/base";
 
 import { Helmet } from "react-helmet";
-import { getListings } from "../../services/listings";
-import { getProfile } from "../../services/auth";
-import { bookSchedule, getSchedules } from "../../services/schedule";
 import { useRouteMatch, useLocation } from "react-router-dom";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { getListings } from "../../../services/listings";
+import { getProfile } from "../../../services/auth";
+import { bookSchedule, getSchedules } from "../../../services/schedule";
+import { getDeveloperProfile } from "../../../services/developer-website/developers";
 
 const Tour = React.memo(() => {
   dayjs.extend(utc);
+
+  const developer = getDeveloperProfile();
   const match = useRouteMatch();
   const location = useLocation();
   const [message, setMessage] = useState("");
@@ -95,7 +98,7 @@ const Tour = React.memo(() => {
   const HelmetComponent = () => (
     <Helmet>
       <meta charSet="utf-8" />
-      <title>Book a Tour | Instahomes</title>
+      <title>Book a Tour | {developer.name}</title>
       <meta
         name="description"
         content="Book a tour with your preferred developer for specific properties, through Instahomes' touring feature!"
@@ -105,8 +108,6 @@ const Tour = React.memo(() => {
 
   return (
     <TourBase
-      withLayout
-      withNavbar
       HelmetComponent={HelmetComponent}
       listing={listing}
       handleSubmit={handleSubmit}

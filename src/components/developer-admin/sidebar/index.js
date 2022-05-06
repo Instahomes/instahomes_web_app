@@ -11,8 +11,11 @@ import {
   DeveloperName,
   TabGroup,
   Tab,
+  menuStyles,
+  MenuContainer,
 } from "./styles";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import { slide as Menu } from "react-burger-menu";
 
 const sidebarTabs = [
   {
@@ -35,75 +38,95 @@ const sidebarTabs = [
   },
 ];
 
+const TabComponents = ({ history, theme }) => {
+  const match = useRouteMatch();
+  const currentTab = sidebarTabs.find((tab) => match.path.includes(tab.value));
+
+  const [activeTab, setActiveTab] = useState(currentTab.value);
+  const [developer, setDeveloper] = useState(null);
+  const isTabActive = (value) => value == activeTab;
+
+  useEffect(() => {
+    const { developer } = getProfile();
+    setDeveloper(developer);
+  }, []);
+
+  const logout = () => {
+    clear();
+    history.push("/partner/login");
+  };
+
+  return (
+    <React.Fragment>
+      <SidebarHeader>
+        <InstahomesLogo
+          src={instahomesLogo}
+          alt=""
+          onClick={() => history.push("/")}
+        />
+        {developer && (
+          <DeveloperName>
+            {/* <img src={developer.logo} alt={developer.name} className="logo" /> */}
+            <span className="dev-name">{developer.name}</span>
+          </DeveloperName>
+        )}
+      </SidebarHeader>
+      <TabGroup>
+        {sidebarTabs.map((tab) => (
+          <Tab
+            key={tab.value}
+            active={isTabActive(tab.value)}
+            onClick={() => setActiveTab(tab.value)}
+            to={tab.link}
+          >
+            <Icon
+              icon={tab.iconName}
+              color={
+                isTabActive(tab.value)
+                  ? theme.colors.orange
+                  : theme.colors.darkGray
+              }
+              width="1.5em"
+              height="1.5em"
+            />
+            <span className="tab-name">{tab.label}</span>
+          </Tab>
+        ))}
+        <Tab style={{ marginTop: "auto" }} onClick={logout}>
+          <Icon
+            icon="ic:baseline-logout"
+            color={theme.colors.darkGray}
+            width="1.5em"
+            height="1.5em"
+          />
+          <span className="tab-name">Log Out</span>
+        </Tab>
+      </TabGroup>
+    </React.Fragment>
+  );
+};
+
 const Sidebar = withTheme(
   React.memo(({ theme }) => {
-    const match = useRouteMatch();
-    const currentTab = sidebarTabs.find((tab) =>
-      match.path.includes(tab.value)
-    );
-
-    const [activeTab, setActiveTab] = useState(currentTab.value);
-    const [developer, setDeveloper] = useState(null);
-    const isTabActive = (value) => value == activeTab;
+    const finalMenuStyles = menuStyles(theme);
     const history = useHistory();
 
-    useEffect(() => {
-      const { developer } = getProfile();
-      setDeveloper(developer);
-    }, []);
-
-    const logout = () => {
-      clear();
-      history.push("/partner/login");
-    };
-
     return (
-      <SidebarFrame>
-        <SidebarHeader>
+      <React.Fragment>
+        <SidebarFrame>
+          <TabComponents history={history} theme={theme} />
+        </SidebarFrame>
+        <MenuContainer>
           <InstahomesLogo
             src={instahomesLogo}
             alt=""
             onClick={() => history.push("/")}
           />
-          {developer && (
-            <DeveloperName>
-              {/* <img src={developer.logo} alt={developer.name} className="logo" /> */}
-              <span className="dev-name">{developer.name}</span>
-            </DeveloperName>
-          )}
-        </SidebarHeader>
-        <TabGroup>
-          {sidebarTabs.map((tab) => (
-            <Tab
-              key={tab.value}
-              active={isTabActive(tab.value)}
-              onClick={() => setActiveTab(tab.value)}
-              to={tab.link}
-            >
-              <Icon
-                icon={tab.iconName}
-                color={
-                  isTabActive(tab.value)
-                    ? theme.colors.orange
-                    : theme.colors.darkGray
-                }
-                width="1.5em"
-                height="1.5em"
-              />
-              <span className="tab-name">{tab.label}</span>
-            </Tab>
-          ))}
-          <Tab style={{ marginTop: "auto" }} onClick={logout}>
-            <Icon
-              icon="ic:baseline-logout"
-              color={theme.colors.darkGray}
-              width="1.5em"
-              height="1.5em"
-            />
-            <span className="tab-name">Log Out</span>
-          </Tab>
-        </TabGroup>
-      </SidebarFrame>
+          <Menu styles={finalMenuStyles} right>
+            <TabComponents history={history} theme={theme} />
+          </Menu>
+        </MenuContainer>
+      </React.Fragment>
     );
   })
 );

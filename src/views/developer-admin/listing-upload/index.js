@@ -48,7 +48,10 @@ const HeaderElements = withTheme(({ theme, showGrid, setShowGrid }) => {
 
   return (
     <React.Fragment>
-      <GridPreviewButton onClick={() => setShowGrid(!showGrid)}>
+      <GridPreviewButton
+        className="right-side"
+        onClick={() => setShowGrid(!showGrid)}
+      >
         <Icon
           icon={showGrid ? "fa:eye-slash" : "fa:eye"}
           color={theme.colors.darkHeader}

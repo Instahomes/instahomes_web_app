@@ -7,7 +7,7 @@ import {
   DialogActions,
   BackToHomeButton,
 } from "./styles";
-import logo from "../../assets/navbar/largeLogoDark.svg";
+import logo from "../../../assets/navbar/largeLogoDark.svg";
 import { useHistory } from "react-router-dom";
 
 const ConfirmationModal = ({ open, setOpen, datetime, developer }) => {

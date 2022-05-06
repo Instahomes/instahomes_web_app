@@ -20,11 +20,20 @@ export const FormFrame = styled(Form)`
   grid-template-rows: auto;
   align-items: end;
   ${({ formGridTemplates }) => formGridTemplates || ""}
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 100%;
+  }
 `;
 
 export const Label = styled.label`
