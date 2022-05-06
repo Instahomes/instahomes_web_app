@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../../components/layout";
-import Navbar from "../../../components/navbar";
-import DeveloperContact from "../../../components/developer-contact";
 import FeaturedSection from "../../../components/featured-section";
 import Loading from "../../../components/loading";
 import EmptyPage from "../../../components/empty-page";
@@ -23,7 +20,6 @@ import {
 } from "./styles";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { getDevelopers } from "../../../services/developers";
 import { useRouteMatch } from "react-router-dom";
 import { getDeveloperProfile } from "../../../services/developer-website/developers";
 
@@ -67,15 +63,6 @@ const Developer = React.memo((props) => {
       setDeveloper(developerProfile);
     }
   }, [developerProfile]);
-
-  // const truncateOverview = (overview) => {
-  //   const MAX_WORD_COUNT = 80;
-  //   const words = overview.split(" ");
-  //   if (words.length > MAX_WORD_COUNT) {
-  //     return words.slice(0, MAX_WORD_COUNT).join(" ") + "...";
-  //   }
-  //   return words.join(" ");
-  // };
 
   return (
     <React.Fragment>
