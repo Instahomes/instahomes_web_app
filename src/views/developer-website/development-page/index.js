@@ -157,7 +157,13 @@ const Development = React.memo((props) => {
               )}
             </AmenitiesSection>
             <MapSection>
-              <img src={development.map_image} alt="Location" className="map" />
+              {development.map_image && (
+                <img
+                  src={development.map_image}
+                  alt="Location"
+                  className="map"
+                />
+              )}
               <div className="details">
                 <label>Site Location</label>
                 <p>{development.location}</p>

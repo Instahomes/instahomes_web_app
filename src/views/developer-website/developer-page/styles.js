@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const DeveloperContainer = styled.main`
+  background-color: ${({ theme }) => theme.colors.mainBg};
+
   .h2 {
     font-size: 1.5em;
     margin-bottom: 1em;
@@ -334,7 +336,7 @@ export const OfficeLocations = styled.section`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     text-align: center;
     flex-direction: column;
-    padding-bottom: 0;
+    padding-bottom: 3em;
 
     .office-map {
       display: none;

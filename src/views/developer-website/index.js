@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
 import DevelopmentPage from "./development-page";
+import DeveloperPage from "./developer-page";
+import ListingPage from "./listing-page";
 import Tour from "./tour";
 import ProtectedRoute from "../../misc/protectedRoutes";
 import {
@@ -35,8 +37,14 @@ const DeveloperWebsite = () => {
       <Route exact path={`${match.path}/developer-landing`}>
         <DeveloperLanding />
       </Route>
+      <Route exact path={`${match.path}/listings`}>
+        <ListingPage />
+      </Route>
       <Route exact path={`${match.path}/tour/:id`}>
         <Tour />
+      </Route>
+      <Route exact path={`${match.path}`}>
+        <DeveloperPage />
       </Route>
       <Route>
         <EmptyPage isEmpty={true} />
