@@ -11,6 +11,7 @@ import {
   getDevelopers,
 } from "../../services/developer-website/developers";
 import EmptyPage from "../../components/empty-page";
+import DeveloperLanding from "./developer-landing";
 
 const DeveloperWebsite = () => {
   let match = useRouteMatch();
@@ -32,6 +33,9 @@ const DeveloperWebsite = () => {
     <Switch>
       <Route exact path={`${match.path}/development/:id`}>
         <DevelopmentPage />
+      </Route>
+      <Route exact path={`${match.path}/developer-landing`}>
+        <DeveloperLanding />
       </Route>
       <Route exact path={`${match.path}/listings`}>
         <ListingPage />
