@@ -1,0 +1,65 @@
+name: Dev Workflow
+
+on:
+  pull_request:
+    types: open
+    branches: "develop"
+  push:
+    branches: "develop"
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        region: [ap-northeast-1, ap-southeast-1]
+        env: [tokyo-dev, sg-prod]
+        exclude:
+          - region: ap-northeast-1
+            env: sg-prod
+          - region: ap-southeast-1
+            env: tokyo-dev
+    name: Build and push image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ matrix.region }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Set shortened commit SHA
+        id: git-sha
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: ecr-push
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: instahomes-react-landing
+          SHA: ${{ steps.git-sha.outputs.sha_short }}
+          REACT_APP_API_URL: https://${{ matrix.env }}.instahomes.com.ph/api
+          REACT_APP_DEVADMIN_URL: https://${{ matrix.env }}.instahomes.com.ph/devadmin
+        run: |
+          export VERSION=$(jq -r -cs '.[0].version' <package.json)
+          docker build \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:dev-$VERSION-$SHA \
+            -f Dockerfile.prod \
+            --build-arg REACT_APP_MAINTENANCE_MODE="false" \
+            --build-arg REACT_APP_API_URL=$REACT_APP_API_URL \
+            --build-arg REACT_APP_DEVADMIN_URL=$REACT_APP_DEVADMIN_URL \
+            .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:dev-$VERSION-$SHA
+          echo "::set-output name=ecr_target::$(echo dev-$VERSION-$SHA)"
+
+      - name: Output Image Tag
+        id: output-image-tag
+        run: |
+          echo "COPY AND SAVE THIS IMAGE TAG: ${{ steps.ecr-push.outputs.ecr_target }}"
